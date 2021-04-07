@@ -1,4 +1,6 @@
-﻿using SmokeFree.Bootstrap;
+﻿using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Bootstrap;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SmokeFree
@@ -11,7 +13,13 @@ namespace SmokeFree
 
             InitializeAppContainer();
 
-            MainPage = new MainPage();
+            InitializeNavigation();
+        }
+
+        private Task InitializeNavigation()
+        {
+            var navigationService = AppContainer.Resolve<INavigationService>();
+            return navigationService.InitializeAsync();
         }
 
         private void InitializeAppContainer()

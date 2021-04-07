@@ -73,6 +73,6 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// User Challenges
         /// </summary>
-        public IList<Challenge> Challenges { get;  }
+        public IList<Challenge> Challenges { get; }
     }
 }

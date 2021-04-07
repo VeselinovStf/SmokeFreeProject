@@ -5,7 +5,16 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmokeFree.Android", "SmokeFree.Android\SmokeFree.Android.csproj", "{4E7E3DF1-39EB-480C-AB73-65055756DFFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmokeFree", "SmokeFree\SmokeFree.csproj", "{64E96CA2-1EA1-4506-B786-854A20B00BC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmokeFree", "SmokeFree\SmokeFree.csproj", "{64E96CA2-1EA1-4506-B786-854A20B00BC1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shered", "Shered", "{93A96DB4-5C17-4B7F-86EF-2967874D9316}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{50C2E96F-EAB4-4C55-AB19-61DF830CDF1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7528BF7-5672-4C2F-8227-649B152DC6CB}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +37,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4E7E3DF1-39EB-480C-AB73-65055756DFFB} = {50C2E96F-EAB4-4C55-AB19-61DF830CDF1C}
+		{64E96CA2-1EA1-4506-B786-854A20B00BC1} = {93A96DB4-5C17-4B7F-86EF-2967874D9316}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0E4387F0-AC70-4802-ACEA-3D866152DF84}
