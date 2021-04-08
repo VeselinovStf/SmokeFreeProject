@@ -1,4 +1,5 @@
 ﻿using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
@@ -13,8 +14,10 @@ namespace SmokeFree.ViewModels.Test
 
         public CreateTestViewModel(
            INavigationService navigationService,
-           IDateTimeWrapper dateTimeWrapper)
-           : base(navigationService, dateTimeWrapper)
+           IDateTimeWrapper dateTimeWrapper,
+           IAppLogger appLogger,
+           IDialogService dialogService)
+           : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
 
         }

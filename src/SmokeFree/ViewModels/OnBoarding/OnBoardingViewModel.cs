@@ -1,5 +1,6 @@
 ﻿using Realms;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.Base;
@@ -32,8 +33,10 @@ namespace SmokeFree.ViewModels.OnBoarding
         public OnBoardingViewModel(
             Realm realm,
             INavigationService navigationService,
-            IDateTimeWrapper dateTimeWrapper)
-            : base(navigationService,dateTimeWrapper)
+            IDateTimeWrapper dateTimeWrapper,
+            IAppLogger appLogger,
+            IDialogService dialogService)
+            : base(navigationService,dateTimeWrapper, appLogger, dialogService)
         {
             _realm = realm;
         }
@@ -42,6 +45,11 @@ namespace SmokeFree.ViewModels.OnBoarding
 
         #region INIT
 
+        /// <summary>
+        /// Initialize ViewModel - Any user who comes here is going trough on boarding
+        /// </summary>
+        /// <param name="parameter">Not Required</param>
+        /// <returns>Base InitializeAsync</returns>
         public override Task InitializeAsync(object parameter)
         {
             try
@@ -75,7 +83,7 @@ namespace SmokeFree.ViewModels.OnBoarding
                     this.AppUser = user;
                 }
 
-                // Return ...
+                // Return
                 return base.InitializeAsync(parameter);
             }
             catch (Exception ex)

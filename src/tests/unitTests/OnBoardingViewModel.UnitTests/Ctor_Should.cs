@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.OnBoarding;
 
@@ -21,11 +22,15 @@ namespace OnBoardingViewModelTests.UnitTests
 
             var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
 
             var onBoardingViewModel = new OnBoardingViewModel(
                 realm,
                 navigationServiceMock.Object,
-                dateTimeWrapperMock.Object
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object
                 );
 
             //Assert

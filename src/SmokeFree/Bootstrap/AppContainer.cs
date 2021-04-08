@@ -41,6 +41,7 @@ namespace SmokeFree.Bootstrap
             // SERVICES
             // SERVICES - GENERAL
             _builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
+            _builder.RegisterType<DialogService>().As<IDialogService>();
 
             // UTILITIES
             // LOGGER
