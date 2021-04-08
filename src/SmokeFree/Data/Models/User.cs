@@ -11,11 +11,6 @@ namespace SmokeFree.Data.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Flags On Boarding Completition.
-        /// </summary>
-        public bool CompletedOnBoarding { get; set; }
-
-        /// <summary>
         /// Default Application Color Theme Skin
         /// </summary>
         public int AppColorThemeIndex { get; set; }
@@ -26,29 +21,9 @@ namespace SmokeFree.Data.Models
         public bool NotificationState { get; set; }
 
         /// <summary>
-        /// Flags User Under Test
-        /// </summary>
-        public bool UserUnderTesting { get; set; }
-
-        /// <summary>
         /// Current Test Id
         /// </summary>
         public int TestId { get; set; }
-
-        /// <summary>
-        /// Flags Complete Testing
-        /// </summary>
-        public bool IsTestComplete { get; set; }
-
-        /// <summary>
-        /// Create Test View - Furst Run Description
-        /// </summary>
-        public bool CreateTestFirstRun { get; set; }
-
-        /// <summary>
-        /// Is User In Challenge
-        /// </summary>
-        public bool InChallenge { get; set; }
 
         /// <summary>
         /// User Tests
@@ -74,5 +49,10 @@ namespace SmokeFree.Data.Models
         /// User Challenges
         /// </summary>
         public IList<Challenge> Challenges { get; }
+
+        /// <summary>
+        /// User State In Application
+        /// </summary>
+        public string UserState { get; set; }
     }
 }

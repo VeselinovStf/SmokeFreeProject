@@ -1,8 +1,11 @@
 ﻿using Autofac;
+using Realms;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
+using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Services.General;
 using SmokeFree.Utilities.Logging;
+using SmokeFree.Utilities.Wrappers;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
 using System;
@@ -23,6 +26,14 @@ namespace SmokeFree.Bootstrap
         {
             var _builder = new ContainerBuilder();
 
+            // Database
+            var realmConfiguration = new RealmConfiguration
+            {
+                SchemaVersion = 4,
+            };
+            var realm = Realm.GetInstance(realmConfiguration);
+            _builder.Register(c => realm).InstancePerDependency();
+
             //VIEW MODELS
             _builder.RegisterType<OnBoardingViewModel>();
             _builder.RegisterType<CreateTestViewModel>();
@@ -32,8 +43,10 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
 
             // UTILITIES
-            // UTILITIES - LOGGER
+            // LOGGER
             _builder.RegisterType<DebugLogger>().As<IAppLogger>().SingleInstance();
+            // DateTime Wrapper
+            _builder.RegisterType<DateTimeWrapper>().As<IDateTimeWrapper>().SingleInstance();
 
 
             _container = _builder.Build();

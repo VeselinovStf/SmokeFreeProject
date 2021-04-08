@@ -1,4 +1,5 @@
 ﻿using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
 using System.Threading.Tasks;
@@ -8,11 +9,14 @@ namespace SmokeFree.ViewModels.Test
 {
     public class CreateTestViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
 
-        public CreateTestViewModel(INavigationService navigationService)
+
+        public CreateTestViewModel(
+           INavigationService navigationService,
+           IDateTimeWrapper dateTimeWrapper)
+           : base(navigationService, dateTimeWrapper)
         {
-            _navigationService = navigationService;
+
         }
 
         public IAsyncValueCommand GOGO => new AsyncValueCommand(GOGOGO);

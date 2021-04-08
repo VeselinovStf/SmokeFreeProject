@@ -1,4 +1,6 @@
-﻿using SmokeFree.Abstraction.Services.General;
+﻿using Realms;
+using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.Test;
 using System.Threading.Tasks;
@@ -8,18 +10,22 @@ namespace SmokeFree.ViewModels.OnBoarding
 {
     public class OnBoardingViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly Realm _realm;
 
-        public OnBoardingViewModel(INavigationService navigationService)
+        public OnBoardingViewModel(
+            Realm realm,
+            INavigationService navigationService,
+            IDateTimeWrapper dateTimeWrapper)
+            : base(navigationService,dateTimeWrapper)
         {
-            _navigationService = navigationService;
+            _realm = realm;
         }
 
         public IAsyncValueCommand GOGO => new AsyncValueCommand(GOGOGO);
 
         private async ValueTask GOGOGO()
         {
-            await this._navigationService.NavigateToAsync<CreateTestViewModel>();
+            await base._navigationService.NavigateToAsync<CreateTestViewModel>();
 
             //var config = new RealmConfiguration
             //{
