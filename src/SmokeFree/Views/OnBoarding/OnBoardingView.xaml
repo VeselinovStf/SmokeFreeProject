@@ -10,7 +10,6 @@
             <Label Text="On Boarding"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="GO GO GO" Command="{Binding GOGO}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

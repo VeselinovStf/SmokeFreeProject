@@ -18,7 +18,8 @@ namespace OnBoardingViewModelTests.UnitTests
     public class InitializeAsync_Should
     {       
         /// <summary>
-        /// Create A Default User, If is not existing. When override of InitializeAsync Is Called
+        /// Create A Default User, If is not existing. 
+        /// When override of InitializeAsync Is Called
         /// </summary>
         [Test]
         public async Task Create_Default_User_If_Not_Exist_Successfully()
@@ -48,13 +49,14 @@ namespace OnBoardingViewModelTests.UnitTests
 
             //Assert
             Assert.NotNull(realmUser);
-            Assert.Equals(globalUserId, realmUser.Id);
-            Assert.AreEqual(realmUser.CreatedOn, dateTimeOfCreation);
+            Assert.AreEqual(globalUserId, realmUser.Id);
+            Assert.True(realmUser.CreatedOn.Equals(dateTimeOfCreation));
             Assert.AreNotEqual(realmUser.UserState, UserStates.UserUnderTesting);
         }
 
         /// <summary>
-        /// Initialize Async is not creating new user if is previosly created. When override of InitializeAsync Is Called
+        /// Initialize Async is not creating new user if is previosly created.
+        /// When override of InitializeAsync Is Called
         /// </summary>
         [Test]
         public async Task Not_Creatte_New_User_If_Is_Existing()
@@ -99,7 +101,7 @@ namespace OnBoardingViewModelTests.UnitTests
                 (u => u.Id == globalUserId);
 
             Assert.NotNull(currentPresentUser);
-            Assert.AreEqual(currentPresentUser.CreatedOn, dateTimeOfCreation);
+            Assert.True(currentPresentUser.CreatedOn.Equals(dateTimeOfCreation));
         }
     }
 }

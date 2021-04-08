@@ -13,7 +13,11 @@ namespace SmokeFree.ViewModels.Base
         /// Application Navigation Service
         /// </summary>
         protected readonly INavigationService _navigationService;
-        private readonly IDateTimeWrapper _dateTime;
+
+        /// <summary>
+        /// Application DateTime Provider
+        /// </summary>
+        protected readonly IDateTimeWrapper _dateTime;
 
         public ViewModelBase(
             INavigationService navigationService,
