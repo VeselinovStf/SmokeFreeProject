@@ -17,7 +17,7 @@ namespace OnBoardingViewModelTests.UnitTests
     /// OnBoardingViewModel InitializeAsync Tests
     /// </summary>
     public class InitializeAsync_Should
-    {       
+    {
         /// <summary>
         /// Create A Default User, If is not existing. 
         /// When override of InitializeAsync Is Called
@@ -33,7 +33,7 @@ namespace OnBoardingViewModelTests.UnitTests
 
             var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-                dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTimeOfCreation);
+            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTimeOfCreation);
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
 
@@ -128,7 +128,7 @@ namespace OnBoardingViewModelTests.UnitTests
                 CreatedOn = dateTimeOfCreation,
                 Id = globalUserId
             };
-          
+
             var onBoardingViewModel = new OnBoardingViewModel(
                 realm,
                 navigationServiceMock.Object,

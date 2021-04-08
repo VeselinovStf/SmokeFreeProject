@@ -36,7 +36,7 @@ namespace SmokeFree.ViewModels.OnBoarding
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
             IDialogService dialogService)
-            : base(navigationService,dateTimeWrapper, appLogger, dialogService)
+            : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             _realm = realm;
         }
@@ -72,7 +72,7 @@ namespace SmokeFree.ViewModels.OnBoarding
 
                     // Execute Write Transaction
                     _realm.Write(() =>
-                    {                       
+                    {
                         _realm.Add(newUser);
                     });
 
@@ -81,7 +81,7 @@ namespace SmokeFree.ViewModels.OnBoarding
                 else
                 {
                     this.AppUser = user;
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -100,15 +100,15 @@ namespace SmokeFree.ViewModels.OnBoarding
         #endregion
 
         #region PROPS
-      
+
         /// <summary>
         /// Application User
         /// </summary>
         public User AppUser
         {
             get { return _appUser; }
-            set 
-            { 
+            set
+            {
                 _appUser = value;
             }
         }
