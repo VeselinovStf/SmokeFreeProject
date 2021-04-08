@@ -55,6 +55,44 @@ namespace OnBoardingViewModelTests.UnitTests
         }
 
         /// <summary>
+        /// Sets AppUser after creating on first app run
+        /// When override of InitializeAsync Is Called
+        /// </summary>
+        [Test]
+        public async Task Sets_AppUser_Property_If_User_Is_Created_For_Furst_Time()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration("Sets_AppUser_Property_If_User_Is_Created_For_Furst_Time");
+            var realm = Realm.GetInstance(config);
+
+            var dateTimeOfCreation = DateTime.Now;
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTimeOfCreation);
+
+            var onBoardingViewModel = new OnBoardingViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object);
+
+            object initializeParameter = new object();
+
+            var globalUserId = Globals.UserId;
+
+            //Act
+            await onBoardingViewModel.InitializeAsync(initializeParameter);
+
+            var viewModelAppUser = onBoardingViewModel.AppUser;
+
+            //Assert
+            Assert.NotNull(viewModelAppUser);
+            Assert.AreEqual(globalUserId, viewModelAppUser.Id);
+            Assert.True(viewModelAppUser.CreatedOn.Equals(dateTimeOfCreation));
+            Assert.AreNotEqual(viewModelAppUser.UserState, UserStates.UserUnderTesting);
+        }
+
+        /// <summary>
         /// Initialize Async is not creating new user if is previosly created.
         /// When override of InitializeAsync Is Called
         /// </summary>
@@ -102,6 +140,52 @@ namespace OnBoardingViewModelTests.UnitTests
 
             Assert.NotNull(currentPresentUser);
             Assert.True(currentPresentUser.CreatedOn.Equals(dateTimeOfCreation));
+        }
+
+        /// <summary>
+        /// Sets AppUser after calling InitializaAsync
+        /// When override of InitializeAsync Is Called
+        /// </summary>
+        [Test]
+        public async Task Sets_AppUser_Property_If_User_Is__Allready_Created_In_DB()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration("Sets_AppUser_Property_If_User_Is__Allready_Created_In_DB");
+            var realm = Realm.GetInstance(config);
+
+            var dateTimeOfCreation = DateTime.Now;
+            var globalUserId = Globals.UserId;
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+
+            var previouslyCreatedUser = new User()
+            {
+                CreatedOn = dateTimeOfCreation,
+                Id = globalUserId
+            };
+
+            var onBoardingViewModel = new OnBoardingViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object);
+
+            object initializeParameter = new object();
+
+            realm.Write(() =>
+            {
+                realm.Add(previouslyCreatedUser);
+            });
+
+            //Act
+            await onBoardingViewModel.InitializeAsync(initializeParameter);
+            var viewModelAppUser = onBoardingViewModel.AppUser;
+
+            //Assert
+            Assert.NotNull(viewModelAppUser);
+            Assert.AreEqual(globalUserId, viewModelAppUser.Id);
+            Assert.True(viewModelAppUser.CreatedOn.Equals(dateTimeOfCreation));
+            Assert.AreNotEqual(viewModelAppUser.UserState, UserStates.UserUnderTesting);
         }
     }
 }

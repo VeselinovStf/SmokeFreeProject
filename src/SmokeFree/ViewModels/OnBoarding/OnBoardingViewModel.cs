@@ -3,10 +3,8 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.Base;
-using SmokeFree.ViewModels.Test;
 using System;
 using System.Threading.Tasks;
-using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace SmokeFree.ViewModels.OnBoarding
 {
@@ -21,6 +19,11 @@ namespace SmokeFree.ViewModels.OnBoarding
         /// Database
         /// </summary>
         private readonly Realm _realm;
+
+        /// <summary>
+        /// Application User
+        /// </summary>
+        private User _appUser;
 
         #endregion
 
@@ -64,6 +67,12 @@ namespace SmokeFree.ViewModels.OnBoarding
                     {                       
                         _realm.Add(newUser);
                     });
+
+                    this.AppUser = newUser;
+                }
+                else
+                {
+                    this.AppUser = user;
                 }
 
                 // Return ...
@@ -75,6 +84,23 @@ namespace SmokeFree.ViewModels.OnBoarding
                 throw;
             }          
         }
+
+        #endregion
+
+        #region PROPS
+      
+        /// <summary>
+        /// Application User
+        /// </summary>
+        public User AppUser
+        {
+            get { return _appUser; }
+            set 
+            { 
+                _appUser = value;
+            }
+        }
+
 
         #endregion
     }
