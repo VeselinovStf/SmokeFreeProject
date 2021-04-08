@@ -65,7 +65,7 @@ namespace OnBoardingViewModelTests.UnitTests
         /// When override of InitializeAsync Is Called
         /// </summary>
         [Test]
-        public async Task Sets_AppUser_Property_If_User_Is_Created_For_Furst_Time()
+        public async Task Sets_AppUser_Property_If_User_Is_Created_For_First_Time()
         {
             //Arrange
             var config = new InMemoryConfiguration("Sets_AppUser_Property_If_User_Is_Created_For_Furst_Time");
@@ -109,7 +109,7 @@ namespace OnBoardingViewModelTests.UnitTests
         /// When override of InitializeAsync Is Called
         /// </summary>
         [Test]
-        public async Task Not_Creatte_New_User_If_Is_Existing()
+        public async Task Not_Create_New_User_If_Is_Existing_In_DB()
         {
             //Arrange
             var config = new InMemoryConfiguration("Not_Creatte_New_User_If_Is_Existing");
@@ -164,7 +164,7 @@ namespace OnBoardingViewModelTests.UnitTests
         /// When override of InitializeAsync Is Called
         /// </summary>
         [Test]
-        public async Task Sets_AppUser_Property_If_User_Is__Allready_Created_In_DB()
+        public async Task Sets_AppUser_Property_If_User_Is_Allready_Created_In_DB()
         {
             //Arrange
             var config = new InMemoryConfiguration("Sets_AppUser_Property_If_User_Is__Allready_Created_In_DB");
