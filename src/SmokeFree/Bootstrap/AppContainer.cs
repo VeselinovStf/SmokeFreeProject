@@ -31,8 +31,8 @@ namespace SmokeFree.Bootstrap
             {
                 SchemaVersion = 4,
             };
-            var realm = Realm.GetInstance(realmConfiguration);
-            _builder.Register(c => realm).InstancePerDependency();
+            
+            _builder.Register(c => Realm.GetInstance(realmConfiguration)).InstancePerDependency();
 
             //VIEW MODELS
             _builder.RegisterType<OnBoardingViewModel>();

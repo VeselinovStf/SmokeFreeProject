@@ -81,16 +81,20 @@ namespace SmokeFree.ViewModels.OnBoarding
                 else
                 {
                     this.AppUser = user;
-                }
-
-                // Return
-                return base.InitializeAsync(parameter);
+                }               
             }
             catch (Exception ex)
             {
+                base._appLogger.LogError(ex.Message);
 
-                throw;
-            }          
+                // TODO: A: Navigate to Error View Model
+                // Set Option for 'go back'
+                base.InternalErrorMessageToUser();
+            }
+
+            // TODO: A: Remove After - Navigate to Error View Model after Initialization Exception
+            // Return
+            return base.InitializeAsync(parameter);
         }
 
         #endregion

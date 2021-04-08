@@ -42,9 +42,23 @@ namespace SmokeFree.ViewModels.Base
             _dialogService = dialogService;
         }
 
+        /// <summary>
+        /// Initialize ViewModel
+        /// </summary>
+        /// <param name="parameter">View Model Parameter</param>
+        /// <returns>Completed Task</returns>
         public virtual Task InitializeAsync(object parameter)
         {
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// Display Internal Error Message To User - Device Toast With Error Message
+        /// </summary>
+        /// <param name="message">Message to display</param>
+        protected virtual void InternalErrorMessageToUser(string message = Globals.InternalErrorUserMessage)
+        {
+            this._dialogService.ShowToast(message);
         }
     }
 }
