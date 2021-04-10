@@ -23,7 +23,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Current Test Id
         /// </summary>
-        public int TestId { get; set; }
+        public string TestId { get; set; } 
 
         /// <summary>
         /// User Tests

@@ -10,6 +10,7 @@ using SmokeFree.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.ObjectModel;
 
@@ -160,19 +161,49 @@ namespace SmokeFree.ViewModels.Test
                     // Get Current User
                     var user = this._realm.Find<User>(userId);
 
-                    if (user != null)
+                    // Only One Active Test per user check
+                    // State Managment Error
+                    if (user.Tests
+                        .FirstOrDefault(e => e.UserId == user.Id && !e.IsDeleted) != null)
                     {
+                        base._appLogger
+                            .LogError($"Only One Test Per User Can Exist! User : {userId} : already have one!");
+
+                        // TODO: A: Navigate to Error View Model
+                        // Set Option for 'go back'
+                        base.InternalErrorMessageToUser();
+                    }
+
+                    if (user != null)
+                    {                      
+                        // Total Days of Test
+                        var goalTimeInDays = (goalTime - _dateTime.Now()).Days;
+
+                        // Initial Chalens - Store StartUp data
+                        var challenge = new Challenge()
+                        {
+                            GoalCompletitionTime = goalTime,
+                            CreatedOn = _dateTime.Now(),
+                            TotalChallengeDays = goalTimeInDays,
+                            UserId = user.Id
+                        };
+
+                        // User Test
                         var newTest = new Data.Models.Test()
                         {
                             UserId = user.Id,
                             CreatedOn = _dateTime.Now(),
                             TestStartDate = _dateTime.Now(),
-                            TestEndDate = _dateTime.Now().AddDays(testDuration)
+                            TestEndDate = _dateTime.Now().AddDays(testDuration),
                         };
 
+                        // Write to DB
                         this._realm.Write(() =>
                         {
+                            user.Challenges.Add(challenge);
                             user.Tests.Add(newTest);
+                            user.UserState = UserStates.UserUnderTesting.ToString();
+                            user.TestId = newTest.Id;
                         });
 
                         // Navigate to Under Test

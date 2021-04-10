@@ -10,7 +10,7 @@ namespace SmokeFree.Data.Models
     {
         [PrimaryKey]
         [MapTo("_id")]
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         /// <summary>
         /// Total Time of Test
         /// </summary>
