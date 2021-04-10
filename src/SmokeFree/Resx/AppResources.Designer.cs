@@ -61,6 +61,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Създаване на Тест.
+        /// </summary>
+        internal static string CreateTestViewTiitle {
+            get {
+                return ResourceManager.GetString("CreateTestViewTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продължи.
         /// </summary>
         internal static string OnBoardingItemButton1 {
@@ -174,6 +183,24 @@ namespace SmokeFree.Resx {
         internal static string OnBoardingViewTitle {
             get {
                 return ResourceManager.GetString("OnBoardingViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to дни.
+        /// </summary>
+        internal static string PluralDay {
+            get {
+                return ResourceManager.GetString("PluralDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ден.
+        /// </summary>
+        internal static string SingleDay {
+            get {
+                return ResourceManager.GetString("SingleDay", resourceCulture);
             }
         }
     }
