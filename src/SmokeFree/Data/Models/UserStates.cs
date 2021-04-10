@@ -2,6 +2,7 @@
 {
     public enum UserStates
     {
+        Initial,
         CompletedOnBoarding,
         UserUnderTesting,
         IsTestComplete,

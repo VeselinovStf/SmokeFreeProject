@@ -19,14 +19,14 @@ namespace OnBoardingViewModelTests.UnitTests
     public class OnBordingItemButtonClickedCommand_Should
     {
         /// <summary>
-        /// Navigate to next view when user is move throug all of on boarding items
+        /// Initial UserStatus - Navigate to next view when user is move throug all of on boarding items
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index()
+        public async Task Initial_Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index()
         {
             //Arrange
-            var config = new InMemoryConfiguration("Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index");
+            var config = new InMemoryConfiguration("Initial_Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index");
             var realm = Realm.GetInstance(config);
 
             var dateTimeOfCreation = DateTime.Now;
@@ -49,7 +49,11 @@ namespace OnBoardingViewModelTests.UnitTests
             object initializeParameter = new object();
 
             var globalUserId = Globals.UserId;
-            var newUser = new User() { Id = globalUserId };
+            var newUser = new User() 
+            { 
+                Id = globalUserId,
+                UserState = UserStates.Initial.ToString()
+            };
 
             realm.Write(() =>
             {
@@ -71,7 +75,7 @@ namespace OnBoardingViewModelTests.UnitTests
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task Changes_User_State_To_CompletedOnBoarding_Before_Navigation_To_Next()
+        public async Task Changes_Initial_User_State_To_CompletedOnBoarding_Before_Navigation_To_Next()
         {
             //Arrange
             var config = new InMemoryConfiguration("Changes_User_State_To_CompletedOnBoarding_Before_Navigation_To_Next");
@@ -95,7 +99,12 @@ namespace OnBoardingViewModelTests.UnitTests
             object initializeParameter = new object();
 
             var globalUserId = Globals.UserId;
-            var newUser = new User() { Id = globalUserId };
+            var newUser = new User() 
+            { 
+                Id = globalUserId,
+                UserState = UserStates.Initial.ToString()
+            };
+
             var newState = UserStates.CompletedOnBoarding.ToString();
 
             realm.Write(() =>
@@ -121,6 +130,57 @@ namespace OnBoardingViewModelTests.UnitTests
             Assert.AreEqual(dbSavedUser.UserState, viewModelAppUser.UserState);
         }
 
+        /// <summary>
+        /// UserStatus CreateTestFirstRun - Navigate to next view when user is move throug all of on boarding items
+        /// </summary>
+        /// <returns></returns>
+        [Test]
+        public async Task Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration("Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index");
+            var realm = Realm.GetInstance(config);
+
+            var dateTimeOfCreation = DateTime.Now;
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            navigationServiceMock.Setup(e => e.InitializeAsync());
+
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+
+            var onBoardingViewModel = new OnBoardingViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object
+                );
+
+            object initializeParameter = new object();
+
+            var globalUserId = Globals.UserId;
+            var newUser = new User()
+            {
+                Id = globalUserId,
+                UserState = UserStates.CreateTestFirstRun.ToString()
+            };
+
+            realm.Write(() =>
+            {
+                realm.Add(newUser);
+            });
+
+            //Act
+            await onBoardingViewModel.InitializeAsync(initializeParameter);
+
+            onBoardingViewModel.SelectedOnBoardingItemsIndex = onBoardingViewModel.OnBoardingItems.Count - 1;
+
+            //Assert
+            var commandResult = onBoardingViewModel.OnBordingItemButtonClickedCommand.ExecuteAsync().ConfigureAwait(false);
+            navigationServiceMock.Verify(e => e.InitializeAsync(), Times.Once);
+        }
 
     }
 }

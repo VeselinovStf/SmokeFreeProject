@@ -95,7 +95,8 @@ namespace SmokeFree.ViewModels.OnBoarding
                     var newUser = new User()
                     {
                         Id = globalUserId,
-                        CreatedOn = base._dateTime.Now()
+                        CreatedOn = base._dateTime.Now(),
+                        UserState = UserStates.Initial.ToString()
                     };
 
                     // Execute Write Transaction
@@ -195,14 +196,23 @@ namespace SmokeFree.ViewModels.OnBoarding
                 // Check if ob boardins is on last element
                 if (this.SelectedOnBoardingItemsIndex + 1 == this.OnBoardingItems.Count)
                 {
-                    // Persist User State in DB
-                    this._realm.Write(() =>
+                    if (AppUser.UserState.Equals(UserStates.Initial.ToString()))
                     {
-                        AppUser.UserState = UserStates.CompletedOnBoarding.ToString();
-                    });
+                        // Persist User State in DB
+                        this._realm.Write(() =>
+                        {
+                            AppUser.UserState = UserStates.CompletedOnBoarding.ToString();
+                        });
 
-                    // Navigate to
-                    await base._navigationService.NavigateToAsync<CreateTestViewModel>();
+                        // Navigate to user initial state of actions
+                        await base._navigationService.NavigateToAsync<CreateTestViewModel>();
+                    }
+                    else
+                    {
+                        await base._navigationService.InitializeAsync();
+                        // TODO: B: Check if navigation stack is correct
+                    }
+                 
                 }
             }
             catch (Exception ex)
