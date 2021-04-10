@@ -1,14 +1,17 @@
 ﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace SmokeFree.ViewModels.Base
 {
     /// <summary>
-    /// Base Model For ViewModels
+    /// Base Class For View Models. Implements INotifyPropertyChanged
     /// </summary>
-    public class ViewModelBase
+    public class ViewModelBase : INotifyPropertyChanged
     {
         #region FIELDS
 
@@ -69,7 +72,25 @@ namespace SmokeFree.ViewModels.Base
 
         #endregion
 
+        #region EVENTS
+
+        /// <summary>
+        /// Property Changed event
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
+
         #region METHODS
+
+        /// <summary>
+        /// Invoke on Property Change
+        /// </summary>
+        /// <param name="propertyName">Optional: Changable Property Name</param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         /// <summary>
         /// Display Internal Error Message To User - Device Toast With Error Message
@@ -78,6 +99,19 @@ namespace SmokeFree.ViewModels.Base
         protected virtual void InternalErrorMessageToUser(string message = Globals.InternalErrorUserMessage)
         {
             this._dialogService.ShowToast(message);
+        }
+
+        /// <summary>
+        /// Handle Exeptions Thrown by Commands
+        /// </summary>
+        /// <param name="ex">Thrown Exception</param>
+        protected virtual void GenericCommandExeptionHandler(Exception ex)
+        {
+            // Log Error
+            this._appLogger.LogError(ex.Message);
+
+            // Display default internal error message to user
+            this.InternalErrorMessageToUser();
         }
 
         #endregion

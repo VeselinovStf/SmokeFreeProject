@@ -3,11 +3,17 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.Models.Views.OnBoarding;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
+using SmokeFree.ViewModels.Test;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
+using System.Windows.Input;
+using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Forms;
 
 namespace SmokeFree.ViewModels.OnBoarding
 {
@@ -17,6 +23,16 @@ namespace SmokeFree.ViewModels.OnBoarding
     public class OnBoardingViewModel : ViewModelBase
     {
         #region FIELDS
+
+        /// <summary>
+        /// On Boarding Items For Carousel View
+        /// </summary>
+        private ObservableCollection<OnBordingItem> _onBoardingItems;
+
+        /// <summary>
+        /// Curent selected carousel index value
+        /// </summary>
+        private int _selectedOnBoardingItemsIndex;
 
         /// <summary>
         /// Database
@@ -40,9 +56,17 @@ namespace SmokeFree.ViewModels.OnBoarding
             IDialogService dialogService)
             : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
+            // Set View Title
             ViewTitle = AppResources.OnBoardingViewTitle;
 
+            // Set Database
             _realm = realm;
+
+            // Create collections
+            this.OnBoardingItems = new ObservableCollection<OnBordingItem>();
+
+            // Init OC OnBordingItems
+            InitiateOnBoardingItems();
         }
 
         #endregion
@@ -101,6 +125,96 @@ namespace SmokeFree.ViewModels.OnBoarding
             return base.InitializeAsync(parameter);
         }
 
+        /// <summary>
+        /// Initiating OnBoardingItems Observable Collection with OnBording Item At CTOR level
+        /// </summary>
+        private void InitiateOnBoardingItems()
+        {
+            // Clear Collection
+            this.OnBoardingItems.Clear();
+
+            // Create List of OnBoarding Items
+            // TODO: B: OnBoarding Items are hard coded in InitiateOnBoardingItems, check if this can be refactored
+            var staticOnBoardingItems = new List<OnBordingItem>()
+            {
+                new OnBordingItem()
+                {
+                    Image = AppResources.OnBoardingItemImage1,
+                    Title = AppResources.OnBoardingItemTitle1,
+                    Text = AppResources.OnBoardingItemText1,
+                    ItemButtonText = AppResources.OnBoardingItemButton1
+                },
+                new OnBordingItem()
+                {
+                    Image = AppResources.OnBoardingItemImage2,
+                    Title = AppResources.OnBoardingItemTitle2,
+                    Text = AppResources.OnBoardingItemText2,
+                    ItemButtonText = AppResources.OnBoardingItemButton2
+                },
+                new OnBordingItem()
+                {
+                    Image = AppResources.OnBoardingItemImage3,
+                    Title = AppResources.OnBoardingItemTitle3,
+                    Text = AppResources.OnBoardingItemText3,
+                    ItemButtonText = AppResources.OnBoardingItemButton3
+                }
+
+            };
+
+            // Add each on bording item to ObservableCollection
+            foreach (var onBoardingItem in staticOnBoardingItems)
+            {
+                this.OnBoardingItems.Add(onBoardingItem);
+            }
+        }
+
+        #endregion
+
+        #region COMMANDS
+
+        /// <summary>
+        /// On Changed Carousel position, set carousel index
+        /// </summary>
+        public ICommand OnPositionChangedCommand => new Command<int>((position) =>
+        {
+            SelectedOnBoardingItemsIndex = position;
+        });
+
+        /// <summary>
+        /// Find if final OnBoarding Item is selected and navigate to next page
+        /// </summary>
+        public IAsyncValueCommand OnBordingItemButtonClickedCommand => new AsyncValueCommand(
+            ExecuteOnBordingItemButtonClicked,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async ValueTask ExecuteOnBordingItemButtonClicked()
+        {
+            try
+            {
+                // Check if ob boardins is on last element
+                if (this.SelectedOnBoardingItemsIndex + 1 == this.OnBoardingItems.Count)
+                {
+                    // Persist User State in DB
+                    this._realm.Write(() =>
+                    {
+                        AppUser.UserState = UserStates.CompletedOnBoarding.ToString();
+                    });
+
+                    // Navigate to
+                    await base._navigationService.NavigateToAsync<CreateTestViewModel>();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                // TODO: A: Navigate to Error View Model
+                // Set Option for 'go back'
+                base.InternalErrorMessageToUser();
+            }           
+        }
+
         #endregion
 
         #region PROPS
@@ -117,6 +231,33 @@ namespace SmokeFree.ViewModels.OnBoarding
             }
         }
 
+        /// <summary>
+        /// On Boarding Items For Carousel View
+        /// </summary>
+        public ObservableCollection<OnBordingItem> OnBoardingItems
+        {
+            get { return _onBoardingItems; }
+            set
+            {
+                if (value != null)
+                {
+                    _onBoardingItems = value;                    
+                }
+            }
+        }
+
+        /// <summary>
+        /// Curent selected carousel index value
+        /// </summary>
+        public int SelectedOnBoardingItemsIndex
+        {
+            get { return _selectedOnBoardingItemsIndex; }
+            set
+            {
+                _selectedOnBoardingItemsIndex = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
     }

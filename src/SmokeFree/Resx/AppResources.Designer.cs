@@ -61,6 +61,114 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продължи.
+        /// </summary>
+        internal static string OnBoardingItemButton1 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemButton1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Продължи.
+        /// </summary>
+        internal static string OnBoardingItemButton2 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemButton2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Готово.
+        /// </summary>
+        internal static string OnBoardingItemButton3 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ReSchedule.png.
+        /// </summary>
+        internal static string OnBoardingItemImage1 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemImage1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TimeZone.png.
+        /// </summary>
+        internal static string OnBoardingItemImage2 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemImage2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ViewMode.png.
+        /// </summary>
+        internal static string OnBoardingItemImage3 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemImage3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        /// </summary>
+        internal static string OnBoardingItemText1 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        /// </summary>
+        internal static string OnBoardingItemText2 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        /// </summary>
+        internal static string OnBoardingItemText3 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Насока Едно.
+        /// </summary>
+        internal static string OnBoardingItemTitle1 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemTitle1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Насока Две.
+        /// </summary>
+        internal static string OnBoardingItemTitle2 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemTitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Насока Три.
+        /// </summary>
+        internal static string OnBoardingItemTitle3 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemTitle3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ръководство.
         /// </summary>
         internal static string OnBoardingViewTitle {

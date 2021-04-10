@@ -117,6 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="OnBoardingItemButton1" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="OnBoardingItemImage1" xml:space="preserve">
+    <value>ReSchedule.png</value>
+  </data>
+  <data name="OnBoardingItemText1" xml:space="preserve">
+    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+  </data>
+  <data name="OnBoardingItemTitle1" xml:space="preserve">
+    <value>Guide One</value>
+  </data>
+  <data name="OnBoardingItemButton2" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="OnBoardingItemImage2" xml:space="preserve">
+    <value>TimeZone.png</value>
+  </data>
+  <data name="OnBoardingItemText2" xml:space="preserve">
+    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+  </data>
+  <data name="OnBoardingItemTitle2" xml:space="preserve">
+    <value>Guide Two</value>
+  </data>
+  <data name="OnBoardingItemButton3" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="OnBoardingItemImage3" xml:space="preserve">
+    <value>ViewMode.png</value>
+  </data>
+  <data name="OnBoardingItemText3" xml:space="preserve">
+    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+  </data>
+  <data name="OnBoardingItemTitle3" xml:space="preserve">
+    <value>Guide Three</value>
+  </data>
   <data name="OnBoardingViewTitle" xml:space="preserve">
     <value>Tutorial</value>
   </data>
