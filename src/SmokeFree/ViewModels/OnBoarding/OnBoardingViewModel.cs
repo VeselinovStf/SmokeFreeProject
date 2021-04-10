@@ -212,7 +212,7 @@ namespace SmokeFree.ViewModels.OnBoarding
                         await base._navigationService.InitializeAsync();
                         // TODO: B: Check if navigation stack is correct
                     }
-                 
+
                 }
             }
             catch (Exception ex)
@@ -222,7 +222,7 @@ namespace SmokeFree.ViewModels.OnBoarding
                 // TODO: A: Navigate to Error View Model
                 // Set Option for 'go back'
                 base.InternalErrorMessageToUser();
-            }           
+            }
         }
 
         #endregion
@@ -251,7 +251,7 @@ namespace SmokeFree.ViewModels.OnBoarding
             {
                 if (value != null)
                 {
-                    _onBoardingItems = value;                    
+                    _onBoardingItems = value;
                 }
             }
         }

@@ -129,7 +129,7 @@ namespace SmokeFree.ViewModels.Base
             {
                 if (value != null)
                 {
-                    _viewTitle = value;                    
+                    _viewTitle = value;
                 }
             }
         }

@@ -3,7 +3,6 @@ using Realms;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
-using SmokeFree.Data.Models;
 using SmokeFree.Services.General;
 using SmokeFree.Utilities.Logging;
 using SmokeFree.Utilities.Wrappers;
@@ -11,7 +10,6 @@ using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
 using System;
-using System.Linq;
 
 namespace SmokeFree.Bootstrap
 {
@@ -32,7 +30,7 @@ namespace SmokeFree.Bootstrap
             // Database
             var realmConfiguration = new RealmConfiguration
             {
-                SchemaVersion = 1           
+                SchemaVersion = 1
             };
 
             _builder.Register(c => Realm.GetInstance(realmConfiguration)).InstancePerDependency();

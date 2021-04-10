@@ -52,7 +52,7 @@ namespace SmokeFree.Services.General
                     case UserStates.Initial:
                         return NavigateToAsync<OnBoardingViewModel>();
                     case UserStates.CompletedOnBoarding:
-                        return NavigateToAsync<CreateTestViewModel>();                       
+                        return NavigateToAsync<CreateTestViewModel>();
                     case UserStates.UserUnderTesting:
                         break;
                     case UserStates.IsTestComplete:
@@ -76,7 +76,7 @@ namespace SmokeFree.Services.General
                 // TODO: B: Custom Exception Error Page
                 throw new Exception("Navigation Exception!");
             }
-           
+
         }
 
         /// <summary>

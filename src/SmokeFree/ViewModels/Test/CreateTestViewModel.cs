@@ -134,7 +134,7 @@ namespace SmokeFree.ViewModels.Test
             // Check if user is shore
             var userNotification = await base._dialogService
                  .ConfirmAsync(
-                    string.Format(AppResources.ConfirmStartTestingDialogMessage,this.SelectedTestTimeDurationItem.DisplayText),
+                    string.Format(AppResources.ConfirmStartTestingDialogMessage, this.SelectedTestTimeDurationItem.DisplayText),
                     AppResources.ConfirmStartTestingDialogTitle,
                     AppResources.ButtonOkText,
                     AppResources.ButtonCancelText
@@ -152,8 +152,8 @@ namespace SmokeFree.ViewModels.Test
                 if (goalTime < base._dateTime.Now().AddDays(Globals.MinChallengeDays))
                 {
                     await this._dialogService.ShowDialog(
-                        string.Format(AppResources.CreateTestInvalidGoalTimeMessage,Globals.MinChallengeDays), 
-                        AppResources.CreateTestInvalidGoalTimeTitle, 
+                        string.Format(AppResources.CreateTestInvalidGoalTimeMessage, Globals.MinChallengeDays),
+                        AppResources.CreateTestInvalidGoalTimeTitle,
                         AppResources.ButtonOkText);
                 }
                 else
@@ -175,7 +175,7 @@ namespace SmokeFree.ViewModels.Test
                     }
 
                     if (user != null)
-                    {                      
+                    {
                         // Total Days of Test
                         var goalTimeInDays = (goalTime - _dateTime.Now()).Days;
 
@@ -216,9 +216,9 @@ namespace SmokeFree.ViewModels.Test
                         // TODO: A: Navigate to Error View Model
                         // Set Option for 'go back'
                         base.InternalErrorMessageToUser();
-                    }                   
-                }               
-            }          
+                    }
+                }
+            }
         }
 
 

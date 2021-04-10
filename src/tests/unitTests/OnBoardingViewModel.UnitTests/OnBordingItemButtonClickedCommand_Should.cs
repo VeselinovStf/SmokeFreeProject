@@ -49,8 +49,8 @@ namespace OnBoardingViewModelTests.UnitTests
             object initializeParameter = new object();
 
             var globalUserId = Globals.UserId;
-            var newUser = new User() 
-            { 
+            var newUser = new User()
+            {
                 Id = globalUserId,
                 UserState = UserStates.Initial.ToString()
             };
@@ -83,7 +83,7 @@ namespace OnBoardingViewModelTests.UnitTests
 
             var dateTimeOfCreation = DateTime.Now;
 
-            var navigationServiceMock = new Mock<INavigationService>();  
+            var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
@@ -99,8 +99,8 @@ namespace OnBoardingViewModelTests.UnitTests
             object initializeParameter = new object();
 
             var globalUserId = Globals.UserId;
-            var newUser = new User() 
-            { 
+            var newUser = new User()
+            {
                 Id = globalUserId,
                 UserState = UserStates.Initial.ToString()
             };

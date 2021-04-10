@@ -14,7 +14,7 @@ namespace SmokeFree
         {
             InitializeComponent();
 
-            LocalizationResourceManager.Current.PropertyChanged += (sender, e) 
+            LocalizationResourceManager.Current.PropertyChanged += (sender, e)
                 => AppResources.Culture = LocalizationResourceManager.Current.CurrentCulture;
 
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);

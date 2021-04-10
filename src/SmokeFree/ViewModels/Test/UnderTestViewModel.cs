@@ -11,9 +11,9 @@ namespace SmokeFree.ViewModels.Test
     public class UnderTestViewModel : ViewModelBase
     {
         public UnderTestViewModel(
-            INavigationService navigationService, 
-            IDateTimeWrapper dateTimeWrapper, 
-            IAppLogger appLogger, 
+            INavigationService navigationService,
+            IDateTimeWrapper dateTimeWrapper,
+            IAppLogger appLogger,
             IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
         }

@@ -12,8 +12,8 @@ namespace SmokeFree.ViewModels.AppSettings
     {
         public AppSettingsViewModel(
             INavigationService navigationService,
-            IDateTimeWrapper dateTimeWrapper, 
-            IAppLogger appLogger, 
+            IDateTimeWrapper dateTimeWrapper,
+            IAppLogger appLogger,
             IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
         }

@@ -24,7 +24,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Test Relation Id
         /// </summary>
-        public string TestId { get; set; } 
+        public string TestId { get; set; }
 
         /// <summary>
         /// Last Modifiet date

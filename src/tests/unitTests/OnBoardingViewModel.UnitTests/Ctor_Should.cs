@@ -159,7 +159,7 @@ namespace OnBoardingViewModelTests.UnitTests
                 Assert.AreEqual(itemUnderTest.ItemButtonText, item.ItemButtonText);
                 Assert.AreEqual(itemUnderTest.Image, item.Image);
             }
-          
+
         }
     }
 }
