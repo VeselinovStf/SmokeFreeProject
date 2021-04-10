@@ -20,7 +20,7 @@ namespace SmokeFree
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
 
             // TODO: C: Change from settings in the future and initiate current culture
-            //LocalizationResourceManager.Current.CurrentCulture = new CultureInfo("uk");
+            LocalizationResourceManager.Current.CurrentCulture = new System.Globalization.CultureInfo("uk");
 
             InitializeAppContainer();
 

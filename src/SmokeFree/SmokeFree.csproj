@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.483" />
     <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="MagicGradients" Version="1.2.0" />
     <PackageReference Include="Realm" Version="10.1.2" />
     <PackageReference Include="Realm.Fody" Version="10.1.2">
       <PrivateAssets>all</PrivateAssets>

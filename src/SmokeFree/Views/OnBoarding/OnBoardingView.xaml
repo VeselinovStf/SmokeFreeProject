@@ -1,16 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmokeFree.Views.OnBoarding.OnBoardingView"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="SmokeFree.Views.OnBoarding.OnBoardingView"            
+             xmlns:viewModels="clr-namespace:SmokeFree.ViewModels.OnBoarding"
              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
              utility:ViewModelLocator.AutoWireViewModel="True"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             Title="{Binding ViewTitle}">
+    
+    <!-- View Content -->
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{xct:Translate String1}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+        <!-- Carousel -->
+        <CarouselView
+            x:Name="CarouselView"
+            ItemsSource="{Binding OnBoardingItems}"
+            PositionChangedCommand="{Binding OnPositionChangedCommand}"
+            PositionChangedCommandParameter="{Binding Source={RelativeSource Self}, Path=Position}">
+            <CarouselView.ItemTemplate>
+
+                <!-- Carousel Items Data Template -->
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Display Item -->
+                            <Image 
+                                VerticalOptions="Start"
+                                HeightRequest="200"
+                                WidthRequest="200"
+                                Aspect="AspectFit"
+                                Margin="20,30,20,0"
+                                Source="{Binding Image}"/>
+                            <!-- /END/ Display Item -->
+
+                            <!-- Header -->
+                            <Label 
+                                Grid.Row="1"
+                                TextColor="{StaticResource Gray-100}"
+                                VerticalOptions="Start"
+                                FontSize="26"
+                                Margin="30"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Title}"/>
+                            <!-- /END/ Header -->
+
+                            <!-- Description Text -->
+                            <Label
+                                Grid.Row="2"
+                                TextColor="{StaticResource Gray-100}"
+                                Margin="20,0,20,25"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Text}"/>
+                            <!-- /END/ Description Text -->
+
+                        </Grid>
+
+                        <!-- Next/End Button -->
+                        <Button                                                      
+                            Grid.Row="1"
+                            FontSize="20"
+                            Clicked="OnChangeCarouselItem_Clicked"
+                            FontAttributes="Bold"
+                            CornerRadius="30"
+                            Margin="20,0,20,20"
+                            Command="{Binding Path=OnBordingItemButtonClickedCommand,Source={RelativeSource AncestorType={x:Type viewModels:OnBoardingViewModel} }}"
+                            Text="{Binding ItemButtonText}"/>
+                        <!-- /END/ Next/End Button -->
+
+                    </Grid>
+                </DataTemplate>
+                <!-- /END/ Carousel Items Data Template -->
+
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <!-- /END/ Carousel -->
+
     </ContentPage.Content>
+    <!-- /END/ View Content -->
 </ContentPage>

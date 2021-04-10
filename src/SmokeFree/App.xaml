@@ -1,8 +1,142 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
+             xmlns:converters="clr-namespace:SmokeFree.Converters"
              x:Class="SmokeFree.App">
     <Application.Resources>
+        <ResourceDictionary>
 
+            <!-- Colors -->
+            <Color x:Key="PrimaryColor">#f54e5e</Color>
+            <Color x:Key="PrimaryDarkColor">#d0424f</Color>
+            <Color x:Key="PrimaryDarkenColor">#ab3641</Color>
+            <Color x:Key="PrimaryLighterColor">#edcacd</Color>
+            <Color x:Key="PrimaryGradient">#e83f94</Color>
+            <Color x:Key="PrimaryLight">#ffe8f4</Color>
+            <Color x:Key="SecondaryGradient">#7644ad</Color>
+            <Color x:Key="Secondary">#d54381</Color>
+            <Color x:Key="Green">#7ed321</Color>
+            <Color x:Key="Red">#ff4a4a</Color>
+            <Color x:Key="Orange">#ff844a</Color>
+            <Color x:Key="Blue">#4acaff</Color>
+            <Color x:Key="HyperLink">#567cd7</Color>
+
+            <Color x:Key="Gray-100">#f6f7f8</Color>
+            <Color x:Key="Gray-200">#ebecef</Color>
+            <Color x:Key="Gray-300">#ced2d9</Color>
+            <Color x:Key="Gray-400">#b2b8c2</Color>
+            <Color x:Key="Gray-500">#959eac</Color>
+            <Color x:Key="Gray-600">#788396</Color>
+            <Color x:Key="Gray-700">#606a7b</Color>
+            <Color x:Key="Gray-800">#4a515e</Color>
+            <Color x:Key="Gray-900">#333942</Color>
+            <Color x:Key="Gray-Black">#000000</Color>
+            <Color x:Key="Gray-White">#ffffff</Color>
+            <!-- /END/ COLORS -->
+
+            <!-- ICONS -->
+            <OnPlatform x:Key="FontIcons" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="UIFontIcons.ttf#UIFontIcons" />
+                    <On Platform="iOS" Value="UIFontIcons" />
+                    <On Platform="UWP" Value="Assets/UIFontIcons.ttf#UIFontIcons" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+            <!-- /END/ ICONS -->
+
+            <!-- FONTS -->
+            <OnPlatform x:Key="Montserrat-SemiBold" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="Montserrat-SemiBold.ttf#Montserrat-SemiBold" />
+                    <On Platform="iOS" Value="Montserrat-SemiBold" />
+                    <On Platform="UWP" Value="Assets/Montserrat-SemiBold.ttf#Montserrat-SemiBold" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+
+            <OnPlatform x:Key="Montserrat-Regular" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="Montserrat-Regular.ttf#Montserrat-Regular" />
+                    <On Platform="iOS" Value="Montserrat-Regular" />
+                    <On Platform="UWP" Value="Assets/Montserrat-Regular.ttf#Montserrat-Regular" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+
+            <OnPlatform x:Key="Montserrat-Medium" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="Montserrat-Medium.ttf#Montserrat-Medium" />
+                    <On Platform="iOS" Value="Montserrat-Medium" />
+                    <On Platform="UWP" Value="Assets/Montserrat-Medium.ttf#Montserrat-Medium" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+
+            <OnPlatform x:Key="Montserrat-Bold" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="Montserrat-Bold.ttf#Montserrat-Bold" />
+                    <On Platform="iOS" Value="Montserrat-Bold" />
+                    <On Platform="UWP" Value="Assets/Montserrat-Bold.ttf#Montserrat-Bold" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
+            <!-- /END/ FONTS -->
+
+            <!-- THEME GRADIENT -->
+            <ControlTemplate x:Key="PageWithGradient">
+                <Grid>
+                    <magicGradients:GradientView VerticalOptions="FillAndExpand" >
+                        <magicGradients:GradientView.GradientSource>
+                            <magicGradients:LinearGradient Angle="90">
+                                <magicGradients:GradientStop Color="{StaticResource PrimaryColor}" Offset="0" />
+                                <magicGradients:GradientStop Color="{StaticResource PrimaryGradient}" Offset="1" />
+                            </magicGradients:LinearGradient>
+                        </magicGradients:GradientView.GradientSource>
+                    </magicGradients:GradientView>
+                    <ContentPresenter />
+                </Grid>
+            </ControlTemplate>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="ControlTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Grid>
+                                <magicGradients:GradientView VerticalOptions="FillAndExpand" >
+                                    <magicGradients:GradientView.GradientSource>
+                                        <magicGradients:LinearGradient Angle="90">
+                                            <magicGradients:GradientStop Color="{StaticResource PrimaryColor}" Offset="0" />
+                                            <magicGradients:GradientStop Color="{StaticResource PrimaryGradient}" Offset="1" />
+                                        </magicGradients:LinearGradient>
+                                    </magicGradients:GradientView.GradientSource>
+                                </magicGradients:GradientView>
+                                <ContentPresenter />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!-- /END/ THEME GRADIENT -->
+
+            <!-- ICON STYLES -->
+
+            <!-- CLOSE ICON STYLE -->
+            <Style x:Key="CloseIconStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe724;" />
+            </Style>
+            <!-- /END/ CLOSE ICON STYLE -->
+
+            <!-- /END/ ICON STYLES -->
+
+            <!-- CONVERTERS -->
+            <converters:TimeSpanToStaticTimeConverter x:Key="TimeSpanToStaticTimeConverter"/>
+            <converters:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
+            <converters:DoubleToProcentStringConverter x:Key="DoubleToProcentStringConverter"/>
+
+            <x:Boolean x:Key="FalseValue">False</x:Boolean>
+            <x:Boolean x:Key="TrueValue">True</x:Boolean>
+
+            <!-- /END/ CONVERTERS -->
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
