@@ -39,6 +39,11 @@ namespace SmokeFree.Services.General
                 var user = this._realm
                     .Find<User>(Globals.UserId);
 
+                if (user == null)
+                {
+                    return NavigateToAsync<OnBoardingViewModel>();
+                }
+
                 var userState = UserStateConverter.ToUserState(user.UserState);
 
                 // TODO: C: Clear navigation back stack
