@@ -3,9 +3,11 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace SmokeFree.ViewModels.OnBoarding
 {
@@ -38,6 +40,8 @@ namespace SmokeFree.ViewModels.OnBoarding
             IDialogService dialogService)
             : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
+            ViewTitle = AppResources.OnBoardingViewTitle;
+
             _realm = realm;
         }
 

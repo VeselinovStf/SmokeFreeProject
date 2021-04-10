@@ -10,6 +10,13 @@ namespace SmokeFree.ViewModels.Base
     /// </summary>
     public class ViewModelBase
     {
+        #region FIELDS
+
+        /// <summary>
+        /// View Title
+        /// </summary>
+        private string _viewTitle;
+
         /// <summary>
         /// Application Navigation Service
         /// </summary>
@@ -30,6 +37,10 @@ namespace SmokeFree.ViewModels.Base
         /// </summary>
         protected readonly IDialogService _dialogService;
 
+        #endregion
+
+        #region CTOR
+
         public ViewModelBase(
             INavigationService navigationService,
             IDateTimeWrapper dateTimeWrapper,
@@ -42,6 +53,10 @@ namespace SmokeFree.ViewModels.Base
             _dialogService = dialogService;
         }
 
+        #endregion
+
+        #region INIT
+
         /// <summary>
         /// Initialize ViewModel
         /// </summary>
@@ -52,6 +67,10 @@ namespace SmokeFree.ViewModels.Base
             return Task.CompletedTask;
         }
 
+        #endregion
+
+        #region METHODS
+
         /// <summary>
         /// Display Internal Error Message To User - Device Toast With Error Message
         /// </summary>
@@ -60,5 +79,26 @@ namespace SmokeFree.ViewModels.Base
         {
             this._dialogService.ShowToast(message);
         }
+
+        #endregion
+
+        #region PROPS
+
+        /// <summary>
+        /// Title Of Each view
+        /// </summary>
+        public string ViewTitle
+        {
+            get { return _viewTitle; }
+            set
+            {
+                if (value != null)
+                {
+                    _viewTitle = value;                    
+                }
+            }
+        }
+
+        #endregion
     }
 }

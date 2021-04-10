@@ -61,6 +61,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ръководство.
+        /// </summary>
+        internal static string OnBoardingViewTitle {
+            get {
+                return ResourceManager.GetString("OnBoardingViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to БГ БГ БГ БГ.
         /// </summary>
         internal static string String1 {
