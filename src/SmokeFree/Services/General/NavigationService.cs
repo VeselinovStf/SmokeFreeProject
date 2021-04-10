@@ -1,7 +1,11 @@
-﻿using SmokeFree.Abstraction.Services.General;
+﻿using Realms;
+using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
+using SmokeFree.Data.Models;
+using SmokeFree.Utilities.UserStateHelpers;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
+using SmokeFree.ViewModels.Test;
 using SmokeFree.Views;
 using SmokeFree.Views.OnBoarding;
 using System;
@@ -17,16 +21,57 @@ namespace SmokeFree.Services.General
     /// </summary>
     public class NavigationService : INavigationService
     {
+        private readonly Realm _realm;
         private readonly IAppLogger _appLogger;
 
-        public NavigationService(IAppLogger appLogger)
+        public NavigationService(
+            Realm realm,
+            IAppLogger appLogger)
         {
+            _realm = realm;
             _appLogger = appLogger;
         }
 
         public Task InitializeAsync()
         {
-            return NavigateToAsync<OnBoardingViewModel>();
+            try
+            {
+                var user = this._realm
+                    .Find<User>(Globals.UserId);
+
+                var userState = UserStateConverter.ToUserState(user.UserState);
+
+                // TODO: C: Clear navigation back stack
+                switch (userState)
+                {
+                    case UserStates.Initial:
+                        return NavigateToAsync<OnBoardingViewModel>();
+                    case UserStates.CompletedOnBoarding:
+                        return NavigateToAsync<CreateTestViewModel>();                       
+                    case UserStates.UserUnderTesting:
+                        break;
+                    case UserStates.IsTestComplete:
+                        break;
+                    case UserStates.CreateTestFirstRun:
+                        break;
+                    case UserStates.InChallenge:
+                        break;
+                    default:
+                        break;
+                }
+
+                // TODO: B: Custom Exception Error Page
+                throw new Exception("No where to navigate!");
+
+            }
+            catch (Exception ex)
+            {
+                this._appLogger.LogCritical(ex.Message);
+
+                // TODO: B: Custom Exception Error Page
+                throw new Exception("Navigation Exception!");
+            }
+           
         }
 
         /// <summary>
