@@ -39,8 +39,8 @@ Sorry for inconvenience.";
         public static int OneSmokeTreshHoldTimeMinutes = 9;
 
         /// <summary>
-        /// Minimum Limit for Challenge
+        /// Minimum Limit for Challenge in Days
         /// </summary>
-        public static DateTime MinChallengeTime = DateTime.Now.AddDays(3);
+        public static int MinChallengeDays = 3;
     }
 }

@@ -61,6 +61,60 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не.
+        /// </summary>
+        internal static string ButtonCancelText {
+            get {
+                return ResourceManager.GetString("ButtonCancelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        internal static string ButtonOkText {
+            get {
+                return ResourceManager.GetString("ButtonOkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Твоят тест ще продължи {0}. Сигурен ли си, че това ще бъде достатъчно?.
+        /// </summary>
+        internal static string ConfirmStartTestingDialogMessage {
+            get {
+                return ResourceManager.GetString("ConfirmStartTestingDialogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Започни своя тест..
+        /// </summary>
+        internal static string ConfirmStartTestingDialogTitle {
+            get {
+                return ResourceManager.GetString("ConfirmStartTestingDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Крайната дата за успешно спиране на цигарите трябва да е по голяма от днешната със {0} дни!.
+        /// </summary>
+        internal static string CreateTestInvalidGoalTimeMessage {
+            get {
+                return ResourceManager.GetString("CreateTestInvalidGoalTimeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нужно е повече време!.
+        /// </summary>
+        internal static string CreateTestInvalidGoalTimeTitle {
+            get {
+                return ResourceManager.GetString("CreateTestInvalidGoalTimeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Създаване на Тест.
         /// </summary>
         internal static string CreateTestViewTiitle {

@@ -156,6 +156,18 @@
   <data name="OnBoardingViewTitle" xml:space="preserve">
     <value>Tutorial</value>
   </data>
+  <data name="ButtonCancelText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ButtonOkText" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ConfirmStartTestingDialogMessage" xml:space="preserve">
+    <value>You Smoke Test is going to continue for {0}. Are you sure about that?</value>
+  </data>
+  <data name="ConfirmStartTestingDialogTitle" xml:space="preserve">
+    <value>Start your Test</value>
+  </data>
   <data name="CreateTestViewTiitle" xml:space="preserve">
     <value>Create Test</value>
   </data>
@@ -164,5 +176,11 @@
   </data>
   <data name="SingleDay" xml:space="preserve">
     <value>day</value>
+  </data>
+  <data name="CreateTestInvalidGoalTimeMessage" xml:space="preserve">
+    <value>Final goal date must be greater than current date with {0} days!</value>
+  </data>
+  <data name="CreateTestInvalidGoalTimeTitle" xml:space="preserve">
+    <value>Give your self more time!</value>
   </data>
 </root>

@@ -156,6 +156,18 @@
   <data name="OnBoardingViewTitle" xml:space="preserve">
     <value>Ръководство</value>
   </data>
+  <data name="ButtonCancelText" xml:space="preserve">
+    <value>Не</value>
+  </data>
+  <data name="ButtonOkText" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="ConfirmStartTestingDialogMessage" xml:space="preserve">
+    <value>Твоят тест ще продължи {0}. Сигурен ли си, че това ще бъде достатъчно?</value>
+  </data>
+  <data name="ConfirmStartTestingDialogTitle" xml:space="preserve">
+    <value>Започни своя тест.</value>
+  </data>
   <data name="CreateTestViewTiitle" xml:space="preserve">
     <value>Създаване на Тест</value>
   </data>
@@ -164,5 +176,11 @@
   </data>
   <data name="SingleDay" xml:space="preserve">
     <value>ден</value>
+  </data>
+  <data name="CreateTestInvalidGoalTimeMessage" xml:space="preserve">
+    <value>Крайната дата за успешно спиране на цигарите трябва да е по голяма от днешната със {0} дни!</value>
+  </data>
+  <data name="CreateTestInvalidGoalTimeTitle" xml:space="preserve">
+    <value>Нужно е повече време!</value>
   </data>
 </root>

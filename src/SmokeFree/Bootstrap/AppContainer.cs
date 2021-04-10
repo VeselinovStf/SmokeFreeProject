@@ -7,6 +7,7 @@ using SmokeFree.Data.Models;
 using SmokeFree.Services.General;
 using SmokeFree.Utilities.Logging;
 using SmokeFree.Utilities.Wrappers;
+using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
 using System;
@@ -39,6 +40,8 @@ namespace SmokeFree.Bootstrap
             //VIEW MODELS
             _builder.RegisterType<OnBoardingViewModel>();
             _builder.RegisterType<CreateTestViewModel>();
+            _builder.RegisterType<AppSettingsViewModel>();
+            _builder.RegisterType<UnderTestViewModel>();
 
             // SERVICES
             // SERVICES - GENERAL

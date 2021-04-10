@@ -2,15 +2,22 @@
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.Test;
 using SmokeFree.Resx;
+using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace SmokeFree.ViewModels.Test
 {
+    /// <summary>
+    /// Create Test View Model
+    /// </summary>
     public class CreateTestViewModel : ViewModelBase
     {
         #region FIELDS
@@ -113,6 +120,89 @@ namespace SmokeFree.ViewModels.Test
 
         #region COMMANDS
 
+        /// <summary>
+        /// Async Start Testing Command and Logic
+        /// </summary>
+        public IAsyncCommand OnStartTestingCommand => new AsyncCommand(
+            ExecuteStartTestingCommand,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteStartTestingCommand()
+        {
+            // Check if user is shore
+            var userNotification = await base._dialogService
+                 .ConfirmAsync(
+                    string.Format(AppResources.ConfirmStartTestingDialogMessage,this.SelectedTestTimeDurationItem.DisplayText),
+                    AppResources.ConfirmStartTestingDialogTitle,
+                    AppResources.ButtonOkText,
+                    AppResources.ButtonCancelText
+                 );
+
+            // Check User Notification Result
+            if (userNotification)
+            {
+                // Get Values For Creation
+                var testDuration = this.SelectedTestTimeDurationItem.DayValue;
+                var userId = Globals.UserId;
+                var goalTime = this.GoalDateTime;
+
+                // Goal Time Validation
+                if (goalTime < base._dateTime.Now().AddDays(Globals.MinChallengeDays))
+                {
+                    await this._dialogService.ShowDialog(
+                        string.Format(AppResources.CreateTestInvalidGoalTimeMessage,Globals.MinChallengeDays), 
+                        AppResources.CreateTestInvalidGoalTimeTitle, 
+                        AppResources.ButtonOkText);
+                }
+                else
+                {
+                    // Get Current User
+                    var user = this._realm.Find<User>(userId);
+
+                    if (user != null)
+                    {
+                        var newTest = new Data.Models.Test()
+                        {
+                            UserId = user.Id,
+                            CreatedOn = _dateTime.Now(),
+                            TestStartDate = _dateTime.Now(),
+                            TestEndDate = _dateTime.Now().AddDays(testDuration)
+                        };
+
+                        this._realm.Write(() =>
+                        {
+                            user.Tests.Add(newTest);
+                        });
+
+                        // Navigate to Under Test
+                        await base._navigationService.NavigateToAsync<UnderTestViewModel>();
+                    }
+                    else
+                    {
+                        base._appLogger.LogError($"Can't Find User in Database: USER ID {userId}");
+
+                        // TODO: A: Navigate to Error View Model
+                        // Set Option for 'go back'
+                        base.InternalErrorMessageToUser();
+                    }                   
+                }               
+            }          
+        }
+
+
+        /// <summary>
+        /// Navigate to settings View
+        /// </summary>
+        public IAsyncCommand OnSettingsCommand => new AsyncCommand(
+            ExecuteNavigateToSetting,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteNavigateToSetting()
+        {
+            await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
+        }
 
         #endregion
 
