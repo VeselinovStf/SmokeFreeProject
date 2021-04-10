@@ -11,7 +11,7 @@
             <Label Text="TEST"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button Text="GO BACK" Command="{Binding GOGO}"/>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

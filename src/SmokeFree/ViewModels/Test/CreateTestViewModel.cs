@@ -1,33 +1,52 @@
-﻿using SmokeFree.Abstraction.Services.General;
+﻿using Realms;
+using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.Base;
-using SmokeFree.ViewModels.OnBoarding;
-using System.Threading.Tasks;
-using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace SmokeFree.ViewModels.Test
 {
     public class CreateTestViewModel : ViewModelBase
     {
+        #region FIELDS
 
+        /// <summary>
+        /// Database
+        /// </summary>
+        private readonly Realm _realm;
+
+        #endregion
+
+        #region CTOR
 
         public CreateTestViewModel(
+            Realm realm,
            INavigationService navigationService,
            IDateTimeWrapper dateTimeWrapper,
            IAppLogger appLogger,
            IDialogService dialogService)
            : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
-
+            // Set Database
+            _realm = realm;
         }
 
-        public IAsyncValueCommand GOGO => new AsyncValueCommand(GOGOGO);
+        #endregion
 
-        private async ValueTask GOGOGO()
-        {
-            await this._navigationService.NavigateToAsync<OnBoardingViewModel>();
-            await this._navigationService.RemoveBackStackAsync();
-        }
+        #region INIT
+
+
+        #endregion
+
+        #region COMMANDS
+
+
+        #endregion
+
+        #region PROPS
+
+
+        #endregion
+
     }
 }
