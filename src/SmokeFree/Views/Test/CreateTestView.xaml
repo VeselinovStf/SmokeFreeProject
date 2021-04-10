@@ -2,16 +2,139 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmokeFree.Views.Test.CreateTestView"
-              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
-            utility:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             utility:ViewModelLocator.AutoWireViewModel="True"
              NavigationPage.HasNavigationBar="False"
+             Title="{Binding ViewTitle}"   
              >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="TEST"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-           
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- View Description -->
+            <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
+                   BackgroundColor="{StaticResource Gray-300}"
+                   Opacity="0.7">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        Text="{xct:Translate CreateTestViewViewDescriptionLabel}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Text="{xct:Translate CreateTestViewViewDescriptionLabelButton}" 
+                        CornerRadius="20"
+                        TextColor="{StaticResource Gray-900}"
+                        Opacity="5"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Clicked="OnCloseDescriptionButton_Clicked"/>
+                </Grid>
+
+            </Frame>
+            <!-- /END/ View Description -->
+
+            <StackLayout x:Name="ViewContent" IsVisible="false">
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+                    <!-- Goal Date Button -->
+                    <Button
+                        Text="&#xe746;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Clicked="GoalDate_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"
+                        Margin="10,10,10,10"
+                    />
+                    <!-- /END/ Goal Date Button -->
+
+                    <!-- App Settings Button -->
+                    <Button
+                    Text="&#xe72B;"
+                    FontFamily="{StaticResource FontIcons}"
+                    Command="{Binding OnSettingsCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource Gray-100}"
+                    FontSize="20"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    HorizontalOptions="End"
+                    Margin="10,10,10,10"
+                />
+                    <!-- /END/ App Settings Button -->
+                </Grid>
+
+
+                <!-- /END/ NAVIGATION -->
+
+                <!-- MAIN CONTENT -->
+                <StackLayout Grid.Row="1"
+                             VerticalOptions="CenterAndExpand"
+                             Spacing="20">
+
+                    <!-- Goal Date Time -->
+                    <DatePicker 
+                        x:Name="GoalDateTime" 
+                        Visual="Material" 
+                        IsVisible="false"
+                        Date="{Binding GoalDateTime}"
+                        />
+
+                    <!-- TEST VIEW TITLE -->
+                    <Label Text="{Binding ViewTitle}"
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"
+                           HorizontalTextAlignment="Center"
+                            FontSize="20"/>
+                    <!-- /END/ TEST VIEW TITLE -->
+
+                    <!-- TEST TIME PICKER -->
+                    <Picker x:Name="picker"
+                            Title="{xct:Translate CreateTestViewTestTimePicker}"
+                            TitleColor="{StaticResource Gray-300}"
+                            HorizontalTextAlignment="Center"
+                            FontSize="30"
+                            ItemsSource="{Binding TestTimeDurations}"
+                            ItemDisplayBinding="{Binding DisplayText}"
+                            SelectedItem="{Binding SelectedTestTimeDurationItem}"
+                            SelectedIndexChanged="OnSelectedIndex_Change"
+                            />
+                    <!-- /END/ TEST TIME PICKER -->
+
+                    <!-- START TEST BUTTON -->
+                    <Button x:Name="StartTestButton"
+                            Text="{xct:Translate CreateTestViewTestStartTestButton}"  
+                            IsVisible="False"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"
+                            Command="{Binding OnStartTestingCommand}"
+                            CornerRadius="30"/>
+                    <!-- /END/ START TEST BUTTON -->
+
+                </StackLayout>
+                <!-- /END/ MAIN CONTENT -->
+
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

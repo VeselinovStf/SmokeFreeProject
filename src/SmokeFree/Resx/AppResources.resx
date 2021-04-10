@@ -183,4 +183,19 @@
   <data name="CreateTestInvalidGoalTimeTitle" xml:space="preserve">
     <value>Нужно е повече време!</value>
   </data>
+  <data name="CreateTestViewTestStartTestButton" xml:space="preserve">
+    <value>Започни своя тест</value>
+  </data>
+  <data name="CreateTestViewTestTimePicker" xml:space="preserve">
+    <value>Избере времеви диапазон за тестване</value>
+  </data>
+  <data name="CreateTestViewViewDescriptionLabel" xml:space="preserve">
+    <value>Избери своята цел! До коя дата искаш да спреш този навик?</value>
+  </data>
+  <data name="CreateTestViewViewDescriptionLabelButton" xml:space="preserve">
+    <value>Продължи</value>
+  </data>
+  <data name="InternalErrorUserMessage" xml:space="preserve">
+    <value>Възникна неочаквана грешка. Рестартирайте приложението или се свържете със създателите.</value>
+  </data>
 </root>

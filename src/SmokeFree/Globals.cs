@@ -26,14 +26,6 @@ namespace SmokeFree
         public static int UserId { get; set; } = 1;
 
         /// <summary>
-        /// Internal Error Message Displayed to User
-        /// </summary>
-        public const string InternalErrorUserMessage = @"Application is bussy right now.
-Please close and restart the application to fix this issue.
-If problem persists, cleare application mobile data or connect to application development team.
-Sorry for inconvenience.";
-
-        /// <summary>
         /// Limits if User Forgets To push Smoke Done
         /// </summary>
         public static int OneSmokeTreshHoldTimeMinutes = 9;

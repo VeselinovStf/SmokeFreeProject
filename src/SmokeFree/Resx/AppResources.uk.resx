@@ -183,4 +183,19 @@
   <data name="CreateTestInvalidGoalTimeTitle" xml:space="preserve">
     <value>Give your self more time!</value>
   </data>
+  <data name="CreateTestViewTestStartTestButton" xml:space="preserve">
+    <value>Start Your Test</value>
+  </data>
+  <data name="CreateTestViewTestTimePicker" xml:space="preserve">
+    <value>Select Test Time Duration</value>
+  </data>
+  <data name="CreateTestViewViewDescriptionLabel" xml:space="preserve">
+    <value>Let's First Set Your Stop Smoking Goal Completition Date!</value>
+  </data>
+  <data name="CreateTestViewViewDescriptionLabelButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="InternalErrorUserMessage" xml:space="preserve">
+    <value>Unexpected error accures! Please restart the application or contact with app development team.</value>
+  </data>
 </root>

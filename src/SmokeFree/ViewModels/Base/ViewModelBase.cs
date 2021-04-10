@@ -1,6 +1,7 @@
 ﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Resx;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -96,9 +97,9 @@ namespace SmokeFree.ViewModels.Base
         /// Display Internal Error Message To User - Device Toast With Error Message
         /// </summary>
         /// <param name="message">Message to display</param>
-        protected virtual void InternalErrorMessageToUser(string message = Globals.InternalErrorUserMessage)
+        protected virtual void InternalErrorMessageToUser(string message = null)
         {
-            this._dialogService.ShowToast(message);
+            this._dialogService.ShowToast(message != null ? message : AppResources.InternalErrorUserMessage);
         }
 
         /// <summary>

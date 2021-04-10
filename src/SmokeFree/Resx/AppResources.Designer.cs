@@ -115,11 +115,56 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Започни своя тест.
+        /// </summary>
+        internal static string CreateTestViewTestStartTestButton {
+            get {
+                return ResourceManager.GetString("CreateTestViewTestStartTestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Избере времеви диапазон за тестване.
+        /// </summary>
+        internal static string CreateTestViewTestTimePicker {
+            get {
+                return ResourceManager.GetString("CreateTestViewTestTimePicker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Създаване на Тест.
         /// </summary>
         internal static string CreateTestViewTiitle {
             get {
                 return ResourceManager.GetString("CreateTestViewTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Избери своята цел! До коя дата искаш да спреш този навик?.
+        /// </summary>
+        internal static string CreateTestViewViewDescriptionLabel {
+            get {
+                return ResourceManager.GetString("CreateTestViewViewDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Продължи.
+        /// </summary>
+        internal static string CreateTestViewViewDescriptionLabelButton {
+            get {
+                return ResourceManager.GetString("CreateTestViewViewDescriptionLabelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна неочаквана грешка. Рестартирайте приложението или се свържете със създателите..
+        /// </summary>
+        internal static string InternalErrorUserMessage {
+            get {
+                return ResourceManager.GetString("InternalErrorUserMessage", resourceCulture);
             }
         }
         
