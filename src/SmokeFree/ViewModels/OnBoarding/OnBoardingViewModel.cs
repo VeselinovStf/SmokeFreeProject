@@ -193,7 +193,7 @@ namespace SmokeFree.ViewModels.OnBoarding
         {
             try
             {
-                // Check if ob boardins is on last element
+                // Check if on boarding carousel is on last element
                 if (this.SelectedOnBoardingItemsIndex + 1 == this.OnBoardingItems.Count)
                 {
                     if (AppUser.UserState.Equals(UserStates.Initial.ToString()))

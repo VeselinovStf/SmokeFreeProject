@@ -54,10 +54,8 @@ namespace SmokeFree.Services.General
                     case UserStates.CompletedOnBoarding:
                         return NavigateToAsync<CreateTestViewModel>();
                     case UserStates.UserUnderTesting:
-                        break;
+                        return NavigateToAsync<UnderTestViewModel>();
                     case UserStates.IsTestComplete:
-                        break;
-                    case UserStates.CreateTestFirstRun:
                         break;
                     case UserStates.InChallenge:
                         break;

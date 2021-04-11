@@ -8,6 +8,7 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
+using SmokeFree.ViewModels.Test;
 using System;
 using System.Threading.Tasks;
 
@@ -144,6 +145,57 @@ namespace OnBoardingViewModelTests.UnitTests
             var dateTimeOfCreation = DateTime.Now;
 
             var navigationServiceMock = new Mock<INavigationService>();
+            navigationServiceMock.Setup(e => e.NavigateToAsync<CreateTestViewModel>());
+
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+
+            var onBoardingViewModel = new OnBoardingViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object
+                );
+
+            object initializeParameter = new object();
+
+            var globalUserId = Globals.UserId;
+            var newUser = new User()
+            {
+                Id = globalUserId,
+            };
+
+            realm.Write(() =>
+            {
+                realm.Add(newUser);
+            });
+
+            //Act
+            await onBoardingViewModel.InitializeAsync(initializeParameter);
+
+            onBoardingViewModel.SelectedOnBoardingItemsIndex = onBoardingViewModel.OnBoardingItems.Count - 1;
+
+            //Assert
+            var commandResult = onBoardingViewModel.OnBordingItemButtonClickedCommand.ExecuteAsync().ConfigureAwait(false);
+            navigationServiceMock.Verify(e => e.NavigateToAsync<CreateTestViewModel>(), Times.Once);
+        }
+
+        /// <summary>
+        /// UserStatus CreateTestFirstRun - Navigate to next view when user is move throug all of on boarding items
+        /// </summary>
+        /// <returns></returns>
+        [Test]
+        public async Task Repeaded_On_Boarding_Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration("Repeaded_On_Boarding_Navigate_To_Next_View_If_Is_Selected_Last_Carousel_Index");
+            var realm = Realm.GetInstance(config);
+
+            var dateTimeOfCreation = DateTime.Now;
+
+            var navigationServiceMock = new Mock<INavigationService>();
             navigationServiceMock.Setup(e => e.InitializeAsync());
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
@@ -164,7 +216,7 @@ namespace OnBoardingViewModelTests.UnitTests
             var newUser = new User()
             {
                 Id = globalUserId,
-                UserState = UserStates.CreateTestFirstRun.ToString()
+                UserState = UserStates.CompletedOnBoarding.ToString()
             };
 
             realm.Write(() =>
