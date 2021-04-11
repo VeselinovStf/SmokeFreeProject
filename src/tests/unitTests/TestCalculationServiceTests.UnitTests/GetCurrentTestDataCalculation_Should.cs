@@ -2,7 +2,6 @@ using NUnit.Framework;
 using SmokeFree.Data.Models;
 using SmokeFree.Services.Data.Test;
 using System;
-using TestCalculationServiceTests.UnitTests.Utility;
 
 namespace TestCalculationServiceTests.UnitTests
 {
@@ -78,7 +77,7 @@ namespace TestCalculationServiceTests.UnitTests
             Assert.AreEqual(currentSmokeId, serviceResult.CurrentSmokeId, "CurrentSmokeId not equal");
             Assert.IsTrue(serviceResult.TimeSinceLastSmoke.Equals(timeSenceLastSmoke), "TimeSenceLastSmoke not equal");
             Assert.IsTrue(serviceResult.TestTimeLeft.Equals(testLeftTime), "TestLeftTime not equal");
-            Assert.IsTrue(serviceResult.CurrentSmokeTime.FormatedEqual(currentSmokeTime), "CurrentSmokeTime not equal");
+            Assert.IsTrue(serviceResult.CurrentSmokeTime.Equals(currentSmokeTime), "CurrentSmokeTime not equal");
 
         }
     }

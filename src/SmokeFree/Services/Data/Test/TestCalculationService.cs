@@ -1,7 +1,6 @@
 ﻿using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Data.Models;
 using SmokeFree.Models.Services.Data.Test;
-using SmokeFree.Utilities.DateTimeHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace SmokeFree.Services.Data.Test
             // Calculate test time left
             if (!test.TestEndDate.Equals(defaultTimeOffset))
             {
-                testTimeLeft = test.TestEndDate.Subtract(time);
+                testTimeLeft = test.TestEndDate.DateTime.Subtract(time);
             }
 
             if (test.SmokedCigaresUnderTest != null)
@@ -76,7 +75,7 @@ namespace SmokeFree.Services.Data.Test
 
                     if (!lastSmokeTime.Equals(defaultTimeOffset))
                     {
-                        timeSinceLastSmoke = time.Subtract(lastSmokeTime.DateTimeParse());
+                        timeSinceLastSmoke = time.Subtract(lastSmokeTime.DateTime);
                     }
 
                     // Calculate last smoked time
@@ -87,7 +86,7 @@ namespace SmokeFree.Services.Data.Test
                     if (lastSmoke != null)
                     {
                         currentSmokeId = lastSmoke.Id;
-                        currentSmokeTime = time.Subtract(lastSmoke.StartSmokeTime.DateTimeParse());
+                        currentSmokeTime = time.Subtract(lastSmoke.StartSmokeTime.DateTime);
                     }
                 }
             }
