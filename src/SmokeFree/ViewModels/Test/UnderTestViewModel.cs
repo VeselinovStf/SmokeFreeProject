@@ -19,6 +19,36 @@ namespace SmokeFree.ViewModels.Test
         #region FIELDS
 
         /// <summary>
+        /// Curent Smoked Count
+        /// </summary>
+        private int _currentlySmokedCount;
+
+        /// <summary>
+        /// Timer From last Smoked
+        /// </summary>
+        private TimeSpan? _timeSenceLastSmoke;
+
+        /// <summary>
+        /// Test Left Time Indicator
+        /// </summary>
+        private TimeSpan? _testLeftTime;
+
+        /// <summary>
+        /// Smoking State
+        /// </summary>
+        private bool _isSmoking;
+
+        /// <summary>
+        /// Current Smoke Id
+        /// </summary>
+        private int _currentSmokeId;
+
+        /// <summary>
+        /// Current Smoke Time Display
+        /// </summary>
+        private TimeSpan? _currentSmokeTime;
+
+        /// <summary>
         /// Database
         /// </summary>
         private readonly Realm _realm;
@@ -119,7 +149,85 @@ namespace SmokeFree.ViewModels.Test
 
         #region PROPS
 
+        /// <summary>
+        /// Curent Smoked Count
+        /// </summary>
+        public int CurrentlySmokedCount
+        {
+            get { return _currentlySmokedCount; }
+            set
+            {
+                _currentlySmokedCount = value;
+                OnPropertyChanged();
+            }
+        }
 
+        /// <summary>
+        /// Current Smoke Id
+        /// </summary>
+        public int CurrentSmokeId
+        {
+            get { return _currentSmokeId; }
+            set
+            {
+                _currentSmokeId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Current Smoke Time Display
+        /// </summary>
+        public TimeSpan? CurrentSmokeTime
+        {
+            get { return _currentSmokeTime; }
+            set
+            {
+                _currentSmokeTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        /// <summary>
+        /// Timer From last Smoked
+        /// </summary>
+        public TimeSpan? TimeSenceLastSmoke
+        {
+            get { return _timeSenceLastSmoke; }
+            set
+            {
+                _timeSenceLastSmoke = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Test Left Time Indicator
+        /// </summary>
+        public TimeSpan? TestLeftTime
+        {
+            get { return _testLeftTime; }
+            set
+            {
+                _testLeftTime = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Smoking State
+        /// </summary>
+        public bool IsSmoking
+        {
+            get { return _isSmoking; }
+            set
+            {
+
+                _isSmoking = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
     }
