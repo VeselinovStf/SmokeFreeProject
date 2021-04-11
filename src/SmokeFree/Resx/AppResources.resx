@@ -198,4 +198,7 @@
   <data name="InternalErrorUserMessage" xml:space="preserve">
     <value>Възникна неочаквана грешка. Рестартирайте приложението или се свържете със създателите.</value>
   </data>
+  <data name="UnderTestViewTiitle" xml:space="preserve">
+    <value>Тест</value>
+  </data>
 </root>

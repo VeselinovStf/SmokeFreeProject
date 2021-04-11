@@ -198,4 +198,7 @@
   <data name="InternalErrorUserMessage" xml:space="preserve">
     <value>Unexpected error accures! Please restart the application or contact with app development team.</value>
   </data>
+  <data name="UnderTestViewTiitle" xml:space="preserve">
+    <value>Under Test</value>
+  </data>
 </root>

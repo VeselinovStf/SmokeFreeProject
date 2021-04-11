@@ -302,5 +302,14 @@ namespace SmokeFree.Resx {
                 return ResourceManager.GetString("SingleDay", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Тест.
+        /// </summary>
+        internal static string UnderTestViewTiitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewTiitle", resourceCulture);
+            }
+        }
     }
 }
