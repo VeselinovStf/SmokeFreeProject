@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Services.Data.Test;
 using SmokeFree.Services.General;
 using SmokeFree.Utilities.Logging;
 using SmokeFree.Utilities.Wrappers;
@@ -45,6 +47,9 @@ namespace SmokeFree.Bootstrap
             // SERVICES - GENERAL
             _builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
             _builder.RegisterType<DialogService>().As<IDialogService>();
+            // SERVICES - DATA
+            _builder.RegisterType<TestCalculationService>().As<ITestCalculationService>();
+
 
             // UTILITIES
             // LOGGER

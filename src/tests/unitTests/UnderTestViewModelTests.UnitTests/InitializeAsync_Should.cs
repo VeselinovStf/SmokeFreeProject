@@ -3,10 +3,12 @@ using NUnit.Framework;
 using Realms;
 using SmokeFree;
 using SmokeFree.Abstraction.Managers;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.Models.Services.Data.Test;
 using SmokeFree.ViewModels.Test;
 using System;
 using System.Threading.Tasks;
@@ -33,6 +35,8 @@ namespace UnderTestViewModelTests.UnitTests
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
             var notificationManagerMock = new Mock<INotificationManager>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+
 
             var underTestViewModel = new UnderTestViewModel(
                 realm,
@@ -40,25 +44,46 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object
+                notificationManagerMock.Object,
+                testCalculationServiceMock.Object
                 );
 
             object parameter = new object();
             var currentlySmokedCount = 2;
             var timeSenceLastSmoke = new TimeSpan(1,1,1);
             var testLeftTime = new TimeSpan(1, 1, 1);
-            var currentSmokeId = 3;
+            var currentSmokeId = "ID";
             var currentSmokeTime = new TimeSpan(1, 1, 1);
+            var testId = "TEST_ID";
+
+            var user = new User()
+            {
+                Id = Globals.UserId,
+                TestId = testId
+            };
 
             var userTest = new Test()
             {
+                Id = testId,
                 UserId = Globals.UserId
             };
 
             realm.Write(() =>
             {
-                realm.Add(userTest);
+                realm.Add(user);
+
+                user.Tests.Add(userTest);
             });
+
+            var testCalculationResultDTO = new CurrentTestDataCalculationDTO(
+                currentlySmokedCount,
+                timeSenceLastSmoke,
+                testLeftTime,
+                currentSmokeId, 
+                currentSmokeTime);
+
+            testCalculationServiceMock.Setup(e => e.GetCurrentTestDataCalculation(It.IsAny<DateTime>(), It.IsAny<Test>()))
+                .Returns(testCalculationResultDTO);
 
             // Act
             await underTestViewModel.InitializeAsync(parameter);

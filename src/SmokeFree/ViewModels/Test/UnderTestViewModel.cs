@@ -1,5 +1,6 @@
 ﻿using Realms;
 using SmokeFree.Abstraction.Managers;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -8,6 +9,8 @@ using SmokeFree.Models.Managers.NotificationManager;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmokeFree.ViewModels.Test
 {
@@ -41,7 +44,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Id
         /// </summary>
-        private int _currentSmokeId;
+        private string _currentSmokeId;
 
         /// <summary>
         /// Current Smoke Time Display
@@ -58,6 +61,11 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private readonly INotificationManager _notificationManager;
 
+        /// <summary>
+        /// Test Calculations Service Abstraction
+        /// </summary>
+        private readonly ITestCalculationService _testCalculationService;
+
         #endregion
 
         #region CTOR
@@ -68,7 +76,8 @@ namespace SmokeFree.ViewModels.Test
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
             IDialogService dialogService,
-            INotificationManager notificationManager) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            INotificationManager notificationManager,
+            ITestCalculationService testCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             ViewTitle = AppResources.UnderTestViewTiitle;
@@ -78,6 +87,9 @@ namespace SmokeFree.ViewModels.Test
 
             // Device Specific Notification Manager
             _notificationManager = notificationManager;
+
+            // Test Calculation Service
+            _testCalculationService = testCalculationService;
 
             // Notification for test completition
             InitiateTestCompletitionNotificationEvent();
@@ -134,6 +146,77 @@ namespace SmokeFree.ViewModels.Test
             
         }
 
+        public override Task InitializeAsync(object parameter)
+        {
+            try
+            {
+                // Get User From DB
+                var userId = Globals.UserId;
+                var user = this._realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    // Get Current User Test
+                    var currentUserTestId = user.TestId;
+                    var currentTest = user.Tests
+                        .FirstOrDefault(e => e.Id == currentUserTestId);
+
+                    // Validate Test
+                    if (currentTest != null)
+                    {
+                        // Calculate Test 
+                        var testCalculation = this._testCalculationService
+                            .GetCurrentTestDataCalculation(_dateTime.Now(), currentTest);
+
+                        // Assignm properties
+                        this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
+                        this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
+                        this.TestLeftTime = testCalculation.TestTimeLeft;
+                        this.CurrentSmokeId = testCalculation.CurrentSmokeId;
+                        this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
+
+                        // Check if is smoking
+                        if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
+                        {
+                            this.IsSmoking = true;
+                        }
+
+                        // Start Device Cound Down for Test Left Time
+                        //StartTestintTimer();
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test: {currentUserTestId}");
+
+                        // TODO: A: Navigate to Error View Model
+                        // Set Option for 'go back'
+                        base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: {userId}");
+
+                    // TODO: A: Navigate to Error View Model
+                    // Set Option for 'go back'
+                    base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                // TODO: A: Navigate to Error View Model
+                // Set Option for 'go back'
+                base.InternalErrorMessageToUser();
+            }
+
+            return base.InitializeAsync(parameter);
+        }
+
         #endregion
 
         #region METHODS
@@ -165,7 +248,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Id
         /// </summary>
-        public int CurrentSmokeId
+        public string CurrentSmokeId
         {
             get { return _currentSmokeId; }
             set
