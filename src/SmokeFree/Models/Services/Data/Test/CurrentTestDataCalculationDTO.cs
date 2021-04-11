@@ -7,7 +7,7 @@ namespace SmokeFree.Models.Services.Data.Test
     /// </summary>
     public class CurrentTestDataCalculationDTO
     {
-        public CurrentTestDataCalculationDTO(int currentSmokedCount, TimeSpan? timeSinceLastSmoke, TimeSpan? testTimeLeft, string currentSmokeId, TimeSpan currentSmokeTime)
+        public CurrentTestDataCalculationDTO(int currentSmokedCount, TimeSpan timeSinceLastSmoke, TimeSpan testTimeLeft, string currentSmokeId, TimeSpan currentSmokeTime)
         {
             CurrentSmokedCount = currentSmokedCount;
             TimeSinceLastSmoke = timeSinceLastSmoke;
@@ -19,9 +19,9 @@ namespace SmokeFree.Models.Services.Data.Test
 
         public int CurrentSmokedCount { get; set; }
 
-        public TimeSpan? TimeSinceLastSmoke { get; set; }
+        public TimeSpan TimeSinceLastSmoke { get; set; }
 
-        public TimeSpan? TestTimeLeft { get; set; }
+        public TimeSpan TestTimeLeft { get; set; }
 
         public TimeSpan CurrentSmokeTime { get; set; }
 

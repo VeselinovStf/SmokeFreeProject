@@ -29,12 +29,12 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Timer From last Smoked
         /// </summary>
-        private TimeSpan? _timeSenceLastSmoke;
+        private TimeSpan _timeSenceLastSmoke;
 
         /// <summary>
         /// Test Left Time Indicator
         /// </summary>
-        private TimeSpan? _testLeftTime;
+        private TimeSpan _testLeftTime;
 
         /// <summary>
         /// Smoking State
@@ -49,7 +49,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Time Display
         /// </summary>
-        private TimeSpan? _currentSmokeTime;
+        private TimeSpan _currentSmokeTime;
 
         /// <summary>
         /// Database
@@ -146,6 +146,11 @@ namespace SmokeFree.ViewModels.Test
             
         }
 
+        /// <summary>
+        /// Initialize View State
+        /// </summary>
+        /// <param name="parameter">Optional</param>
+        /// <returns>Base Initialize Async</returns>
         public override Task InitializeAsync(object parameter)
         {
             try
@@ -173,6 +178,9 @@ namespace SmokeFree.ViewModels.Test
                         this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
                         this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
                         this.TestLeftTime = testCalculation.TestTimeLeft;
+
+                        // Set value of currently smoked or string.Empty 
+                        // if user is smoking for first time
                         this.CurrentSmokeId = testCalculation.CurrentSmokeId;
                         this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
 
@@ -261,7 +269,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Time Display
         /// </summary>
-        public TimeSpan? CurrentSmokeTime
+        public TimeSpan CurrentSmokeTime
         {
             get { return _currentSmokeTime; }
             set
@@ -275,7 +283,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Timer From last Smoked
         /// </summary>
-        public TimeSpan? TimeSenceLastSmoke
+        public TimeSpan TimeSenceLastSmoke
         {
             get { return _timeSenceLastSmoke; }
             set
@@ -288,7 +296,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Test Left Time Indicator
         /// </summary>
-        public TimeSpan? TestLeftTime
+        public TimeSpan TestLeftTime
         {
             get { return _testLeftTime; }
             set
