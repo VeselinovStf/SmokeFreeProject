@@ -79,7 +79,7 @@ namespace SmokeFree.Services.Data.Test
                     }
 
                     // Calculate last smoked time
-                    var lastSmoke = leftUnfinished
+                    var lastSmoke = smokedCigaresUnderTest
                         .OrderByDescending(e => e.StartSmokeTime)
                         .FirstOrDefault();
 
