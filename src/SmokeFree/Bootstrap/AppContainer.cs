@@ -2,10 +2,12 @@
 using Realms;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Services.Data.Test;
 using SmokeFree.Services.General;
+using SmokeFree.Utilities.DeviceUtilities;
 using SmokeFree.Utilities.Logging;
 using SmokeFree.Utilities.Wrappers;
 using SmokeFree.ViewModels.AppSettings;
@@ -56,6 +58,8 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<DebugLogger>().As<IAppLogger>().SingleInstance();
             // DateTime Wrapper
             _builder.RegisterType<DateTimeWrapper>().As<IDateTimeWrapper>().SingleInstance();
+            // Device Utilities
+            _builder.RegisterType<DeviceTimer>().As<IDeviceTimer>().InstancePerDependency();
 
 
             _container = _builder.Build();

@@ -2,6 +2,7 @@
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
@@ -10,6 +11,7 @@ using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SmokeFree.ViewModels.Test
@@ -20,6 +22,11 @@ namespace SmokeFree.ViewModels.Test
     public class UnderTestViewModel : ViewModelBase
     {
         #region FIELDS
+
+        /// <summary>
+        /// Stop Testing Timer Cancelation Token
+        /// </summary>
+        public CancellationTokenSource stopTestingTimerCancellation;
 
         /// <summary>
         /// Curent Smoked Count
@@ -66,6 +73,11 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private readonly ITestCalculationService _testCalculationService;
 
+        /// <summary>
+        /// Device Timer Abstraction
+        /// </summary>
+        private readonly IDeviceTimer _deviceTimer;
+
         #endregion
 
         #region CTOR
@@ -77,7 +89,8 @@ namespace SmokeFree.ViewModels.Test
             IAppLogger appLogger,
             IDialogService dialogService,
             INotificationManager notificationManager,
-            ITestCalculationService testCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            ITestCalculationService testCalculationService,
+            IDeviceTimer deviceTimer) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             ViewTitle = AppResources.UnderTestViewTiitle;
@@ -90,6 +103,12 @@ namespace SmokeFree.ViewModels.Test
 
             // Test Calculation Service
             _testCalculationService = testCalculationService;
+
+            // Device Timer
+            _deviceTimer = deviceTimer;
+
+            // Stop Testing Timer Cancelation Token
+            this.stopTestingTimerCancellation = new CancellationTokenSource();
 
             // Notification for test completition
             InitiateTestCompletitionNotificationEvent();
@@ -191,7 +210,7 @@ namespace SmokeFree.ViewModels.Test
                         }
 
                         // Start Device Cound Down for Test Left Time
-                        //StartTestintTimer();
+                        StartTestintTimer();
                     }
                     else
                     {
@@ -235,6 +254,29 @@ namespace SmokeFree.ViewModels.Test
         /// <param name="title">Notification Title</param>
         /// <param name="message">Notification Message</param>
         private void ShowNotification(string title, string message) { }
+
+        /// <summary>
+        /// Starts Testing Time
+        /// </summary>
+        private void StartTestintTimer()
+        {
+            _deviceTimer
+                .Start(() =>
+                {
+                    this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
+
+                    if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
+                    {
+                        // Notification for Test Completition
+                        //DoSomething();
+
+                        return false;
+                    }
+
+                    return true;
+
+                }, this.stopTestingTimerCancellation);
+        }
 
         #endregion
 

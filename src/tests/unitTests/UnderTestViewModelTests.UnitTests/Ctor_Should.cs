@@ -5,6 +5,7 @@ using SmokeFree;
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
@@ -37,6 +38,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dialogServiceMock = new Mock<IDialogService>();
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
 
             // Act
             var underTestViewModel = new UnderTestViewModel(
@@ -46,7 +48,8 @@ namespace UnderTestViewModelTests.UnitTests
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
                 notificationManagerMock.Object,
-                testCalculationServiceMock.Object
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
                 );
 
             //Assert
@@ -69,7 +72,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dialogServiceMock = new Mock<IDialogService>();
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
-
+            var deviceTimerMock = new Mock<IDeviceTimer>();
 
             LocalizationResourceManager.Current.CurrentCulture = new CultureInfo("uk");
             var resourceManager = ResourceManagerMock.GetResourceManager();
@@ -84,7 +87,8 @@ namespace UnderTestViewModelTests.UnitTests
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
                 notificationManagerMock.Object,
-                testCalculationServiceMock.Object
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
                 );
 
             var underTestViewTitle = underTestViewModel.ViewTitle;
@@ -109,6 +113,7 @@ namespace UnderTestViewModelTests.UnitTests
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
 
             var notificationManagerMock = new Mock<INotificationManager>();
             notificationManagerMock.Raise(e => e.NotificationReceived += (sender, args) => { });
@@ -132,7 +137,8 @@ namespace UnderTestViewModelTests.UnitTests
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
                 notificationManagerMock.Object,
-                testCalculationServiceMock.Object
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
                 );
 
             //Assert
@@ -154,6 +160,7 @@ namespace UnderTestViewModelTests.UnitTests
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
 
             var notificationManagerMock = new Mock<INotificationManager>();
             notificationManagerMock.Raise(e => e.NotificationReceived += (sender, args) => { });
@@ -177,11 +184,46 @@ namespace UnderTestViewModelTests.UnitTests
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
                 notificationManagerMock.Object,
-                testCalculationServiceMock.Object
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
                 );
 
             //Assert
             notificationManagerMock.VerifyAdd(m => m.NotificationReceived += It.IsAny<EventHandler>(), Times.Exactly(0));
+        }
+
+        /// <summary>
+        /// Assign Stop Testing Timer CTS
+        /// </summary>
+        [Test]
+        public void Assign_Stop_Timer_CTS_For_UnderTestViewModel()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration("Assign_Stop_Timer_CTS_For_UnderTestViewModel");
+            var realm = Realm.GetInstance(config);
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            var notificationManagerMock = new Mock<INotificationManager>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
+
+            // Act
+            var underTestViewModel = new UnderTestViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object,
+                notificationManagerMock.Object,
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
+                );
+
+            //Assert
+            Assert.NotNull(underTestViewModel.stopTestingTimerCancellation);
         }
 
     }
