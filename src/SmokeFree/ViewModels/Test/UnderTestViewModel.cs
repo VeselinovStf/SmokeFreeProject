@@ -124,7 +124,7 @@ namespace SmokeFree.ViewModels.Test
         /// Initate Notification For Test COmpletition
         /// </summary>
         private void InitiateTestCompletitionNotificationEvent()
-        {         
+        {
             try
             {
                 // Get Current User
@@ -164,7 +164,7 @@ namespace SmokeFree.ViewModels.Test
                 // Set Option for 'go back'
                 base.InternalErrorMessageToUser();
             }
-            
+
         }
 
         /// <summary>
@@ -249,6 +249,101 @@ namespace SmokeFree.ViewModels.Test
         #endregion
 
         #region COMMANDS
+
+        /// <summary>
+        /// Async Start Testing Command and Logic
+        /// </summary>
+        public IAsyncCommand OnStopTestingCommand => new AsyncCommand(
+            ExecuteStopTestingCommand,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteStopTestingCommand()
+        {
+            try
+            {
+                // Check if user is shure
+                var userNotification = await base._dialogService
+                     .ConfirmAsync(AppResources.UnderTestViewModelStopTestMessage,
+                     AppResources.UnderTestViewModelRestartTestingLabel,
+                     AppResources.ButtonOkText,
+                     AppResources.ButtonCancelText);
+
+                if (userNotification)
+                {
+                    // Get Current User
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
+
+                    // Validate User
+                    if (user != null)
+                    {
+                        var currentTestId = user.TestId;
+
+                        // Delete Current Test Information From DB                        
+                        _realm.Write(() =>
+                        {
+                            var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId);
+
+                            // Remove Test
+                            userTest.IsDeleted = true;
+                            userTest.DeletedOn = this._dateTime.Now();
+                            userTest.ModifiedOn = this._dateTime.Now();
+
+                            // Remove smoked cigares if persist
+                            if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                            {
+                                foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                                {
+                                    smoke.IsDeleted = true;
+                                    smoke.DeletedOn = this._dateTime.Now();
+                                    smoke.ModifiedOn = this._dateTime.Now();
+                                }
+                            }
+
+                            var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId);
+
+                            // Remove Challenge
+                            testChallenge.IsDeleted = true;
+                            testChallenge.DeletedOn = this._dateTime.Now();
+                            testChallenge.ModifiedOn = this._dateTime.Now();
+
+                            // Update User Status
+                            user.UserState = UserStates.CompletedOnBoarding.ToString();
+                            user.TestId = string.Empty;
+                        });
+
+                        // Stop Testing Timer
+                        StopTestingTimer();
+
+                        // TODO: A: Stop any other timer
+                        // TODO: A: Stop Notification
+
+                        // Navigate to Create Test
+                        await this._navigationService.NavigateToAsync<CreateTestViewModel>();
+                        //TODO: B: Clear navigation stack
+
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                        // TODO: A: Navigate to Error View Model
+                        // Set Option for 'go back'
+                        base.InternalErrorMessageToUser();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                // TODO: A: Navigate to Error View Model
+                // Set Option for 'go back'
+                base.InternalErrorMessageToUser();
+            }
+        }
 
         /// <summary>
         /// Navigate to settings View

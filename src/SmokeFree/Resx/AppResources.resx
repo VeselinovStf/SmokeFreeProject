@@ -201,4 +201,10 @@
   <data name="UnderTestViewTiitle" xml:space="preserve">
     <value>Тест</value>
   </data>
+  <data name="UnderTestViewModelRestartTestingLabel" xml:space="preserve">
+    <value>Рестартиране на теста</value>
+  </data>
+  <data name="UnderTestViewModelStopTestMessage" xml:space="preserve">
+    <value>Рестартирането на теста ще истрие събраната информация до момента! Сигурен ли си, че искаш да направиш това?</value>
+  </data>
 </root>

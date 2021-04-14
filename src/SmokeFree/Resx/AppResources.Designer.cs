@@ -304,6 +304,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Рестартиране на теста.
+        /// </summary>
+        internal static string UnderTestViewModelRestartTestingLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelRestartTestingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рестартирането на теста ще истрие събраната информация до момента! Сигурен ли си, че искаш да направиш това?.
+        /// </summary>
+        internal static string UnderTestViewModelStopTestMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelStopTestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Тест.
         /// </summary>
         internal static string UnderTestViewTiitle {
