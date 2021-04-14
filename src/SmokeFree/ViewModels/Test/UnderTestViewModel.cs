@@ -8,11 +8,13 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.Models.Managers.NotificationManager;
 using SmokeFree.Resx;
+using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace SmokeFree.ViewModels.Test
 {
@@ -246,6 +248,26 @@ namespace SmokeFree.ViewModels.Test
 
         #endregion
 
+        #region COMMANDS
+
+        /// <summary>
+        /// Navigate to settings View
+        /// </summary>
+        public IAsyncCommand OnSettingsCommand => new AsyncCommand(
+            ExecuteNavigateToSetting,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteNavigateToSetting()
+        {
+            // Stop Testing Timer
+            StopTestingTimer();
+
+            await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
+        }
+
+        #endregion
+
         #region METHODS
 
         /// <summary>
@@ -276,6 +298,14 @@ namespace SmokeFree.ViewModels.Test
                     return true;
 
                 }, this.stopTestingTimerCancellation);
+        }
+
+        /// <summary>
+        /// Stop Testing Timer
+        /// </summary>
+        private void StopTestingTimer()
+        {
+            _deviceTimer.Stop(this.stopTestingTimerCancellation);
         }
 
         #endregion
