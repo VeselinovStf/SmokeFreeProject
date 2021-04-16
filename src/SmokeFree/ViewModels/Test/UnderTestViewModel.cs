@@ -363,6 +363,7 @@ namespace SmokeFree.ViewModels.Test
 
         #endregion
 
+        // TODO: B: Add notification for app inner work! Use IsBusy for methods
         #region METHODS
 
         /// <summary>
@@ -384,8 +385,12 @@ namespace SmokeFree.ViewModels.Test
 
                     if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
                     {
-                        // Notification for Test Completition
-                        //DoSomething();
+                        // Execute Function for stop testing
+                        MarkTestCompleted();
+                        CreateTestResult();
+                        SendTestCompletitionNotification();
+                        StopTestingTimer();
+                        NavigateToTestResults();
 
                         return false;
                     }
@@ -393,6 +398,101 @@ namespace SmokeFree.ViewModels.Test
                     return true;
 
                 }, this.stopTestingTimerCancellation);
+        }
+
+        /// <summary>
+        /// Create Current Test Results
+        /// </summary>
+        private void CreateTestResult()
+        {
+            //TODO: A: Implement
+        }
+
+        /// <summary>
+        /// Navigate to next view
+        /// </summary>
+        private void NavigateToTestResults()
+        {
+            //TODO: A: Implement
+        }
+
+        /// <summary>
+        /// Send Device Specific Notification For test Completition
+        /// </summary>
+        private void SendTestCompletitionNotification()
+        {
+            //TODO: A: Implement
+        }
+
+        /// <summary>
+        /// Marks Current test completed
+        /// </summary>
+        public void MarkTestCompleted()
+        {
+            try
+            {
+                // Get user
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    // Get Current State
+                    var currentTestId = user.TestId;
+                    var currentTest = user
+                        .Tests
+                        .FirstOrDefault(t => t.Id == currentTestId);
+
+                    // Validate Test
+                    if (currentTest != null)
+                    {
+                        // Validate App State
+                        if (currentTest.IsCompleted)
+                        {
+                            base._appLogger.LogCritical($"User Test is with flag Completed! But was not completed at a time! App State is Compromised!");
+                        }
+
+                        this._realm.Write(() =>
+                        {
+                            currentTest.IsCompleted = true;
+                            currentTest.ModifiedOn = this._dateTime.Now();
+                            user.UserState = UserStates.IsTestComplete.ToString();
+                        });
+
+
+                        this._dialogService
+                            .ShowDialog("Test Completed", "Congratuations!", "Continue to challenge!");
+
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test: Test Id {currentTestId}");
+
+                        // TODO: A: Navigate to Error View Model
+                        // Set Option for 'go back'
+                        base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                    // TODO: A: Navigate to Error View Model
+                    // Set Option for 'go back'
+                    base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                // TODO: A: Navigate to Error View Model
+                // Set Option for 'go back'
+                base.InternalErrorMessageToUser();
+            }
         }
 
         /// <summary>
