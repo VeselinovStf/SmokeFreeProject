@@ -13,6 +13,98 @@ namespace SmokeFree.Services.Data.Test
     public class TestCalculationService : ITestCalculationService
     {
         /// <summary>
+        /// Calculate Test Results
+        /// </summary>
+        /// <param name="test">Test to calculate results from</param>
+        /// <returns>Result data DTO</returns>
+        public CalculateTestResultDTO CalculateTestResult(SmokeFree.Data.Models.Test test)
+        {
+            try
+            {
+                // Get Test Smokes
+                var testSmokes = test.SmokedCigaresUnderTest;
+
+                // Validate App State
+                if (testSmokes.Count == 0)
+                {
+                    return new CalculateTestResultDTO(false, $"Can't calculate test result without actual smokes! Test Id {test.Id}");
+                }
+
+                var newTestResults = new TestResult();
+
+                newTestResults.TotalTestTime = new DateTimeOffset(
+                    new DateTime() + test.TestEndDate.DateTime.Subtract(test.TestStartDate.DateTime));
+
+                newTestResults.TestId = test.Id;
+                newTestResults.TestStartDate = test.TestStartDate;
+                newTestResults.EndStartDate = test.TestEndDate;
+                newTestResults.TotalSmokedCigars = testSmokes.Count();
+
+                // Per day calculation
+                var avaragePerDay = testSmokes
+                    .GroupBy(
+                        smoke => smoke.StartSmokeTime.Day,
+                        (day, smokes) => new
+                        {
+                            SmokedForDay = smokes.Count(),
+                            DaySmokeTimeMinutes =
+                                smokes.Select(
+                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime)
+                                    ).ToList().Sum(e => e.TotalMinutes),
+                            DayNotSmokingTime = smokes.Max(e => e.EndSmokeTime)
+                                .Subtract(smokes.Min(e => e.StartSmokeTime)).Subtract(
+                                new TimeSpan(smokes.Select(
+                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime)
+                                    ).Sum(e => e.Ticks))
+                                ),
+                            AvarageSmokeDistance = CalculateAvarageSmokeDistance(smokes.ToList())
+                        }
+                    )
+                    .ToList();
+
+                var avarageSmokedCigarsPerDay = avaragePerDay.Select(e => e.SmokedForDay).Average();
+                var avarageSmokeOxygen = TimeSpan.FromMinutes((long)Math.Ceiling(avaragePerDay.Select(e => e.DaySmokeTimeMinutes).Average()));
+                var avarageCleanOxygen = new TimeSpan((long)avaragePerDay.Select(e => e.DayNotSmokingTime.Ticks).Average());
+                var avarageSmokeDistance = new TimeSpan((long)avaragePerDay.Select(e => e.AvarageSmokeDistance.Ticks).Average());
+
+                // TODO: B SmokerType is not added
+                newTestResults.AvarageSmokedCigarsPerDay = avarageSmokedCigarsPerDay;
+                newTestResults.AvarageCleanOxygenTimeSeconds = avarageCleanOxygen.TotalSeconds;
+                newTestResults.TotalSmokeGasTimeTimeSeconds = avarageSmokeOxygen.TotalSeconds;
+                newTestResults.AvarageSmokeDistanceSeconds = avarageSmokeDistance.TotalSeconds;
+                newTestResults.AvarageSmokeActiveTimeSeconds = new TimeSpan((avarageSmokeOxygen.Ticks + avarageCleanOxygen.Ticks)).Seconds;
+
+                return new CalculateTestResultDTO(true, newTestResults);
+            }
+            catch (Exception ex)
+            {
+                return new CalculateTestResultDTO(false, ex.Message);
+            }
+        }
+
+        private static TimeSpan CalculateAvarageSmokeDistance(List<Smoke> smokes)
+        {
+            var timeSpan = new List<TimeSpan>();
+
+            if (smokes.Count == 1)
+            {
+                return new TimeSpan();
+            }
+
+            var orderedSmokes = smokes.OrderByDescending(e => e.StartSmokeTime).ToList();
+            for (int i = 0; i < orderedSmokes.Count - 1; i++)
+            {
+                var subs = orderedSmokes[i].StartSmokeTime.Subtract(orderedSmokes[i + 1].StartSmokeTime);
+
+                timeSpan.Add(subs);
+            }
+
+
+            //return timeSpan.Average();
+            return new TimeSpan((long)timeSpan.Select(ts => ts.Ticks).Average());
+        }
+
+        /// <summary>
         /// Get Test Data Based on Time
         /// </summary>
         /// <param name="time">DateTime Filter</param>
