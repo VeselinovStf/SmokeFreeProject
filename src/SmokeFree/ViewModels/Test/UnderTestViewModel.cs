@@ -365,14 +365,14 @@ namespace SmokeFree.ViewModels.Test
         private void StartTestintTimer()
         {
             _deviceTimer
-                .Start(() =>
+                .Start(async () =>
                 {
                     this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
 
                     if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
                     {
                         // Execute Function for stop testing
-                        MarkTestCompleted();
+                        await MarkTestCompleted();
                         CreateTestResult();
                         SendTestCompletitionNotification();
                         StopTestingTimer();

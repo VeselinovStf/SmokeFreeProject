@@ -118,7 +118,7 @@ namespace UnderTestViewModelTests.UnitTests
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
 
             var deviceTimerMock = new Mock<IDeviceTimer>();
-            deviceTimerMock.Setup(e => e.Start(It.IsAny<Func<bool>>(), It.IsAny<CancellationTokenSource>()));
+            deviceTimerMock.Setup(e => e.Start(It.IsAny<Func<Task<bool>>>(), It.IsAny<CancellationTokenSource>()));
 
             var underTestViewModel = new UnderTestViewModel(
                 realm,
@@ -172,7 +172,7 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.InitializeAsync(parameter);
 
             //Assert
-            deviceTimerMock.Verify(e => e.Start(It.IsAny<Func<bool>>(), It.IsAny<CancellationTokenSource>()), Times.Once);
+            deviceTimerMock.Verify(e => e.Start(It.IsAny<Func<Task<bool>>>(), It.IsAny<CancellationTokenSource>()), Times.Once);
 
         }
 
@@ -193,7 +193,7 @@ namespace UnderTestViewModelTests.UnitTests
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
 
             var deviceTimerMock = new Mock<IDeviceTimer>();
-            deviceTimerMock.Setup(e => e.Start(It.IsAny<Func<bool>>(), It.IsAny<CancellationTokenSource>()));
+            deviceTimerMock.Setup(e => e.Start(It.IsAny<Func<Task<bool>>>(), It.IsAny<CancellationTokenSource>()));
 
             var underTestViewModel = new UnderTestViewModel(
                 realm,

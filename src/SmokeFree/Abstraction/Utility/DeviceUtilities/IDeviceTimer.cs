@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace SmokeFree.Abstraction.Utility.DeviceUtilities
 {
@@ -13,7 +14,7 @@ namespace SmokeFree.Abstraction.Utility.DeviceUtilities
         /// </summary>
         /// <param name="func">Function to execute. Return false to stop timer</param>
         /// <param name="cts">Cancelation Token Source. Manages Stop Method</param>
-        void Start(Func<bool> p, CancellationTokenSource stopTestingTimerCancellation);
+        void Start(Func<Task<bool>> p, CancellationTokenSource stopTestingTimerCancellation);
 
         /// <summary>
         /// Stop Timer
