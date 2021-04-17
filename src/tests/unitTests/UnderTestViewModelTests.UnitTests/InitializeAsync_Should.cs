@@ -289,7 +289,105 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.InitializeAsync(parameter);
 
             //Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()),Times.Exactly(2));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()),Times.Exactly(1));
+        }
+
+        /// <summary>
+        /// Initializes NotificationReceived event when is called and user is allowing notifications
+        /// </summary>
+        [Test]
+        public async Task Initializes_Test_Completition_Notification_When_User_Allowes_Notifications()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
+            var realm = Realm.GetInstance(config);
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
+
+            var notificationManagerMock = new Mock<INotificationManager>();
+            notificationManagerMock.Raise(e => e.NotificationReceived += (sender, args) => { });
+
+            var user = new User()
+            {
+                Id = Globals.UserId,
+                NotificationState = true
+            };
+
+            realm.Write(() =>
+            {
+                realm.Add(user);
+            });
+
+            // Act
+            var underTestViewModel = new UnderTestViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object,
+                notificationManagerMock.Object,
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
+                );
+
+            await underTestViewModel.InitializeAsync(new object());
+
+            //Assert
+            notificationManagerMock.VerifyAdd(m => m.NotificationReceived += It.IsAny<EventHandler>(), Times.Exactly(1));
+        }
+
+        /// <summary>
+        /// Not Initializes NotificationReceived event when is called and user is not allowing notifications
+        /// </summary>
+        [Test]
+        public async Task Not_Initializes_Test_Completition_Notification_When_User_Not_Allowed_Notifications()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
+            var realm = Realm.GetInstance(config);
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
+
+            var notificationManagerMock = new Mock<INotificationManager>();
+            notificationManagerMock.Raise(e => e.NotificationReceived += (sender, args) => { });
+
+            var user = new User()
+            {
+                Id = Globals.UserId,
+                NotificationState = false
+            };
+
+            realm.Write(() =>
+            {
+                realm.Add(user);
+            });
+
+            // Act
+            var underTestViewModel = new UnderTestViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object,
+                notificationManagerMock.Object,
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
+                );
+
+            await underTestViewModel.InitializeAsync(new object());
+
+            //Assert
+            notificationManagerMock.VerifyAdd(m => m.NotificationReceived += It.IsAny<EventHandler>(), Times.Exactly(0));
         }
 
     }

@@ -207,4 +207,19 @@
   <data name="UnderTestViewModelStopTestMessage" xml:space="preserve">
     <value>Рестартирането на теста ще истрие събраната информация до момента! Сигурен ли си, че искаш да направиш това?</value>
   </data>
+  <data name="SomethingWentWrongViewModelHeader" xml:space="preserve">
+    <value>Нещо се обърка</value>
+  </data>
+  <data name="SomethingWentWrongViewModelImage" xml:space="preserve">
+    <value>SomethingWentWrong.png</value>
+  </data>
+  <data name="SomethingWentWrongViewModelTitle" xml:space="preserve">
+    <value>Нещо се обърка</value>
+  </data>
+  <data name="SomethingWentWrongViewModelTryAgainButtonText" xml:space="preserve">
+    <value>Опитай отново</value>
+  </data>
+  <data name="SomethingWentWrongViewModelReportIssueButtonText" xml:space="preserve">
+    <value>Уведоми създателите</value>
+  </data>
 </root>

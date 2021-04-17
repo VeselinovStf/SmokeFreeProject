@@ -7,6 +7,7 @@ using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.Test;
+using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
 using System.Linq;
@@ -156,17 +157,18 @@ namespace CreateTestViewModelTests.UnitTests
         /// App State Must be with one active ( not deleted ) user test
         /// </summary>
         [Test]
-        public void Show_Toast_If_Db_Contains_More_The_One_Active_Test_For_User()
+        public void Show_SomethingWentWrongViewModel_If_Db_Contains_More_The_One_Active_Test_For_User()
         {
             //Arrange
-            var config = new InMemoryConfiguration("Show_Toast_If_Db_Contains_More_The_One_Active_Test_For_User");
+            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
             var realm = Realm.GetInstance(config);
 
             var navigationServiceMock = new Mock<INavigationService>();
+            navigationServiceMock.Setup(e => e.NavigateToAsync<SomethingWentWrongViewModel>());
+
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-            dialogServiceMock.Setup(e => e.ShowToast(It.IsAny<string>()));
+            var dialogServiceMock = new Mock<IDialogService>();           
 
             dialogServiceMock.Setup(e => e.ConfirmAsync(
                     It.IsAny<string>(),
@@ -230,7 +232,7 @@ namespace CreateTestViewModelTests.UnitTests
             var call = createTestViewModel.OnStartTestingCommand.ExecuteAsync();
 
             //Assert
-            dialogServiceMock.Verify(e => e.ShowToast(It.IsAny<string>()), Times.Once);
+            navigationServiceMock.Verify(e => e.NavigateToAsync< SomethingWentWrongViewModel>(), Times.Once);
         }
 
         /// <summary>

@@ -207,4 +207,19 @@
   <data name="UnderTestViewModelStopTestMessage" xml:space="preserve">
     <value>Restarting the test is going to erase all collected data. Are you shore?</value>
   </data>
+  <data name="SomethingWentWrongViewModelHeader" xml:space="preserve">
+    <value>Something Went Wrong</value>
+  </data>
+  <data name="SomethingWentWrongViewModelImage" xml:space="preserve">
+    <value>SomethingWentWrong.png</value>
+  </data>
+  <data name="SomethingWentWrongViewModelTitle" xml:space="preserve">
+    <value>Something Went Wrong</value>
+  </data>
+  <data name="SomethingWentWrongViewModelTryAgainButtonText" xml:space="preserve">
+    <value>Try Again</value>
+  </data>
+  <data name="SomethingWentWrongViewModelReportIssueButtonText" xml:space="preserve">
+    <value>Report Developers</value>
+  </data>
 </root>

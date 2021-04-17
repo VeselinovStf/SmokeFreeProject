@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmokeFree.Views.ErrorAndEmpty.SomethingWentWrongView"
+             xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             Title="{Binding ViewTitle}"
+             >
+    <!-- View Content -->
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Display Item -->
+                <Image 
+                                VerticalOptions="Start"
+                                HeightRequest="200"
+                                WidthRequest="200"
+                                Aspect="AspectFit"
+                                Margin="20,30,20,0"
+                                Source="{Binding ImagePath}"/>
+                <!-- /END/ Display Item -->
+
+                <!-- Header -->
+                <Label 
+                                Grid.Row="1"
+                                TextColor="{StaticResource Gray-100}"
+                                VerticalOptions="Start"
+                                FontSize="26"
+                                Margin="30"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Header}"/>
+                <!-- /END/ Header -->
+
+                <!-- Description Text -->
+                <Label
+                                Grid.Row="2"
+                                TextColor="{StaticResource Gray-100}"
+                                Margin="20,0,20,25"
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                Text="{Binding Content}"/>
+                <!-- /END/ Description Text -->
+
+            </Grid>
+
+            <!-- Report Issue Button -->
+            <Button                                                      
+                            Grid.Row="1"
+                            FontSize="20"                           
+                            FontAttributes="Bold"
+                            CornerRadius="30"
+                            Margin="20,0,20,20"
+                            Command="{Binding ReportIssueCommand}"
+                            Text="{Binding ReportIssueCommandText}"/>
+            <!-- /END/ Report Issue Button -->
+
+            <!-- Try Again Button -->
+            <Button                                                      
+                            Grid.Row="3"
+                            FontSize="20"                           
+                            FontAttributes="Bold"
+                            CornerRadius="30"
+                            Margin="20,0,20,20"
+                            Command="{Binding TryAgainCommand}"
+                            Text="{Binding TryAgainCommandText}"/>
+            <!-- /END/ Try Again Button -->
+
+        </Grid>
+    </ContentPage.Content>
+    <!-- /END/ View Content -->
+    
+</ContentPage>

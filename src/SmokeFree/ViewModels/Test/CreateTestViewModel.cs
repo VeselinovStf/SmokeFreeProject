@@ -169,9 +169,9 @@ namespace SmokeFree.ViewModels.Test
                         base._appLogger
                             .LogError($"Only One Test Per User Can Exist! User : {userId} : already have one!");
 
-                        // TODO: A: Navigate to Error View Model
-                        // Set Option for 'go back'
-                        base.InternalErrorMessageToUser();
+                        
+                        
+                        await base.InternalErrorMessageToUser();
                     }
 
                     if (user != null)
@@ -213,9 +213,9 @@ namespace SmokeFree.ViewModels.Test
                     {
                         base._appLogger.LogError($"Can't Find User in Database: USER ID {userId}");
 
-                        // TODO: A: Navigate to Error View Model
-                        // Set Option for 'go back'
-                        base.InternalErrorMessageToUser();
+                        
+                        
+                        await base.InternalErrorMessageToUser();
                     }
                 }
             }

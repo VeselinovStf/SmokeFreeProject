@@ -17937,19 +17937,22 @@ namespace SmokeFree.Droid
 			public const int roundedbgdark = 2131165329;
 			
 			// aapt resource value: 0x7F070092
-			public const int test_custom_background = 2131165330;
+			public const int SomethingWentWrong = 2131165330;
 			
 			// aapt resource value: 0x7F070093
-			public const int TimeZone = 2131165331;
+			public const int test_custom_background = 2131165331;
 			
 			// aapt resource value: 0x7F070094
-			public const int tooltip_frame_dark = 2131165332;
+			public const int TimeZone = 2131165332;
 			
 			// aapt resource value: 0x7F070095
-			public const int tooltip_frame_light = 2131165333;
+			public const int tooltip_frame_dark = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int ViewMode = 2131165334;
+			public const int tooltip_frame_light = 2131165334;
+			
+			// aapt resource value: 0x7F070097
+			public const int ViewMode = 2131165335;
 			
 			static Drawable()
 			{

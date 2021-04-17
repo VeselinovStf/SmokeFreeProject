@@ -78,7 +78,7 @@ namespace SmokeFree.ViewModels.OnBoarding
         /// </summary>
         /// <param name="parameter">Not Required</param>
         /// <returns>Base InitializeAsync</returns>
-        public override Task InitializeAsync(object parameter)
+        public override async Task InitializeAsync(object parameter)
         {
             try
             {
@@ -116,14 +116,12 @@ namespace SmokeFree.ViewModels.OnBoarding
             {
                 base._appLogger.LogError(ex.Message);
 
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
+                
+                
+                await base.InternalErrorMessageToUser();
             }
 
             // TODO: A: Remove After - Navigate to Error View Model after Initialization Exception
-            // Return
-            return base.InitializeAsync(parameter);
         }
 
         /// <summary>
@@ -219,9 +217,9 @@ namespace SmokeFree.ViewModels.OnBoarding
             {
                 base._appLogger.LogError(ex.Message);
 
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
+                
+                
+                await base.InternalErrorMessageToUser();
             }
         }
 

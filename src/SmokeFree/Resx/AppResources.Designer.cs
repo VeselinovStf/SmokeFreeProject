@@ -304,6 +304,51 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Нещо се обърка.
+        /// </summary>
+        internal static string SomethingWentWrongViewModelHeader {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongViewModelHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SomethingWentWrong.png.
+        /// </summary>
+        internal static string SomethingWentWrongViewModelImage {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongViewModelImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Уведоми създателите.
+        /// </summary>
+        internal static string SomethingWentWrongViewModelReportIssueButtonText {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongViewModelReportIssueButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нещо се обърка.
+        /// </summary>
+        internal static string SomethingWentWrongViewModelTitle {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongViewModelTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Опитай отново.
+        /// </summary>
+        internal static string SomethingWentWrongViewModelTryAgainButtonText {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongViewModelTryAgainButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рестартиране на теста.
         /// </summary>
         internal static string UnderTestViewModelRestartTestingLabel {

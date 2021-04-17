@@ -2,6 +2,7 @@
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Resx;
+using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -97,9 +98,9 @@ namespace SmokeFree.ViewModels.Base
         /// Display Internal Error Message To User - Device Toast With Error Message
         /// </summary>
         /// <param name="message">Message to display</param>
-        protected virtual void InternalErrorMessageToUser(string message = null)
+        protected virtual async Task InternalErrorMessageToUser(string message = null)
         {
-            this._dialogService.ShowToast(message != null ? message : AppResources.InternalErrorUserMessage);
+            await this._navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
         }
 
         /// <summary>
@@ -112,7 +113,7 @@ namespace SmokeFree.ViewModels.Base
             this._appLogger.LogError(ex.Message);
 
             // Display default internal error message to user
-            this.InternalErrorMessageToUser();
+            this.InternalErrorMessageToUser().ConfigureAwait(false);
         }
 
         #endregion

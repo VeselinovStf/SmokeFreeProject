@@ -9,6 +9,7 @@ using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
 using System.Collections.Generic;
@@ -372,7 +373,7 @@ namespace UnderTestViewModelTests.UnitTests
             underTestViewModel.OnStopTestingCommand.Execute(new object());
 
             // Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
 
         }
 
@@ -394,7 +395,7 @@ namespace UnderTestViewModelTests.UnitTests
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()));
+            appLoggerServiceMock.Setup(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()));
 
             var dialogServiceMock = new Mock<IDialogService>();
 
@@ -439,7 +440,7 @@ namespace UnderTestViewModelTests.UnitTests
             underTestViewModel.OnStopTestingCommand.Execute(new object());
 
             // Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
+            appLoggerServiceMock.Verify(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
 
         }
 
@@ -456,6 +457,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTime = DateTime.Now;
 
             var navigationServiceMock = new Mock<INavigationService>();
+            navigationServiceMock.Setup(e => e.NavigateToAsync<SomethingWentWrongViewModel>());
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
@@ -470,8 +472,6 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            dialogServiceMock.Setup(e => e.ShowToast(
-                    It.IsAny<string>()));
 
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
@@ -505,9 +505,8 @@ namespace UnderTestViewModelTests.UnitTests
             // Act
             underTestViewModel.OnStopTestingCommand.Execute(new object());
 
-            // Assert
-            dialogServiceMock.Verify(e => e.ShowToast(
-                    It.IsAny<string>()), Times.Exactly(2));
+            //Assert
+            navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
 
         }
 
@@ -524,6 +523,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTime = DateTime.Now;
 
             var navigationServiceMock = new Mock<INavigationService>();
+            navigationServiceMock.Setup(e => e.NavigateToAsync<SomethingWentWrongViewModel>());
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
@@ -537,9 +537,6 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>(),
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
-
-            dialogServiceMock.Setup(e => e.ShowToast(
-                    It.IsAny<string>()));
 
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
@@ -572,9 +569,8 @@ namespace UnderTestViewModelTests.UnitTests
             // Act
             underTestViewModel.OnStopTestingCommand.Execute(new object());
 
-            // Assert
-            dialogServiceMock.Verify(e => e.ShowToast(
-                    It.IsAny<string>()), Times.Exactly(2));
+            //Assert
+            navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
 
         }
     }

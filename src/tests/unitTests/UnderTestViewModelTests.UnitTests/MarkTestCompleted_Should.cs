@@ -11,6 +11,7 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.Test;
 using System;
+using System.Threading.Tasks;
 
 namespace UnderTestViewModelTests.UnitTests
 {
@@ -23,7 +24,7 @@ namespace UnderTestViewModelTests.UnitTests
         /// Mark Test Completed When State is appropriate
         /// </summary>
         [Test]
-        public void Mark_Test_Completed()
+        public async Task Mark_Test_Completed()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -75,7 +76,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            underTestViewModel.MarkTestCompleted();
+            await underTestViewModel.MarkTestCompleted();
 
             //Assert
             Assert.IsTrue(userTest.IsCompleted);

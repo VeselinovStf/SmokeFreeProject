@@ -110,10 +110,7 @@ namespace SmokeFree.ViewModels.Test
             _deviceTimer = deviceTimer;
 
             // Stop Testing Timer Cancelation Token
-            this.stopTestingTimerCancellation = new CancellationTokenSource();
-
-            // Notification for test completition
-            InitiateTestCompletitionNotificationEvent();
+            this.stopTestingTimerCancellation = new CancellationTokenSource();          
         }
 
         #endregion
@@ -121,61 +118,17 @@ namespace SmokeFree.ViewModels.Test
         #region INIT
 
         /// <summary>
-        /// Initate Notification For Test COmpletition
-        /// </summary>
-        private void InitiateTestCompletitionNotificationEvent()
-        {
-            try
-            {
-                // Get Current User
-                var userId = Globals.UserId;
-                var user = _realm.Find<User>(userId);
-
-                // Check if is valid
-                if (user != null)
-                {
-                    var userNotificationPremission = user.NotificationState;
-
-                    // Send Notification if user is allowed notifications
-                    if (userNotificationPremission)
-                    {
-                        this._notificationManager.NotificationReceived += (sender, eventArgs) =>
-                        {
-                            var evtData = (NotificationEventArgs)eventArgs;
-                            ShowNotification(evtData.Title, evtData.Message);
-                        };
-                    }
-                }
-                else
-                {
-                    // User Not Found!
-                    base._appLogger.LogCritical($"Can't find User: {userId}");
-
-                    // TODO: A: Navigate to Error View Model
-                    // Set Option for 'go back'
-                    base.InternalErrorMessageToUser();
-                }
-            }
-            catch (Exception ex)
-            {
-                base._appLogger.LogError($"Can't Initialize Under Test Completition Notification: {ex.Message}");
-
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
-            }
-
-        }
-
-        /// <summary>
         /// Initialize View State
         /// </summary>
         /// <param name="parameter">Optional</param>
         /// <returns>Base Initialize Async</returns>
-        public override Task InitializeAsync(object parameter)
+        public override async Task InitializeAsync(object parameter)
         {
             try
             {
+                // Notification for test completition
+                await InitiateTestCompletitionNotificationEvent();
+
                 // Get User From DB
                 var userId = Globals.UserId;
                 var user = this._realm.Find<User>(userId);
@@ -219,9 +172,9 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User Test: {currentUserTestId}");
 
-                        // TODO: A: Navigate to Error View Model
-                        // Set Option for 'go back'
-                        base.InternalErrorMessageToUser();
+                        
+                        
+                        await base.InternalErrorMessageToUser();
                     }
                 }
                 else
@@ -229,21 +182,66 @@ namespace SmokeFree.ViewModels.Test
                     // User Not Found!
                     base._appLogger.LogCritical($"Can't find User: {userId}");
 
-                    // TODO: A: Navigate to Error View Model
-                    // Set Option for 'go back'
-                    base.InternalErrorMessageToUser();
+                    
+                    
+                    await base.InternalErrorMessageToUser();
                 }
             }
             catch (Exception ex)
             {
                 base._appLogger.LogError(ex.Message);
 
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
+                
+                
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// Initate Notification For Test COmpletition
+        /// </summary>
+        private async Task InitiateTestCompletitionNotificationEvent()
+        {
+            try
+            {
+                // Get Current User
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Check if is valid
+                if (user != null)
+                {
+                    var userNotificationPremission = user.NotificationState;
+
+                    // Send Notification if user is allowed notifications
+                    if (userNotificationPremission)
+                    {
+                        this._notificationManager.NotificationReceived += (sender, eventArgs) =>
+                        {
+                            var evtData = (NotificationEventArgs)eventArgs;
+                            ShowNotification(evtData.Title, evtData.Message);
+                        };
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: {userId}");
+
+                    
+                    
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError($"Can't Initialize Under Test Completition Notification: {ex.Message}");
+
+                
+                
+                await base.InternalErrorMessageToUser();
             }
 
-            return base.InitializeAsync(parameter);
         }
 
         #endregion
@@ -329,9 +327,9 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
-                        // TODO: A: Navigate to Error View Model
-                        // Set Option for 'go back'
-                        base.InternalErrorMessageToUser();
+                        
+                        
+                        await base.InternalErrorMessageToUser();
                     }
                 }
             }
@@ -339,9 +337,9 @@ namespace SmokeFree.ViewModels.Test
             {
                 base._appLogger.LogError(ex.Message);
 
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
+                
+                
+                await base.InternalErrorMessageToUser();
             }
         }
 
@@ -427,7 +425,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Marks Current test completed
         /// </summary>
-        public void MarkTestCompleted()
+        public async Task MarkTestCompleted()
         {
             try
             {
@@ -461,7 +459,7 @@ namespace SmokeFree.ViewModels.Test
                         });
 
 
-                        this._dialogService
+                        await this._dialogService
                             .ShowDialog("Test Completed", "Congratuations!", "Continue to challenge!");
 
                     }
@@ -470,9 +468,9 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User Test: Test Id {currentTestId}");
 
-                        // TODO: A: Navigate to Error View Model
-                        // Set Option for 'go back'
-                        base.InternalErrorMessageToUser();
+                        
+                        
+                        await base.InternalErrorMessageToUser();
                     }
                 }
                 else
@@ -480,18 +478,18 @@ namespace SmokeFree.ViewModels.Test
                     // User Not Found!
                     base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
-                    // TODO: A: Navigate to Error View Model
-                    // Set Option for 'go back'
-                    base.InternalErrorMessageToUser();
+                    
+                    
+                    await base.InternalErrorMessageToUser();
                 }
             }
             catch (Exception ex)
             {
                 base._appLogger.LogError(ex.Message);
 
-                // TODO: A: Navigate to Error View Model
-                // Set Option for 'go back'
-                base.InternalErrorMessageToUser();
+                
+                
+                await base.InternalErrorMessageToUser();
             }
         }
 
