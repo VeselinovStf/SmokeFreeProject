@@ -66,6 +66,7 @@ namespace SmokeFree.Bootstrap
 
                 // Device Utilities
             _builder.RegisterType<DeviceTimer>().As<IDeviceTimer>().InstancePerDependency();
+            _builder.RegisterType<DeviceEmailSender>().As<IDeviceEmailSender>().InstancePerDependency();
 
 
             _container = _builder.Build();

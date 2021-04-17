@@ -40,6 +40,11 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
         /// </summary>
         private string _reportIssueCommandText;
 
+        /// <summary>
+        /// Application Logging Utility
+        /// </summary>
+        private readonly ILocalLogUtility _localLogUtility;
+
         #endregion
 
         #region CTOR
@@ -48,10 +53,14 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             INavigationService navigationService, 
             IDateTimeWrapper dateTimeWrapper, 
             IAppLogger appLogger, 
-            IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IDialogService dialogService,
+            ILocalLogUtility localLogUtility) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             base.ViewTitle = AppResources.SomethingWentWrongViewModelTitle;
+
+            // Application Logging Utility
+            this._localLogUtility = localLogUtility;
 
             // Set View Image 
             this._imagePath = AppResources.SomethingWentWrongViewModelImage;
@@ -66,7 +75,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             this.TryAgainCommandText = AppResources.SomethingWentWrongViewModelTryAgainButtonText;
 
             // Report Issue Command Text
-            this.ReportIssueCommandText = AppResources.SomethingWentWrongViewModelReportIssueButtonText;
+            this.ReportIssueCommandText = AppResources.SomethingWentWrongViewModelReportIssueButtonText;           
         }
 
         #endregion
@@ -95,8 +104,32 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             allowsMultipleExecutions: false);
 
         private async Task ExecuteReportIssue()
-        {
-            //TODO: A: Reporting Application Crashes Implementation
+        {          
+            try
+            {
+                // Get Archived Logs
+                var archivedLogsUtilityResponse = this._localLogUtility
+                    .CreateLogZipFile();
+
+                // Check if Logs are Archived
+                if (archivedLogsUtilityResponse.Created)
+                {
+                    // Send Them To Dev Team Email
+                    // Notify User
+                }
+                else
+                {
+
+                }
+            
+            }
+            catch (System.Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                await base.InternalErrorMessageToUser();
+            }
+
             await Task.CompletedTask;
         }
 
