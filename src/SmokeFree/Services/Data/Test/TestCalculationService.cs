@@ -72,7 +72,7 @@ namespace SmokeFree.Services.Data.Test
                 newTestResults.AvarageCleanOxygenTimeSeconds = avarageCleanOxygen.TotalSeconds;
                 newTestResults.TotalSmokeGasTimeTimeSeconds = avarageSmokeOxygen.TotalSeconds;
                 newTestResults.AvarageSmokeDistanceSeconds = avarageSmokeDistance.TotalSeconds;
-                newTestResults.AvarageSmokeActiveTimeSeconds = new TimeSpan((avarageSmokeOxygen.Ticks + avarageCleanOxygen.Ticks)).Seconds;
+                newTestResults.AvarageSmokeActiveTimeSeconds = (avarageSmokeOxygen + avarageCleanOxygen).TotalSeconds;
 
                 return new CalculateTestResultDTO(true, newTestResults);
             }
