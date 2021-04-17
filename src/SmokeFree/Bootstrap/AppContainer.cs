@@ -51,8 +51,9 @@ namespace SmokeFree.Bootstrap
                 // SERVICES - GENERAL
             _builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
             _builder.RegisterType<DialogService>().As<IDialogService>();
+            _builder.RegisterType<NetworkConnectionService>().As<INetworkConnectionService>();
 
-                // SERVICES - DATA
+            // SERVICES - DATA
             _builder.RegisterType<TestCalculationService>().As<ITestCalculationService>();
 
 
