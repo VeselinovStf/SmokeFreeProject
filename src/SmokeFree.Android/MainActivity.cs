@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Runtime;
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Droid.Managers;
+using SmokeFree.Utilities.Logging;
 using Xamarin.Forms;
 
 namespace SmokeFree.Droid
@@ -23,6 +24,9 @@ namespace SmokeFree.Droid
 
             // User Dialogs Init
             UserDialogs.Init(this);
+
+            // Initialize Local Logging
+            InitializeLogging();
 
             LoadApplication(new App());
         }
@@ -48,5 +52,12 @@ namespace SmokeFree.Droid
             }
         }
 
+        private void InitializeLogging()
+        {
+            var assembly = this.GetType().Assembly;
+            var assemblyName = assembly.GetName().Name;
+
+            new LocalLogUtility().Initialize(assembly, assemblyName);
+        }
     }
 }
