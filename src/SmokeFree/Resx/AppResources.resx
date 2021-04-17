@@ -240,4 +240,13 @@
   <data name="IssueNoWebConnectionMessageTitle" xml:space="preserve">
     <value>Не сте свързани към интернет</value>
   </data>
+  <data name="UnderTestViewModelCompleteTestButton" xml:space="preserve">
+    <value>Продължи към Предизвикателството</value>
+  </data>
+  <data name="UnderTestViewModelCompleteTestMessage" xml:space="preserve">
+    <value>Теста е приключен.</value>
+  </data>
+  <data name="UnderTestViewModelCompleteTestTitle" xml:space="preserve">
+    <value>Поздравления</value>
+  </data>
 </root>

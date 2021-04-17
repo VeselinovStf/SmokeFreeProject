@@ -403,6 +403,33 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продължи към Предизвикателството.
+        /// </summary>
+        internal static string UnderTestViewModelCompleteTestButton {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCompleteTestButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Теста е приключен..
+        /// </summary>
+        internal static string UnderTestViewModelCompleteTestMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCompleteTestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поздравления.
+        /// </summary>
+        internal static string UnderTestViewModelCompleteTestTitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCompleteTestTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рестартиране на теста.
         /// </summary>
         internal static string UnderTestViewModelRestartTestingLabel {

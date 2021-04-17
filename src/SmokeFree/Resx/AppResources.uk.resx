@@ -240,4 +240,13 @@
   <data name="IssueNoWebConnectionMessageTitle" xml:space="preserve">
     <value>No internet connection</value>
   </data>
+  <data name="UnderTestViewModelCompleteTestButton" xml:space="preserve">
+    <value>Continue to Challenge!</value>
+  </data>
+  <data name="UnderTestViewModelCompleteTestMessage" xml:space="preserve">
+    <value>Test Completed</value>
+  </data>
+  <data name="UnderTestViewModelCompleteTestTitle" xml:space="preserve">
+    <value>Congratuations!</value>
+  </data>
 </root>

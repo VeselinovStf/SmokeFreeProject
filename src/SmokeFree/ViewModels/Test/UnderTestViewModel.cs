@@ -448,7 +448,10 @@ namespace SmokeFree.ViewModels.Test
 
 
                         await this._dialogService
-                            .ShowDialog("Test Completed", "Congratuations!", "Continue to challenge!");
+                            .ShowDialog(
+                                AppResources.UnderTestViewModelCompleteTestMessage,
+                                AppResources.UnderTestViewModelCompleteTestTitle,
+                                AppResources.UnderTestViewModelCompleteTestButton);
 
                     }
                     else
