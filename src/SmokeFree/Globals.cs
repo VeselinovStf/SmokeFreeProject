@@ -25,6 +25,24 @@ namespace SmokeFree
         public static int UserId { get; set; } = 1;
 
         /// <summary>
+        /// User issues email report emails
+        /// </summary>
+        public static List<string> ReportIssueEmails = new List<string>()
+        {
+            "chofexx@gmail.com"
+        };
+
+        /// <summary>
+        /// Issue Report Message Title
+        /// </summary>
+        public static string IssueReportTitle = "! [SMOKE FREE] : [ISSUE REPORT] !";
+
+        /// <summary>
+        /// Issue report message body
+        /// </summary>
+        public static string IssueReportBody = "User Reports and issue, Email contains application Log Attachment";
+
+        /// <summary>
         /// Limits if User Forgets To push Smoke Done
         /// </summary>
         public static int OneSmokeTreshHoldTimeMinutes = 9;

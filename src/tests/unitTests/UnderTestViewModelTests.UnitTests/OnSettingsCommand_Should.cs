@@ -80,7 +80,7 @@ namespace UnderTestViewModelTests.UnitTests
             var config = new InMemoryConfiguration("Stops_Testing_Time");
             var realm = Realm.GetInstance(config);
 
-            var navigationServiceMock = new Mock<INavigationService>();            
+            var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();

@@ -110,7 +110,7 @@ namespace SmokeFree.ViewModels.Test
             _deviceTimer = deviceTimer;
 
             // Stop Testing Timer Cancelation Token
-            this.stopTestingTimerCancellation = new CancellationTokenSource();          
+            this.stopTestingTimerCancellation = new CancellationTokenSource();
         }
 
         #endregion
@@ -172,8 +172,6 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User Test: {currentUserTestId}");
 
-                        
-                        
                         await base.InternalErrorMessageToUser();
                     }
                 }
@@ -182,8 +180,6 @@ namespace SmokeFree.ViewModels.Test
                     // User Not Found!
                     base._appLogger.LogCritical($"Can't find User: {userId}");
 
-                    
-                    
                     await base.InternalErrorMessageToUser();
                 }
             }
@@ -191,8 +187,6 @@ namespace SmokeFree.ViewModels.Test
             {
                 base._appLogger.LogError(ex.Message);
 
-                
-                
                 await base.InternalErrorMessageToUser();
             }
         }
@@ -228,8 +222,6 @@ namespace SmokeFree.ViewModels.Test
                     // User Not Found!
                     base._appLogger.LogCritical($"Can't find User: {userId}");
 
-                    
-                    
                     await base.InternalErrorMessageToUser();
                 }
             }
@@ -237,8 +229,6 @@ namespace SmokeFree.ViewModels.Test
             {
                 base._appLogger.LogError($"Can't Initialize Under Test Completition Notification: {ex.Message}");
 
-                
-                
                 await base.InternalErrorMessageToUser();
             }
 
@@ -327,8 +317,8 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
-                        
-                        
+
+
                         await base.InternalErrorMessageToUser();
                     }
                 }
@@ -337,8 +327,6 @@ namespace SmokeFree.ViewModels.Test
             {
                 base._appLogger.LogError(ex.Message);
 
-                
-                
                 await base.InternalErrorMessageToUser();
             }
         }
@@ -468,8 +456,6 @@ namespace SmokeFree.ViewModels.Test
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User Test: Test Id {currentTestId}");
 
-                        
-                        
                         await base.InternalErrorMessageToUser();
                     }
                 }
@@ -478,8 +464,6 @@ namespace SmokeFree.ViewModels.Test
                     // User Not Found!
                     base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
-                    
-                    
                     await base.InternalErrorMessageToUser();
                 }
             }
@@ -487,8 +471,6 @@ namespace SmokeFree.ViewModels.Test
             {
                 base._appLogger.LogError(ex.Message);
 
-                
-                
                 await base.InternalErrorMessageToUser();
             }
         }

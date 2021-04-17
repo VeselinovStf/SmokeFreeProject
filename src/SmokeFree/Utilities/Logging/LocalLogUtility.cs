@@ -152,7 +152,7 @@ namespace SmokeFree.Utilities.Logging
 
                 return new CreateLogZipFileResponse(false, ex.Message);
             }
-            
+
         }
 
     }

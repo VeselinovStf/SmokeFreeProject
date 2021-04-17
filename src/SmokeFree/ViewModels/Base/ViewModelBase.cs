@@ -1,7 +1,6 @@
 ﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
-using SmokeFree.Resx;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
 using System.ComponentModel;

@@ -79,6 +79,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не е възможно да се изпрати съобщението.
+        /// </summary>
+        internal static string CantSendEmailTitle {
+            get {
+                return ResourceManager.GetString("CantSendEmailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Възникна проблем! Не е възможно изпращането на вашият проблем до създателите на приложението. Рестартирайте вашето устройство или изпратете съобщение от друго устройство..
+        /// </summary>
+        internal static string CantSendIssueEmailMessage {
+            get {
+                return ResourceManager.GetString("CantSendIssueEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Твоят тест ще продължи {0}. Сигурен ли си, че това ще бъде достатъчно?.
         /// </summary>
         internal static string ConfirmStartTestingDialogMessage {
@@ -160,11 +178,47 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Съобщението е изпратено успешно.
+        /// </summary>
+        internal static string EmailSuccesTitle {
+            get {
+                return ResourceManager.GetString("EmailSuccesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Възникна неочаквана грешка. Рестартирайте приложението или се свържете със създателите..
         /// </summary>
         internal static string InternalErrorUserMessage {
             get {
                 return ResourceManager.GetString("InternalErrorUserMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Благодарим ви за изпратената информация. След обработката на вашия проблем, екипат ни ще ви отговори със евентуално негово решение..
+        /// </summary>
+        internal static string IssueEmailSuccessMessage {
+            get {
+                return ResourceManager.GetString("IssueEmailSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вашето устройство не е свързано към интернет мрежа. Свържете се, за да бъде изпратено вашето съобщение.
+        /// </summary>
+        internal static string IssueNoWebConnectionMessage {
+            get {
+                return ResourceManager.GetString("IssueNoWebConnectionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не сте свързани към интернет.
+        /// </summary>
+        internal static string IssueNoWebConnectionMessageTitle {
+            get {
+                return ResourceManager.GetString("IssueNoWebConnectionMessageTitle", resourceCulture);
             }
         }
         

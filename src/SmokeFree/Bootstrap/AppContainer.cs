@@ -48,7 +48,7 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<SomethingWentWrongViewModel>();
 
             // SERVICES
-                // SERVICES - GENERAL
+            // SERVICES - GENERAL
             _builder.RegisterType<NavigationService>().As<INavigationService>().SingleInstance();
             _builder.RegisterType<DialogService>().As<IDialogService>();
             _builder.RegisterType<NetworkConnectionService>().As<INetworkConnectionService>();
@@ -58,14 +58,14 @@ namespace SmokeFree.Bootstrap
 
 
             // UTILITIES
-                // LOGGER
+            // LOGGER
             _builder.RegisterType<AppLogger>().As<IAppLogger>().SingleInstance();
             _builder.RegisterType<LocalLogUtility>().As<ILocalLogUtility>();
 
-                // DateTime Wrapper
+            // DateTime Wrapper
             _builder.RegisterType<DateTimeWrapper>().As<IDateTimeWrapper>().SingleInstance();
 
-                // Device Utilities
+            // Device Utilities
             _builder.RegisterType<DeviceTimer>().As<IDeviceTimer>().InstancePerDependency();
             _builder.RegisterType<DeviceEmailSender>().As<IDeviceEmailSender>().InstancePerDependency();
 

@@ -1,7 +1,6 @@
 using Moq;
 using NUnit.Framework;
 using Realms;
-using SmokeFree;
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
@@ -11,7 +10,6 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Test;
-using System;
 using System.Globalization;
 using Xamarin.CommunityToolkit.Helpers;
 
@@ -77,7 +75,7 @@ namespace UnderTestViewModelTests.UnitTests
             LocalizationResourceManager.Current.CurrentCulture = new CultureInfo("uk");
             var resourceManager = ResourceManagerMock.GetResourceManager();
             var resourceViewTitle = resourceManager.GetString("UnderTestViewTiitle");
-           
+
 
             // Act
             var underTestViewModel = new UnderTestViewModel(

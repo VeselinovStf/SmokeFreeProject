@@ -168,7 +168,7 @@ namespace CreateTestViewModelTests.UnitTests
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();           
+            var dialogServiceMock = new Mock<IDialogService>();
 
             dialogServiceMock.Setup(e => e.ConfirmAsync(
                     It.IsAny<string>(),
@@ -232,7 +232,7 @@ namespace CreateTestViewModelTests.UnitTests
             var call = createTestViewModel.OnStartTestingCommand.ExecuteAsync();
 
             //Assert
-            navigationServiceMock.Verify(e => e.NavigateToAsync< SomethingWentWrongViewModel>(), Times.Once);
+            navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Once);
         }
 
         /// <summary>

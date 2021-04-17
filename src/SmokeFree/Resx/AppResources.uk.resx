@@ -222,4 +222,22 @@
   <data name="SomethingWentWrongViewModelReportIssueButtonText" xml:space="preserve">
     <value>Report Developers</value>
   </data>
+  <data name="CantSendEmailTitle" xml:space="preserve">
+    <value>Enable to send message</value>
+  </data>
+  <data name="CantSendIssueEmailMessage" xml:space="preserve">
+    <value>Problem accures! Unable to send your issue to application delopment team. Please restart your device or send as a message from other device.</value>
+  </data>
+  <data name="EmailSuccesTitle" xml:space="preserve">
+    <value>Email send successfully</value>
+  </data>
+  <data name="IssueEmailSuccessMessage" xml:space="preserve">
+    <value>Your issue email is send to our development team.Thank you for sending it. We are going to response quick li as we can.</value>
+  </data>
+  <data name="IssueNoWebConnectionMessage" xml:space="preserve">
+    <value>Your device is not connected to internet network. Please connet to send issue!</value>
+  </data>
+  <data name="IssueNoWebConnectionMessageTitle" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
 </root>

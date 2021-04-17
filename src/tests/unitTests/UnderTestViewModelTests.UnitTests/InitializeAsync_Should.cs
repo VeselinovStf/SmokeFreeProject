@@ -53,7 +53,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             object parameter = new object();
             var currentlySmokedCount = 2;
-            var timeSenceLastSmoke = new TimeSpan(1,1,1);
+            var timeSenceLastSmoke = new TimeSpan(1, 1, 1);
             var testLeftTime = new TimeSpan(1, 1, 1);
             var currentSmokeId = "ID";
             var currentSmokeTime = new TimeSpan(1, 1, 1);
@@ -82,7 +82,7 @@ namespace UnderTestViewModelTests.UnitTests
                 currentlySmokedCount,
                 timeSenceLastSmoke,
                 testLeftTime,
-                currentSmokeId, 
+                currentSmokeId,
                 currentSmokeTime);
 
             testCalculationServiceMock.Setup(e => e.GetCurrentTestDataCalculation(It.IsAny<DateTime>(), It.IsAny<Test>()))
@@ -92,7 +92,7 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.InitializeAsync(parameter);
 
             //Assert
-            Assert.AreEqual(currentlySmokedCount,underTestViewModel.CurrentlySmokedCount,"CurrentlySmokedCount not equal");
+            Assert.AreEqual(currentlySmokedCount, underTestViewModel.CurrentlySmokedCount, "CurrentlySmokedCount not equal");
             Assert.AreEqual(currentSmokeId, underTestViewModel.CurrentSmokeId, "CurrentSmokeId not equal");
             Assert.IsTrue(underTestViewModel.TimeSenceLastSmoke.Equals(timeSenceLastSmoke), "TimeSenceLastSmoke not equal");
             Assert.IsTrue(underTestViewModel.TestLeftTime.Equals(testLeftTime), "TestLeftTime not equal");
@@ -175,7 +175,7 @@ namespace UnderTestViewModelTests.UnitTests
             deviceTimerMock.Verify(e => e.Start(It.IsAny<Func<bool>>(), It.IsAny<CancellationTokenSource>()), Times.Once);
 
         }
-    
+
         [Test]
         public async Task Logs_Critical_When_User_Is_Not_Found_In_DB()
         {
@@ -186,7 +186,7 @@ namespace UnderTestViewModelTests.UnitTests
             var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<string>(),It.IsAny<string>()));
+            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()));
 
             var dialogServiceMock = new Mock<IDialogService>();
             var notificationManagerMock = new Mock<INotificationManager>();
@@ -211,7 +211,7 @@ namespace UnderTestViewModelTests.UnitTests
             var timeSenceLastSmoke = new TimeSpan(1, 1, 1);
             var testLeftTime = new TimeSpan(1, 1, 1);
             var currentSmokeId = "ID";
-            var currentSmokeTime = new TimeSpan(1, 1, 1);    
+            var currentSmokeTime = new TimeSpan(1, 1, 1);
 
             var testCalculationResultDTO = new CurrentTestDataCalculationDTO(
                 currentlySmokedCount,
@@ -224,7 +224,7 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.InitializeAsync(parameter);
 
             //Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()),Times.Exactly(2));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(2));
 
         }
 
@@ -269,10 +269,10 @@ namespace UnderTestViewModelTests.UnitTests
                 Id = Globals.UserId,
                 TestId = testId
             };
-          
+
             realm.Write(() =>
             {
-                realm.Add(user); 
+                realm.Add(user);
             });
 
             var testCalculationResultDTO = new CurrentTestDataCalculationDTO(
@@ -289,7 +289,7 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.InitializeAsync(parameter);
 
             //Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()),Times.Exactly(1));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
         }
 
         /// <summary>

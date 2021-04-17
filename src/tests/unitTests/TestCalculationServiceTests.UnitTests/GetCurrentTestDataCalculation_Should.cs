@@ -9,7 +9,7 @@ namespace TestCalculationServiceTests.UnitTests
     /// TestCalculationService - GetCurrentTestDataCalculation Tests
     /// </summary>
     public class GetCurrentTestDataCalculation_Should
-    {        
+    {
         /// <summary>
         /// Returns Correnct Result Model when test parrameter is new
         /// </summary>
@@ -18,7 +18,7 @@ namespace TestCalculationServiceTests.UnitTests
         {
             // Arrange
             var testCalculationService = new TestCalculationService();
-            
+
             var dateTime = DateTime.Now;
             var currentlySmokedCount = 0;
             var timeSenceLastSmoke = new TimeSpan(0, 0, 0);
@@ -49,11 +49,11 @@ namespace TestCalculationServiceTests.UnitTests
 
             var dateTime = DateTime.Now;
             var testEndDay = dateTime.AddDays(3);
-            
+
             var startSmokeTimeOne = dateTime.AddDays(-1);
             var startSmokeTimeTwo = dateTime.AddDays(-1).AddHours(1);
             var startSmokeTimeThree = dateTime.AddDays(-1).AddHours(2);
-            
+
             var expectedCurrentlySmokedCount = 3;
             var expectedTimeSenceLastSmoke = dateTime.Subtract(startSmokeTimeThree.AddMinutes(7));
             var expectedTestLeftTime = testEndDay.Subtract(dateTime);
@@ -67,7 +67,7 @@ namespace TestCalculationServiceTests.UnitTests
             {
                 TestEndDate = testEndDay
             };
-            
+
             var startedSmokeOne = new Smoke()
             {
                 StartSmokeTime = startSmokeTimeOne,
@@ -234,7 +234,7 @@ namespace TestCalculationServiceTests.UnitTests
                 StartSmokeTime = startSmokeTime,
                 Id = currentSmokeIdOne,
                 EndSmokeTime = dateTime.AddDays(1)
-                
+
             };
 
             var startedSmokeTwo = new Smoke()
@@ -280,7 +280,7 @@ namespace TestCalculationServiceTests.UnitTests
             var endDate = dateTime.AddDays(testDays);
             var expectedResult = endDate.Subtract(dateTime);
 
-            var test = new Test() 
+            var test = new Test()
             {
                 TestEndDate = endDate
             };

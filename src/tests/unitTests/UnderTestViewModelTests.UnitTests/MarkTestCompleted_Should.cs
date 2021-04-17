@@ -41,7 +41,7 @@ namespace UnderTestViewModelTests.UnitTests
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
-           
+
             var underTestViewModel = new UnderTestViewModel(
                 realm,
                 navigationServiceMock.Object,

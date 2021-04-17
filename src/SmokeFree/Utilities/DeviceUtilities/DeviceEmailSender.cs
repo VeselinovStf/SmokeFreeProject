@@ -65,7 +65,7 @@ namespace SmokeFree.Utilities.DeviceUtilities
                 await Email.ComposeAsync(message);
 
                 return new SendEmailAsyncResponse(true, "Email Send");
-            }         
+            }
             catch (Exception ex)
             {
                 return new SendEmailAsyncResponse(false, ex.Message);

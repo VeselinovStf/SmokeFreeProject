@@ -60,6 +60,6 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Deletiton Time
         /// </summary>
-        public DateTimeOffset DeletedOn { get; set; }      
+        public DateTimeOffset DeletedOn { get; set; }
     }
 }

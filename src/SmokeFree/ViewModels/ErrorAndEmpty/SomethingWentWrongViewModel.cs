@@ -1,4 +1,5 @@
 ﻿using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Resx;
@@ -41,26 +42,44 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
         private string _reportIssueCommandText;
 
         /// <summary>
+        /// Network Connectivity Service 
+        /// </summary>
+        private readonly INetworkConnectionService _connectionService;
+
+        /// <summary>
         /// Application Logging Utility
         /// </summary>
         private readonly ILocalLogUtility _localLogUtility;
+
+        /// <summary>
+        /// Device Email Sender
+        /// </summary>
+        private readonly IDeviceEmailSender _emailSender;
 
         #endregion
 
         #region CTOR
 
         public SomethingWentWrongViewModel(
-            INavigationService navigationService, 
-            IDateTimeWrapper dateTimeWrapper, 
-            IAppLogger appLogger, 
+            INavigationService navigationService,
+            IDateTimeWrapper dateTimeWrapper,
+            IAppLogger appLogger,
             IDialogService dialogService,
-            ILocalLogUtility localLogUtility) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            INetworkConnectionService connectionService,
+            ILocalLogUtility localLogUtility,
+            IDeviceEmailSender emailSender) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             base.ViewTitle = AppResources.SomethingWentWrongViewModelTitle;
 
+            // Network Connectivity Service 
+            this._connectionService = connectionService;
+
             // Application Logging Utility
             this._localLogUtility = localLogUtility;
+
+            // Device Email Sender
+            this._emailSender = emailSender;
 
             // Set View Image 
             this._imagePath = AppResources.SomethingWentWrongViewModelImage;
@@ -75,7 +94,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             this.TryAgainCommandText = AppResources.SomethingWentWrongViewModelTryAgainButtonText;
 
             // Report Issue Command Text
-            this.ReportIssueCommandText = AppResources.SomethingWentWrongViewModelReportIssueButtonText;           
+            this.ReportIssueCommandText = AppResources.SomethingWentWrongViewModelReportIssueButtonText;
         }
 
         #endregion
@@ -91,7 +110,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             allowsMultipleExecutions: false);
 
         private async Task ExecuteTryAgain()
-        {           
+        {
             await base._navigationService.RemoveLastFromBackStackAsync();
         }
 
@@ -104,24 +123,64 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             allowsMultipleExecutions: false);
 
         private async Task ExecuteReportIssue()
-        {          
+        {
             try
             {
-                // Get Archived Logs
-                var archivedLogsUtilityResponse = this._localLogUtility
-                    .CreateLogZipFile();
+                var responseMessageTitle = string.Empty;
+                var responseMessage = string.Empty;
 
-                // Check if Logs are Archived
-                if (archivedLogsUtilityResponse.Created)
+                // Check If User is able to send Email at all
+                if (this._connectionService.IsConnected)
                 {
-                    // Send Them To Dev Team Email
-                    // Notify User
+                    // Get Archived Logs
+                    var archivedLogsUtilityResponse = this._localLogUtility
+                        .CreateLogZipFile();
+
+                    // Check if Logs are Archived
+                    if (archivedLogsUtilityResponse.Created)
+                    {
+                        // Send Them To Dev Team Email
+                        var emailSendResult = await this._emailSender
+                            .SendEmailAsync(
+                                Globals.IssueReportTitle,
+                                Globals.IssueReportBody,
+                                Globals.ReportIssueEmails,
+                                archivedLogsUtilityResponse.Message);
+
+                        if (emailSendResult.Success)
+                        {
+                            // Success
+                            responseMessageTitle = AppResources.EmailSuccesTitle;
+                            responseMessage = AppResources.IssueEmailSuccessMessage;
+                        }
+                        else
+                        {
+                            // Can't send email
+                            responseMessageTitle = AppResources.CantSendEmailTitle;
+                            responseMessage = AppResources.CantSendIssueEmailMessage;
+                        }
+                    }
+                    else
+                    {
+                        // Can't create log zip
+                        base._appLogger.LogError(archivedLogsUtilityResponse.Message);
+
+                        await base.InternalErrorMessageToUser();
+                    }
                 }
                 else
                 {
-
+                    // User Is not connected to web - can't send issue
+                    responseMessageTitle = AppResources.IssueNoWebConnectionMessageTitle;
+                    responseMessage = AppResources.IssueNoWebConnectionMessage;
                 }
-            
+
+                // Notify User
+                await this._dialogService
+                    .ShowDialog(
+                        responseMessage,
+                        responseMessageTitle,
+                        AppResources.ButtonOkText);
             }
             catch (System.Exception ex)
             {

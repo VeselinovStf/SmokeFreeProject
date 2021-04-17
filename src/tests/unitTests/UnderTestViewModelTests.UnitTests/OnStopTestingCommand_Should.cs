@@ -12,7 +12,6 @@ using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -229,7 +228,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             // Assert
             deviceTimerMock.Verify(e => e.Stop(It.IsAny<CancellationTokenSource>()), Times.Exactly(1));
-            
+
         }
 
         /// <summary>
@@ -356,7 +355,7 @@ namespace UnderTestViewModelTests.UnitTests
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
-         
+
             var user = new User()
             {
                 Id = 2,
@@ -553,7 +552,7 @@ namespace UnderTestViewModelTests.UnitTests
                 deviceTimerMock.Object
                 );
 
-           
+
             var user = new User()
             {
                 Id = 2,

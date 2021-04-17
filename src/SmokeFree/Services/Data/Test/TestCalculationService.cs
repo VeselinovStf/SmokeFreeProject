@@ -22,8 +22,8 @@ namespace SmokeFree.Services.Data.Test
         {
             // Default Values
             var currentSmokeId = string.Empty;
-            TimeSpan currentSmokeTime = new TimeSpan(0, 0, 0);       
-            TimeSpan timeSinceLastSmoke = new TimeSpan(0, 0, 0);     
+            TimeSpan currentSmokeTime = new TimeSpan(0, 0, 0);
+            TimeSpan timeSinceLastSmoke = new TimeSpan(0, 0, 0);
             TimeSpan testTimeLeft = new TimeSpan(0, 0, 0);
             var totalSmoked = 0;
 
@@ -60,7 +60,7 @@ namespace SmokeFree.Services.Data.Test
                         // More then one Started but not finished breaks app state
                         throw new Exception($"[APP STATE EXCEPTION] : More then one Started SMOKE but not finished detected! In Test : {test.Id}");
                     }
-                    else if(leftUnfinished.Count == 0)
+                    else if (leftUnfinished.Count == 0)
                     {
                         // One is left
                         // Calculate total smokes
