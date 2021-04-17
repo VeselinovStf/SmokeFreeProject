@@ -371,11 +371,16 @@ namespace SmokeFree.ViewModels.Test
 
                     if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
                     {
+                        base.IsBusy = true;
+
                         // Execute Function for stop testing
                         await MarkTestCompleted();
                         CreateTestResult();
                         SendTestCompletitionNotification();
                         StopTestingTimer();
+
+                        base.IsBusy = false;
+
                         NavigateToTestResults();
 
                         return false;

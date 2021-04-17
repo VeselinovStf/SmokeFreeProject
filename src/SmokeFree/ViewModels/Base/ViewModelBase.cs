@@ -22,6 +22,11 @@ namespace SmokeFree.ViewModels.Base
         private string _viewTitle;
 
         /// <summary>
+        /// Notify that ViewModel is busy whit some job
+        /// </summary>
+        private bool _isBusy;
+
+        /// <summary>
         /// Application Navigation Service
         /// </summary>
         protected readonly INavigationService _navigationService;
@@ -133,6 +138,20 @@ namespace SmokeFree.ViewModels.Base
                 }
             }
         }
+
+        /// <summary>
+        /// Notify that ViewModel is busy whit some job
+        /// </summary>
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set 
+            { 
+                _isBusy = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
     }
