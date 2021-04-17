@@ -371,6 +371,7 @@ namespace SmokeFree.ViewModels.Test
 
                     if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
                     {
+                        // TODO: C: Add loader to view
                         base.IsBusy = true;
 
                         // Execute Function for stop testing
