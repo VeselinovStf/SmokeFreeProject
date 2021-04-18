@@ -555,7 +555,9 @@ namespace SmokeFree.ViewModels.Test
                         // TODO: C: Add loader to view
                         base.IsBusy = true;
 
-                        await SendNotificationAsync("You Smoke is done", "Your smoke is mark as finished");
+                        await SendNotificationAsync(
+                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
+                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage);
                         await MarkSmokedAfterDelayLimitAsync();
 
                         base.IsBusy = false;

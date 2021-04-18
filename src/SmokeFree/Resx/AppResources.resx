@@ -273,4 +273,10 @@
   <data name="UnderTestViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
     <value>Лимита за пушене на една цигара е десет минути. След изтичане на лимита, цигарата се маркира като изпупена</value>
   </data>
+  <data name="UnderTestViewModelOneSmokeTreshHoldNotificationMessage" xml:space="preserve">
+    <value>Цигарата е маркирана за изпушена автоматично</value>
+  </data>
+  <data name="UnderTestViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
+    <value>Цигарата е маркирана като приключена</value>
+  </data>
 </root>

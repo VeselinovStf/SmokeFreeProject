@@ -273,4 +273,10 @@
   <data name="UnderTestViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
     <value>After 10min. delay your previos smoke was marked as done.</value>
   </data>
+  <data name="UnderTestViewModelOneSmokeTreshHoldNotificationMessage" xml:space="preserve">
+    <value>Your smoke is mark as finished</value>
+  </data>
+  <data name="UnderTestViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
+    <value>Your Smoke is mark done</value>
+  </data>
 </root>

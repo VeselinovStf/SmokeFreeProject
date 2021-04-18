@@ -475,6 +475,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Цигарата е маркирана за изпушена автоматично.
+        /// </summary>
+        internal static string UnderTestViewModelOneSmokeTreshHoldNotificationMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelOneSmokeTreshHoldNotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Цигарата е маркирана като приключена.
+        /// </summary>
+        internal static string UnderTestViewModelOneSmokeTreshHoldNotificationTitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelOneSmokeTreshHoldNotificationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рестартиране на теста.
         /// </summary>
         internal static string UnderTestViewModelRestartTestingLabel {
