@@ -220,11 +220,11 @@ namespace UnderTestViewModelTests.UnitTests
                 );
 
             var userId = Globals.UserId;
-            
+
             var user = new User()
             {
-                Id = userId,               
-            };         
+                Id = userId,
+            };
 
             realm.Write(() =>
             {
@@ -251,8 +251,8 @@ namespace UnderTestViewModelTests.UnitTests
 
             var dateTime = DateTime.Now;
             var navigationServiceMock = new Mock<INavigationService>();
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();   
-            
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+
             var appLoggerServiceMock = new Mock<IAppLogger>();
             appLoggerServiceMock.
                 Setup(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()));
@@ -300,7 +300,7 @@ namespace UnderTestViewModelTests.UnitTests
             await underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()),Times.Exactly(1));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
         }
     }
 }

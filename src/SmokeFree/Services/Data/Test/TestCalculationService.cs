@@ -214,8 +214,8 @@ namespace SmokeFree.Services.Data.Test
                     if (lastSmokeTime != new DateTimeOffset())
                     {
                         return now.Subtract(lastSmokeTime.DateTime);
-                    }                   
-                }              
+                    }
+                }
             }
 
             // Default return value

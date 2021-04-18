@@ -49,11 +49,11 @@ namespace UnderTestViewModelTests.UnitTests
                 It.IsAny<string>(),
                 It.IsAny<string>()))
                     .Returns(Task.FromResult(true));
-            
-                var notificationManagerMock = new Mock<INotificationManager>();
+
+            var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
-            
+
             var underTestViewModel = new UnderTestViewModel(
                 realm,
                 navigationServiceMock.Object,
@@ -298,7 +298,7 @@ namespace UnderTestViewModelTests.UnitTests
             var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
-            deviceTimerMock.Setup(e => 
+            deviceTimerMock.Setup(e =>
                 e.Start(It.IsAny<Func<Task<bool>>>(), It.IsAny<CancellationTokenSource>()));
 
             var underTestViewModel = new UnderTestViewModel(
@@ -442,7 +442,7 @@ namespace UnderTestViewModelTests.UnitTests
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
-           
+
             var dialogServiceMock = new Mock<IDialogService>();
             dialogServiceMock.Setup(e => e.ConfirmAsync(
                 It.IsAny<string>(),

@@ -145,8 +145,8 @@ namespace SmokeFree.ViewModels.Base
         public bool IsBusy
         {
             get { return _isBusy; }
-            set 
-            { 
+            set
+            {
                 _isBusy = value;
                 OnPropertyChanged();
             }

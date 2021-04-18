@@ -22,7 +22,7 @@ namespace SmokeFree.Utilities.DeviceUtilities
             {
                 if (cts.IsCancellationRequested)
                 {
-                  
+
                     return false;
                 }
 

@@ -44,7 +44,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             testCalculationServiceMock.Setup(e => e.CalculateTestResult(It.IsAny<Test>()))
-                .Returns(() => new SmokeFree.Models.Services.Data.Test.CalculateTestResultDTO(true, new TestResult() { Id = testResultId}));
+                .Returns(() => new SmokeFree.Models.Services.Data.Test.CalculateTestResultDTO(true, new TestResult() { Id = testResultId }));
 
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -263,7 +263,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             var user = new User()
             {
-                Id = userId,               
+                Id = userId,
             };
 
 

@@ -12,8 +12,6 @@ using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace UnderTestViewModelTests.UnitTests

@@ -829,7 +829,7 @@ namespace SmokeFree.ViewModels.Test
                             this.CurrentlySmokedCount = currentCountSmokes + 1;
 
                             // Stop Timer
-                            StopSmokingTimer();                          
+                            StopSmokingTimer();
                         }
                         else
                         {
@@ -837,7 +837,7 @@ namespace SmokeFree.ViewModels.Test
                             base._appLogger.LogCritical($"Can't find User Test Smoke: User Id: {userId}, Test Id {currentTestId}");
 
                             await base.InternalErrorMessageToUser();
-                        }                       
+                        }
                     }
                     else
                     {
@@ -860,7 +860,7 @@ namespace SmokeFree.ViewModels.Test
                 base._appLogger.LogError(ex.Message);
 
                 await base.InternalErrorMessageToUser();
-            }            
+            }
         }
 
 

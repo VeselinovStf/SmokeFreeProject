@@ -17,7 +17,7 @@ namespace SmokeFree.Models.Services.Data.Test
             Success = success;
         }
 
-        public CalculateTestResultDTO(bool success, TestResult testResultCalculation):this(success)
+        public CalculateTestResultDTO(bool success, TestResult testResultCalculation) : this(success)
         {
             TestResultCalculation = testResultCalculation;
         }

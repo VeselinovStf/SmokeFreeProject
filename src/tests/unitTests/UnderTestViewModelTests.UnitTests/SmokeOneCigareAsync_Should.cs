@@ -12,8 +12,6 @@ using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -187,7 +185,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTime = DateTime.Now;
             var navigationServiceMock = new Mock<INavigationService>();
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            
+
             var appLoggerServiceMock = new Mock<IAppLogger>();
             appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()));
 
