@@ -3,14 +3,256 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmokeFree.Views.AppSettings.AppSettingsView"
               xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
-            utility:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:views="clr-namespace:SmokeFree.Views.AppSettings"
+             utility:ViewModelLocator.AutoWireViewModel="True"
+             BackgroundColor="{StaticResource Gray-400}"
+             ControlTemplate="{StaticResource PageWithGradient}"
+             Title="{Binding ViewTitle}"
+             NavigationPage.HasNavigationBar="False"
            >
     <ContentPage.Content>
-        <!-- ADD   NavigationPage.HasNavigationBar="False" -->
-        <StackLayout>
-            <Label Text="App Settings"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <!-- Content -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- HEADER -->
+            <Grid 
+                Margin="0,40,0,0"
+                HeightRequest="70"
+                BackgroundColor="{StaticResource Gray-100}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <!-- APP ICON  -->
+                <Button
+                    Text="&#xe72C;"
+                    FontFamily="{StaticResource FontIcons}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    TextColor="{StaticResource Gray-700}"
+                    FontSize="40"
+
+                />
+                <!-- /END/  APP ICON -->
+
+                <!-- Page Title -->
+                <Label Text="{Binding ViewTitle}"
+                       Grid.Column="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="CenterAndExpand"
+                       TextColor="{StaticResource Gray-700}"
+                       FontSize="20"
+                       />
+                <!-- /END/ Page Title -->
+
+                <!-- BACK BUTTON  -->
+                <Button
+                    Text="&#xe71A;"
+                    Grid.Column="2"
+                    FontFamily="{StaticResource FontIcons}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    TextColor="{StaticResource Gray-700}"
+                    FontSize="20"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    Command="{Binding NavigateBackCommand}"/>
+                <!-- /END/  BACK BUTTON -->
+
+            </Grid>
+            <!-- /END/ HEADER -->
+
+            <!-- MAIN CONTENT TABLE -->
+            <TableView 
+                Intent="Settings"
+                Grid.Row="1"
+               >
+                <TableView.Behaviors>
+
+                </TableView.Behaviors>
+                <TableRoot>
+                    <!-- TUTORIAL SECTION -->
+                    <TableSection Title="Tutorial" TextColor="{StaticResource Gray-100}">
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- TUTORIAL ICON -->
+                                <Label         
+                                     Margin="10,10,0,10"
+                                     Text="&#xe751;"
+                                     FontFamily="{StaticResource FontIcons}"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="Start"
+                                     VerticalTextAlignment="Center"
+                                     TextColor="{StaticResource Gray-600}"
+                                     FontSize="30"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                    />
+                                <!-- /END/ TUTORIAL ICON -->
+
+                                <!-- TUTORIAL TEXT -->
+                                <Label Text="Start Tutorial"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10,0,10"                                      
+                                       FontFamily="{StaticResource  Montserrat-Bold}"
+                                       TextColor="{StaticResource Gray-700}" />
+                                <!-- /END/ TUTORIAL TEXT -->
+
+                                <!-- START TUTORIAL BUTTON -->
+                                <Button
+                                    Text="&#xe71A;"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource FontIcons}"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    TextColor="{StaticResource Gray-700}"
+                                    FontSize="20"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    Command="{Binding StartTutorialCommand}"/>
+                                <!-- /END/ START TUTORIAL BUTTON -->
+
+                            </Grid>
+                        </ViewCell>
+                    </TableSection>
+                    <!-- /END/ TUTORIAL SECTION -->
+
+                    <!-- APPLICATION SECTION -->
+                    <TableSection Title="Application" TextColor="{StaticResource Gray-100}">
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- COLOR ICON -->
+                                <Label            
+                                     Margin="10,10,0,10"
+                                     Text="&#xe731;"
+                                     FontFamily="{StaticResource FontIcons}"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="Start"
+                                     VerticalTextAlignment="Center"
+                                     TextColor="{StaticResource Gray-600}"
+                                     FontSize="30"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                    />
+                                <!-- /END/ COLOR ICON -->
+
+                                <!-- COLOR TEXT -->
+                                <Label Text="Change Skin"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10,0,10"                                      
+                                       FontFamily="{StaticResource  Montserrat-Bold}"
+                                       TextColor="{StaticResource Gray-700}" />
+                                <!-- /END/ COLOR TEXT -->
+
+                                <!-- START COLOR BUTTON -->
+                                <Button
+                                    Text="&#xe71A;"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource FontIcons}"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    TextColor="{StaticResource Gray-700}"
+                                    FontSize="20"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    Clicked="ShowSettings"
+                                   />
+                                <!-- /END/ START COLOR BUTTON -->
+
+                            </Grid>
+                        </ViewCell>
+
+                        <!-- NOTIFICATIONS -->
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- NOTIFICATIONS ICON -->
+                                <Label            
+                                     Margin="10,10,0,10"
+                                     Text="&#xe743;"
+                                     FontFamily="{StaticResource FontIcons}"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="Start"
+                                     VerticalTextAlignment="Center"
+                                     TextColor="{StaticResource Gray-600}"
+                                     FontSize="30"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                    />
+                                <!-- /END/ NOTIFICATIONS ICON -->
+
+                                <!-- NOTIFICATIONS TEXT -->
+                                <Label Text="Notifications"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10,0,10"                                      
+                                       FontFamily="{StaticResource  Montserrat-Bold}"
+                                       TextColor="{StaticResource Gray-700}" />
+                                <!-- /END/ NOTIFICATIONS TEXT -->
+
+                                <!-- START STOP NOTIFICATIONS -->
+                                <Switch                                    
+                                    Grid.Column="2"                                 
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"                           
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    IsToggled="{Binding NotificationSwitch}"
+                                   />
+                                <!-- /END/ START STOP NOTIFICATIONS -->
+
+                            </Grid>
+                        </ViewCell>
+                        <!-- NOTIFICATIONS -->
+
+                    </TableSection>
+                    <!-- /END/ APPLICATION SECTION -->
+
+                </TableRoot>
+            </TableView>
+            <!-- /END/ MAIN CONTENT TABLE -->
+
+            <views:ColorSettingsView 
+                 Grid.Row="2"
+                x:Name="ColorSettings" />
+        </Grid>
+        <!-- /END/ Content -->
     </ContentPage.Content>
 </ContentPage>
