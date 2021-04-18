@@ -607,6 +607,7 @@ namespace SmokeFree.ViewModels.Test
                             this._realm.Write(() =>
                             {
                                 userTest.CompletedTestResult = testResult;
+                                user.UserState = UserStates.IsTestComplete.ToString();
                             });
                         }
                         else

@@ -90,6 +90,7 @@ namespace UnderTestViewModelTests.UnitTests
             Assert.IsTrue(dbTestResult.TestId.Equals(testId));
             Assert.IsTrue(dbTestResult.CreatedOn.LocalDateTime.Equals(dateTime));
             Assert.IsTrue(userTest.CompletedTestResult.Id.Equals(testResultId));
+            Assert.IsTrue(user.UserState.Equals(UserStates.IsTestComplete.ToString()));
         }
 
         /// <summary>

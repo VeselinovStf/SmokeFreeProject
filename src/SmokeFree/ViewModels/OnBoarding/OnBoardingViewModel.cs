@@ -217,8 +217,6 @@ namespace SmokeFree.ViewModels.OnBoarding
             {
                 base._appLogger.LogError(ex.Message);
 
-
-
                 await base.InternalErrorMessageToUser();
             }
         }

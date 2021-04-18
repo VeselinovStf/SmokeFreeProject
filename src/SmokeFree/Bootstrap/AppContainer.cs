@@ -49,6 +49,7 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<SomethingWentWrongViewModel>();
             _builder.RegisterType<TestResultViewModel>();
             _builder.RegisterType<CreateChallengeViewModel>();
+            _builder.RegisterType<ChallengeViewModel>();
 
             // SERVICES
             // SERVICES - GENERAL

@@ -9,6 +9,8 @@
         CompletedOnBoarding,
         UserUnderTesting,
         IsTestComplete,
-        InChallenge
+        InCreateChallenge,
+        InChallenge,
+        Complete
     }
 }

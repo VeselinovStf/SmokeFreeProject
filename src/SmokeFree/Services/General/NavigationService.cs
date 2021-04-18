@@ -4,6 +4,7 @@ using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Data.Models;
 using SmokeFree.Utilities.UserStateHelpers;
 using SmokeFree.ViewModels.Base;
+using SmokeFree.ViewModels.Challenge;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
 using SmokeFree.Views;
@@ -56,8 +57,13 @@ namespace SmokeFree.Services.General
                     case UserStates.UserUnderTesting:
                         return NavigateToAsync<UnderTestViewModel>();
                     case UserStates.IsTestComplete:
-                        break;
+                        return NavigateToAsync<TestResultViewModel>();
+                    case UserStates.InCreateChallenge:
+                        return NavigateToAsync<CreateChallengeViewModel>();
                     case UserStates.InChallenge:
+                        return NavigateToAsync<ChallengeViewModel>();
+                    case UserStates.Complete:
+                        //TODO: B: Add Complete
                         break;
                     default:
                         break;
