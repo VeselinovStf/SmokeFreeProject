@@ -2,9 +2,11 @@
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Data.Models;
+using SmokeFree.Resx;
 using SmokeFree.Utilities.UserStateHelpers;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.Challenge;
+using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
 using SmokeFree.Views;
@@ -24,13 +26,16 @@ namespace SmokeFree.Services.General
     {
         private readonly Realm _realm;
         private readonly IAppLogger _appLogger;
+        private readonly IDialogService _dialogService;
 
         public NavigationService(
             Realm realm,
-            IAppLogger appLogger)
+            IAppLogger appLogger,
+            IDialogService dialogService)
         {
             _realm = realm;
             _appLogger = appLogger;
+            _dialogService = dialogService;
         }
 
         public Task InitializeAsync()
@@ -69,16 +74,13 @@ namespace SmokeFree.Services.General
                         break;
                 }
 
-                // TODO: B: Custom Exception Error Page
-                throw new Exception("No where to navigate!");
-
+                throw new Exception($"Nowhere to navigate! User Id: {user.Id}, User State: {user.UserState}");
             }
             catch (Exception ex)
             {
                 this._appLogger.LogCritical(ex.Message);
 
-                // TODO: B: Custom Exception Error Page
-                throw new Exception("Navigation Exception!");
+                return NavigateToAsync<SomethingWentWrongViewModel>();
             }
 
         }
@@ -103,8 +105,9 @@ namespace SmokeFree.Services.General
             }
             catch (Exception ex)
             {
-
                 this._appLogger.LogCritical(ex.Message);
+
+                return NavigateToAsync<SomethingWentWrongViewModel>();
             }
 
             return Task.FromResult(true);
@@ -132,11 +135,11 @@ namespace SmokeFree.Services.General
 
 
             }
-            // TODO: B: Custom Exception Error Page
             catch (Exception ex)
             {
-
                 this._appLogger.LogCritical(ex.Message);
+
+                return NavigateToAsync<SomethingWentWrongViewModel>();
             }
 
             return Task.FromResult(true);
@@ -177,10 +180,31 @@ namespace SmokeFree.Services.General
 
                 await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
             }
-            // TODO: B: Custom Exception Error Page
             catch (Exception ex)
             {
                 this._appLogger.LogCritical(ex.Message);
+
+                // Validate Type param
+                if (viewModelType != null)
+                {
+                    // Validate if SomethingWentWrongViewModel is throwing
+                    if (viewModelType.Name.Equals(nameof(SomethingWentWrongViewModel)))
+                    {
+                        this._appLogger.LogCritical($"Application is trowing second navigation exception on - Navigate to {nameof(SomethingWentWrongViewModel)}");
+
+                        // Notify for critical exception
+                        await this._dialogService
+                            .ShowDialog(
+                                AppResources.CriticalApplicationFail,
+                                AppResources.SomethingWentWrongViewModelHeader,
+                                AppResources.ButtonOkText);
+
+                        // Force close the app
+                        throw new Exception(AppResources.CriticalApplicationFail);
+                    }
+                }
+
+                await NavigateToAsync<SomethingWentWrongViewModel>();
             }
 
         }

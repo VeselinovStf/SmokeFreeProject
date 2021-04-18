@@ -282,4 +282,7 @@
   <data name="AppSettingsViewTitle" xml:space="preserve">
     <value>Настройки на приложението</value>
   </data>
+  <data name="CriticalApplicationFail" xml:space="preserve">
+    <value>Възникна проплем в работата на приложението! Потърсете за помощ създателите на приложението.</value>
+  </data>
 </root>

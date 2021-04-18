@@ -282,4 +282,7 @@
   <data name="AppSettingsViewTitle" xml:space="preserve">
     <value>Application Settings</value>
   </data>
+  <data name="CriticalApplicationFail" xml:space="preserve">
+    <value>Unexpected exception accuress in application. Please contact application develers</value>
+  </data>
 </root>

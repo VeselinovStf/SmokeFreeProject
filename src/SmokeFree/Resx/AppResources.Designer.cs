@@ -187,6 +187,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Възникна проплем в работата на приложението! Потърсете за помощ създателите на приложението..
+        /// </summary>
+        internal static string CriticalApplicationFail {
+            get {
+                return ResourceManager.GetString("CriticalApplicationFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Съобщението е изпратено успешно.
         /// </summary>
         internal static string EmailSuccesTitle {
