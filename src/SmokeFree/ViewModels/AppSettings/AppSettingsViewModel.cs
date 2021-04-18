@@ -102,7 +102,7 @@ namespace SmokeFree.ViewModels.AppSettings
 
         private async Task NavigateBack()
         {
-            await base._navigationService.RemoveLastFromBackStackAsync();
+            await base._navigationService.BackToPreviousAsync();
         }
 
         /// <summary>

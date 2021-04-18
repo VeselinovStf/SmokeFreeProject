@@ -11,6 +11,7 @@ namespace SmokeFree.Abstraction.Services.General
         Task InitializeAsync();
         Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
         Task NavigateToAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
+        Task BackToPreviousAsync();
         Task RemoveLastFromBackStackAsync();
         Task RemoveBackStackAsync();
     }

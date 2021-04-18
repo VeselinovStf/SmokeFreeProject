@@ -25,7 +25,7 @@ namespace AppSettingsViewModelTests.UnitTests
             var realm = Realm.GetInstance(config);
 
             var navigationServiceMock = new Mock<INavigationService>();
-            navigationServiceMock.Setup(e => e.RemoveLastFromBackStackAsync());
+            navigationServiceMock.Setup(e => e.BackToPreviousAsync());
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
@@ -43,7 +43,7 @@ namespace AppSettingsViewModelTests.UnitTests
             appSettingsViewModel.NavigateBackCommand.Execute(new object());
 
             //Assert
-            navigationServiceMock.Verify(e => e.RemoveLastFromBackStackAsync(), Times.Once);
+            navigationServiceMock.Verify(e => e.BackToPreviousAsync(), Times.Once);
 
         }
 

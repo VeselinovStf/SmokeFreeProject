@@ -86,6 +86,32 @@ namespace SmokeFree.Services.General
         }
 
         /// <summary>
+        /// Turn Back To Previous Page
+        /// </summary>
+        /// <returns></returns>
+        public Task BackToPreviousAsync()
+        {
+            try
+            {
+                var mainPage = Application.Current.MainPage as SmokeFreeNavigationView;
+
+                if (mainPage != null)
+                {
+                    mainPage.Navigation.PopAsync();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                this._appLogger.LogCritical(ex.Message);
+
+                return NavigateToAsync<SomethingWentWrongViewModel>();
+            }
+
+            return Task.FromResult(true);
+        }
+
+        /// <summary>
         /// Remove Last Inserted (-2) View From Navigation
         /// </summary>
         /// <returns></returns>
