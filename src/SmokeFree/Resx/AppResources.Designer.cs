@@ -61,6 +61,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Настройки на приложението.
+        /// </summary>
+        internal static string AppSettingsViewTitle {
+            get {
+                return ResourceManager.GetString("AppSettingsViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Не.
         /// </summary>
         internal static string ButtonCancelText {

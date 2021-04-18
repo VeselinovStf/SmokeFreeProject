@@ -279,4 +279,7 @@
   <data name="UnderTestViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
     <value>Your Smoke is mark done</value>
   </data>
+  <data name="AppSettingsViewTitle" xml:space="preserve">
+    <value>Application Settings</value>
+  </data>
 </root>

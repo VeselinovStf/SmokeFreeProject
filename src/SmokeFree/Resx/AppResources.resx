@@ -279,4 +279,7 @@
   <data name="UnderTestViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
     <value>Цигарата е маркирана като приключена</value>
   </data>
+  <data name="AppSettingsViewTitle" xml:space="preserve">
+    <value>Настройки на приложението</value>
+  </data>
 </root>
