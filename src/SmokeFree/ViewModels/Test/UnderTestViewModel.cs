@@ -377,7 +377,7 @@ namespace SmokeFree.ViewModels.Test
                         // Execute Function for stop testing
                         await MarkTestCompletedAsync();
                         await CreateTestResultAsync();
-                        SendTestCompletitionNotification();
+                        await SendTestCompletitionNotificationAsync();
                         StopTestingTimer();
 
                         base.IsBusy = false;
@@ -475,9 +475,41 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Send Device Specific Notification For test Completition
         /// </summary>
-        private void SendTestCompletitionNotification()
+        public async Task SendTestCompletitionNotificationAsync()
         {
-            //TODO: A: Implement
+            try
+            {
+                // Get user
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    // Get User Notifications Options
+                    var userNotification = user.NotificationState;
+                    if (userNotification)
+                    {
+                        // Send Notificatio
+                        this._notificationManager.SendNotification(
+                                AppResources.UnderTestViewModelCompleteTestMessage,
+                                AppResources.UnderTestViewModelCompleteTestNotificationMessage);
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                await base.InternalErrorMessageToUser();
+            }
         }
 
         /// <summary>

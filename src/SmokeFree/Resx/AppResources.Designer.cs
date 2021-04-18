@@ -421,6 +421,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продължи към Предизвикателството..
+        /// </summary>
+        internal static string UnderTestViewModelCompleteTestNotificationMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCompleteTestNotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Поздравления.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestTitle {

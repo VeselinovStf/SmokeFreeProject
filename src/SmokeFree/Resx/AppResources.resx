@@ -249,4 +249,7 @@
   <data name="UnderTestViewModelCompleteTestTitle" xml:space="preserve">
     <value>Поздравления</value>
   </data>
+  <data name="UnderTestViewModelCompleteTestNotificationMessage" xml:space="preserve">
+    <value>Продължи към Предизвикателството.</value>
+  </data>
 </root>
