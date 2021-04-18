@@ -132,6 +132,7 @@ namespace SmokeFree.Services.General
 
 
             }
+            // TODO: B: Custom Exception Error Page
             catch (Exception ex)
             {
 
@@ -176,6 +177,7 @@ namespace SmokeFree.Services.General
 
                 await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
             }
+            // TODO: B: Custom Exception Error Page
             catch (Exception ex)
             {
                 this._appLogger.LogCritical(ex.Message);
