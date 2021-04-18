@@ -267,4 +267,10 @@
   <data name="YesButtonText" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="TestDataAccuired" xml:space="preserve">
+    <value>Test Data Saved</value>
+  </data>
+  <data name="UnderTestViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
+    <value>After 10min. delay your previos smoke was marked as done.</value>
+  </data>
 </root>

@@ -23,5 +23,12 @@ namespace SmokeFree.Abstraction.Services.Data.Test
         /// <returns>Result data DTO</returns>
         CalculateTestResultDTO CalculateTestResult(SmokeFree.Data.Models.Test test);
 
+        /// <summary>
+        /// Calculate Time Sence last smoke
+        /// </summary>
+        /// <param name="currentTest">Test to calculate from</param>
+        /// <param name="now">Current time</param>
+        /// <returns>TimeSpan time sence last smoke</returns>
+        TimeSpan TimeSinceLastSmoke(SmokeFree.Data.Models.Test currentTest, DateTime now);
     }
 }

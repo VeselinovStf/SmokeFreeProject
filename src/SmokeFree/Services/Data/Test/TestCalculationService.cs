@@ -186,5 +186,40 @@ namespace SmokeFree.Services.Data.Test
             // Return DTO Model 
             return new CurrentTestDataCalculationDTO(totalSmoked, timeSinceLastSmoke, testTimeLeft, currentSmokeId, currentSmokeTime);
         }
+
+        /// <summary>
+        /// Calculate Time Sence last smoke
+        /// </summary>
+        /// <param name="currentTest">Test to calculate from</param>
+        /// <param name="now">Current time</param>
+        /// <returns>TimeSpan time sence last smoke</returns>
+        public TimeSpan TimeSinceLastSmoke(SmokeFree.Data.Models.Test currentTest, DateTime now)
+        {
+            // Check Collection
+            if (currentTest.SmokedCigaresUnderTest.Count > 0)
+            {
+                // Get last smoke
+                var lastSmoke = currentTest
+                    .SmokedCigaresUnderTest
+                    .OrderByDescending(e => e.EndSmokeTime)
+                    .FirstOrDefault();
+
+                // Validate
+                if (lastSmoke != null)
+                {
+                    // Last Smoke Time End smoke time
+                    var lastSmokeTime = lastSmoke.EndSmokeTime;
+
+                    // Validate
+                    if (lastSmokeTime != new DateTimeOffset())
+                    {
+                        return now.Subtract(lastSmokeTime.DateTime);
+                    }                   
+                }              
+            }
+
+            // Default return value
+            return new TimeSpan(0, 0, 0);
+        }
     }
 }

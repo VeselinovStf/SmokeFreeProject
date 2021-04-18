@@ -360,7 +360,7 @@ namespace SmokeFree.ViewModels.Test
 
                 await base.InternalErrorMessageToUser();
             }
-          
+
         }
 
         /// <summary>
@@ -415,7 +415,7 @@ namespace SmokeFree.ViewModels.Test
                                     {
                                         notCompleteSmoke.EndSmokeTime = this._dateTime.Now();
                                         notCompleteSmoke.ModifiedOn = this._dateTime.Now();
-                                    });                                    
+                                    });
                                 }
                             }
 
@@ -457,7 +457,7 @@ namespace SmokeFree.ViewModels.Test
                         base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
                         await base.InternalErrorMessageToUser();
-                    }  
+                    }
                 }
             }
             catch (Exception ex)
@@ -465,9 +465,32 @@ namespace SmokeFree.ViewModels.Test
                 base._appLogger.LogError(ex.Message);
 
                 await base.InternalErrorMessageToUser();
-            }           
+            }
         }
-       
+
+        /// <summary>
+        /// Mark One Smoked
+        /// </summary>
+        public IAsyncCommand<bool> MarkOneSmokedCommand => new AsyncCommand<bool>(isSmoking =>
+           MarkOneSmoked(isSmoking),
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task MarkOneSmoked(bool isSmoking)
+        {
+            // Check User Notification
+            var userNotification = await base._dialogService
+                .ConfirmAsync(AppResources.UnderTestViewModelStartSmokeConfirmMessage,
+                    AppResources.UnderTestViewModelStartSmokeConfirmTitle,
+                    AppResources.YesButtonText,
+                    AppResources.NoButtonText);
+
+            if (userNotification)
+            {
+                await SmokeOneCigareAsync();
+            }
+        }
+
         #endregion
 
         // TODO: B: Add notification for app inner work! Use IsBusy for methods
@@ -533,9 +556,8 @@ namespace SmokeFree.ViewModels.Test
                         base.IsBusy = true;
 
                         await SendNotificationAsync("You Smoke is done", "Your smoke is mark as finished");
+                        await MarkSmokedAfterDelayLimitAsync();
 
-                        // TODO: A: Implement
-                        //MarkSmokedAfterDelayLimit();
                         base.IsBusy = false;
 
                         return false;
@@ -545,7 +567,6 @@ namespace SmokeFree.ViewModels.Test
 
                 }, this.stopSmokingTimerCancellation);
         }
-
 
         /// <summary>
         /// Create Current Test Results
@@ -647,7 +668,7 @@ namespace SmokeFree.ViewModels.Test
                     {
                         // Send Notificatio
                         this._notificationManager.SendNotification(
-                                notificationTitle,notificationMessage);
+                                notificationTitle, notificationMessage);
                     }
                 }
                 else
@@ -735,11 +756,126 @@ namespace SmokeFree.ViewModels.Test
         }
 
         /// <summary>
-        /// Stop Testing Timer
+        /// Mark one smoke after delay of time
+        /// </summary>
+        private async Task MarkSmokedAfterDelayLimitAsync()
+        {
+            await base._dialogService.ShowDialog(
+                AppResources.UnderTestViewModelMarkAfterDelayDialogMessage,
+                AppResources.TestDataAccuired,
+                AppResources.ButtonOkText);
+
+            await SmokeOneCigareAsync();
+        }
+
+        /// <summary>
+        /// Mark One Cigare Smoke
+        /// </summary>
+        /// <returns></returns>
+        public async Task SmokeOneCigareAsync()
+        {
+            try
+            {
+                // Get user
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    // Get Current State
+                    var currentTestId = user.TestId;
+                    var currentTest = user
+                        .Tests
+                        .FirstOrDefault(t => t.Id == currentTestId);
+
+                    // Validate Test
+                    if (currentTest != null)
+                    {
+                        // Get Current Test Smoke
+                        var currentSmoke = currentTest
+                            .SmokedCigaresUnderTest
+                            .FirstOrDefault(e => e.Id.Equals(this.CurrentSmokeId));
+
+                        // Validate
+                        if (currentSmoke != null)
+                        {
+                            // Validate app state
+                            if (!currentSmoke.EndSmokeTime.Equals(new DateTimeOffset()))
+                            {
+                                base._appLogger.LogCritical($"Current Test Smoke is completed, App state is compromissed : User Id: {userId}, Test Id {currentTestId}");
+                            }
+
+                            // Current count
+                            var currentCountSmokes = currentTest.SmokedCigaresUnderTest.Count;
+
+                            // Calculate time sence previous smoke
+                            this.TimeSenceLastSmoke = this._testCalculationService
+                                .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
+
+                            // Update Db
+                            this._realm.Write(() =>
+                            {
+                                currentSmoke.EndSmokeTime = this._dateTime.Now();
+                                currentSmoke.ModifiedOn = this._dateTime.Now();
+                            });
+
+                            // Set it not smoking
+                            this.IsSmoking = false;
+
+                            // +1 new ( currentrly smoked)
+                            this.CurrentlySmokedCount = currentCountSmokes + 1;
+
+                            // Stop Timer
+                            StopSmokingTimer();                          
+                        }
+                        else
+                        {
+                            // User Test Smoke Not Found!
+                            base._appLogger.LogCritical($"Can't find User Test Smoke: User Id: {userId}, Test Id {currentTestId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }                       
+                    }
+                    else
+                    {
+                        // User Test Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test: User Id: {userId}, Test Id {currentTestId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogError(ex.Message);
+
+                await base.InternalErrorMessageToUser();
+            }            
+        }
+
+
+        /// <summary>
+        /// Stops Testing Timer
         /// </summary>
         private void StopTestingTimer()
         {
             _deviceTimer.Stop(this.stopTestingTimerCancellation);
+        }
+
+        /// <summary>
+        /// Stops Smoking Timer
+        /// </summary>
+        public void StopSmokingTimer()
+        {
+            _deviceTimer.Stop(this.stopSmokingTimerCancellation);
         }
 
         #endregion

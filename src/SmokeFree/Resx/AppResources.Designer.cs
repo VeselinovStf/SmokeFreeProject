@@ -412,6 +412,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Информацията е запазена.
+        /// </summary>
+        internal static string TestDataAccuired {
+            get {
+                return ResourceManager.GetString("TestDataAccuired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Резултати от теста.
         /// </summary>
         internal static string TestResultViewModelTiitle {
@@ -453,6 +462,15 @@ namespace SmokeFree.Resx {
         internal static string UnderTestViewModelCompleteTestTitle {
             get {
                 return ResourceManager.GetString("UnderTestViewModelCompleteTestTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лимита за пушене на една цигара е десет минути. След изтичане на лимита, цигарата се маркира като изпупена.
+        /// </summary>
+        internal static string UnderTestViewModelMarkAfterDelayDialogMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelMarkAfterDelayDialogMessage", resourceCulture);
             }
         }
         

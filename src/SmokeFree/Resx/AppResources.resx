@@ -267,4 +267,10 @@
   <data name="YesButtonText" xml:space="preserve">
     <value>Да</value>
   </data>
+  <data name="TestDataAccuired" xml:space="preserve">
+    <value>Информацията е запазена</value>
+  </data>
+  <data name="UnderTestViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
+    <value>Лимита за пушене на една цигара е десет минути. След изтичане на лимита, цигарата се маркира като изпупена</value>
+  </data>
 </root>
