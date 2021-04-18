@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace SmokeFree.Abstraction.Utility.Logging
 {
@@ -9,6 +10,7 @@ namespace SmokeFree.Abstraction.Utility.Logging
     {
         void LogCritical(string message, [CallerMemberName] string caller = null);
 
+        void LogCritical(Exception ex, [CallerMemberName] string caller = null);
 
         void LogError(string message, [CallerMemberName] string caller = null);
 

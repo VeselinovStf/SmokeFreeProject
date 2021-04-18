@@ -213,7 +213,7 @@ namespace SmokeFree.ViewModels.OnBoarding
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }

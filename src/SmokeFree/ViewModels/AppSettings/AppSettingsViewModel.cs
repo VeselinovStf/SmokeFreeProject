@@ -82,7 +82,7 @@ namespace SmokeFree.ViewModels.AppSettings
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -137,7 +137,7 @@ namespace SmokeFree.ViewModels.AppSettings
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 base.InternalErrorMessageToUser().Wait();
             }

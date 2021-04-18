@@ -1,4 +1,5 @@
 ﻿using SmokeFree.Abstraction.Utility.Logging;
+using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -50,6 +51,21 @@ namespace SmokeFree.Utilities.Logging
             Debug.WriteLine(logMessage);
 
             LocalLogger.Warn(logMessage);
+        }
+
+        public void LogCritical(System.Exception ex, [CallerMemberName] string caller = null)
+        {
+            var message = $"[MESSAGE] : {ex.Message}" +
+                $"{Environment.NewLine}" +
+                $"[STACK TRACE] : {ex.StackTrace}" +
+                $"{Environment.NewLine}" +
+                $"[INNER EXCEPTION] :{ex.InnerException}";
+
+            var logMessage = string.Format(criticalLog, caller, message);
+
+            Debug.WriteLine(logMessage);
+
+            LocalLogger.Fatal(logMessage);
         }
     }
 }

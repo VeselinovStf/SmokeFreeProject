@@ -215,7 +215,7 @@ namespace SmokeFree.Services.General
             }
             catch (Exception ex)
             {
-                this._appLogger.LogCritical($"{ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}{ex.InnerException}");
+                this._appLogger.LogCritical(ex);
 
                 // Validate Type param
                 if (viewModelType != null)

@@ -308,7 +308,7 @@ namespace TestResultViewModelTests.UnitTests
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()));
+            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()));
 
             var dialogServiceMock = new Mock<IDialogService>();
 
@@ -362,7 +362,7 @@ namespace TestResultViewModelTests.UnitTests
             testResultViewModel.OnStopTestingCommand.Execute(new object());
 
             // Assert
-            appLoggerServiceMock.Verify(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()), Times.Exactly(1));
 
         }
 
@@ -384,7 +384,7 @@ namespace TestResultViewModelTests.UnitTests
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()));
+            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()));
 
             var dialogServiceMock = new Mock<IDialogService>();
 
@@ -422,7 +422,7 @@ namespace TestResultViewModelTests.UnitTests
             testResultViewModel.OnStopTestingCommand.Execute(new object());
 
             // Assert
-            appLoggerServiceMock.Verify(e => e.LogError(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
+            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()), Times.Exactly(1));
 
         }
 

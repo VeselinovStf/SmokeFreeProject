@@ -184,7 +184,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
             }
             catch (System.Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }

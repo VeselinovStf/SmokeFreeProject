@@ -193,7 +193,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -236,6 +236,7 @@ namespace SmokeFree.ViewModels.Test
             catch (Exception ex)
             {
                 base._appLogger.LogError($"Can't Initialize Under Test Completition Notification: {ex.Message}");
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -331,7 +332,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -356,7 +357,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -462,7 +463,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -636,8 +637,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -684,7 +684,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -752,7 +752,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }
@@ -858,7 +858,7 @@ namespace SmokeFree.ViewModels.Test
             }
             catch (Exception ex)
             {
-                base._appLogger.LogError(ex.Message);
+                base._appLogger.LogCritical(ex);
 
                 await base.InternalErrorMessageToUser();
             }

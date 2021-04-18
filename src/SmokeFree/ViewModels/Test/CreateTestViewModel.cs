@@ -131,92 +131,100 @@ namespace SmokeFree.ViewModels.Test
 
         private async Task ExecuteStartTestingCommand()
         {
-            // Check if user is shore
-            var userNotification = await base._dialogService
-                 .ConfirmAsync(
-                    string.Format(AppResources.ConfirmStartTestingDialogMessage, this.SelectedTestTimeDurationItem.DisplayText),
-                    AppResources.ConfirmStartTestingDialogTitle,
-                    AppResources.ButtonOkText,
-                    AppResources.ButtonCancelText
-                 );
-
-            // Check User Notification Result
-            if (userNotification)
+            try
             {
-                // Get Values For Creation
-                var testDuration = this.SelectedTestTimeDurationItem.DayValue;
-                var userId = Globals.UserId;
-                var goalTime = this.GoalDateTime;
+                // Check if user is shore
+                var userNotification = await base._dialogService
+                     .ConfirmAsync(
+                        string.Format(AppResources.ConfirmStartTestingDialogMessage, this.SelectedTestTimeDurationItem.DisplayText),
+                        AppResources.ConfirmStartTestingDialogTitle,
+                        AppResources.ButtonOkText,
+                        AppResources.ButtonCancelText
+                     );
 
-                // Goal Time Validation
-                if (goalTime < base._dateTime.Now().AddDays(Globals.MinChallengeDays))
+                // Check User Notification Result
+                if (userNotification)
                 {
-                    await this._dialogService.ShowDialog(
-                        string.Format(AppResources.CreateTestInvalidGoalTimeMessage, Globals.MinChallengeDays),
-                        AppResources.CreateTestInvalidGoalTimeTitle,
-                        AppResources.ButtonOkText);
-                }
-                else
-                {
-                    // Get Current User
-                    var user = this._realm.Find<User>(userId);
+                    // Get Values For Creation
+                    var testDuration = this.SelectedTestTimeDurationItem.DayValue;
+                    var userId = Globals.UserId;
+                    var goalTime = this.GoalDateTime;
 
-                    // Only One Active Test per user check
-                    // State Managment Error
-                    if (user.Tests
-                        .FirstOrDefault(e => e.UserId == user.Id && !e.IsDeleted) != null)
+                    // Goal Time Validation
+                    if (goalTime < base._dateTime.Now().AddDays(Globals.MinChallengeDays))
                     {
-                        base._appLogger
-                            .LogError($"Only One Test Per User Can Exist! User : {userId} : already have one!");
-
-                        await base.InternalErrorMessageToUser();
-                    }
-
-                    if (user != null)
-                    {
-                        // Total Days of Test
-                        var goalTimeInDays = (goalTime - _dateTime.Now()).Days;
-
-                        // Initial Chalens - Store StartUp data
-                        var challenge = new Data.Models.Challenge()
-                        {
-                            GoalCompletitionTime = goalTime,
-                            CreatedOn = _dateTime.Now(),
-                            TotalChallengeDays = goalTimeInDays,
-                            UserId = user.Id
-                        };
-
-                        // User Test
-                        var newTest = new Data.Models.Test()
-                        {
-                            UserId = user.Id,
-                            CreatedOn = _dateTime.Now(),
-                            TestStartDate = _dateTime.Now(),
-                            TestEndDate = _dateTime.Now().AddDays(testDuration),
-                        };
-
-                        // Write to DB
-                        this._realm.Write(() =>
-                        {
-                            user.Challenges.Add(challenge);
-                            user.Tests.Add(newTest);
-                            user.UserState = UserStates.UserUnderTesting.ToString();
-                            user.TestId = newTest.Id;
-                        });
-
-                        // Navigate to Under Test
-                        await base._navigationService.NavigateToAsync<UnderTestViewModel>();
+                        await this._dialogService.ShowDialog(
+                            string.Format(AppResources.CreateTestInvalidGoalTimeMessage, Globals.MinChallengeDays),
+                            AppResources.CreateTestInvalidGoalTimeTitle,
+                            AppResources.ButtonOkText);
                     }
                     else
                     {
-                        base._appLogger.LogError($"Can't Find User in Database: USER ID {userId}");
+                        // Get Current User
+                        var user = this._realm.Find<User>(userId);
 
+                        // Only One Active Test per user check
+                        // State Managment Error
+                        if (user.Tests
+                            .FirstOrDefault(e => e.UserId == user.Id && !e.IsDeleted) != null)
+                        {
+                            base._appLogger
+                                .LogError($"Only One Test Per User Can Exist! User : {userId} : already have one!");
 
+                            await base.InternalErrorMessageToUser();
+                        }
 
-                        await base.InternalErrorMessageToUser();
+                        if (user != null)
+                        {
+                            // Total Days of Test
+                            var goalTimeInDays = (goalTime - _dateTime.Now()).Days;
+
+                            // Initial Chalens - Store StartUp data
+                            var challenge = new Data.Models.Challenge()
+                            {
+                                GoalCompletitionTime = goalTime,
+                                CreatedOn = _dateTime.Now(),
+                                TotalChallengeDays = goalTimeInDays,
+                                UserId = user.Id
+                            };
+
+                            // User Test
+                            var newTest = new Data.Models.Test()
+                            {
+                                UserId = user.Id,
+                                CreatedOn = _dateTime.Now(),
+                                TestStartDate = _dateTime.Now(),
+                                TestEndDate = _dateTime.Now().AddDays(testDuration),
+                            };
+
+                            // Write to DB
+                            this._realm.Write(() =>
+                            {
+                                user.Challenges.Add(challenge);
+                                user.Tests.Add(newTest);
+                                user.UserState = UserStates.UserUnderTesting.ToString();
+                                user.TestId = newTest.Id;
+                            });
+
+                            // Navigate to Under Test
+                            await base._navigationService.NavigateToAsync<UnderTestViewModel>();
+                        }
+                        else
+                        {
+                            base._appLogger.LogError($"Can't Find User in Database: USER ID {userId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+            
         }
 
 

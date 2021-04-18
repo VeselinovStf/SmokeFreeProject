@@ -114,7 +114,7 @@ namespace SmokeFree.ViewModels.Base
         protected virtual void GenericCommandExeptionHandler(Exception ex)
         {
             // Log Error
-            this._appLogger.LogError(ex.Message);
+            this._appLogger.LogCritical(ex);
 
             // Display default internal error message to user
             this.InternalErrorMessageToUser().ConfigureAwait(false);
