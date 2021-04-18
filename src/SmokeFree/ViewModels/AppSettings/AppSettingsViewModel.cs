@@ -70,6 +70,7 @@ namespace SmokeFree.ViewModels.AppSettings
                 if (user != null)
                 {
                     this.AppUser = user;
+                    this.NotificationSwitch = user.NotificationState;
                 }
                 else
                 {
