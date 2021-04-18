@@ -21,13 +21,13 @@ namespace UnderTestViewModelTests.UnitTests
     /// <summary>
     /// UnderTestViewModel - SendTestCompletitionNotificationAsync Tests
     /// </summary>
-    public class SendTestCompletitionNotificationAsync_Should
+    public class SendNotificationAsync_Should
     {
         /// <summary>
-        /// Send Notification For Test Completition if user is set Notifications
+        /// Send Notification  when user is set Notifications
         /// </summary>
         [Test]
-        public async Task Send_Notification_For_Test_Completition_When_User_Is_Notifiable()
+        public async Task Send_Notification_When_User_Is_Notifiable()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -70,17 +70,17 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.SendTestCompletitionNotificationAsync();
+            await underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             notificationManagerMock.Verify(e => e.SendNotification(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime?>()), Times.Once);
         }
 
         /// <summary>
-        /// Not sending Notification For Test Completition if user is set Notifications to false
+        /// Not sending Notification if user is set Notifications to false
         /// </summary>
         [Test]
-        public async Task Not_Sending_Notification_For_Test_Completition_When_User_Is_Desabled_Notifications()
+        public async Task Not_Sending_Notification_When_User_Is_Desabled_Notifications()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -123,7 +123,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.SendTestCompletitionNotificationAsync();
+            await underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             notificationManagerMock.Verify(e => e.SendNotification(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime?>()), Times.Never);
@@ -161,7 +161,7 @@ namespace UnderTestViewModelTests.UnitTests
                 );
 
             // Act
-            await underTestViewModel.SendTestCompletitionNotificationAsync();
+            await underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Once);

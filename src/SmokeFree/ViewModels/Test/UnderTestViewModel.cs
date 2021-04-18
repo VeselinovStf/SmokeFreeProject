@@ -498,7 +498,11 @@ namespace SmokeFree.ViewModels.Test
                         // Execute Function for stop testing
                         await MarkTestCompletedAsync();
                         await CreateTestResultAsync();
-                        await SendTestCompletitionNotificationAsync();
+                        await SendNotificationAsync(
+                            AppResources.UnderTestViewModelCompleteTestMessage,
+                            AppResources.UnderTestViewModelCompleteTestNotificationMessage
+                            );
+
                         StopTestingTimer();
 
                         base.IsBusy = false;
@@ -525,10 +529,14 @@ namespace SmokeFree.ViewModels.Test
 
                     if (this.CurrentSmokeTime.TotalSeconds > Globals.OneSmokeTreshHoldTimeMinutes)
                     {
-                        //this._notificationManager.SendNotification("You Smoke is done", "Your smoke is mark as finished");
+                        // TODO: C: Add loader to view
+                        base.IsBusy = true;
+
+                        await SendNotificationAsync("You Smoke is done", "Your smoke is mark as finished");
 
                         // TODO: A: Implement
                         //MarkSmokedAfterDelayLimit();
+                        base.IsBusy = false;
 
                         return false;
                     }
@@ -622,7 +630,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Send Device Specific Notification For test Completition
         /// </summary>
-        public async Task SendTestCompletitionNotificationAsync()
+        public async Task SendNotificationAsync(string notificationTitle, string notificationMessage)
         {
             try
             {
@@ -639,8 +647,7 @@ namespace SmokeFree.ViewModels.Test
                     {
                         // Send Notificatio
                         this._notificationManager.SendNotification(
-                                AppResources.UnderTestViewModelCompleteTestMessage,
-                                AppResources.UnderTestViewModelCompleteTestNotificationMessage);
+                                notificationTitle,notificationMessage);
                     }
                 }
                 else
