@@ -6,10 +6,197 @@
             utility:ViewModelLocator.AutoWireViewModel="True"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Under Test"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout>
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+                    <!-- STOP TEST BUTTON -->
+                    <Button                   
+                        Text="&#xe724;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnStopTestingCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ STOP TEST BUTTON -->
+
+                    <!-- App Settings Button -->
+                    <Button            
+                        x:Name="SettingsButton"
+                        Text="&#xe72B;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnSettingsCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="End"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ App Settings Button -->
+
+                </Grid>
+                <!-- /END/ NAVIGATION -->
+
+                <!-- STATUS DISPLAY -->
+                <Grid Grid.Row="1" Margin="20,0,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- SMOKES COUNT DISPLAY -->
+                    <StackLayout>
+
+                        <Label 
+                            Text="Smoked" 
+                            HorizontalOptions="Start"
+                            FontSize="25"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label                       
+                            Text="{Binding CurrentlySmokedCount}"                
+                            HorizontalTextAlignment="Center"
+                            FontSize="25"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                    </StackLayout>
+                    <!-- /END/ SMOKES COUNT DISPLAY -->
+
+                    <!-- LAST SMOKE DATE TIME DISPLAY -->
+                    <StackLayout Grid.Column="2">
+
+                        <Label 
+                             IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="LastSmokeDateTimeDisplayLabel"
+                            Text="Last Time" 
+                            FontSize="25"
+                            HorizontalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                             IsVisible="{Binding IsSmoking}"
+                            Text="Smoke Sence" 
+                            FontSize="25"
+                            HorizontalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="LastSmokeDateTimeDisplayDateTime"
+                            Text="{Binding TimeSenceLastSmoke, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
+                             HorizontalTextAlignment="Center"
+                            FontSize="25"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                            IsVisible="{Binding IsSmoking}"
+                            x:Name="LastSmokeDateTimeDisplayAtSmokeDateTime"
+                            Text="{Binding CurrentSmokeTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
+                             HorizontalTextAlignment="Center"
+                            FontSize="25"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                    </StackLayout>
+                    <!-- /END/ LAST SMOKE DATE TIME DISPLAY -->
+
+                </Grid>
+                <!-- /END/ STATUS DISPLAY -->
+
+                <!-- MAIN CONTROLS CONTENT -->
+                <Grid Grid.Row="2" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout 
+                             VerticalOptions="CenterAndExpand"
+                             Spacing="20">
+
+                        <!-- UNDER TEST VIEW TITLE -->
+                        <Label Text="{Binding ViewTitle}"
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"/>
+                        <!-- /END/ TEST VIEW TITLE -->
+
+                        <!-- Start Smoking BUTTON -->
+                        <Button 
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="StartSmoking"                           
+                            Text="Start Smoking" 
+                            Command="{Binding StartSmokingCommand}"
+                            CommandParameter="{StaticResource TrueValue}"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"                           
+                            CornerRadius="30"/>
+                        <!-- /END/ Start Smoking BUTTON -->
+
+                        <!-- Mark One Smoked BUTTON -->
+                        <Button 
+                            IsVisible="{Binding IsSmoking}"
+                            x:Name="MarkOneSmoked"
+                            Text="Mark One Smoked" 
+                            Command="{Binding MarkOneSmokedCommand}"
+                            CommandParameter="{StaticResource FalseValue}"
+                            BackgroundColor="{StaticResource Gray-100}"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"                           
+                            CornerRadius="30"/>
+                        <!-- /END/ Mark One Smoked BUTTON -->
+
+                    </StackLayout>
+                    <!-- TEST TIME LEFT -->
+                    <StackLayout Grid.Row="2" VerticalOptions="EndAndExpand" Margin="0,60,0,0">
+
+                        <Label 
+                            Text="Test Time Left" 
+                            HorizontalOptions="Center"
+                            VerticalOptions="End"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label       
+                            x:Name="Timer"
+                            Text="{Binding TestLeftTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}"                
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            VerticalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                    </StackLayout>
+                    <!-- /END/ TEST TIME LEFT -->
+                </Grid>
+                <!-- /END/ MAIN CONTENT -->
+
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
