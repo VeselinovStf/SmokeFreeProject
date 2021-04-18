@@ -8,10 +8,129 @@
              Title="{Binding ViewTitle}" 
              >
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Test Result"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout>
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+                    <!-- STOP TEST BUTTON -->
+                    <Button                   
+                        Text="&#xe724;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnStopTestingCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ STOP TEST BUTTON -->
+
+                    <!-- App Settings Button -->
+                    <Button                    
+                        Text="&#xe72B;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnSettingsCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="End"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ App Settings Button -->
+
+                </Grid>
+                <!-- /END/ NAVIGATION -->
+
+            </StackLayout>
+            <!-- /END/ NAVIGATION -->
+
+            <!-- MAIN CONTENT -->
+            <!-- Test Results -->
+            <Frame CornerRadius="20" Grid.Row="1"
+                       Margin="20,0,20,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- HEADER TEXT -->
+                    <Label Text="{Binding ViewTitle}"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="3"
+                           HorizontalOptions="CenterAndExpand"
+                          
+                           FontSize="20"
+                           TextColor="{StaticResource Gray-800}"
+                           FontFamily="{StaticResource Montserrat-Bold}"/>
+                    <!-- /END/ HEADER TEXT -->
+
+                    <!-- TODO: ADD SMOKER TUPE -->
+
+                    <!-- TEST RESULTS DISPLAY -->
+                    <Label Text="Test Time" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.TotalTestTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="1" Grid.Column="2"/>
+
+                    <Label Text="Started Date" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.TestStartDate,StringFormat='{dd:mm:yyyy}'}" Grid.Row="2" Grid.Column="2"/>
+
+                    <Label Text="End Date" Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.EndStartDate ,StringFormat='{dd:mm:yyyy}'}" Grid.Row="3" Grid.Column="2"/>
+
+                    <Label Text="Smoked Cigars" Grid.Row="4" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.TotalSmokedCigars}" Grid.Row="4" Grid.Column="2"/>
+
+                    <Label Text="Avarage For Day" Grid.Row="5" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.AvarageSmokedCigarsPerDay,Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Row="5" Grid.Column="2"/>
+
+                    <Label Text="Avarage Clean Oxygen Time" Grid.Row="6" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.AvarageCleanOxygenTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="6" Grid.Column="2"/>
+
+                    <Label Text="Total Smoke Gaz Time" Grid.Row="7" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.TotalSmokeGasTimeTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="7" Grid.Column="2"/>
+
+                    <Label Text="Avarage Smoke Distance" Grid.Row="8" Grid.Column="0"/>
+                    <Label Text="{Binding TestResult.AvarageSmokeDistance,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="8" Grid.Column="2"/>
+                    <!-- /END/ TEST RESULTS DISPLAY -->
+
+                </Grid>
+
+            </Frame>
+            <!-- /END/ Test Results -->
+
+            <!-- Create Challenge Button -->
+            <Button Text="Create Challenge" Grid.Row="2"
+                    Command="{Binding OnCreateChallengeCommand}"
+                    FontSize="20"
+                    FontAttributes="Bold"                           
+                    Margin="20,0,20,20"                           
+                    CornerRadius="30"/>
+            <!-- /END/ Create Challenge Button -->
+
+            <!-- /END/ MAIN CONTENT -->
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
