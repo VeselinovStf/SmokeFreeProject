@@ -252,4 +252,19 @@
   <data name="UnderTestViewModelCompleteTestNotificationMessage" xml:space="preserve">
     <value>Продължи към Предизвикателството.</value>
   </data>
+  <data name="TestResultViewModelTiitle" xml:space="preserve">
+    <value>Резултати от теста</value>
+  </data>
+  <data name="NoButtonText" xml:space="preserve">
+    <value>Не</value>
+  </data>
+  <data name="UnderTestViewModelStartSmokeConfirmMessage" xml:space="preserve">
+    <value>Пушиш ли в момента?</value>
+  </data>
+  <data name="UnderTestViewModelStartSmokeConfirmTitle" xml:space="preserve">
+    <value>Добави към теста</value>
+  </data>
+  <data name="YesButtonText" xml:space="preserve">
+    <value>Да</value>
+  </data>
 </root>

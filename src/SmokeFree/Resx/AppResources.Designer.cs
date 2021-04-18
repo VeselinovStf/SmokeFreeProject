@@ -223,6 +223,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Не.
+        /// </summary>
+        internal static string NoButtonText {
+            get {
+                return ResourceManager.GetString("NoButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продължи.
         /// </summary>
         internal static string OnBoardingItemButton1 {
@@ -403,6 +412,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Резултати от теста.
+        /// </summary>
+        internal static string TestResultViewModelTiitle {
+            get {
+                return ResourceManager.GetString("TestResultViewModelTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Продължи към Предизвикателството.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestButton {
@@ -448,6 +466,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пушиш ли в момента?.
+        /// </summary>
+        internal static string UnderTestViewModelStartSmokeConfirmMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelStartSmokeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добави към теста.
+        /// </summary>
+        internal static string UnderTestViewModelStartSmokeConfirmTitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelStartSmokeConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Рестартирането на теста ще истрие събраната информация до момента! Сигурен ли си, че искаш да направиш това?.
         /// </summary>
         internal static string UnderTestViewModelStopTestMessage {
@@ -462,6 +498,15 @@ namespace SmokeFree.Resx {
         internal static string UnderTestViewTiitle {
             get {
                 return ResourceManager.GetString("UnderTestViewTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Да.
+        /// </summary>
+        internal static string YesButtonText {
+            get {
+                return ResourceManager.GetString("YesButtonText", resourceCulture);
             }
         }
     }

@@ -252,4 +252,19 @@
   <data name="UnderTestViewModelCompleteTestNotificationMessage" xml:space="preserve">
     <value>Continue to Challenge!</value>
   </data>
+  <data name="TestResultViewModelTiitle" xml:space="preserve">
+    <value>Test Results</value>
+  </data>
+  <data name="NoButtonText" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="UnderTestViewModelStartSmokeConfirmMessage" xml:space="preserve">
+    <value>Are you smoking now?</value>
+  </data>
+  <data name="UnderTestViewModelStartSmokeConfirmTitle" xml:space="preserve">
+    <value>Add to Test</value>
+  </data>
+  <data name="YesButtonText" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

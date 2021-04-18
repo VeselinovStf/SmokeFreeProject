@@ -46,6 +46,7 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<AppSettingsViewModel>();
             _builder.RegisterType<UnderTestViewModel>();
             _builder.RegisterType<SomethingWentWrongViewModel>();
+            _builder.RegisterType<TestResultViewModel>();
 
             // SERVICES
             // SERVICES - GENERAL

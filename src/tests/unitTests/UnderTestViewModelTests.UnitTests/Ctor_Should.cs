@@ -10,6 +10,7 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Test;
+using System;
 using System.Globalization;
 using Xamarin.CommunityToolkit.Helpers;
 
@@ -101,10 +102,10 @@ namespace UnderTestViewModelTests.UnitTests
         /// Assign Stop Testing Timer CTS
         /// </summary>
         [Test]
-        public void Assign_Stop_Timer_CTS_For_UnderTestViewModel()
+        public void Assign_Stop_Testing_Timer_CTS_For_UnderTestViewModel()
         {
             //Arrange
-            var config = new InMemoryConfiguration("Assign_Stop_Timer_CTS_For_UnderTestViewModel");
+            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
             var realm = Realm.GetInstance(config);
 
             var navigationServiceMock = new Mock<INavigationService>();
@@ -129,6 +130,40 @@ namespace UnderTestViewModelTests.UnitTests
 
             //Assert
             Assert.NotNull(underTestViewModel.stopTestingTimerCancellation);
+        }
+
+        /// <summary>
+        /// Assign Stop Smoking Testing Timer CTS
+        /// </summary>
+        [Test]
+        public void Assign_Stop_Smoking_Timer_CTS_For_UnderTestViewModel()
+        {
+            //Arrange
+            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
+            var realm = Realm.GetInstance(config);
+
+            var navigationServiceMock = new Mock<INavigationService>();
+            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
+            var appLoggerServiceMock = new Mock<IAppLogger>();
+            var dialogServiceMock = new Mock<IDialogService>();
+            var notificationManagerMock = new Mock<INotificationManager>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+            var deviceTimerMock = new Mock<IDeviceTimer>();
+
+            // Act
+            var underTestViewModel = new UnderTestViewModel(
+                realm,
+                navigationServiceMock.Object,
+                dateTimeWrapperMock.Object,
+                appLoggerServiceMock.Object,
+                dialogServiceMock.Object,
+                notificationManagerMock.Object,
+                testCalculationServiceMock.Object,
+                deviceTimerMock.Object
+                );
+
+            //Assert
+            Assert.NotNull(underTestViewModel.stopSmokingTimerCancellation);
         }
 
     }
