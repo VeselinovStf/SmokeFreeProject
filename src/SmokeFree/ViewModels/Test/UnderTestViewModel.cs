@@ -375,8 +375,8 @@ namespace SmokeFree.ViewModels.Test
                         base.IsBusy = true;
 
                         // Execute Function for stop testing
-                        await MarkTestCompleted();
-                        CreateTestResult();
+                        await MarkTestCompletedAsync();
+                        await CreateTestResultAsync();
                         SendTestCompletitionNotification();
                         StopTestingTimer();
 
@@ -395,9 +395,73 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Create Current Test Results
         /// </summary>
-        private void CreateTestResult()
+        public async Task CreateTestResultAsync()
         {
-            //TODO: A: Implement
+            try
+            {
+                // Get user
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    var testId = user.TestId;
+                    var userTest = user.Tests
+                        .FirstOrDefault(t => t.Id == testId);
+
+                    // Validate User Test
+                    if (userTest != null)
+                    {
+                        // Calculate Test Results
+                        var testResultCalculation = this._testCalculationService
+                            .CalculateTestResult(userTest);
+
+                        // Validate Test Results
+                        if (testResultCalculation.Success)
+                        {
+                            // Setup Test Result
+                            var testResult = testResultCalculation.TestResultCalculation;
+                            testResult.TestId = testId;
+                            testResult.CreatedOn = this._dateTime.Now();
+
+                            // Write To db
+                            this._realm.Write(() =>
+                            {
+                                userTest.CompletedTestResult = testResult;
+                            });
+                        }
+                        else
+                        {
+                            // Cand Do Test Result Calculations
+                            base._appLogger.LogCritical($"Can't Calculate Test Results: User id: {userId}, Test Id {testId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test: User id: {userId}, Test Id {testId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                base._appLogger.LogError(ex.Message);
+
+                await base.InternalErrorMessageToUser();
+            }
         }
 
         /// <summary>
@@ -419,7 +483,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Marks Current test completed
         /// </summary>
-        public async Task MarkTestCompleted()
+        public async Task MarkTestCompletedAsync()
         {
             try
             {
@@ -463,7 +527,7 @@ namespace SmokeFree.ViewModels.Test
                     else
                     {
                         // User Not Found!
-                        base._appLogger.LogCritical($"Can't find User Test: Test Id {currentTestId}");
+                        base._appLogger.LogCritical($"Can't find User Test: User Id: {userId}, Test Id {currentTestId}");
 
                         await base.InternalErrorMessageToUser();
                     }
