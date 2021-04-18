@@ -180,7 +180,7 @@ namespace SmokeFree.ViewModels.Test
                         var goalTimeInDays = (goalTime - _dateTime.Now()).Days;
 
                         // Initial Chalens - Store StartUp data
-                        var challenge = new Challenge()
+                        var challenge = new Data.Models.Challenge()
                         {
                             GoalCompletitionTime = goalTime,
                             CreatedOn = _dateTime.Now(),

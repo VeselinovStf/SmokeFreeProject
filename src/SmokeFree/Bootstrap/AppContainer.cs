@@ -11,6 +11,7 @@ using SmokeFree.Utilities.DeviceUtilities;
 using SmokeFree.Utilities.Logging;
 using SmokeFree.Utilities.Wrappers;
 using SmokeFree.ViewModels.AppSettings;
+using SmokeFree.ViewModels.Challenge;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.OnBoarding;
 using SmokeFree.ViewModels.Test;
@@ -47,6 +48,7 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<UnderTestViewModel>();
             _builder.RegisterType<SomethingWentWrongViewModel>();
             _builder.RegisterType<TestResultViewModel>();
+            _builder.RegisterType<CreateChallengeViewModel>();
 
             // SERVICES
             // SERVICES - GENERAL
