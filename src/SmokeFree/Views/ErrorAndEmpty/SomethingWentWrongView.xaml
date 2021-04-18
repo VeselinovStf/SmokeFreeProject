@@ -21,7 +21,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Display Item -->
@@ -33,11 +34,11 @@
                                 Margin="20,30,20,0"
                                 Source="{Binding ImagePath}"/>
                 <!-- /END/ Display Item -->
-
-                <!-- Header -->
-                <Label 
+                <StackLayout Grid.Row="1">
+                    <!-- Header -->
+                    <Label 
                                 Grid.Row="1"
-                                TextColor="{StaticResource Gray-100}"
+                                TextColor="{StaticResource Gray-900}"
                                 VerticalOptions="Start"
                                 FontSize="26"
                                 Margin="30"
@@ -46,43 +47,45 @@
                                 HorizontalTextAlignment="Center"
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Header}"/>
-                <!-- /END/ Header -->
+                    <!-- /END/ Header -->
 
-                <!-- Description Text -->
-                <Label
-                                Grid.Row="2"
-                                TextColor="{StaticResource Gray-100}"
+                    <!-- Description Text -->
+                    <Label                                
+                                TextColor="{StaticResource Gray-800}"
                                 Margin="20,0,20,25"
                                 FontSize="20"
                                 HorizontalOptions="Center"
                                 HorizontalTextAlignment="Center"
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Content}"/>
-                <!-- /END/ Description Text -->
+                    <!-- /END/ Description Text -->
 
-            </Grid>
-
-            <!-- Report Issue Button -->
-            <Button                                                      
-                            Grid.Row="1"
+                    <!-- Report Issue Button -->
+                    <Button                                                      
+                            Grid.Row="3"
                             FontSize="20"                           
                             FontAttributes="Bold"
                             CornerRadius="30"
                             Margin="20,0,20,20"
                             Command="{Binding ReportIssueCommand}"
                             Text="{Binding ReportIssueCommandText}"/>
-            <!-- /END/ Report Issue Button -->
+                    <!-- /END/ Report Issue Button -->
 
-            <!-- Try Again Button -->
-            <Button                                                      
-                            Grid.Row="3"
+                    <!-- Try Again Button -->
+                    <Button                                                      
+                            Grid.Row="4"
                             FontSize="20"                           
                             FontAttributes="Bold"
                             CornerRadius="30"
                             Margin="20,0,20,20"
                             Command="{Binding TryAgainCommand}"
                             Text="{Binding TryAgainCommandText}"/>
-            <!-- /END/ Try Again Button -->
+                    <!-- /END/ Try Again Button -->
+                </StackLayout>
+                
+            </Grid>
+
+            
 
         </Grid>
     </ContentPage.Content>

@@ -97,7 +97,14 @@ namespace SmokeFree.Services.General
 
                 if (mainPage != null)
                 {
-                    mainPage.Navigation.PopAsync();
+                    if (mainPage.Navigation.NavigationStack.Count > 1)
+                    {
+                        mainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        return NavigateToAsync<OnBoardingViewModel>();
+                    }
                 }
 
             }
@@ -208,7 +215,7 @@ namespace SmokeFree.Services.General
             }
             catch (Exception ex)
             {
-                this._appLogger.LogCritical(ex.Message);
+                this._appLogger.LogCritical($"{ex.Message}{Environment.NewLine}{ex.StackTrace}{Environment.NewLine}{ex.InnerException}");
 
                 // Validate Type param
                 if (viewModelType != null)

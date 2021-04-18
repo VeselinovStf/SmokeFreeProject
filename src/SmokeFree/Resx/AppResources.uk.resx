@@ -220,7 +220,7 @@
     <value>Try Again</value>
   </data>
   <data name="SomethingWentWrongViewModelReportIssueButtonText" xml:space="preserve">
-    <value>Report Developers</value>
+    <value>Report to Developers</value>
   </data>
   <data name="CantSendEmailTitle" xml:space="preserve">
     <value>Enable to send message</value>

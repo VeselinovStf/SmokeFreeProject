@@ -111,7 +111,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
 
         private async Task ExecuteTryAgain()
         {
-            await base._navigationService.RemoveLastFromBackStackAsync();
+            await base._navigationService.BackToPreviousAsync();
         }
 
         /// <summary>

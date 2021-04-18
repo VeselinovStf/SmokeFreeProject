@@ -169,8 +169,6 @@ namespace SmokeFree.ViewModels.Test
                         base._appLogger
                             .LogError($"Only One Test Per User Can Exist! User : {userId} : already have one!");
 
-
-
                         await base.InternalErrorMessageToUser();
                     }
 

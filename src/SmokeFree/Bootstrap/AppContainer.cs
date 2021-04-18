@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Realms;
+using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -73,6 +74,9 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<DeviceTimer>().As<IDeviceTimer>().InstancePerDependency();
             _builder.RegisterType<DeviceEmailSender>().As<IDeviceEmailSender>().InstancePerDependency();
 
+            // Platform Specific Implementations
+            _builder.Register(ctx => Xamarin.Forms.DependencyService.Get<INotificationManager>())
+                .As<INotificationManager>();
 
             _container = _builder.Build();
         }

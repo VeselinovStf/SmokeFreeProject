@@ -27,14 +27,43 @@ namespace SmokeFree.Views.OnBoarding
 
         private void InitializeDefaultColour()
         {
+            INavigationService navigationService = null;
+            IAppLogger appLogger = null;
 
-            var bindingUser = this.BindingContext as OnBoardingViewModel;
+            try
+            {
+                var userId = Globals.UserId;
+                var realm = AppContainer.Resolve<Realm>();
+                navigationService = AppContainer.Resolve<INavigationService>();
+                appLogger = AppContainer.Resolve<IAppLogger>();
 
-            var currentColorIndex = bindingUser.AppUser.AppColorThemeIndex;
+                var user = realm.Find<User>(userId);
 
-            var colorThemes = Globals.AppColorThemes;
+                if (user != null)
+                {
 
-            BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+                    var currentColorIndex = user.AppColorThemeIndex;
+
+                    var colorThemes = Globals.AppColorThemes;
+
+                    BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+                }
+                else
+                {
+                    appLogger.LogError($"Can't find User! User id {userId}");
+
+                    var colorThemes = Globals.AppColorThemes;
+
+                    BackgroundColor = Color.FromHex(colorThemes[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                appLogger.LogError(ex.Message);
+
+                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+            }
+          
 
         }
 
