@@ -407,7 +407,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             //Assert
             Assert.False(underTestViewModel.IsSmoking);
-            Assert.True(underTestViewModel.CurrentlySmokedCount == 2);
+            Assert.True(underTestViewModel.CurrentlySmokedCount == 1);
             Assert.True(underTestViewModel.TimeSenceLastSmoke.Equals(timeSenceLastSmoke));
 
         }

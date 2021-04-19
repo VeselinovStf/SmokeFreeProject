@@ -50,7 +50,7 @@ namespace SmokeFree.Views.OnBoarding
                 }
                 else
                 {
-                    appLogger.LogError($"Can't find User! User id {userId}");
+                    appLogger.LogWarning($"Can't find User! User id {userId}");
 
                     var colorThemes = Globals.AppColorThemes;
 

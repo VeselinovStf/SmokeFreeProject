@@ -351,7 +351,7 @@ namespace SmokeFree.ViewModels.Test
             try
             {
                 // Stop Testing Timer
-                StopTestingTimer();
+                //StopTestingTimer();
 
                 await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
             }
@@ -402,7 +402,7 @@ namespace SmokeFree.ViewModels.Test
                         {
                             // Check for un-finished smokes
                             var notCompleteSmokes = userTest.SmokedCigaresUnderTest
-                                .Where(e => !e.StartSmokeTime.Equals(new DateTimeOffset()));
+                                .Where(e => e.EndSmokeTime.Equals(new DateTimeOffset()));
 
                             if (notCompleteSmokes.Count() > 0)
                             {
@@ -551,7 +551,7 @@ namespace SmokeFree.ViewModels.Test
                 {
                     this.CurrentSmokeTime += TimeSpan.FromSeconds(1);
 
-                    if (this.CurrentSmokeTime.TotalSeconds > Globals.OneSmokeTreshHoldTimeMinutes)
+                    if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
                     {
                         // TODO: C: Add loader to view
                         base.IsBusy = true;
@@ -826,8 +826,7 @@ namespace SmokeFree.ViewModels.Test
                             // Set it not smoking
                             this.IsSmoking = false;
 
-                            // +1 new ( currentrly smoked)
-                            this.CurrentlySmokedCount = currentCountSmokes + 1;
+                            this.CurrentlySmokedCount = currentCountSmokes;
 
                             // Stop Timer
                             StopSmokingTimer();
@@ -870,7 +869,7 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private void StopTestingTimer()
         {
-            _deviceTimer.Stop(this.stopTestingTimerCancellation);
+            _deviceTimer.Stop(this.stopTestingTimerCancellation);            
         }
 
         /// <summary>
@@ -879,6 +878,8 @@ namespace SmokeFree.ViewModels.Test
         public void StopSmokingTimer()
         {
             _deviceTimer.Stop(this.stopSmokingTimerCancellation);
+
+            this.stopSmokingTimerCancellation = new CancellationTokenSource();
         }
 
         #endregion

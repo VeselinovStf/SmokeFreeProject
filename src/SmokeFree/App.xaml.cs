@@ -16,6 +16,7 @@ namespace SmokeFree
         public App()
         {
             InitializeAppContainer();
+
             // TODO: AA: Remove in Release
 #if DEBUG
             DevelopmentDatabaseClearing();
@@ -29,13 +30,9 @@ namespace SmokeFree
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
 
             // TODO: C: Change from settings in the future and initiate current culture
-            LocalizationResourceManager.Current.CurrentCulture = new System.Globalization.CultureInfo("uk");
-
-            
+            LocalizationResourceManager.Current.CurrentCulture = new System.Globalization.CultureInfo("uk");   
 
             InitializeNavigation();
-
-
         }
 
         private void DevelopmentDatabaseClearing()

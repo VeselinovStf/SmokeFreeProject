@@ -213,7 +213,7 @@ namespace SmokeFree.Services.Data.Test
                     // Validate
                     if (lastSmokeTime != new DateTimeOffset())
                     {
-                        return now.Subtract(lastSmokeTime.DateTime);
+                        return now.Subtract(lastSmokeTime.LocalDateTime);
                     }
                 }
             }
