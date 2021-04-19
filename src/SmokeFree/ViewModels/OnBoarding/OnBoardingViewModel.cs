@@ -192,6 +192,11 @@ namespace SmokeFree.ViewModels.OnBoarding
                 // Check if on boarding carousel is on last element
                 if (this.SelectedOnBoardingItemsIndex + 1 == this.OnBoardingItems.Count)
                 {
+                    // If UserState Is initial 
+                    // This is User First Run
+                    // Else
+                    // User is send here by AppSettings
+                    // Navigate it back to AppSettings
                     if (AppUser.UserState.Equals(UserStates.Initial.ToString()))
                     {
                         // Persist User State in DB
@@ -205,7 +210,9 @@ namespace SmokeFree.ViewModels.OnBoarding
                     }
                     else
                     {
-                        await base._navigationService.InitializeAsync();
+                        // TODO: A: Navigate back - and check for path validaty
+                        //await base._navigationService.InitializeAsync();
+                        await base._navigationService.BackToPreviousAsync();
                         // TODO: B: Check if navigation stack is correct
                     }
 

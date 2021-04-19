@@ -167,9 +167,16 @@ namespace SmokeFree.ViewModels.Test
                         this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
 
                         // Check if is smoking
+                        // TODO: A: Check if InitiateAsync is called more then once
+                        // If is not -> Remove this check
                         if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
                         {
                             this.IsSmoking = true;
+                        }
+                        else
+                        {
+                            // TODO: A if not smoking and TimeSenceLastSmoke > default 
+                            // TODO: A: Increment TimeSenceLastSmoke try timer
                         }
 
                         // Start Device Cound Down for Test Left Time
@@ -352,6 +359,7 @@ namespace SmokeFree.ViewModels.Test
             {
                 // Stop Testing Timer
                 //StopTestingTimer();
+                // TODO: A: StopTestingTimer
 
                 await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
             }
@@ -441,6 +449,8 @@ namespace SmokeFree.ViewModels.Test
 
                             // Start Smoking Timer
                             StartSmokingTimer();
+
+                            // TODO: A: STOP TimeSenceLastSmoke timer
 
                         }
                         else
@@ -815,6 +825,8 @@ namespace SmokeFree.ViewModels.Test
                             // Calculate time sence previous smoke
                             this.TimeSenceLastSmoke = this._testCalculationService
                                 .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
+
+                            // TODO: A: Increment TimeSenceLastSmoke try timer
 
                             // Update Db
                             this._realm.Write(() =>
