@@ -3,7 +3,6 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Bootstrap;
 using SmokeFree.Data.Models;
 using SmokeFree.Resx;
-using System;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;

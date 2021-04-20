@@ -36,6 +36,11 @@ namespace SmokeFree.ViewModels.Test
         public CancellationTokenSource stopSmokingTimerCancellation;
 
         /// <summary>
+        /// TimeSenceLastSmoke Timer Cancelation Token
+        /// </summary>
+        public CancellationTokenSource stopTimeSenceLastSmokeTimerCancellation;
+
+        /// <summary>
         /// Curent Smoked Count
         /// </summary>
         private int _currentlySmokedCount;
@@ -119,6 +124,9 @@ namespace SmokeFree.ViewModels.Test
 
             // Smoking Timer Cancelation Token
             this.stopSmokingTimerCancellation = new CancellationTokenSource();
+
+            // TimeSenceLastSmoke Timer Cancelation Token
+            this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
         }
 
         #endregion
@@ -127,6 +135,7 @@ namespace SmokeFree.ViewModels.Test
 
         /// <summary>
         /// Initialize View State
+        /// Called Initialy and if app is re-oppend
         /// </summary>
         /// <param name="parameter">Optional</param>
         /// <returns>Base Initialize Async</returns>
@@ -158,7 +167,10 @@ namespace SmokeFree.ViewModels.Test
 
                         // Assignm properties
                         this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
-                        this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
+
+                        //this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
+                  
+
                         this.TestLeftTime = testCalculation.TestTimeLeft;
 
                         // Set value of currently smoked or string.Empty 
@@ -167,19 +179,28 @@ namespace SmokeFree.ViewModels.Test
                         this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
 
                         // Check if is smoking
-                        // TODO: A: Check if InitiateAsync is called more then once
-                        // If is not -> Remove this check
                         if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
                         {
                             this.IsSmoking = true;
+
+                            StartSmokingTimer();
                         }
                         else
                         {
-                            // TODO: A if not smoking and TimeSenceLastSmoke > default 
-                            // TODO: A: Increment TimeSenceLastSmoke try timer
+                            // View is called with un-finished smoke -> add to TimeSenceLastSmoke
+                            if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
+                            {
+                                this.TimeSenceLastSmoke = this._testCalculationService
+                                    .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
+
+                                StartTimeSenceLastSmokeTimer();
+                            }
+                            
                         }
 
                         // Start Device Cound Down for Test Left Time
+
+                        // TODO: A: ATTENTION In fot the end of testing
                         StartTestintTimer();
                     }
                     else
@@ -209,6 +230,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Initate Notification For Test COmpletition
         /// </summary>
+        // TODO: A: TRIGER THIS BY MESSAGE CENTER
         private async Task InitiateTestCompletitionNotificationEvent()
         {
             try
@@ -319,8 +341,9 @@ namespace SmokeFree.ViewModels.Test
 
                         // Stop Testing Timer
                         StopTestingTimer();
-
-                        // TODO: A: Stop any other timer
+                        StopTimeSenceLastSmokeTimer();
+                        StopSmokingTimer();
+                        // TODO: - A: Stop any other timer
                         // TODO: A: Stop Notification
 
                         // Navigate to Create Test
@@ -357,10 +380,6 @@ namespace SmokeFree.ViewModels.Test
         {
             try
             {
-                // Stop Testing Timer
-                //StopTestingTimer();
-                // TODO: A: StopTestingTimer
-
                 await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
             }
             catch (Exception ex)
@@ -450,8 +469,7 @@ namespace SmokeFree.ViewModels.Test
                             // Start Smoking Timer
                             StartSmokingTimer();
 
-                            // TODO: A: STOP TimeSenceLastSmoke timer
-
+                            StopTimeSenceLastSmokeTimer();
                         }
                         else
                         {
@@ -478,6 +496,8 @@ namespace SmokeFree.ViewModels.Test
                 await base.InternalErrorMessageToUser();
             }
         }
+
+      
 
         /// <summary>
         /// Mark One Smoked
@@ -513,6 +533,21 @@ namespace SmokeFree.ViewModels.Test
         /// <param name="title">Notification Title</param>
         /// <param name="message">Notification Message</param>
         private void ShowNotification(string title, string message) { }
+
+        /// <summary>
+        /// Increment TimeSenceLastSmoke
+        /// </summary>
+        private void StartTimeSenceLastSmokeTimer()
+        {
+            _deviceTimer
+                .Start(() =>
+                {
+                    this.TimeSenceLastSmoke += TimeSpan.FromSeconds(1);
+
+                    return true;
+
+                }, this.stopTimeSenceLastSmokeTimerCancellation);
+        }
 
         /// <summary>
         /// Starts Testing Time
@@ -823,10 +858,11 @@ namespace SmokeFree.ViewModels.Test
                             var currentCountSmokes = currentTest.SmokedCigaresUnderTest.Count;
 
                             // Calculate time sence previous smoke
-                            this.TimeSenceLastSmoke = this._testCalculationService
-                                .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
+                            //this.TimeSenceLastSmoke = this._testCalculationService
+                            //    .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
 
-                            // TODO: A: Increment TimeSenceLastSmoke try timer
+                            this.TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
+
 
                             // Update Db
                             this._realm.Write(() =>
@@ -840,6 +876,7 @@ namespace SmokeFree.ViewModels.Test
 
                             this.CurrentlySmokedCount = currentCountSmokes;
 
+                            StartTimeSenceLastSmokeTimer();
                             // Stop Timer
                             StopSmokingTimer();
                         }
@@ -875,6 +912,15 @@ namespace SmokeFree.ViewModels.Test
             }
         }
 
+        /// <summary>
+        /// Stops TimeSenceLastSmoke
+        /// </summary>
+        private void StopTimeSenceLastSmokeTimer()
+        {
+            _deviceTimer.Stop(this.stopTimeSenceLastSmokeTimerCancellation);
+
+            this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
+        }
 
         /// <summary>
         /// Stops Testing Timer

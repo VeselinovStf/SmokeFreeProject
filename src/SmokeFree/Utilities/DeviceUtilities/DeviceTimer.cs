@@ -32,6 +32,26 @@ namespace SmokeFree.Utilities.DeviceUtilities
         }
 
         /// <summary>
+        /// Async Start Timer
+        /// </summary>
+        /// <param name="func">Function to execute. Return false to stop timer</param>
+        /// <param name="cts">Cancelation Token Source. Manages Stop Method</param>
+        public void Start(Func<bool> p, CancellationTokenSource cts)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                if (cts.IsCancellationRequested)
+                {
+
+                    return false;
+                }
+
+                return p.Invoke();
+
+            });
+        }
+
+        /// <summary>
         /// Stop Timer
         /// </summary>
         /// <param name="cts">Cancelation Token Source. Stops timer with same instance of cts</param>
