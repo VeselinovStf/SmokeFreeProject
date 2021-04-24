@@ -10,11 +10,13 @@ using SmokeFree.Models.Managers.NotificationManager;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
+using SmokeFree.Views.Test;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Forms;
 
 namespace SmokeFree.ViewModels.Test
 {
@@ -26,39 +28,24 @@ namespace SmokeFree.ViewModels.Test
         #region FIELDS
 
         /// <summary>
-        /// Stop Testing Timer Cancelation Token
-        /// </summary>
-        public CancellationTokenSource stopTestingTimerCancellation;
-
-        /// <summary>
-        /// Smoking Timer Cancelation Token
-        /// </summary>
-        public CancellationTokenSource stopSmokingTimerCancellation;
-
-        /// <summary>
-        /// TimeSenceLastSmoke Timer Cancelation Token
-        /// </summary>
-        public CancellationTokenSource stopTimeSenceLastSmokeTimerCancellation;
-
-        /// <summary>
         /// Curent Smoked Count
         /// </summary>
-        private int _currentlySmokedCount;
+        //private int _currentlySmokedCount;
 
         /// <summary>
         /// Timer From last Smoked
         /// </summary>
-        private TimeSpan _timeSenceLastSmoke;
+        //private TimeSpan _timeSenceLastSmoke;
 
         /// <summary>
         /// Test Left Time Indicator
         /// </summary>
-        private TimeSpan _testLeftTime;
+        //private TimeSpan _testLeftTime;
 
         /// <summary>
         /// Smoking State
         /// </summary>
-        private bool _isSmoking;
+        //private bool _isSmoking;
 
         /// <summary>
         /// Current Smoke Id
@@ -68,7 +55,7 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Time Display
         /// </summary>
-        private TimeSpan _currentSmokeTime;
+        //private TimeSpan _currentSmokeTime;
 
         /// <summary>
         /// Database
@@ -119,14 +106,10 @@ namespace SmokeFree.ViewModels.Test
             // Device Timer
             _deviceTimer = deviceTimer;
 
-            // Stop Testing Timer Cancelation Token
-            this.stopTestingTimerCancellation = new CancellationTokenSource();
+           
 
-            // Smoking Timer Cancelation Token
-            this.stopSmokingTimerCancellation = new CancellationTokenSource();
-
-            // TimeSenceLastSmoke Timer Cancelation Token
-            this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
+            MessagingCenter.Subscribe<UnderTestView>(this, "TestCompleted", model => MarkTestCompleted());
+            MessagingCenter.Subscribe<UnderTestView>(this, "DelaySmoke", model => SmokeDelayedSmoke());
         }
 
         #endregion
@@ -166,42 +149,42 @@ namespace SmokeFree.ViewModels.Test
                             .GetCurrentTestDataCalculation(_dateTime.Now(), currentTest);
 
                         // Assignm properties
-                        this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
+                        //this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
 
                         //this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
                   
 
-                        this.TestLeftTime = testCalculation.TestTimeLeft;
+                        //this.TestLeftTime = testCalculation.TestTimeLeft;
 
                         // Set value of currently smoked or string.Empty 
                         // if user is smoking for first time
                         this.CurrentSmokeId = testCalculation.CurrentSmokeId;
-                        this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
+                        //this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
 
                         // Check if is smoking
-                        if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
-                        {
-                            this.IsSmoking = true;
+                        //if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
+                        //{
+                        //    //this.IsSmoking = true;
 
-                            StartSmokingTimer();
-                        }
-                        else
-                        {
-                            // View is called with un-finished smoke -> add to TimeSenceLastSmoke
-                            if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
-                            {
-                                this.TimeSenceLastSmoke = this._testCalculationService
-                                    .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
+                        //    //StartSmokingTimer();
+                        //}
+                        //else
+                        //{
+                        //    // View is called with un-finished smoke -> add to TimeSenceLastSmoke
+                        //    if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
+                        //    {
+                        //        this.TimeSenceLastSmoke = this._testCalculationService
+                        //            .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
 
-                                StartTimeSenceLastSmokeTimer();
-                            }
+                        //        StartTimeSenceLastSmokeTimer();
+                        //    }
                             
-                        }
+                        //}
 
-                        // Start Device Cound Down for Test Left Time
+                        //// Start Device Cound Down for Test Left Time
 
-                        // TODO: A: ATTENTION In fot the end of testing
-                        StartTestintTimer();
+                        //// TODO: A: ATTENTION In fot the end of testing
+                        //StartTestintTimer();
                     }
                     else
                     {
@@ -339,11 +322,6 @@ namespace SmokeFree.ViewModels.Test
                             user.TestId = string.Empty;
                         });
 
-                        // Stop Testing Timer
-                        StopTestingTimer();
-                        StopTimeSenceLastSmokeTimer();
-                        StopSmokingTimer();
-                        // TODO: - A: Stop any other timer
                         // TODO: A: Stop Notification
 
                         // Navigate to Create Test
@@ -463,13 +441,8 @@ namespace SmokeFree.ViewModels.Test
 
                             // Setup VM Props
                             this.CurrentSmokeId = newSmoke.Id;
-                            this.IsSmoking = true;
-                            this.CurrentSmokeTime = new TimeSpan(0, 0, 0);
-
-                            // Start Smoking Timer
-                            StartSmokingTimer();
-
-                            StopTimeSenceLastSmokeTimer();
+                            //this.IsSmoking = true;
+                            //this.CurrentSmokeTime = new TimeSpan(0, 0, 0);
                         }
                         else
                         {
@@ -537,84 +510,117 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Increment TimeSenceLastSmoke
         /// </summary>
-        private void StartTimeSenceLastSmokeTimer()
-        {
-            _deviceTimer
-                .Start(() =>
-                {
-                    this.TimeSenceLastSmoke += TimeSpan.FromSeconds(1);
+        //private void StartTimeSenceLastSmokeTimer()
+        //{
+        //    //_deviceTimer
+        //    //    .Start(() =>
+        //    //    {
+        //    //        this.TimeSenceLastSmoke += TimeSpan.FromSeconds(1);
 
-                    return true;
+        //    //        return true;
 
-                }, this.stopTimeSenceLastSmokeTimerCancellation);
-        }
+        //    //    }, this.stopTimeSenceLastSmokeTimerCancellation);
+        //}
 
         /// <summary>
         /// Starts Testing Time
         /// </summary>
-        private void StartTestintTimer()
+        //private void StartTestintTimer()
+        //{
+        //    //_deviceTimer
+        //    //    .Start(async () =>
+        //    //    {
+        //    //        Device.BeginInvokeOnMainThread(() =>
+        //    //        {
+        //    //            this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
+        //    //        });
+
+        //    //        if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
+        //    //        {
+        //    //            // TODO: C: Add loader to view
+        //    //            base.IsBusy = true;
+
+        //    //            // Execute Function for stop testing
+        //    //            await MarkTestCompletedAsync();
+        //    //            await CreateTestResultAsync();
+        //    //            await SendNotificationAsync(
+        //    //                AppResources.UnderTestViewModelCompleteTestMessage,
+        //    //                AppResources.UnderTestViewModelCompleteTestNotificationMessage
+        //    //                );
+
+        //    //            StopTestingTimer();
+
+        //    //            base.IsBusy = false;
+
+        //    //            await NavigateToTestResults();
+
+        //    //            return false;
+        //    //        }
+
+        //    //        return true;
+
+        //    //    }, this.stopTestingTimerCancellation);
+        //}
+
+        private async Task MarkTestCompleted()
         {
-            _deviceTimer
-                .Start(async () =>
-                {
-                    this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
 
-                    if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
-                    {
-                        // TODO: C: Add loader to view
-                        base.IsBusy = true;
+            // Execute Function for stop testing
+            await MarkTestCompletedAsync();
+            await CreateTestResultAsync();
+            await SendNotificationAsync(
+                AppResources.UnderTestViewModelCompleteTestMessage,
+                AppResources.UnderTestViewModelCompleteTestNotificationMessage
+                );
 
-                        // Execute Function for stop testing
-                        await MarkTestCompletedAsync();
-                        await CreateTestResultAsync();
-                        await SendNotificationAsync(
-                            AppResources.UnderTestViewModelCompleteTestMessage,
-                            AppResources.UnderTestViewModelCompleteTestNotificationMessage
-                            );
-
-                        StopTestingTimer();
-
-                        base.IsBusy = false;
-
-                        await NavigateToTestResults();
-
-                        return false;
-                    }
-
-                    return true;
-
-                }, this.stopTestingTimerCancellation);
         }
 
-        /// <summary>
-        /// Starts Smoking Timer for each new smoke
-        /// </summary>
-        private void StartSmokingTimer()
+        ///// <summary>
+        ///// Starts Smoking Timer for each new smoke
+        ///// </summary>
+        //private void StartSmokingTimer()
+        //{
+        //    //_deviceTimer
+        //    //    .Start(async () =>
+        //    //    {
+        //    //        Device.BeginInvokeOnMainThread(() =>
+        //    //        {
+        //    //            this.CurrentSmokeTime += TimeSpan.FromSeconds(1);
+        //    //        });
+
+        //    //        if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
+        //    //        {
+        //    //            // TODO: C: Add loader to view
+        //    //            base.IsBusy = true;
+
+        //    //            await SendNotificationAsync(
+        //    //                AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
+        //    //                AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage);
+        //    //            await MarkSmokedAfterDelayLimitAsync();
+
+        //    //            base.IsBusy = false;
+
+        //    //            return false;
+        //    //        }
+
+        //    //        return true;
+
+        //    //    }, this.stopSmokingTimerCancellation);
+        //}
+
+
+        private async Task SmokeDelayedSmoke()
         {
-            _deviceTimer
-                .Start(async () =>
-                {
-                    this.CurrentSmokeTime += TimeSpan.FromSeconds(1);
+            base.IsBusy = true;
 
-                    if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
-                    {
-                        // TODO: C: Add loader to view
-                        base.IsBusy = true;
+            await SendNotificationAsync(
+                AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
+                AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage);
+            await MarkSmokedAfterDelayLimitAsync();
 
-                        await SendNotificationAsync(
-                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
-                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage);
-                        await MarkSmokedAfterDelayLimitAsync();
-
-                        base.IsBusy = false;
-
-                        return false;
-                    }
-
-                    return true;
-
-                }, this.stopSmokingTimerCancellation);
+            base.IsBusy = false;
         }
+
 
         /// <summary>
         /// Create Current Test Results
@@ -857,13 +863,6 @@ namespace SmokeFree.ViewModels.Test
                             // Current count
                             var currentCountSmokes = currentTest.SmokedCigaresUnderTest.Count;
 
-                            // Calculate time sence previous smoke
-                            //this.TimeSenceLastSmoke = this._testCalculationService
-                            //    .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
-
-                            this.TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
-
-
                             // Update Db
                             this._realm.Write(() =>
                             {
@@ -872,13 +871,9 @@ namespace SmokeFree.ViewModels.Test
                             });
 
                             // Set it not smoking
-                            this.IsSmoking = false;
+                            //this.IsSmoking = false;
 
-                            this.CurrentlySmokedCount = currentCountSmokes;
-
-                            StartTimeSenceLastSmokeTimer();
-                            // Stop Timer
-                            StopSmokingTimer();
+                            //this.CurrentlySmokedCount = currentCountSmokes;
                         }
                         else
                         {
@@ -912,34 +907,6 @@ namespace SmokeFree.ViewModels.Test
             }
         }
 
-        /// <summary>
-        /// Stops TimeSenceLastSmoke
-        /// </summary>
-        private void StopTimeSenceLastSmokeTimer()
-        {
-            _deviceTimer.Stop(this.stopTimeSenceLastSmokeTimerCancellation);
-
-            this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
-        }
-
-        /// <summary>
-        /// Stops Testing Timer
-        /// </summary>
-        private void StopTestingTimer()
-        {
-            _deviceTimer.Stop(this.stopTestingTimerCancellation);            
-        }
-
-        /// <summary>
-        /// Stops Smoking Timer
-        /// </summary>
-        public void StopSmokingTimer()
-        {
-            _deviceTimer.Stop(this.stopSmokingTimerCancellation);
-
-            this.stopSmokingTimerCancellation = new CancellationTokenSource();
-        }
-
         #endregion
 
         #region PROPS
@@ -947,15 +914,15 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Curent Smoked Count
         /// </summary>
-        public int CurrentlySmokedCount
-        {
-            get { return _currentlySmokedCount; }
-            set
-            {
-                _currentlySmokedCount = value;
-                OnPropertyChanged();
-            }
-        }
+        //public int CurrentlySmokedCount
+        //{
+        //    get { return _currentlySmokedCount; }
+        //    set
+        //    {
+        //        _currentlySmokedCount = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         /// <summary>
         /// Current Smoke Id
@@ -973,56 +940,56 @@ namespace SmokeFree.ViewModels.Test
         /// <summary>
         /// Current Smoke Time Display
         /// </summary>
-        public TimeSpan CurrentSmokeTime
-        {
-            get { return _currentSmokeTime; }
-            set
-            {
-                _currentSmokeTime = value;
-                OnPropertyChanged();
-            }
-        }
+        //public TimeSpan CurrentSmokeTime
+        //{
+        //    get { return _currentSmokeTime; }
+        //    set
+        //    {
+        //        _currentSmokeTime = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
 
         /// <summary>
         /// Timer From last Smoked
         /// </summary>
-        public TimeSpan TimeSenceLastSmoke
-        {
-            get { return _timeSenceLastSmoke; }
-            set
-            {
-                _timeSenceLastSmoke = value;
-                OnPropertyChanged();
-            }
-        }
+        //public TimeSpan TimeSenceLastSmoke
+        //{
+        //    get { return _timeSenceLastSmoke; }
+        //    set
+        //    {
+        //        _timeSenceLastSmoke = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         /// <summary>
         /// Test Left Time Indicator
         /// </summary>
-        public TimeSpan TestLeftTime
-        {
-            get { return _testLeftTime; }
-            set
-            {
-                _testLeftTime = value;
-                OnPropertyChanged();
-            }
-        }
+        //public TimeSpan TestLeftTime
+        //{
+        //    get { return _testLeftTime; }
+        //    set
+        //    {
+        //        _testLeftTime = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         /// <summary>
         /// Smoking State
         /// </summary>
-        public bool IsSmoking
-        {
-            get { return _isSmoking; }
-            set
-            {
+        //public bool IsSmoking
+        //{
+        //    get { return _isSmoking; }
+        //    set
+        //    {
 
-                _isSmoking = value;
-                OnPropertyChanged();
-            }
-        }
+        //        _isSmoking = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         #endregion
     }

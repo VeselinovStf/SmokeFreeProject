@@ -18,7 +18,7 @@ namespace SmokeFree
 
             // TODO: AA: Remove in Release
 #if DEBUG
-            DevelopmentDatabaseClearing();
+            //DevelopmentDatabaseClearing();
 #endif
 
             InitializeComponent();
@@ -66,10 +66,16 @@ namespace SmokeFree
 
         protected override void OnSleep()
         {
+           //MessagingCenter.Send(this, "StopDeviceOpperations");
         }
 
         protected override void OnResume()
         {
+            //MessagingCenter.Send(this, "StopDeviceOpperations");
+
+            //var navigationService = AppContainer.Resolve<INavigationService>();
+            // navigationService.InitializeAsync();
+
         }
     }
 }

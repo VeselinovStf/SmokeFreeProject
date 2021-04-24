@@ -113,11 +113,12 @@ namespace SmokeFree.Services.Data.Test
         public CurrentTestDataCalculationDTO GetCurrentTestDataCalculation(DateTime time, SmokeFree.Data.Models.Test test)
         {
             // Default Values
-            var currentSmokeId = string.Empty;
+            var currentSmokeId = string.Empty; 
             TimeSpan currentSmokeTime = new TimeSpan(0, 0, 0);
             TimeSpan timeSinceLastSmoke = new TimeSpan(0, 0, 0);
             TimeSpan testTimeLeft = new TimeSpan(0, 0, 0);
             var totalSmoked = 0;
+            var isSmoking = false;
 
             var smokedCigaresUnderTest = new List<Smoke>();
 
@@ -127,7 +128,7 @@ namespace SmokeFree.Services.Data.Test
             // Calculate test time left
             if (!test.TestEndDate.Equals(defaultTimeOffset))
             {
-                testTimeLeft = test.TestEndDate.DateTime.Subtract(time);
+                testTimeLeft = test.TestEndDate.LocalDateTime.Subtract(time);
             }
 
             if (test.SmokedCigaresUnderTest != null)
@@ -158,6 +159,10 @@ namespace SmokeFree.Services.Data.Test
                         // Calculate total smokes
                         totalSmoked = smokedCigaresUnderTest.Count;
                     }
+                    else
+                    {
+                        isSmoking = true;
+                    }
 
                     // Calculate Time Since Last Smoke
                     var lastSmokeTime = smokedCigaresUnderTest
@@ -167,7 +172,7 @@ namespace SmokeFree.Services.Data.Test
 
                     if (!lastSmokeTime.Equals(defaultTimeOffset))
                     {
-                        timeSinceLastSmoke = time.Subtract(lastSmokeTime.DateTime);
+                        timeSinceLastSmoke = time.Subtract(lastSmokeTime.LocalDateTime);
                     }
 
                     // Calculate last smoked time
@@ -178,13 +183,13 @@ namespace SmokeFree.Services.Data.Test
                     if (lastSmoke != null)
                     {
                         currentSmokeId = lastSmoke.Id;
-                        currentSmokeTime = time.Subtract(lastSmoke.StartSmokeTime.DateTime);
+                        currentSmokeTime = time.Subtract(lastSmoke.StartSmokeTime.LocalDateTime);
                     }
                 }
             }
 
             // Return DTO Model 
-            return new CurrentTestDataCalculationDTO(totalSmoked, timeSinceLastSmoke, testTimeLeft, currentSmokeId, currentSmokeTime);
+            return new CurrentTestDataCalculationDTO(totalSmoked, timeSinceLastSmoke, testTimeLeft, currentSmokeId, currentSmokeTime,isSmoking);
         }
 
         /// <summary>
