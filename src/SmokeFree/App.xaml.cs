@@ -3,6 +3,7 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Bootstrap;
 using SmokeFree.Data.Models;
 using SmokeFree.Resx;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
@@ -29,7 +30,7 @@ namespace SmokeFree
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
 
             // TODO: C: Change from settings in the future and initiate current culture
-            LocalizationResourceManager.Current.CurrentCulture = new System.Globalization.CultureInfo("uk");   
+            LocalizationResourceManager.Current.CurrentCulture = CultureInfo.CurrentCulture;
 
             InitializeNavigation();
         }

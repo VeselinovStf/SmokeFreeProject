@@ -237,10 +237,89 @@
                                     IsToggled="{Binding NotificationSwitch}"
                                    />
                                 <!-- /END/ START STOP NOTIFICATIONS -->
+                                
 
                             </Grid>
                         </ViewCell>
                         <!-- NOTIFICATIONS -->
+
+
+                        <!-- LANGUAGE APP -->
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                              
+                            <Picker x:Name="picker"
+                            Title="Language"
+                            TitleColor="{StaticResource Gray-300}"
+                            HorizontalTextAlignment="Center"
+                            FontSize="30"
+                            ItemsSource="{Binding Languages}"
+                            ItemDisplayBinding="{Binding DisplayText}"
+                            SelectedItem="{Binding SelectedTLanguageItem}"
+                           />
+                                </Grid>
+                        </ViewCell>
+                        <!-- LANGUAGE -->
+                        
+                        <!-- RESTART APP -->
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- RESTART APP ICON -->
+                                <Label            
+                                     Margin="10,10,0,10"
+                                     Text="&#xe743;"
+                                     FontFamily="{StaticResource FontIcons}"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="Start"
+                                     VerticalTextAlignment="Center"
+                                     TextColor="{StaticResource Gray-600}"
+                                     FontSize="30"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                    />
+                                <!-- /END/ RESTART APP ICON -->
+
+                                <!-- RESTART APP TEXT -->
+                                <Label Text="Restart Application"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="10,10,0,10"                                      
+                                       FontFamily="{StaticResource  Montserrat-Bold}"
+                                       TextColor="{StaticResource Gray-700}" />
+                                <!-- /END/ RESTART APP TEXT -->
+
+                                <!--  RESTART APP -->
+                               
+                                <Button
+                                    Text="&#xe71A;"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource FontIcons}"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    TextColor="{StaticResource Gray-700}"
+                                    FontSize="20"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    Command="{Binding RestartAppCommand}"
+                                   />
+                         
+                                <!-- /END/  RESTART APP -->
+
+
+                            </Grid>
+                        </ViewCell>
+                        <!-- RESTART -->
 
                     </TableSection>
                     <!-- /END/ APPLICATION SECTION -->

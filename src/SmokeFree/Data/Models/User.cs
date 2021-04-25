@@ -10,6 +10,7 @@ namespace SmokeFree.Data.Models
         [MapTo("_id")]
         public int Id { get; set; }
 
+        public string Localozation { get; set; }
         /// <summary>
         /// Default Application Color Theme Skin
         /// </summary>

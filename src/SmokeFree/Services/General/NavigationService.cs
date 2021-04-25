@@ -15,6 +15,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.Forms;
 
 namespace SmokeFree.Services.General
@@ -49,6 +50,8 @@ namespace SmokeFree.Services.General
                 {
                     return NavigateToAsync<OnBoardingViewModel>();
                 }
+
+                LocalizationResourceManager.Current.CurrentCulture = new CultureInfo(user.Localozation);
 
                 var userState = UserStateConverter.ToUserState(user.UserState);
 

@@ -3,11 +3,16 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.Models.Views.AppSetting;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
+using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.CommunityToolkit.ObjectModel;
 
 namespace SmokeFree.ViewModels.AppSettings
@@ -18,11 +23,18 @@ namespace SmokeFree.ViewModels.AppSettings
     public class AppSettingsViewModel : ViewModelBase
     {
         #region FIELDS
+      
+
+        /// <summary>
+        /// Test Time Duration Collection
+        /// </summary>
+        private ObservableCollection<LanguageItem> _languages;
 
         /// <summary>
         /// Switch notifications on/ off
         /// </summary>
         private bool _notificationSwitch;
+        private LanguageItem _selectedTLanguageItem;
 
         /// <summary>
         /// Database
@@ -50,6 +62,10 @@ namespace SmokeFree.ViewModels.AppSettings
 
             // Database
             _realm = realm;
+
+            _languages = new ObservableCollection<LanguageItem>();
+
+            InitiateTestTimeDurations();
         }
 
         #endregion
@@ -88,6 +104,33 @@ namespace SmokeFree.ViewModels.AppSettings
             }
         }
 
+        /// <summary>
+        /// Initialize Test Time Durations Collection
+        /// </summary>
+        private void InitiateTestTimeDurations()
+        {
+            this.Languages.Clear();
+
+            var languages = new List<LanguageItem>()
+            {
+                new LanguageItem()
+                {
+                     Value = 2,
+                     DisplayText =  "Bulgarian"
+                },
+                new LanguageItem()
+                {
+                     Value = 1,
+                     DisplayText =  "English"
+                }
+            };
+
+            foreach (var language in languages)
+            {
+                this.Languages.Add(language);
+            }
+        }
+
         #endregion
 
         #region COMMANDS
@@ -103,6 +146,42 @@ namespace SmokeFree.ViewModels.AppSettings
         private async Task NavigateBack()
         {
             await base._navigationService.BackToPreviousAsync();
+        }
+
+        /// <summary>
+        /// Restart Application State
+        /// </summary>
+        public IAsyncCommand RestartAppCommand => new AsyncCommand(
+            ExecuteRestartApp,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteRestartApp()
+        {
+            // Check if user is shore
+            var userNotification = await base._dialogService
+                 .ConfirmAsync(
+                    "This acction is going to delete all save data!",
+                    "Attention",
+                    "Ok",
+                    "Cancel"
+                 );
+
+            if (userNotification)
+            {
+                _realm.Write(() =>
+                {
+                    _realm.RemoveAll<User>();
+                    _realm.RemoveAll<Data.Models.Test>();
+                    _realm.RemoveAll<Data.Models.Challenge>();
+                    _realm.RemoveAll<TestResult>();
+                    _realm.RemoveAll<Smoke>();
+                    _realm.RemoveAll<DayChallengeSmoke>();
+                });
+
+                await base._navigationService.InitializeAsync();
+            }
+           
         }
 
         /// <summary>
@@ -174,7 +253,43 @@ namespace SmokeFree.ViewModels.AppSettings
             }
         }
 
+        /// <summary>
+        /// Test Time Duration for Picker
+        /// </summary>
+        public ObservableCollection<LanguageItem> Languages
+        {
+            get { return _languages; }
+            set
+            {
+                if (value != null)
+                {
+                    _languages = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Selected Test Time Duration Item
+        /// </summary>
+        public LanguageItem SelectedTLanguageItem
+        {
+            get { return _selectedTLanguageItem; }
+            set
+            {
+                if (value != null)
+                {
+                    _selectedTLanguageItem = value;
+
+                    //TODO: A1 Change language
+                    LocalizationResourceManager.Current.CurrentCulture = value == null ? CultureInfo.CurrentCulture : new CultureInfo(value.Value);
+
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         #endregion
-        
+
     }
 }

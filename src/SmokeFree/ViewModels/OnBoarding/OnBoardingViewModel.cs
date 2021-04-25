@@ -10,6 +10,7 @@ using SmokeFree.ViewModels.Test;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -96,7 +97,8 @@ namespace SmokeFree.ViewModels.OnBoarding
                     {
                         Id = globalUserId,
                         CreatedOn = base._dateTime.Now(),
-                        UserState = UserStates.Initial.ToString()
+                        UserState = UserStates.Initial.ToString(),
+                        Localozation = CultureInfo.CurrentCulture.Name
                     };
 
                     // Execute Write Transaction

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SmokeFree
 {
@@ -7,6 +8,7 @@ namespace SmokeFree
     /// </summary>
     public static class Globals
     {
+
         /// <summary>
         /// App Hex Color Themes Set
         /// </summary>
