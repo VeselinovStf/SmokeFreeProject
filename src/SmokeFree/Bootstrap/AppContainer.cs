@@ -37,7 +37,7 @@ namespace SmokeFree.Bootstrap
             // Database
             var realmConfiguration = new RealmConfiguration
             {
-                SchemaVersion = 2
+                SchemaVersion = 3
             };
 
             _builder.Register(c => Realm.GetInstance(realmConfiguration)).InstancePerDependency();

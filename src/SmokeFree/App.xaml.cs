@@ -18,7 +18,7 @@ namespace SmokeFree
 
             // TODO: AA: Remove in Release
 #if DEBUG
-            //DevelopmentDatabaseClearing();
+            DevelopmentDatabaseClearing();
 #endif
 
             InitializeComponent();

@@ -22,8 +22,7 @@
                     <Button                   
                         Text="&#xe724;"
                         FontFamily="{StaticResource FontIcons}"
-                       
-                        Clicked="Stop_Test_Clicked"
+                        Command="{Binding OnStopTestingCommand}"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Gray-100}"
                         FontSize="20"
@@ -69,9 +68,8 @@
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
-                        <Label     
-                            x:Name="SmokeCount"
-                                         
+                        <Label                       
+                            Text="{Binding CurrentlySmokedCount}"                
                             HorizontalTextAlignment="Center"
                             FontSize="25"
                             TextColor="{StaticResource Gray-100}"
@@ -84,7 +82,7 @@
                     <StackLayout Grid.Column="2">
 
                         <Label 
-                           
+                             IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="LastSmokeDateTimeDisplayLabel"
                             Text="Last Time" 
                             FontSize="25"
@@ -93,25 +91,26 @@
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
                         <Label 
-                           
-                            x:Name="SmokeDateTimeDisplayAtSmokeLabel" 
-                            Text="Smoke Sence"
+                             IsVisible="{Binding IsSmoking}"
+                            Text="Smoke Sence" 
                             FontSize="25"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
                         <Label 
-                           
-                            x:Name="LastSmokeDateTimeDisplayDateTime"                           
-                            HorizontalTextAlignment="Center"
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="LastSmokeDateTimeDisplayDateTime"
+                            Text="{Binding TimeSenceLastSmoke, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
+                             HorizontalTextAlignment="Center"
                             FontSize="25"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
                         <Label 
-                          
-                            x:Name="SmokeDateTimeDisplayAtSmokeDateTime"                           
+                            IsVisible="{Binding IsSmoking}"
+                            x:Name="LastSmokeDateTimeDisplayAtSmokeDateTime"
+                            Text="{Binding CurrentSmokeTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
                              HorizontalTextAlignment="Center"
                             FontSize="25"
                             TextColor="{StaticResource Gray-100}"
@@ -146,11 +145,10 @@
 
                         <!-- Start Smoking BUTTON -->
                         <Button 
-                         
-                            x:Name="StartSmoking"   
-                            Clicked="Start_Smoking_Clicked"
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="StartSmoking"                           
                             Text="Start Smoking" 
-                           
+                            Command="{Binding StartSmokingCommand}"
                             CommandParameter="{StaticResource TrueValue}"
                             FontSize="20"
                             FontAttributes="Bold"                           
@@ -160,11 +158,10 @@
 
                         <!-- Mark One Smoked BUTTON -->
                         <Button 
-                           
+                            IsVisible="{Binding IsSmoking}"
                             x:Name="MarkOneSmoked"
                             Text="Mark One Smoked" 
-                            
-                            Clicked="Mark_One__Smoke_Clicked"
+                            Command="{Binding MarkOneSmokedCommand}"
                             CommandParameter="{StaticResource FalseValue}"
                             BackgroundColor="{StaticResource Gray-100}"
                             FontSize="20"
@@ -187,7 +184,7 @@
 
                         <Label       
                             x:Name="Timer"
-                               
+                            Text="{Binding TestLeftTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}"                
                             HorizontalTextAlignment="Center"
                             FontSize="20"
                             VerticalOptions="End"

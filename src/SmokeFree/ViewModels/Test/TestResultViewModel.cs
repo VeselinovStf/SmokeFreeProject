@@ -81,6 +81,8 @@ namespace SmokeFree.ViewModels.Test
                         if (testResult != null)
                         {
                             this.TestResult = testResult;
+
+
                         }
                         else
                         {
@@ -200,7 +202,7 @@ namespace SmokeFree.ViewModels.Test
                             user.UserState = UserStates.CompletedOnBoarding.ToString();
                             user.TestId = string.Empty;
                         });
-                    
+
                         await this._navigationService.NavigateToAsync<CreateTestViewModel>();
                         //TODO: B: Clear navigation stack
 

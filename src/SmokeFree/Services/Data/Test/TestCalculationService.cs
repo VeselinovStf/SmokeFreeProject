@@ -32,29 +32,32 @@ namespace SmokeFree.Services.Data.Test
 
                 var newTestResults = new TestResult();
 
-                newTestResults.TotalTestTime = new DateTimeOffset(
-                    new DateTime() + test.TestEndDate.DateTime.Subtract(test.TestStartDate.DateTime));
+               
+                var testEndDate = test.TestEndDate.LocalDateTime;
+                var testStartDate = test.TestStartDate.LocalDateTime;
+
+                newTestResults.TotalTestTimeSeconds = testEndDate.Subtract(testStartDate).TotalSeconds;
 
                 newTestResults.TestId = test.Id;
-                newTestResults.TestStartDate = test.TestStartDate;
-                newTestResults.EndStartDate = test.TestEndDate;
+                newTestResults.TestStartDate = test.TestStartDate.LocalDateTime;
+                newTestResults.EndStartDate = test.TestEndDate.LocalDateTime;
                 newTestResults.TotalSmokedCigars = testSmokes.Count();
 
                 // Per day calculation
                 var avaragePerDay = testSmokes
                     .GroupBy(
-                        smoke => smoke.StartSmokeTime.Day,
+                        smoke => smoke.StartSmokeTime.LocalDateTime.Day,
                         (day, smokes) => new
                         {
                             SmokedForDay = smokes.Count(),
                             DaySmokeTimeMinutes =
                                 smokes.Select(
-                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime)
+                                    e => e.EndSmokeTime.LocalDateTime.Subtract(e.StartSmokeTime.LocalDateTime)
                                     ).ToList().Sum(e => e.TotalMinutes),
-                            DayNotSmokingTime = smokes.Max(e => e.EndSmokeTime)
-                                .Subtract(smokes.Min(e => e.StartSmokeTime)).Subtract(
+                            DayNotSmokingTime = smokes.Max(e => e.EndSmokeTime.LocalDateTime)
+                                .Subtract(smokes.Min(e => e.StartSmokeTime.LocalDateTime)).Subtract(
                                 new TimeSpan(smokes.Select(
-                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime)
+                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime.LocalDateTime)
                                     ).Sum(e => e.Ticks))
                                 ),
                             AvarageSmokeDistance = CalculateAvarageSmokeDistance(smokes.ToList())

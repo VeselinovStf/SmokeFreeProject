@@ -1,24 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Xamarin.Forms;
 
 namespace SmokeFree.Converters
 {
-    /// <summary>
-    /// Convert TimeSpan? to static Time Display String
-    /// </summary>
-    public class TimeSpanToStaticTimeConverter : IValueConverter
+    public class DoubleTimeToStringDateTimeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var timestamp = value as TimeSpan?;
-
-            if (timestamp == null)
-            {
-                return "0";
-            }
-
-            var time = timestamp.GetValueOrDefault();
+            var timeValue = (double)value;
+            var time = new TimeSpan(0,0,(int)timeValue);
 
             var formatTime = new TimeSpan(time.Days, time.Hours, time.Minutes, time.Seconds);
 

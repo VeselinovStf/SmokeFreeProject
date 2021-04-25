@@ -92,7 +92,7 @@
 
                     <!-- TEST RESULTS DISPLAY -->
                     <Label Text="Test Time" Grid.Row="1" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TotalTestTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="1" Grid.Column="2"/>
+                    <Label Text="{Binding TestResult.TotalTestTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="1" Grid.Column="2"/>
 
                     <Label Text="Started Date" Grid.Row="2" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.TestStartDate,StringFormat='{dd:mm:yyyy}'}" Grid.Row="2" Grid.Column="2"/>
@@ -107,14 +107,14 @@
                     <Label Text="{Binding TestResult.AvarageSmokedCigarsPerDay,Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Row="5" Grid.Column="2"/>
 
                     <Label Text="Avarage Clean Oxygen Time" Grid.Row="6" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.AvarageCleanOxygenTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="6" Grid.Column="2"/>
+                    <Label Text="{Binding TestResult.AvarageCleanOxygenTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="6" Grid.Column="2"/>
 
                     <Label Text="Total Smoke Gaz Time" Grid.Row="7" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TotalSmokeGasTimeTime,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="7" Grid.Column="2"/>
+                    <Label Text="{Binding TestResult.TotalSmokeGasTimeTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="7" Grid.Column="2"/>
 
                     <Label Text="Avarage Smoke Distance" Grid.Row="8" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.AvarageSmokeDistance,Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Row="8" Grid.Column="2"/>
-                    <!-- /END/ TEST RESULTS DISPLAY -->
+                    <Label Text="{Binding TestResult.AvarageSmokeDistanceSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="8" Grid.Column="2"/>
+                     <!-- /END/ TEST RESULTS DISPLAY -->
 
                 </Grid>
 

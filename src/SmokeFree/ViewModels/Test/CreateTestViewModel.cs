@@ -188,13 +188,19 @@ namespace SmokeFree.ViewModels.Test
                                 UserId = user.Id
                             };
 
+
+                            var testEndDate = _dateTime.Now().AddDays(testDuration);
+#if DEBUG
+                            testEndDate = _dateTime.Now().AddSeconds(30);
+#endif
+
                             // User Test
                             var newTest = new Data.Models.Test()
                             {
                                 UserId = user.Id,
                                 CreatedOn = _dateTime.Now(),
                                 TestStartDate = _dateTime.Now(),
-                                TestEndDate = _dateTime.Now().AddDays(testDuration),
+                                TestEndDate = testEndDate,
                             };
 
                             // Write to DB

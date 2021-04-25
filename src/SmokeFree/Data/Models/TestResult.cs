@@ -14,7 +14,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Total Time of Test
         /// </summary>
-        public DateTimeOffset TotalTestTime { get; set; }
+        public double TotalTestTimeSeconds { get; set; }
 
         /// <summary>
         /// Start Date Of Test
