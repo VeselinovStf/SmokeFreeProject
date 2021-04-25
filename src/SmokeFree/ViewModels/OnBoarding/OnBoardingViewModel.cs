@@ -212,7 +212,7 @@ namespace SmokeFree.ViewModels.OnBoarding
                     {
                         // TODO: A: Navigate back - and check for path validaty
                         //await base._navigationService.InitializeAsync();
-                        await base._navigationService.BackToPreviousAsync();
+                        await base._navigationService.InitializeAsync();
                         // TODO: B: Check if navigation stack is correct
                     }
 

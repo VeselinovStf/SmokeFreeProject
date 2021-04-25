@@ -70,7 +70,7 @@ namespace SmokeFree.ViewModels.Test
                 {
                     var testId = user.TestId;
                     var userTest = user.Tests
-                        .FirstOrDefault(t => t.Id == testId);
+                        .FirstOrDefault(t => t.Id == testId && !t.IsDeleted);
 
                     // Validate User Test
                     if (userTest != null)
@@ -165,7 +165,7 @@ namespace SmokeFree.ViewModels.Test
                         // Delete Current Test Information From DB                        
                         _realm.Write(() =>
                         {
-                            var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId);
+                            var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
 
                             // Remove Test
                             userTest.IsDeleted = true;
@@ -183,7 +183,7 @@ namespace SmokeFree.ViewModels.Test
                                 }
                             }
 
-                            var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId);
+                            var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
 
                             // Remove Challenge
                             testChallenge.IsDeleted = true;

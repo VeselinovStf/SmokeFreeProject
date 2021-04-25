@@ -5,11 +5,14 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
 using SmokeFree.Data.Models;
+using SmokeFree.Resx;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -49,36 +52,56 @@ namespace SmokeFree.Views.Test
         /// </summary>
         private TimeSpan TimeSenceLastSmoke;
 
+        private const string ZeroTimerStr = "00:00:00";
+
         /// <summary>
         /// Smoking State
         /// </summary>
         private bool IsSmoking;
 
+
+        private ITestCalculationService _testCalculationService;
+
+        private IAppLogger _appLogger;
+
+        private INavigationService _navigationService;
+
+        private IDialogService _dialogService;
+
         public UnderTestView()
         {
             InitializeComponent();
+
+           
+            _testCalculationService = AppContainer.Resolve<ITestCalculationService>();
+            _appLogger = AppContainer.Resolve<IAppLogger>();
+            _navigationService = AppContainer.Resolve<INavigationService>();
+            _dialogService = AppContainer.Resolve<IDialogService>();
         }
 
        
 
         protected override void OnAppearing()
         {
-            var appLogger = AppContainer.Resolve<IAppLogger>();
-
+           
             try
-            {              
-                var realm = AppContainer.Resolve<Realm>();
-                var user = realm.Find<User>(Globals.UserId);
+            {
+                Realm _realm = AppContainer.Resolve<Realm>();
+                var user = _realm.Find<User>(Globals.UserId);
 
                 var currentTest = user.Tests.FirstOrDefault(e => e.UserId == user.Id);
-                var testCalculationService = AppContainer.Resolve<ITestCalculationService>();
-                var testCalculation = testCalculationService
+                var testCalculation = _testCalculationService
                               .GetCurrentTestDataCalculation(DateTime.Now, currentTest);
 
                 TestLeftTime = testCalculation.TestTimeLeft;
+              
                 CurrentSmokeTime = testCalculation.CurrentSmokeTime;
-                SmokeCount.Text = testCalculation.CurrentSmokedCount.ToString();
-                
+                Debug.WriteLine(string.Format("{0:hh\\:mm\\:ss}", CurrentSmokeTime));
+                Debug.WriteLine(testCalculation.CurrentSmokedCount);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    SmokeCount.Text = testCalculation.CurrentSmokedCount.ToString();
+                });
 
                 // Stop Testing Timer Cancelation Token
                 this.stopTestingTimerCancellation = new CancellationTokenSource();
@@ -91,34 +114,27 @@ namespace SmokeFree.Views.Test
                 {
                     IsSmoking = true;
 
-                    StartSmokingTimer();
+                    StartSmokingTimer(false);
                 }
                 else
                 {
-                    // View is called with un-finished smoke -> add to TimeSenceLastSmoke
-                    //if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
-                    //{
                     if (testCalculation.CurrentSmokedCount > 0)
                     {
-                        TimeSenceLastSmoke = testCalculationService
+                        TimeSenceLastSmoke = _testCalculationService
                             .TimeSinceLastSmoke(currentTest, DateTime.Now);
 
                         StartLastTimeSmokedTimer();
                     }
-                        
-                    //}
                 }
 
                 UpdateUI();
 
             }
             catch (Exception ex)
-            {
-                var navigationService = AppContainer.Resolve<INavigationService>();
+            {             
+                _appLogger.LogCritical(ex);
 
-                appLogger.LogCritical(ex);
-
-                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+                _navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
             }
             
             base.OnAppearing();
@@ -126,32 +142,16 @@ namespace SmokeFree.Views.Test
 
         protected override void OnDisappearing()
         {
-            var appLogger = AppContainer.Resolve<IAppLogger>();
-
+           
             try
             {
                 StopAllTimers();
-                //StopTestingTimer();
-
-                //if (IsSmoking)
-                //{
-                //    StopSmokingTimer();
-                //}
-                //else
-                //{
-                //    if (TimeSenceLastSmoke >= TimeSpan.FromSeconds(1))
-                //    {
-                //        StopLastTimeSmokedTimer();
-                //    }
-                //}
             }
             catch (Exception ex)
             {
-                var navigationService = AppContainer.Resolve<INavigationService>();
+                _appLogger.LogCritical(ex);
 
-                appLogger.LogCritical(ex);
-
-                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+                _navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
             }
             
 
@@ -160,14 +160,31 @@ namespace SmokeFree.Views.Test
 
         #region StartTimers
 
-        private void StartSmokingTimer()
+        private void StartSmokingTimer(bool resetUiTimer)
         {
+            if (resetUiTimer)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    this.SmokeDateTimeDisplayAtSmokeDateTime.Text = ZeroTimerStr;
+                    CurrentSmokeTime = new TimeSpan(0, 0, 0);
+
+                });
+            }
 
             CancellationTokenSource cts = stopSmokingTimerCancellation; // safe copy
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {               
                 if (cts.IsCancellationRequested)
                 {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        this.SmokeDateTimeDisplayAtSmokeDateTime.Text = ZeroTimerStr;
+                        CurrentSmokeTime = new TimeSpan(0, 0, 0);
+
+                    });
+                   
+                   
                     return false;
                 }
 
@@ -180,9 +197,17 @@ namespace SmokeFree.Views.Test
 
                 if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
                 {
-                    MessagingCenter.Send<UnderTestView>(this, "DelaySmoke");
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        this.SmokeDateTimeDisplayAtSmokeDateTime.Text = ZeroTimerStr;
 
-                    IsSmoking = false;
+                        CurrentSmokeTime = new TimeSpan(0, 0, 0);
+
+                        IsSmoking = false;
+                    });                   
+
+                    MessagingCenter.Send<UnderTestView>(this, "DelaySmoke");
+      
 
                     StartLastTimeSmokedTimer();
 
@@ -203,6 +228,14 @@ namespace SmokeFree.Views.Test
             {
                 if (cts.IsCancellationRequested)
                 {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        this.LastSmokeDateTimeDisplayDateTime.Text = ZeroTimerStr;
+
+                        TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
+                    });
+                    
+
                     return false;
                 }
 
@@ -268,7 +301,14 @@ namespace SmokeFree.Views.Test
         {
             Interlocked.Exchange(ref stopSmokingTimerCancellation, new CancellationTokenSource()).Cancel();
 
-            CurrentSmokeTime = new TimeSpan(0, 0, 0);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                this.SmokeDateTimeDisplayAtSmokeDateTime.Text = ZeroTimerStr;
+
+                CurrentSmokeTime = new TimeSpan(0, 0, 0);
+            });
+            
+
         }
 
         /// <summary>
@@ -278,7 +318,13 @@ namespace SmokeFree.Views.Test
         {
             Interlocked.Exchange(ref stopLastTimeSmokedTimerCancellation, new CancellationTokenSource()).Cancel();
 
-            TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                this.LastSmokeDateTimeDisplayDateTime.Text = ZeroTimerStr;
+
+                TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
+            });
+            
         }
 
         /// <summary>
@@ -302,38 +348,78 @@ namespace SmokeFree.Views.Test
 
         #region ButtonEvents
 
-        private void Start_Smoking_Clicked(object sender, EventArgs e)
+        private async void Start_Smoking_Clicked(object sender, EventArgs e)
         {
-            IsSmoking = true;
 
-            this.stopSmokingTimerCancellation = new CancellationTokenSource();
+            var userNotification = await _dialogService
+                  .ConfirmAsync(AppResources.UnderTestViewModelStartSmokeConfirmMessage,
+                  AppResources.UnderTestViewModelStartSmokeConfirmTitle,
+                  AppResources.YesButtonText,
+                  AppResources.NoButtonText);
 
-            StartSmokingTimer();
+            if (userNotification)
+            {
+                MessagingCenter.Send<UnderTestView>(this, "ExecuteStartSmoking");
 
-            StopLastTimeSmokedTimer();
+                IsSmoking = true;
 
-            UpdateUI();
+                this.stopSmokingTimerCancellation = new CancellationTokenSource();
+
+                StartSmokingTimer(true);
+
+                StopLastTimeSmokedTimer();
+
+                UpdateUI();
+            }
         }
 
-        private void Mark_One__Smoke_Clicked(object sender, EventArgs e)
+        private async void Mark_One__Smoke_Clicked(object sender, EventArgs e)
         {
-            IsSmoking = false;
+            var userNotification = await _dialogService
+                .ConfirmAsync(AppResources.UnderTestViewModelStartSmokeConfirmMessage,
+                    AppResources.UnderTestViewModelStartSmokeConfirmTitle,
+                    AppResources.YesButtonText,
+                    AppResources.NoButtonText);
 
-            SmokeCount.Text = (int.Parse(SmokeCount.Text) + 1).ToString();
+            if (userNotification)
+            {
+                MessagingCenter.Send<UnderTestView>(this, "MarkOneSmoked");
 
-            StopSmokingTimer();
 
-            this.stopLastTimeSmokedTimerCancellation = new CancellationTokenSource();
+                IsSmoking = false;
 
-            StartLastTimeSmokedTimer();
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    SmokeCount.Text = (int.Parse(SmokeCount.Text) + 1).ToString();
+                });
 
-            UpdateUI();
+                StopSmokingTimer();
 
+                this.stopLastTimeSmokedTimerCancellation = new CancellationTokenSource();
+
+                StartLastTimeSmokedTimer();
+
+                UpdateUI();
+
+            }
         }
 
-        private void Stop_Test_Clicked(object sender, EventArgs e)
+        private async void Stop_Test_Clicked(object sender, EventArgs e)
         {
-            StopAllTimers();
+            // Check if user is shure
+            var userNotification = await _dialogService
+                 .ConfirmAsync(AppResources.UnderTestViewModelStopTestMessage,
+                 AppResources.UnderTestViewModelRestartTestingLabel,
+                 AppResources.ButtonOkText,
+                 AppResources.ButtonCancelText);
+
+            if (userNotification)
+            {
+
+                StopAllTimers();
+                MessagingCenter.Send<UnderTestView>(this, "ExecuteStopTestingCommand");
+            
+            }         
         }
 
         #endregion
@@ -342,14 +428,18 @@ namespace SmokeFree.Views.Test
 
         private void UpdateUI()
         {
-            StartSmoking.IsVisible = !IsSmoking;
-            MarkOneSmoked.IsVisible = IsSmoking;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                StartSmoking.IsVisible = !IsSmoking;
+                MarkOneSmoked.IsVisible = IsSmoking;
 
-            LastSmokeDateTimeDisplayLabel.IsVisible = !IsSmoking;
-            LastSmokeDateTimeDisplayDateTime.IsVisible = !IsSmoking;
+                LastSmokeDateTimeDisplayLabel.IsVisible = !IsSmoking;
+                LastSmokeDateTimeDisplayDateTime.IsVisible = !IsSmoking;
 
-            SmokeDateTimeDisplayAtSmokeLabel.IsVisible = IsSmoking;
-            SmokeDateTimeDisplayAtSmokeDateTime.IsVisible = IsSmoking;
+                SmokeDateTimeDisplayAtSmokeLabel.IsVisible = IsSmoking;
+                SmokeDateTimeDisplayAtSmokeDateTime.IsVisible = IsSmoking;
+            });
+            
         }
 
         #endregion

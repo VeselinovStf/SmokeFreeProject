@@ -162,6 +162,8 @@ namespace SmokeFree.Services.Data.Test
                     else
                     {
                         isSmoking = true;
+
+                        totalSmoked = smokedCigaresUnderTest.Count - 1;
                     }
 
                     // Calculate Time Since Last Smoke

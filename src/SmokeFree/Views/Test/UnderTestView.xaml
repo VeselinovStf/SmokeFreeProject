@@ -22,7 +22,7 @@
                     <Button                   
                         Text="&#xe724;"
                         FontFamily="{StaticResource FontIcons}"
-                        Command="{Binding OnStopTestingCommand}"
+                       
                         Clicked="Stop_Test_Clicked"
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Gray-100}"
@@ -150,7 +150,7 @@
                             x:Name="StartSmoking"   
                             Clicked="Start_Smoking_Clicked"
                             Text="Start Smoking" 
-                            Command="{Binding StartSmokingCommand}"
+                           
                             CommandParameter="{StaticResource TrueValue}"
                             FontSize="20"
                             FontAttributes="Bold"                           
@@ -163,7 +163,7 @@
                            
                             x:Name="MarkOneSmoked"
                             Text="Mark One Smoked" 
-                            Command="{Binding MarkOneSmokedCommand}"
+                            
                             Clicked="Mark_One__Smoke_Clicked"
                             CommandParameter="{StaticResource FalseValue}"
                             BackgroundColor="{StaticResource Gray-100}"
