@@ -77,7 +77,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.MarkTestCompletedAsync();
+             underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
             Assert.IsTrue(userTest.IsCompleted);
@@ -144,7 +144,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.MarkTestCompletedAsync();
+             underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
             dialogServiceMock.Verify(e => e.ShowDialog(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));
@@ -182,7 +182,7 @@ namespace UnderTestViewModelTests.UnitTests
                 );
 
             // Act
-            await underTestViewModel.MarkTestCompletedAsync();
+             underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
@@ -232,7 +232,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.MarkTestCompletedAsync();
+             underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
@@ -297,7 +297,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.MarkTestCompletedAsync();
+             underTestViewModel.MarkTestCompletedAsync();
 
             //Assert
             appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()), Times.Exactly(1));

@@ -68,7 +68,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.SendNotificationAsync("Title", "Message");
+             underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             notificationManagerMock.Verify(e => e.SendNotification(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime?>()), Times.Once);
@@ -121,7 +121,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.SendNotificationAsync("Title", "Message");
+             underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             notificationManagerMock.Verify(e => e.SendNotification(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DateTime?>()), Times.Never);
@@ -159,7 +159,7 @@ namespace UnderTestViewModelTests.UnitTests
                 );
 
             // Act
-            await underTestViewModel.SendNotificationAsync("Title", "Message");
+             underTestViewModel.SendNotificationAsync("Title", "Message");
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Once);

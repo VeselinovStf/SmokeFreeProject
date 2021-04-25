@@ -180,11 +180,11 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = new DateTime() + totalTestTime;
+            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
 
             var expectedTestResult = new TestResult()
             {
-                TotalTestTime = totalTestTimeOffset,
+                TotalTestTimeSeconds = totalTestTimeOffset,
                 TestId = testId,
                 TestStartDate = test.TestStartDate,
                 EndStartDate = endTestTime,
@@ -199,7 +199,7 @@ namespace TestCalculationServiceTests.UnitTests
             var actual = testCalculationService.CalculateTestResult(test);
 
             // Assert
-            Assert.IsTrue(expectedTestResult.TotalTestTime == actual.TestResultCalculation.TotalTestTime, "TotalTestTime not valid");
+            Assert.IsTrue(expectedTestResult.TotalTestTimeSeconds == actual.TestResultCalculation.TotalTestTimeSeconds, "TotalTestTime not valid");
             Assert.IsTrue(expectedTestResult.TestId == actual.TestResultCalculation.TestId, "TestId not valid");
             Assert.IsTrue(expectedTestResult.TestStartDate.DateTime == actual.TestResultCalculation.TestStartDate, "TestStartDate not valid");
             Assert.IsTrue(expectedTestResult.EndStartDate.DateTime == actual.TestResultCalculation.EndStartDate, "EndStartDate not valid");
@@ -312,11 +312,11 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = new DateTime() + totalTestTime;
+            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
 
             var expectedTestResult = new TestResult()
             {
-                TotalTestTime = totalTestTimeOffset,
+                TotalTestTimeSeconds = totalTestTimeOffset,
                 TestId = testId,
                 TestStartDate = test.TestStartDate,
                 EndStartDate = endTestTime,
@@ -331,7 +331,7 @@ namespace TestCalculationServiceTests.UnitTests
             var actual = testCalculationService.CalculateTestResult(test);
 
             // Assert
-            Assert.IsTrue(expectedTestResult.TotalTestTime == actual.TestResultCalculation.TotalTestTime, "TotalTestTime not valid");
+            Assert.IsTrue(expectedTestResult.TotalTestTimeSeconds == actual.TestResultCalculation.TotalTestTimeSeconds, "TotalTestTime not valid");
             Assert.IsTrue(expectedTestResult.TestId == actual.TestResultCalculation.TestId, "TestId not valid");
             Assert.IsTrue(expectedTestResult.TestStartDate.DateTime == actual.TestResultCalculation.TestStartDate, "TestStartDate not valid");
             Assert.IsTrue(expectedTestResult.EndStartDate.DateTime == actual.TestResultCalculation.EndStartDate, "EndStartDate not valid");
@@ -444,11 +444,11 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = new DateTime() + totalTestTime;
+            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
 
             var expectedTestResult = new TestResult()
             {
-                TotalTestTime = totalTestTimeOffset,
+                TotalTestTimeSeconds = totalTestTimeOffset,
                 TestId = testId,
                 TestStartDate = test.TestStartDate,
                 EndStartDate = endTestTime,
@@ -463,7 +463,7 @@ namespace TestCalculationServiceTests.UnitTests
             var actual = testCalculationService.CalculateTestResult(test);
 
             // Assert
-            Assert.IsTrue(expectedTestResult.TotalTestTime == actual.TestResultCalculation.TotalTestTime, "TotalTestTime not valid");
+            Assert.IsTrue(expectedTestResult.TotalTestTimeSeconds == actual.TestResultCalculation.TotalTestTimeSeconds, "TotalTestTime not valid");
             Assert.IsTrue(expectedTestResult.TestId == actual.TestResultCalculation.TestId, "TestId not valid");
             Assert.IsTrue(expectedTestResult.TestStartDate.DateTime == actual.TestResultCalculation.TestStartDate, "TestStartDate not valid");
             Assert.IsTrue(expectedTestResult.EndStartDate.DateTime == actual.TestResultCalculation.EndStartDate, "EndStartDate not valid");

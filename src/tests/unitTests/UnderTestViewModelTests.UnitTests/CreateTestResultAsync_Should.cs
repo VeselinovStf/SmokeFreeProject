@@ -82,7 +82,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.CreateTestResultAsync();
+             underTestViewModel.CreateTestResultAsync();
 
             var dbTestResult = realm.Find<TestResult>(testResultId);
             //Assert
@@ -154,7 +154,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.CreateTestResultAsync();
+             underTestViewModel.CreateTestResultAsync();
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
@@ -221,7 +221,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.CreateTestResultAsync();
+             underTestViewModel.CreateTestResultAsync();
 
             var dbTestResult = realm.Find<TestResult>(testResultId);
             //Assert
@@ -274,7 +274,7 @@ namespace UnderTestViewModelTests.UnitTests
             });
 
             // Act
-            await underTestViewModel.CreateTestResultAsync();
+             underTestViewModel.CreateTestResultAsync();
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
@@ -313,7 +313,7 @@ namespace UnderTestViewModelTests.UnitTests
                 );
 
             // Act
-            await underTestViewModel.CreateTestResultAsync();
+             underTestViewModel.CreateTestResultAsync();
 
             //Assert
             navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
