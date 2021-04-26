@@ -191,7 +191,7 @@ namespace SmokeFree.ViewModels.Test
 
                             var testEndDate = _dateTime.Now().AddDays(testDuration);
 #if DEBUG
-                            testEndDate = _dateTime.Now().AddSeconds(30);
+                            //testEndDate = _dateTime.Now().AddSeconds(30);
 #endif
 
                             // User Test

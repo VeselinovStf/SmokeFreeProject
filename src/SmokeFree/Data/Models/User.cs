@@ -19,7 +19,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// State for Notification Service
         /// </summary>
-        public bool NotificationState { get; set; }
+        public bool NotificationState { get; set; } = true;
 
         /// <summary>
         /// Current Test Id

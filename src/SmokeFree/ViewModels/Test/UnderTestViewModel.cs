@@ -11,6 +11,7 @@ using SmokeFree.Models.Managers.NotificationManager;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
+using SmokeFree.Views.Test;
 using System;
 using System.Linq;
 using System.Threading;
@@ -121,14 +122,15 @@ namespace SmokeFree.ViewModels.Test
             // Device Timer
             _deviceTimer = deviceTimer;
 
-            // Stop Testing Timer Cancelation Token
-            this.stopTestingTimerCancellation = new CancellationTokenSource();
+            // Initial Subscribe-UnSubscribe to OnAppearing of View Model
+            MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewAppearing", async (e) =>
+            {
+                await AppearingInitializeAsync();
 
-            // Smoking Timer Cancelation Token
-            this.stopSmokingTimerCancellation = new CancellationTokenSource();
+                MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
+            });
 
-            // TimeSenceLastSmoke Timer Cancelation Token
-            this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
+            
         }
 
         #endregion
@@ -139,12 +141,20 @@ namespace SmokeFree.ViewModels.Test
         /// Initialize View State
         /// Called Initialy and if app is re-oppend
         /// </summary>
-        /// <param name="parameter">Optional</param>
         /// <returns>Base Initialize Async</returns>
-        public override async Task InitializeAsync(object parameter)
+        public async Task AppearingInitializeAsync()
         {
             try
             {
+                // Stop Testing Timer Cancelation Token
+                this.stopTestingTimerCancellation = new CancellationTokenSource();
+
+                // Smoking Timer Cancelation Token
+                this.stopSmokingTimerCancellation = new CancellationTokenSource();
+
+                // TimeSenceLastSmoke Timer Cancelation Token
+                this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
+
                 // Notification for test completition
                 await InitiateTestCompletitionNotificationEvent();
 
@@ -170,7 +180,7 @@ namespace SmokeFree.ViewModels.Test
                         // Assignm properties
                         this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
 
-                        //this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
+                        this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
 
 
                         this.TestLeftTime = testCalculation.TestTimeLeft;
@@ -181,7 +191,7 @@ namespace SmokeFree.ViewModels.Test
                         this.CurrentSmokeTime = testCalculation.CurrentSmokeTime;
 
                         // Check if is smoking
-                        if (testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
+                        if (testCalculation.IsSmoking)//testCalculation.CurrentSmokeTime > TimeSpan.FromSeconds(1))
                         {
                             this.IsSmoking = true;
 
@@ -190,13 +200,19 @@ namespace SmokeFree.ViewModels.Test
                         else
                         {
                             // View is called with un-finished smoke -> add to TimeSenceLastSmoke
-                            if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
+                            //if (currentTest.SmokedCigaresUnderTest.Any(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset())))
+                            //{
+                            if (currentTest.SmokedCigaresUnderTest.Count > 0)
                             {
+                                this.IsSmoking = false;
+
                                 this.TimeSenceLastSmoke = this._testCalculationService
                                     .TimeSinceLastSmoke(currentTest, this._dateTime.Now());
 
                                 StartTimeSenceLastSmokeTimer();
                             }
+                               
+                            //}
 
                         }
 
@@ -204,6 +220,14 @@ namespace SmokeFree.ViewModels.Test
 
                         // TODO: A: ATTENTION In fot the end of testing
                         StartTestintTimer();
+
+                        // Initial Subscribe-UnSubscribe to OnDesapearing of View Model
+                        MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewDisappearing", (e) =>
+                        {
+                            DesapearingInitializeAsync();
+
+                            MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewDisappearing");
+                        });
                     }
                     else
                     {
@@ -227,6 +251,22 @@ namespace SmokeFree.ViewModels.Test
 
                 await base.InternalErrorMessageToUser();
             }
+        }
+
+        public void DesapearingInitializeAsync()
+        {
+            StopSmokingTimer();
+            StopTestingTimer();
+            StopTimeSenceLastSmokeTimer();
+
+            // Post Subscribe-UnSubscribe to OnAppearing of View Model
+            MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewAppearing", async (e) =>
+            {
+                await AppearingInitializeAsync();
+
+                MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
+            });
+
         }
 
         /// <summary>
