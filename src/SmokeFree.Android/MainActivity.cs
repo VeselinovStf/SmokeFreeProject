@@ -5,6 +5,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Plugin.LocalNotification;
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Droid.Managers;
 using SmokeFree.Utilities.Logging;
@@ -29,6 +30,13 @@ namespace SmokeFree.Droid
             InitializeLogging();
 
             LoadApplication(new App());
+
+            NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
+            {
+
+            });
+
+            NotificationCenter.NotifyNotificationTapped(Intent);
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -40,6 +48,8 @@ namespace SmokeFree.Droid
         protected override void OnNewIntent(Intent intent)
         {
             CreateNotificationFromIntent(intent);
+            NotificationCenter.NotifyNotificationTapped(intent);
+            base.OnNewIntent(intent);
         }
 
         void CreateNotificationFromIntent(Intent intent)
@@ -59,5 +69,7 @@ namespace SmokeFree.Droid
 
             new LocalLogUtility().Initialize(assembly, assemblyName);
         }
+
+       
     }
 }

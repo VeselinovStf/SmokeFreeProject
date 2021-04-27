@@ -209,6 +209,8 @@ namespace SmokeFree.ViewModels.AppSettings
         {
             try
             {
+                //TODO B: If notifications are set to false - stop all running notifications
+
                 this._realm.Write(() =>
                 {
                     this.AppUser.NotificationState = value;

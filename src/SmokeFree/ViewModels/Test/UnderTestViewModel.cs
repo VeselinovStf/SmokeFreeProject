@@ -158,6 +158,8 @@ namespace SmokeFree.ViewModels.Test
                 // Notification for test completition
                 await InitiateTestCompletitionNotificationEvent();
 
+               
+
                 // Get User From DB
                 var userId = Globals.UserId;
                 var user = this._realm.Find<User>(userId);
@@ -289,11 +291,12 @@ namespace SmokeFree.ViewModels.Test
                     // Send Notification if user is allowed notifications
                     if (userNotificationPremission)
                     {
-                        this._notificationManager.NotificationReceived += (sender, eventArgs) =>
-                        {
-                            var evtData = (NotificationEventArgs)eventArgs;
-                            ShowNotification(evtData.Title, evtData.Message);
-                        };
+                        // TODO: A1: Start TESTING Notification
+                        //this._notificationManager.NotificationReceived += (sender, eventArgs) =>
+                        //{
+                        //    var evtData = (NotificationEventArgs)eventArgs;
+                        //    ShowNotification(evtData.Title, evtData.Message);
+                        //};
                     }
                 }
                 else
@@ -389,7 +392,8 @@ namespace SmokeFree.ViewModels.Test
                         StopTimeSenceLastSmokeTimer();
                         StopSmokingTimer();
                         // TODO: - A: Stop any other timer
-                        // TODO: A: Stop Notification
+
+                        // TODO: A1: STOP TESTING Notification
 
                         // Navigate to Create Test
                         await this._navigationService.NavigateToAsync<CreateTestViewModel>();
@@ -777,8 +781,9 @@ namespace SmokeFree.ViewModels.Test
                     if (userNotification)
                     {
                         // Send Notificatio
-                        this._notificationManager.SendNotification(
-                                notificationTitle, notificationMessage);
+                        //this._notificationManager.SendNotification(
+                        //        notificationTitle, notificationMessage);
+                        // TODO: A1: Start SMOKING NOW Notification if is smoking Now
                     }
                 }
                 else
@@ -832,6 +837,8 @@ namespace SmokeFree.ViewModels.Test
                             currentTest.ModifiedOn = this._dateTime.Now();
                             user.UserState = UserStates.IsTestComplete.ToString();
                         });
+
+                        // TODO: A1: STOP TESTING Notification
 
 
                         await this._dialogService
@@ -937,6 +944,8 @@ namespace SmokeFree.ViewModels.Test
                             this.IsSmoking = false;
 
                             this.CurrentlySmokedCount = currentCountSmokes;
+
+                            // TODO: A1: STOP SMOKING NOW Notification if is smoking Now
 
                             StartTimeSenceLastSmokeTimer();
                             // Stop Timer
