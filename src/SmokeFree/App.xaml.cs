@@ -18,9 +18,10 @@ namespace SmokeFree
             InitializeAppContainer();
 
             // TODO: AA: Remove in Release
-#if DEBUG
-            DevelopmentDatabaseClearing();
-#endif
+            if (Globals.MockRun)
+            {
+                DevelopmentDatabaseClearing();
+            }
 
             InitializeComponent();
 

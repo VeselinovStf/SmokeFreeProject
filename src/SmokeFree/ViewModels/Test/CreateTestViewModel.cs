@@ -1,4 +1,5 @@
-﻿using Realms;
+﻿using Plugin.LocalNotification;
+using Realms;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -190,9 +191,11 @@ namespace SmokeFree.ViewModels.Test
 
 
                             var testEndDate = _dateTime.Now().AddDays(testDuration);
-#if DEBUG
-                            //testEndDate = _dateTime.Now().AddSeconds(30);
-#endif
+
+                            if (Globals.MockRun)
+                            {
+                                testEndDate = _dateTime.Now().AddSeconds(30);
+                            }
 
                             // User Test
                             var newTest = new Data.Models.Test()
@@ -212,6 +215,21 @@ namespace SmokeFree.ViewModels.Test
                                 user.TestId = newTest.Id;
                             });
 
+                            if (user.NotificationState)
+                            {
+                                // Register Notification
+                                var testTimerNotification = new NotificationRequest
+                                {
+                                    NotificationId = Globals.TestingTimeNotificationId,
+                                    Title = AppResources.UnderTestViewModelCompleteTestMessage,
+                                    Description = AppResources.UnderTestViewModelCompleteTestNotificationMessage,
+                                    ReturningData = "Dummy data", // Returning data when tapped on notification.
+                                    NotifyTime = testEndDate.AddSeconds(3) // Used for Scheduling local notification, if not specified notification will show immediately.
+                                };
+
+                                NotificationCenter.Current.Show(testTimerNotification);
+                            }
+                            
                             // Navigate to Under Test
                             await base._navigationService.NavigateToAsync<UnderTestViewModel>();
                         }

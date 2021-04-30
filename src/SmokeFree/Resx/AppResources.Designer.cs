@@ -484,6 +484,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Времето за тестване изтече, но не бяха събрани данни. Нужно е да повторите теста..
+        /// </summary>
+        internal static string UnderTestViewModelCreateTestResultErrorMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCreateTestResultErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не бяха събрани данни.
+        /// </summary>
+        internal static string UnderTestViewModelCreateTestResultErrorTitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelCreateTestResultErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Лимита за пушене на една цигара е десет минути. След изтичане на лимита, цигарата се маркира като изпупена.
         /// </summary>
         internal static string UnderTestViewModelMarkAfterDelayDialogMessage {

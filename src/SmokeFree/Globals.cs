@@ -8,6 +8,14 @@ namespace SmokeFree
     /// </summary>
     public static class Globals
     {
+        /// <summary>
+        /// Used For Testing 
+        /// </summary>
+        public static bool MockRun = true;
+
+        // Notification Ids
+        public static int TestingTimeNotificationId = 666;
+        public static int DelayedSmokeNotificationId = 999;
 
         /// <summary>
         /// App Hex Color Themes Set

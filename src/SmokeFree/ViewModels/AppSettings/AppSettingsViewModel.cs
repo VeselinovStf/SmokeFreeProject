@@ -1,4 +1,5 @@
-﻿using Realms;
+﻿using Plugin.LocalNotification;
+using Realms;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -169,6 +170,7 @@ namespace SmokeFree.ViewModels.AppSettings
 
             if (userNotification)
             {
+                // Cleare DB
                 _realm.Write(() =>
                 {
                     _realm.RemoveAll<User>();
@@ -178,6 +180,12 @@ namespace SmokeFree.ViewModels.AppSettings
                     _realm.RemoveAll<Smoke>();
                     _realm.RemoveAll<DayChallengeSmoke>();
                 });
+
+                // Stop Testing Time Notification
+                NotificationCenter.Current.Cancel(Globals.TestingTimeNotificationId);
+
+                // Stop Smoke Delayed Time Notification
+                NotificationCenter.Current.Cancel(Globals.DelayedSmokeNotificationId);
 
                 await base._navigationService.InitializeAsync();
             }
@@ -209,7 +217,14 @@ namespace SmokeFree.ViewModels.AppSettings
         {
             try
             {
-                //TODO B: If notifications are set to false - stop all running notifications
+                if (!value)
+                {
+                    // Stop Testing Time Notification
+                    NotificationCenter.Current.Cancel(Globals.TestingTimeNotificationId);
+
+                    // Stop Smoke Delayed Time Notification
+                    NotificationCenter.Current.Cancel(Globals.DelayedSmokeNotificationId);
+                }
 
                 this._realm.Write(() =>
                 {

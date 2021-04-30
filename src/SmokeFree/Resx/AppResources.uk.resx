@@ -285,4 +285,10 @@
   <data name="CriticalApplicationFail" xml:space="preserve">
     <value>Unexpected exception accuress in application. Please contact application develers</value>
   </data>
+  <data name="UnderTestViewModelCreateTestResultErrorMessage" xml:space="preserve">
+    <value>Testing time is over but no data was collected. You nead to mark smoked cigars in order to collect test data. Please redo the test.</value>
+  </data>
+  <data name="UnderTestViewModelCreateTestResultErrorTitle" xml:space="preserve">
+    <value>Unable to collect data</value>
+  </data>
 </root>

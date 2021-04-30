@@ -193,11 +193,14 @@ namespace SmokeFree.ViewModels.Test
                             testChallenge.ModifiedOn = this._dateTime.Now();
 
                             // Remove Test Result
-                            var testResult = userTest.CompletedTestResult;
-                            testResult.IsDeleted = true;
-                            testResult.DeletedOn = this._dateTime.Now();
-                            testResult.ModifiedOn = this._dateTime.Now();
-
+                            var userTestResults = userTest.CompletedTestResult;
+                            if (userTestResults != null)
+                            {
+                                userTestResults.IsDeleted = true;
+                                userTestResults.DeletedOn = this._dateTime.Now();
+                                userTestResults.ModifiedOn = this._dateTime.Now();
+                            }
+ 
                             // Update User Status
                             user.UserState = UserStates.CompletedOnBoarding.ToString();
                             user.TestId = string.Empty;

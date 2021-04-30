@@ -1,4 +1,5 @@
 ﻿
+using Plugin.LocalNotification;
 using Realms;
 using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
@@ -28,6 +29,7 @@ namespace SmokeFree.ViewModels.Test
     {
         #region FIELDS
 
+       
         /// <summary>
         /// Stop Testing Timer Cancelation Token
         /// </summary>
@@ -79,11 +81,6 @@ namespace SmokeFree.ViewModels.Test
         private readonly Realm _realm;
 
         /// <summary>
-        /// Device Specific Notification Manager
-        /// </summary>
-        private readonly INotificationManager _notificationManager;
-
-        /// <summary>
         /// Test Calculations Service Abstraction
         /// </summary>
         private readonly ITestCalculationService _testCalculationService;
@@ -112,9 +109,6 @@ namespace SmokeFree.ViewModels.Test
 
             // Database
             _realm = realm;
-
-            // Device Specific Notification Manager
-            _notificationManager = notificationManager;
 
             // Test Calculation Service
             _testCalculationService = testCalculationService;
@@ -155,11 +149,6 @@ namespace SmokeFree.ViewModels.Test
                 // TimeSenceLastSmoke Timer Cancelation Token
                 this.stopTimeSenceLastSmokeTimerCancellation = new CancellationTokenSource();
 
-                // Notification for test completition
-                await InitiateTestCompletitionNotificationEvent();
-
-               
-
                 // Get User From DB
                 var userId = Globals.UserId;
                 var user = this._realm.Find<User>(userId);
@@ -181,10 +170,7 @@ namespace SmokeFree.ViewModels.Test
 
                         // Assignm properties
                         this.CurrentlySmokedCount = testCalculation.CurrentSmokedCount;
-
                         this.TimeSenceLastSmoke = testCalculation.TimeSinceLastSmoke;
-
-
                         this.TestLeftTime = testCalculation.TestTimeLeft;
 
                         // Set value of currently smoked or string.Empty 
@@ -271,52 +257,6 @@ namespace SmokeFree.ViewModels.Test
 
         }
 
-        /// <summary>
-        /// Initate Notification For Test COmpletition
-        /// </summary>
-        // TODO: A: TRIGER THIS BY MESSAGE CENTER
-        private async Task InitiateTestCompletitionNotificationEvent()
-        {
-            try
-            {
-                // Get Current User
-                var userId = Globals.UserId;
-                var user = _realm.Find<User>(userId);
-
-                // Check if is valid
-                if (user != null)
-                {
-                    var userNotificationPremission = user.NotificationState;
-
-                    // Send Notification if user is allowed notifications
-                    if (userNotificationPremission)
-                    {
-                        // TODO: A1: Start TESTING Notification
-                        //this._notificationManager.NotificationReceived += (sender, eventArgs) =>
-                        //{
-                        //    var evtData = (NotificationEventArgs)eventArgs;
-                        //    ShowNotification(evtData.Title, evtData.Message);
-                        //};
-                    }
-                }
-                else
-                {
-                    // User Not Found!
-                    base._appLogger.LogCritical($"Can't find User: {userId}");
-
-                    await base.InternalErrorMessageToUser();
-                }
-            }
-            catch (Exception ex)
-            {
-                base._appLogger.LogError($"Can't Initialize Under Test Completition Notification: {ex.Message}");
-                base._appLogger.LogCritical(ex);
-
-                await base.InternalErrorMessageToUser();
-            }
-
-        }
-
         #endregion
 
         #region COMMANDS
@@ -342,76 +282,86 @@ namespace SmokeFree.ViewModels.Test
 
                 if (userNotification)
                 {
-                    // Get Current User
-                    var userId = Globals.UserId;
-                    var user = _realm.Find<User>(userId);
+                   // Call Stop Testing
+                    await StopTesting();
 
-                    // Validate User
-                    if (user != null)
-                    {
-                        var currentTestId = user.TestId;
+                    // Navigate to Create Test
+                    await this._navigationService.NavigateToAsync<CreateTestViewModel>();
+                    //TODO: B: Clear navigation stack
 
-                        // Delete Current Test Information From DB
-                            var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
-                        var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
-                        // 
-
-                        _realm.Write(() =>
-                        {
-
-                            // Remove Test
-                            userTest.IsDeleted = true;
-                            userTest.DeletedOn = this._dateTime.Now();
-                            userTest.ModifiedOn = this._dateTime.Now();
-
-                            // Remove smoked cigares if persist
-                            if (userTest.SmokedCigaresUnderTest.Count() > 0)
-                            {
-                                foreach (var smoke in userTest.SmokedCigaresUnderTest)
-                                {
-                                    smoke.IsDeleted = true;
-                                    smoke.DeletedOn = this._dateTime.Now();
-                                    smoke.ModifiedOn = this._dateTime.Now();
-                                }
-                            }
-
-                           
-
-                            // Remove Challenge
-                            testChallenge.IsDeleted = true;
-                            testChallenge.DeletedOn = this._dateTime.Now();
-                            testChallenge.ModifiedOn = this._dateTime.Now();
-
-                            // Update User Status
-                            user.UserState = UserStates.CompletedOnBoarding.ToString();
-                            user.TestId = string.Empty;
-                        });
-
-                        // Stop Testing Timer
-                        StopTestingTimer();
-                        StopTimeSenceLastSmokeTimer();
-                        StopSmokingTimer();
-                        // TODO: - A: Stop any other timer
-
-                        // TODO: A1: STOP TESTING Notification
-
-                        // Navigate to Create Test
-                        await this._navigationService.NavigateToAsync<CreateTestViewModel>();
-                        //TODO: B: Clear navigation stack
-
-                    }
-                    else
-                    {
-                        // User Not Found!
-                        base._appLogger.LogCritical($"Can't find User: User Id {userId}");
-
-                        await base.InternalErrorMessageToUser();
-                    }
                 }
             }
             catch (Exception ex)
             {
                 base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private async Task StopTesting()
+        {
+            // Get Current User
+            var userId = Globals.UserId;
+            var user = _realm.Find<User>(userId);
+
+            // Validate User
+            if (user != null)
+            {
+                var currentTestId = user.TestId;
+
+                // Delete Current Test Information From DB
+                var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
+                var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
+                // 
+
+                _realm.Write(() =>
+                {
+                    // Remove Test
+                    userTest.IsDeleted = true;
+                    userTest.DeletedOn = this._dateTime.Now();
+                    userTest.ModifiedOn = this._dateTime.Now();
+
+                    // Remove smoked cigares if persist
+                    if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                    {
+                        foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                        {
+                            smoke.IsDeleted = true;
+                            smoke.DeletedOn = this._dateTime.Now();
+                            smoke.ModifiedOn = this._dateTime.Now();
+                        }
+                    }
+
+                    // Remove Challenge
+                    testChallenge.IsDeleted = true;
+                    testChallenge.DeletedOn = this._dateTime.Now();
+                    testChallenge.ModifiedOn = this._dateTime.Now();
+
+                    // Update User Status
+                    user.UserState = UserStates.CompletedOnBoarding.ToString();
+                    user.TestId = string.Empty;
+                });
+
+                // Stop Testing Timer
+                StopTestingTimer();
+                StopTimeSenceLastSmokeTimer();
+                StopSmokingTimer();
+
+                // Stop Testing Time Notification
+                NotificationCenter.Current.Cancel(Globals.TestingTimeNotificationId);
+
+                // Stop Smoke Delayed Time Notification
+                NotificationCenter.Current.Cancel(Globals.DelayedSmokeNotificationId);
+
+            }
+            else
+            {
+                // User Not Found!
+                base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
                 await base.InternalErrorMessageToUser();
             }
@@ -519,6 +469,22 @@ namespace SmokeFree.ViewModels.Test
                             StartSmokingTimer();
 
                             StopTimeSenceLastSmokeTimer();
+
+                            if (user.NotificationState)
+                            {
+                                // Register Notification
+                                var delaySmokeNotification = new NotificationRequest
+                                {
+                                    NotificationId = Globals.DelayedSmokeNotificationId,
+                                    Title = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
+                                    Description = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage,
+                                    ReturningData = "Dummy data", // Returning data when tapped on notification.
+                                    NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes) // Used for Scheduling local notification, if not specified notification will show immediately.
+                                };
+
+                                NotificationCenter.Current.Show(delaySmokeNotification);
+                            }
+                            
                         }
                         else
                         {
@@ -545,7 +511,6 @@ namespace SmokeFree.ViewModels.Test
                 await base.InternalErrorMessageToUser();
             }
         }
-
 
 
         /// <summary>
@@ -577,13 +542,6 @@ namespace SmokeFree.ViewModels.Test
         #region METHODS
 
         /// <summary>
-        /// Empty Method, Used By Platform Specific aps
-        /// </summary>
-        /// <param name="title">Notification Title</param>
-        /// <param name="message">Notification Message</param>
-        private void ShowNotification(string title, string message) { }
-
-        /// <summary>
         /// Increment TimeSenceLastSmoke
         /// </summary>
         private void StartTimeSenceLastSmokeTimer()
@@ -611,13 +569,12 @@ namespace SmokeFree.ViewModels.Test
             _deviceTimer
                 .Start( () =>
                 {
+                    // Invcoke TestLeftTime UI changes on main thread
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
-
                     });
                   
-
                     if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
                     {
                         // TODO: C: Add loader to view
@@ -626,16 +583,10 @@ namespace SmokeFree.ViewModels.Test
                         // Execute Function for stop testing
                          MarkTestCompletedAsync();
                          CreateTestResultAsync();
-                         SendNotificationAsync(
-                            AppResources.UnderTestViewModelCompleteTestMessage,
-                            AppResources.UnderTestViewModelCompleteTestNotificationMessage
-                            );
 
                         StopTestingTimer();
 
                         base.IsBusy = false;
-
-                         NavigateToTestResults();
 
                         return false;
                     }
@@ -665,9 +616,6 @@ namespace SmokeFree.ViewModels.Test
                         // TODO: C: Add loader to view
                         base.IsBusy = true;
 
-                         SendNotificationAsync(
-                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
-                            AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage);
                          MarkSmokedAfterDelayLimitAsync();
 
                         base.IsBusy = false;
@@ -701,34 +649,52 @@ namespace SmokeFree.ViewModels.Test
                     // Validate User Test
                     if (userTest != null)
                     {
-                        // Calculate Test Results
-                        var testResultCalculation = this._testCalculationService
-                            .CalculateTestResult(userTest);
-
-
-
-                        // Validate Test Results
-                        if (testResultCalculation.Success)
+                        if (userTest.SmokedCigaresUnderTest.Count < 1)
                         {
-                            // Setup Test Result
-                            var testResult = testResultCalculation.TestResultCalculation;
-                            testResult.TestId = testId;
-                            testResult.CreatedOn = this._dateTime.Now();
+                            await this._dialogService
+                            .ShowDialog(
+                                AppResources.UnderTestViewModelCreateTestResultErrorMessage,
+                                AppResources.UnderTestViewModelCreateTestResultErrorTitle,
+                                AppResources.ButtonOkText);
 
-                            // Write To db
-                            this._realm.Write(() =>
-                            {
-                                userTest.CompletedTestResult = testResult;
-                                user.UserState = UserStates.IsTestComplete.ToString();
-                            });
+                            await StopTesting();
+
+                            // Navigate to Create Test
+                            await this._navigationService.NavigateToAsync<CreateTestViewModel>();
+                            //TODO: B: Clear navigation stack
                         }
                         else
                         {
-                            // Cand Do Test Result Calculations
-                            base._appLogger.LogCritical($"Can't Calculate Test Results: User id: {userId}, Test Id {testId}, Reason: {testResultCalculation.Message}");
+                            // Calculate Test Results
+                            var testResultCalculation = this._testCalculationService
+                                .CalculateTestResult(userTest);
 
-                            await base.InternalErrorMessageToUser();
+                            // Validate Test Results
+                            if (testResultCalculation.Success)
+                            {
+                                // Setup Test Result
+                                var testResult = testResultCalculation.TestResultCalculation;
+                                testResult.TestId = testId;
+                                testResult.CreatedOn = this._dateTime.Now();
+
+                                // Write To db
+                                this._realm.Write(() =>
+                                {
+                                    userTest.CompletedTestResult = testResult;
+                                    user.UserState = UserStates.IsTestComplete.ToString();
+                                });
+
+                                 NavigateToTestResults();
+                            }
+                            else
+                            {
+                                // Cand Do Test Result Calculations
+                                base._appLogger.LogCritical($"Can't Calculate Test Results: User id: {userId}, Test Id {testId}, Reason: {testResultCalculation.Message}");
+
+                                await base.InternalErrorMessageToUser();
+                            }
                         }
+                       
                     }
                     else
                     {
@@ -762,45 +728,6 @@ namespace SmokeFree.ViewModels.Test
             await base._navigationService.NavigateToAsync<TestResultViewModel>();
         }
 
-        /// <summary>
-        /// Send Device Specific Notification For test Completition
-        /// </summary>
-        public async void SendNotificationAsync(string notificationTitle, string notificationMessage)
-        {
-            try
-            {
-                // Get user
-                var userId = Globals.UserId;
-                var user = _realm.Find<User>(userId);
-
-                // Validate User
-                if (user != null)
-                {
-                    // Get User Notifications Options
-                    var userNotification = user.NotificationState;
-                    if (userNotification)
-                    {
-                        // Send Notificatio
-                        //this._notificationManager.SendNotification(
-                        //        notificationTitle, notificationMessage);
-                        // TODO: A1: Start SMOKING NOW Notification if is smoking Now
-                    }
-                }
-                else
-                {
-                    // User Not Found!
-                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
-
-                    await base.InternalErrorMessageToUser();
-                }
-            }
-            catch (Exception ex)
-            {
-                base._appLogger.LogCritical(ex);
-
-                await base.InternalErrorMessageToUser();
-            }
-        }
 
         /// <summary>
         /// Marks Current test completed
@@ -838,14 +765,17 @@ namespace SmokeFree.ViewModels.Test
                             user.UserState = UserStates.IsTestComplete.ToString();
                         });
 
-                        // TODO: A1: STOP TESTING Notification
-
-
                         await this._dialogService
                             .ShowDialog(
                                 AppResources.UnderTestViewModelCompleteTestMessage,
                                 AppResources.UnderTestViewModelCompleteTestTitle,
                                 AppResources.UnderTestViewModelCompleteTestButton);
+
+                        // Stop Testing Time Notification
+                        NotificationCenter.Current.Cancel(Globals.TestingTimeNotificationId);
+
+                        // Stop Smoke Delayed Time Notification
+                        NotificationCenter.Current.Cancel(Globals.DelayedSmokeNotificationId);
 
                     }
                     else
@@ -882,14 +812,14 @@ namespace SmokeFree.ViewModels.Test
                 AppResources.TestDataAccuired,
                 AppResources.ButtonOkText);
 
-            await SmokeOneCigareAsync();
+            await SmokeOneCigareAsync(true);
         }
 
         /// <summary>
         /// Mark One Cigare Smoke
         /// </summary>
         /// <returns></returns>
-        public async Task SmokeOneCigareAsync()
+        public async Task SmokeOneCigareAsync(bool delayed = false)
         {
             try
             {
@@ -932,11 +862,22 @@ namespace SmokeFree.ViewModels.Test
 
                             this.TimeSenceLastSmoke = new TimeSpan(0, 0, 0);
 
-
                             // Update Db
                             this._realm.Write(() =>
                             {
-                                currentSmoke.EndSmokeTime = this._dateTime.Now();
+                                // Is smoke bean forgoten
+                                if (delayed)
+                                {
+                                    currentSmoke.EndSmokeTime = currentSmoke
+                                        .StartSmokeTime
+                                        .LocalDateTime
+                                        .AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes);
+                                }
+                                else
+                                {
+                                    currentSmoke.EndSmokeTime = this._dateTime.Now();
+                                }
+                                
                                 currentSmoke.ModifiedOn = this._dateTime.Now();
                             });
 
@@ -945,7 +886,8 @@ namespace SmokeFree.ViewModels.Test
 
                             this.CurrentlySmokedCount = currentCountSmokes;
 
-                            // TODO: A1: STOP SMOKING NOW Notification if is smoking Now
+                            // STOP SMOKING NOW Notification if is smoking Now
+                            NotificationCenter.Current.Cancel(Globals.DelayedSmokeNotificationId);
 
                             StartTimeSenceLastSmokeTimer();
                             // Stop Timer

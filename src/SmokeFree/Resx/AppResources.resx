@@ -285,4 +285,10 @@
   <data name="CriticalApplicationFail" xml:space="preserve">
     <value>Възникна проплем в работата на приложението! Потърсете за помощ създателите на приложението.</value>
   </data>
+  <data name="UnderTestViewModelCreateTestResultErrorMessage" xml:space="preserve">
+    <value>Времето за тестване изтече, но не бяха събрани данни. Нужно е да повторите теста.</value>
+  </data>
+  <data name="UnderTestViewModelCreateTestResultErrorTitle" xml:space="preserve">
+    <value>Не бяха събрани данни</value>
+  </data>
 </root>
