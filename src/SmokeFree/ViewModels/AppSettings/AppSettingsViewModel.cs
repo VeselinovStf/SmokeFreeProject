@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -66,7 +67,7 @@ namespace SmokeFree.ViewModels.AppSettings
 
             _languages = new ObservableCollection<LanguageItem>();
 
-            InitiateTestTimeDurations();
+            InitiateTestTimeLanguages();
         }
 
         #endregion
@@ -88,6 +89,12 @@ namespace SmokeFree.ViewModels.AppSettings
                 {
                     this.AppUser = user;
                     this.NotificationSwitch = user.NotificationState;
+
+                    var culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+
+                    var currentlySelectedLanguage = this.Languages.FirstOrDefault(e => e.Value == culture);
+
+                    this.SelectedTLanguageItem = currentlySelectedLanguage;
                 }
                 else
                 {
@@ -108,7 +115,7 @@ namespace SmokeFree.ViewModels.AppSettings
         /// <summary>
         /// Initialize Test Time Durations Collection
         /// </summary>
-        private void InitiateTestTimeDurations()
+        private void InitiateTestTimeLanguages()
         {
             this.Languages.Clear();
 
@@ -116,13 +123,13 @@ namespace SmokeFree.ViewModels.AppSettings
             {
                 new LanguageItem()
                 {
-                     Value = 2,
-                     DisplayText =  "Bulgarian"
+                     Value = "bg",
+                     DisplayText = "Sa"
                 },
                 new LanguageItem()
                 {
-                     Value = 1,
-                     DisplayText =  "English"
+                     Value = "en",
+                     DisplayText =  "English (United States)"
                 }
             };
 
@@ -204,6 +211,47 @@ namespace SmokeFree.ViewModels.AppSettings
         {          
             await base._navigationService.NavigateToAsync<OnBoardingViewModel>();
         }
+
+
+        /// <summary>
+        /// Visit Dev Web Site 
+        /// </summary>
+        public IAsyncCommand VisitWebsiteCommand => new AsyncCommand(
+            VisitWebsite,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task VisitWebsite()
+        {
+            //TODO: Visit Website
+        }
+
+        /// <summary>
+        /// Rank App In Store
+        /// </summary>
+        public IAsyncCommand RankAppCommand => new AsyncCommand(
+            RankApp,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task RankApp()
+        {
+            //TODO: Rank App
+        }
+
+        /// <summary>
+        /// Send FeedBack Data to Dev team
+        /// </summary>
+        public IAsyncCommand SendFeedBackDataCommand => new AsyncCommand(
+            SendFeedBackData,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task SendFeedBackData()
+        {
+            //TODO: Send FeedBack Data
+        }
+
 
         #endregion
 

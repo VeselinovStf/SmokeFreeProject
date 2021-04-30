@@ -26,7 +26,12 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowSettings(object sender, EventArgs e)
         {
-            ColorSettings.Show();
+            //ColorSettings.Show();
+        }
+
+        private void ShowLanguages(object sender, EventArgs e)
+        {
+           this.picker.Focus();
         }
     }
 }

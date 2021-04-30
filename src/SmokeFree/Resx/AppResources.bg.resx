@@ -291,4 +291,40 @@
   <data name="UnderTestViewModelCreateTestResultErrorTitle" xml:space="preserve">
     <value>Не бяха събрани данни</value>
   </data>
+  <data name="AppSetingApplicationColorLabel" xml:space="preserve">
+    <value>Цветова Тема</value>
+  </data>
+  <data name="AppSetingApplicationContactSection" xml:space="preserve">
+    <value>Връзки</value>
+  </data>
+  <data name="AppSetingApplicationFeedbackLabel" xml:space="preserve">
+    <value>Изпрати състояние</value>
+  </data>
+  <data name="AppSetingApplicationNotificationLabel" xml:space="preserve">
+    <value>Известия</value>
+  </data>
+  <data name="AppSetingApplicationRankLabel" xml:space="preserve">
+    <value>Оцени Приложението</value>
+  </data>
+  <data name="AppSetingApplicationRestartLabel" xml:space="preserve">
+    <value>Рестартирай Приложанието</value>
+  </data>
+  <data name="AppSetingApplicationSection" xml:space="preserve">
+    <value>Приложение</value>
+  </data>
+  <data name="AppSetingApplicationWebSiteLabel" xml:space="preserve">
+    <value>Посети Уеб Страницата</value>
+  </data>
+  <data name="AppSetingTutorialSection" xml:space="preserve">
+    <value>Ръководство</value>
+  </data>
+  <data name="AppSetingTutorialTitle" xml:space="preserve">
+    <value>Стартирай ръководството</value>
+  </data>
+  <data name="EnglishLanguageDisplayLabel" xml:space="preserve">
+    <value>English ( United States )</value>
+  </data>
+  <data name="BulgarianLanguageDisplayLabel" xml:space="preserve">
+    <value>Български ( България )</value>
+  </data>
 </root>
