@@ -35,6 +35,16 @@ namespace SmokeFree
         public static int UserId { get; set; } = 1;
 
         /// <summary>
+        /// Application Rank Web Site URL
+        /// </summary>
+        public static string AppRankWebSiteUrl = "https://docs.microsoft.com/en-us/xamarin/essentials/open-browser?tabs=android";
+
+        /// <summary>
+        /// Application Web Site URL
+        /// </summary>
+        public static string AppWebSiteUrl = "https://docs.microsoft.com/en-us/xamarin/essentials/open-browser?tabs=android";
+
+        /// <summary>
         /// User issues email report emails
         /// </summary>
         public static List<string> ReportIssueEmails = new List<string>()

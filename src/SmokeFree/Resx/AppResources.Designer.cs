@@ -61,7 +61,97 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Настройки на приложението.
+        ///   Looks up a localized string similar to Color Theme.
+        /// </summary>
+        internal static string AppSetingApplicationColorLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationColorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contacts.
+        /// </summary>
+        internal static string AppSetingApplicationContactSection {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationContactSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Report to Dev Team.
+        /// </summary>
+        internal static string AppSetingApplicationFeedbackLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationFeedbackLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        internal static string AppSetingApplicationNotificationLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationNotificationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank Application.
+        /// </summary>
+        internal static string AppSetingApplicationRankLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationRankLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Restart Application.
+        /// </summary>
+        internal static string AppSetingApplicationRestartLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationRestartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application.
+        /// </summary>
+        internal static string AppSetingApplicationSection {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit Web Site.
+        /// </summary>
+        internal static string AppSetingApplicationWebSiteLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationWebSiteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tutorial.
+        /// </summary>
+        internal static string AppSetingTutorialSection {
+            get {
+                return ResourceManager.GetString("AppSetingTutorialSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Tutorial.
+        /// </summary>
+        internal static string AppSetingTutorialTitle {
+            get {
+                return ResourceManager.GetString("AppSetingTutorialTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Settings.
         /// </summary>
         internal static string AppSettingsViewTitle {
             get {
@@ -70,7 +160,16 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не.
+        ///   Looks up a localized string similar to Bulgarian ( Bulgaria ).
+        /// </summary>
+        internal static string BulgarianLanguageDisplayLabel {
+            get {
+                return ResourceManager.GetString("BulgarianLanguageDisplayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string ButtonCancelText {
             get {
@@ -79,7 +178,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Да.
+        ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string ButtonOkText {
             get {
@@ -88,7 +187,16 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не е възможно да се изпрати съобщението.
+        ///   Looks up a localized string similar to Can&apos;t open Application web site.
+        /// </summary>
+        internal static string CantOpenAppWebSiteToastMessage {
+            get {
+                return ResourceManager.GetString("CantOpenAppWebSiteToastMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable to send message.
         /// </summary>
         internal static string CantSendEmailTitle {
             get {
@@ -97,7 +205,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Възникна проблем! Не е възможно изпращането на вашият проблем до създателите на приложението. Рестартирайте вашето устройство или изпратете съобщение от друго устройство..
+        ///   Looks up a localized string similar to Problem accures! Unable to send your issue to application delopment team. Please restart your device or send as a message from other device..
         /// </summary>
         internal static string CantSendIssueEmailMessage {
             get {
@@ -106,7 +214,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Твоят тест ще продължи {0}. Сигурен ли си, че това ще бъде достатъчно?.
+        ///   Looks up a localized string similar to You Smoke Test is going to continue for {0}. Are you sure about that?.
         /// </summary>
         internal static string ConfirmStartTestingDialogMessage {
             get {
@@ -115,7 +223,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Започни своя тест..
+        ///   Looks up a localized string similar to Start your Test.
         /// </summary>
         internal static string ConfirmStartTestingDialogTitle {
             get {
@@ -124,7 +232,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Крайната дата за успешно спиране на цигарите трябва да е по голяма от днешната със {0} дни!.
+        ///   Looks up a localized string similar to Final goal date must be greater than current date with {0} days!.
         /// </summary>
         internal static string CreateTestInvalidGoalTimeMessage {
             get {
@@ -133,7 +241,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нужно е повече време!.
+        ///   Looks up a localized string similar to Give your self more time!.
         /// </summary>
         internal static string CreateTestInvalidGoalTimeTitle {
             get {
@@ -142,7 +250,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Започни своя тест.
+        ///   Looks up a localized string similar to Start Your Test.
         /// </summary>
         internal static string CreateTestViewTestStartTestButton {
             get {
@@ -151,7 +259,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Избере времеви диапазон за тестване.
+        ///   Looks up a localized string similar to Select Test Time Duration.
         /// </summary>
         internal static string CreateTestViewTestTimePicker {
             get {
@@ -160,7 +268,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Създаване на Тест.
+        ///   Looks up a localized string similar to Create Test.
         /// </summary>
         internal static string CreateTestViewTiitle {
             get {
@@ -169,7 +277,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Избери своята цел! До коя дата искаш да спреш този навик?.
+        ///   Looks up a localized string similar to Let&apos;s First Set Your Stop Smoking Goal Completition Date!.
         /// </summary>
         internal static string CreateTestViewViewDescriptionLabel {
             get {
@@ -178,7 +286,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продължи.
+        ///   Looks up a localized string similar to Continue.
         /// </summary>
         internal static string CreateTestViewViewDescriptionLabelButton {
             get {
@@ -187,7 +295,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Възникна проплем в работата на приложението! Потърсете за помощ създателите на приложението..
+        ///   Looks up a localized string similar to Unexpected exception accuress in application. Please contact application develers.
         /// </summary>
         internal static string CriticalApplicationFail {
             get {
@@ -196,7 +304,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Съобщението е изпратено успешно.
+        ///   Looks up a localized string similar to Email send successfully.
         /// </summary>
         internal static string EmailSuccesTitle {
             get {
@@ -205,7 +313,16 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Възникна неочаквана грешка. Рестартирайте приложението или се свържете със създателите..
+        ///   Looks up a localized string similar to English ( United States ).
+        /// </summary>
+        internal static string EnglishLanguageDisplayLabel {
+            get {
+                return ResourceManager.GetString("EnglishLanguageDisplayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected error accures! Please restart the application or contact with app development team..
         /// </summary>
         internal static string InternalErrorUserMessage {
             get {
@@ -214,7 +331,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Благодарим ви за изпратената информация. След обработката на вашия проблем, екипат ни ще ви отговори със евентуално негово решение..
+        ///   Looks up a localized string similar to Your issue email is send to our development team.Thank you for sending it. We are going to response quick li as we can..
         /// </summary>
         internal static string IssueEmailSuccessMessage {
             get {
@@ -223,7 +340,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вашето устройство не е свързано към интернет мрежа. Свържете се, за да бъде изпратено вашето съобщение.
+        ///   Looks up a localized string similar to Your device is not connected to internet network. Please connet to send issue!.
         /// </summary>
         internal static string IssueNoWebConnectionMessage {
             get {
@@ -232,7 +349,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не сте свързани към интернет.
+        ///   Looks up a localized string similar to No internet connection.
         /// </summary>
         internal static string IssueNoWebConnectionMessageTitle {
             get {
@@ -241,7 +358,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не.
+        ///   Looks up a localized string similar to No.
         /// </summary>
         internal static string NoButtonText {
             get {
@@ -250,7 +367,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продължи.
+        ///   Looks up a localized string similar to Next.
         /// </summary>
         internal static string OnBoardingItemButton1 {
             get {
@@ -259,7 +376,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продължи.
+        ///   Looks up a localized string similar to Next.
         /// </summary>
         internal static string OnBoardingItemButton2 {
             get {
@@ -268,7 +385,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Готово.
+        ///   Looks up a localized string similar to Done.
         /// </summary>
         internal static string OnBoardingItemButton3 {
             get {
@@ -304,7 +421,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
         /// </summary>
         internal static string OnBoardingItemText1 {
             get {
@@ -313,7 +430,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
         /// </summary>
         internal static string OnBoardingItemText2 {
             get {
@@ -322,7 +439,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Едно много дълго обяснение, какво се случва тук!.
+        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
         /// </summary>
         internal static string OnBoardingItemText3 {
             get {
@@ -331,7 +448,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Насока Едно.
+        ///   Looks up a localized string similar to Guide One.
         /// </summary>
         internal static string OnBoardingItemTitle1 {
             get {
@@ -340,7 +457,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Насока Две.
+        ///   Looks up a localized string similar to Guide Two.
         /// </summary>
         internal static string OnBoardingItemTitle2 {
             get {
@@ -349,7 +466,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Насока Три.
+        ///   Looks up a localized string similar to Guide Three.
         /// </summary>
         internal static string OnBoardingItemTitle3 {
             get {
@@ -358,7 +475,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ръководство.
+        ///   Looks up a localized string similar to Tutorial.
         /// </summary>
         internal static string OnBoardingViewTitle {
             get {
@@ -367,7 +484,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to дни.
+        ///   Looks up a localized string similar to days.
         /// </summary>
         internal static string PluralDay {
             get {
@@ -376,7 +493,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ден.
+        ///   Looks up a localized string similar to day.
         /// </summary>
         internal static string SingleDay {
             get {
@@ -385,7 +502,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нещо се обърка.
+        ///   Looks up a localized string similar to Something Went Wrong.
         /// </summary>
         internal static string SomethingWentWrongViewModelHeader {
             get {
@@ -403,7 +520,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уведоми създателите.
+        ///   Looks up a localized string similar to Report to Developers.
         /// </summary>
         internal static string SomethingWentWrongViewModelReportIssueButtonText {
             get {
@@ -412,7 +529,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Нещо се обърка.
+        ///   Looks up a localized string similar to Something Went Wrong.
         /// </summary>
         internal static string SomethingWentWrongViewModelTitle {
             get {
@@ -421,7 +538,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Опитай отново.
+        ///   Looks up a localized string similar to Try Again.
         /// </summary>
         internal static string SomethingWentWrongViewModelTryAgainButtonText {
             get {
@@ -430,7 +547,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Информацията е запазена.
+        ///   Looks up a localized string similar to Test Data Saved.
         /// </summary>
         internal static string TestDataAccuired {
             get {
@@ -439,7 +556,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Резултати от теста.
+        ///   Looks up a localized string similar to Test Results.
         /// </summary>
         internal static string TestResultViewModelTiitle {
             get {
@@ -448,7 +565,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продължи към Предизвикателството.
+        ///   Looks up a localized string similar to Continue to Challenge!.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestButton {
             get {
@@ -457,7 +574,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Теста е приключен..
+        ///   Looks up a localized string similar to Test Completed.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestMessage {
             get {
@@ -466,7 +583,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продължи към Предизвикателството..
+        ///   Looks up a localized string similar to Continue to Challenge!.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestNotificationMessage {
             get {
@@ -475,7 +592,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Поздравления.
+        ///   Looks up a localized string similar to Congratuations!.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestTitle {
             get {
@@ -484,7 +601,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Времето за тестване изтече, но не бяха събрани данни. Нужно е да повторите теста..
+        ///   Looks up a localized string similar to Testing time is over but no data was collected. You nead to mark smoked cigars in order to collect test data. Please redo the test..
         /// </summary>
         internal static string UnderTestViewModelCreateTestResultErrorMessage {
             get {
@@ -493,7 +610,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Не бяха събрани данни.
+        ///   Looks up a localized string similar to Unable to collect data.
         /// </summary>
         internal static string UnderTestViewModelCreateTestResultErrorTitle {
             get {
@@ -502,7 +619,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Лимита за пушене на една цигара е десет минути. След изтичане на лимита, цигарата се маркира като изпупена.
+        ///   Looks up a localized string similar to After 10min. delay your previos smoke was marked as done..
         /// </summary>
         internal static string UnderTestViewModelMarkAfterDelayDialogMessage {
             get {
@@ -511,7 +628,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Цигарата е маркирана за изпушена автоматично.
+        ///   Looks up a localized string similar to Your smoke is mark as finished.
         /// </summary>
         internal static string UnderTestViewModelOneSmokeTreshHoldNotificationMessage {
             get {
@@ -520,7 +637,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Цигарата е маркирана като приключена.
+        ///   Looks up a localized string similar to Your Smoke is mark done.
         /// </summary>
         internal static string UnderTestViewModelOneSmokeTreshHoldNotificationTitle {
             get {
@@ -529,7 +646,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Рестартиране на теста.
+        ///   Looks up a localized string similar to Restart Testing.
         /// </summary>
         internal static string UnderTestViewModelRestartTestingLabel {
             get {
@@ -538,7 +655,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пушиш ли в момента?.
+        ///   Looks up a localized string similar to Are you smoking now?.
         /// </summary>
         internal static string UnderTestViewModelStartSmokeConfirmMessage {
             get {
@@ -547,7 +664,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Добави към теста.
+        ///   Looks up a localized string similar to Add to Test.
         /// </summary>
         internal static string UnderTestViewModelStartSmokeConfirmTitle {
             get {
@@ -556,7 +673,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Рестартирането на теста ще истрие събраната информация до момента! Сигурен ли си, че искаш да направиш това?.
+        ///   Looks up a localized string similar to Restarting the test is going to erase all collected data. Are you shore?.
         /// </summary>
         internal static string UnderTestViewModelStopTestMessage {
             get {
@@ -565,7 +682,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Тест.
+        ///   Looks up a localized string similar to Under Test.
         /// </summary>
         internal static string UnderTestViewTiitle {
             get {
@@ -574,7 +691,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Да.
+        ///   Looks up a localized string similar to Yes.
         /// </summary>
         internal static string YesButtonText {
             get {

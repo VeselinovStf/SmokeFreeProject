@@ -111,7 +111,8 @@ namespace SmokeFree.Utilities.Logging
                     if (System.IO.Directory.Exists(logFolder))
                     {
                         // Zip Name
-                        zipFilename = $"{folder}/{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}.zip";
+                        var zipName = $"{DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss")}.zip";
+                        zipFilename = $"{folder}/{zipName}";
 
                         int filesCount = System.IO.Directory.GetFiles(logFolder, "*.csv").Length;
 
@@ -127,7 +128,7 @@ namespace SmokeFree.Utilities.Logging
                             }
                             else
                             {
-                                var zipFile = System.IO.Directory.GetFiles(logFolder, zipFilename).FirstOrDefault();
+                                var zipFile = System.IO.Directory.GetFiles(folder, zipName).FirstOrDefault();
 
                                 return new CreateLogZipFileResponse(true, zipFile);
                             }

@@ -25,15 +25,23 @@ namespace SmokeFree
 
             InitializeComponent();
 
+            InitializeLocalization();
+            
+            InitializeNavigation();
+        }
+
+        private void InitializeLocalization()
+        {
             LocalizationResourceManager.Current.PropertyChanged += (sender, e)
                 => AppResources.Culture = LocalizationResourceManager.Current.CurrentCulture;
 
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
 
-            // TODO: C: Change from settings in the future and initiate current culture
-            LocalizationResourceManager.Current.CurrentCulture = CultureInfo.CurrentCulture;
+            var appPreferences = AppContainer.Resolve<IAppPreferencesService>();
+            var appLanguage = appPreferences.LanguageValue;
 
-            InitializeNavigation();
+            // TODO: C: Change from settings in the future and initiate current culture
+            LocalizationResourceManager.Current.CurrentCulture = appLanguage == string.Empty ? CultureInfo.CurrentCulture : new CultureInfo(appLanguage);
         }
 
         private void DevelopmentDatabaseClearing()

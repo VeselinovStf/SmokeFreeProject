@@ -327,4 +327,7 @@
   <data name="BulgarianLanguageDisplayLabel" xml:space="preserve">
     <value>Български ( България )</value>
   </data>
+  <data name="CantOpenAppWebSiteToastMessage" xml:space="preserve">
+    <value>Не е възможно отваряне на уеб страницата</value>
+  </data>
 </root>

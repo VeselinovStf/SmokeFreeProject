@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Realms;
 using SmokeFree;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
@@ -36,6 +37,10 @@ namespace AppSettingsViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var preferencesServiceMock = new Mock<IAppPreferencesService>();
+            var networkConnectivityServiceMock = new Mock<INetworkConnectionService>();
+            var localLogUtilityServiceMock = new Mock<ILocalLogUtility>();
+            var deviceEmailSenderServiceMock = new Mock<IDeviceEmailSender>();
 
             var user = new User()
             {
@@ -48,7 +53,11 @@ namespace AppSettingsViewModelTests.UnitTests
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                preferencesServiceMock.Object,
+                 networkConnectivityServiceMock.Object,
+                localLogUtilityServiceMock.Object,
+                deviceEmailSenderServiceMock.Object
                 );
 
             object initializeParameter = new object();
@@ -92,6 +101,10 @@ namespace AppSettingsViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var preferencesServiceMock = new Mock<IAppPreferencesService>();
+            var networkConnectivityServiceMock = new Mock<INetworkConnectionService>();
+            var localLogUtilityServiceMock = new Mock<ILocalLogUtility>();
+            var deviceEmailSenderServiceMock = new Mock<IDeviceEmailSender>();
 
             var user = new User()
             {
@@ -105,7 +118,11 @@ namespace AppSettingsViewModelTests.UnitTests
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                preferencesServiceMock.Object,
+                 networkConnectivityServiceMock.Object,
+                localLogUtilityServiceMock.Object,
+                deviceEmailSenderServiceMock.Object
                 );
 
             object initializeParameter = new object();
@@ -139,14 +156,22 @@ namespace AppSettingsViewModelTests.UnitTests
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();        
+            var dialogServiceMock = new Mock<IDialogService>();
+            var preferencesServiceMock = new Mock<IAppPreferencesService>();
+            var networkConnectivityServiceMock = new Mock<INetworkConnectionService>();
+            var localLogUtilityServiceMock = new Mock<ILocalLogUtility>();
+            var deviceEmailSenderServiceMock = new Mock<IDeviceEmailSender>();
 
             var onBoardingViewModel = new AppSettingsViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                preferencesServiceMock.Object,
+                 networkConnectivityServiceMock.Object,
+                localLogUtilityServiceMock.Object,
+                deviceEmailSenderServiceMock.Object
                 );
 
             object initializeParameter = new object();

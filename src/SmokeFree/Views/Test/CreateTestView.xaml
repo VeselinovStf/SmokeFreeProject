@@ -98,7 +98,7 @@
                         />
 
                     <!-- TEST VIEW TITLE -->
-                    <Label Text="{Binding ViewTitle}"
+                    <Label Text="{xct:Translate CreateTestViewTiitle}"
                             VerticalOptions="CenterAndExpand" 
                             HorizontalOptions="CenterAndExpand"
                             TextColor="{StaticResource Gray-100}"

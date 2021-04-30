@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.ViewModels.AppSettings;
@@ -31,13 +32,22 @@ namespace AppSettingsViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var preferencesServiceMock = new Mock<IAppPreferencesService>();
+            var networkConnectivityServiceMock = new Mock<INetworkConnectionService>();
+            var localLogUtilityServiceMock = new Mock<ILocalLogUtility>();
+            var deviceEmailSenderServiceMock = new Mock<IDeviceEmailSender>();
+
 
             var appSettingsViewModel = new AppSettingsViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                preferencesServiceMock.Object,
+                 networkConnectivityServiceMock.Object,
+                localLogUtilityServiceMock.Object,
+                deviceEmailSenderServiceMock.Object
                 );
 
             // Act

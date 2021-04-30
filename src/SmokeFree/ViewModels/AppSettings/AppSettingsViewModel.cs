@@ -1,6 +1,7 @@
 ﻿using Plugin.LocalNotification;
 using Realms;
 using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Essentials;
 
 namespace SmokeFree.ViewModels.AppSettings
 {
@@ -44,6 +46,26 @@ namespace SmokeFree.ViewModels.AppSettings
         private readonly Realm _realm;
 
         /// <summary>
+        /// Application Preferences store
+        /// </summary>
+        private readonly IAppPreferencesService _appPreferencesService;
+
+        /// <summary>
+        /// Network Connectivity Service 
+        /// </summary>
+        private readonly INetworkConnectionService _connectionService;
+
+        /// <summary>
+        /// Application Logging Utility
+        /// </summary>
+        private readonly ILocalLogUtility _localLogUtility;
+
+        /// <summary>
+        /// Device Email Sender
+        /// </summary>
+        private readonly IDeviceEmailSender _emailSender;
+
+        /// <summary>
         /// Application User
         /// </summary>
         private User _appUser;
@@ -57,7 +79,11 @@ namespace SmokeFree.ViewModels.AppSettings
             INavigationService navigationService,
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
-            IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IDialogService dialogService,
+            IAppPreferencesService appPreferencesService,
+            INetworkConnectionService networkConnectionService,
+            ILocalLogUtility localLogUtility,
+            IDeviceEmailSender deviceEmailSender) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             ViewTitle = AppResources.AppSettingsViewTitle;
@@ -65,6 +91,19 @@ namespace SmokeFree.ViewModels.AppSettings
             // Database
             _realm = realm;
 
+            // Application Preferences store
+            _appPreferencesService = appPreferencesService;
+
+            // Network Connectivity Service 
+            _connectionService = networkConnectionService;
+
+            // Application Logging Utility
+            _localLogUtility = localLogUtility;
+
+            // Device Email Sender
+            _emailSender = deviceEmailSender;
+
+            // App Availible Languges
             _languages = new ObservableCollection<LanguageItem>();
 
             InitiateTestTimeLanguages();
@@ -90,8 +129,17 @@ namespace SmokeFree.ViewModels.AppSettings
                     this.AppUser = user;
                     this.NotificationSwitch = user.NotificationState;
 
-                    var culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
-
+                    var appPreferencesLocalization = this._appPreferencesService.LanguageValue;
+                    var culture = string.Empty;
+                    if (appPreferencesLocalization.Equals(string.Empty))
+                    {
+                        culture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+                    }
+                    else
+                    {
+                        culture = appPreferencesLocalization;
+                    }
+                    
                     var currentlySelectedLanguage = this.Languages.FirstOrDefault(e => e.Value == culture);
 
                     this.SelectedTLanguageItem = currentlySelectedLanguage;
@@ -124,12 +172,12 @@ namespace SmokeFree.ViewModels.AppSettings
                 new LanguageItem()
                 {
                      Value = "bg",
-                     DisplayText = "Sa"
+                     DisplayText = AppResources.BulgarianLanguageDisplayLabel
                 },
                 new LanguageItem()
                 {
                      Value = "en",
-                     DisplayText =  "English (United States)"
+                     DisplayText =   AppResources.EnglishLanguageDisplayLabel
                 }
             };
 
@@ -223,7 +271,30 @@ namespace SmokeFree.ViewModels.AppSettings
 
         private async Task VisitWebsite()
         {
-            //TODO: Visit Website
+            try
+            {
+                if (this._connectionService.IsConnected)
+                {
+                    await Browser.OpenAsync(Globals.AppWebSiteUrl, BrowserLaunchMode.SystemPreferred);
+                }
+                else
+                {
+                    // Notify User
+                    await this._dialogService
+                        .ShowDialog(
+                            AppResources.IssueNoWebConnectionMessageTitle,
+                            AppResources.CantSendIssueEmailMessage,
+                            AppResources.ButtonOkText);
+                }               
+            }
+            catch (Exception ex)
+            {
+                // User Not Found!
+                base._appLogger.LogCritical($"Can't Open Application Web Site: {ex.Message}");
+
+                this._dialogService
+                    .ShowToast(AppResources.CantOpenAppWebSiteToastMessage);
+            }
         }
 
         /// <summary>
@@ -236,7 +307,30 @@ namespace SmokeFree.ViewModels.AppSettings
 
         private async Task RankApp()
         {
-            //TODO: Rank App
+            try
+            {
+                if (this._connectionService.IsConnected)
+                {
+                    await Browser.OpenAsync(Globals.AppRankWebSiteUrl, BrowserLaunchMode.SystemPreferred);
+                }
+                else
+                {
+                    // Notify User
+                    await this._dialogService
+                        .ShowDialog(
+                            AppResources.IssueNoWebConnectionMessageTitle,
+                            AppResources.CantSendIssueEmailMessage,
+                            AppResources.ButtonOkText);
+                }  
+            }
+            catch (Exception ex)
+            {
+                // User Not Found!
+                base._appLogger.LogCritical($"Can't Open Application Web Site: {ex.Message}");
+
+                this._dialogService
+                    .ShowToast(AppResources.CantOpenAppWebSiteToastMessage);
+            }
         }
 
         /// <summary>
@@ -249,7 +343,70 @@ namespace SmokeFree.ViewModels.AppSettings
 
         private async Task SendFeedBackData()
         {
-            //TODO: Send FeedBack Data
+            try
+            {
+                var responseMessageTitle = string.Empty;
+                var responseMessage = string.Empty;
+
+                // Check If User is able to send Email at all
+                if (this._connectionService.IsConnected)
+                {
+                    // Get Archived Logs
+                    var archivedLogsUtilityResponse = this._localLogUtility
+                        .CreateLogZipFile();
+
+                    // Check if Logs are Archived
+                    if (archivedLogsUtilityResponse.Created)
+                    {
+                        // Send Them To Dev Team Email
+                        var emailSendResult = await this._emailSender
+                            .SendEmailAsync(
+                                Globals.IssueReportTitle,
+                                Globals.IssueReportBody,
+                                Globals.ReportIssueEmails,
+                                archivedLogsUtilityResponse.Message);
+
+                        if (emailSendResult.Success)
+                        {
+                            // Success
+                            responseMessageTitle = AppResources.EmailSuccesTitle;
+                            responseMessage = AppResources.IssueEmailSuccessMessage;
+                        }
+                        else
+                        {
+                            // Can't send email
+                            responseMessageTitle = AppResources.CantSendEmailTitle;
+                            responseMessage = AppResources.CantSendIssueEmailMessage;
+                        }
+                    }
+                    else
+                    {
+                        // Can't create log zip
+                        base._appLogger.LogError(archivedLogsUtilityResponse.Message);
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // User Is not connected to web - can't send issue
+                    responseMessageTitle = AppResources.IssueNoWebConnectionMessageTitle;
+                    responseMessage = AppResources.IssueNoWebConnectionMessage;
+                }
+
+                // Notify User
+                await this._dialogService
+                    .ShowDialog(
+                        responseMessage,
+                        responseMessageTitle,
+                        AppResources.ButtonOkText);
+            }
+            catch (System.Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
         }
 
 
@@ -348,6 +505,8 @@ namespace SmokeFree.ViewModels.AppSettings
 
                     //TODO: A1 Change language
                     LocalizationResourceManager.Current.CurrentCulture = value == null ? CultureInfo.CurrentCulture : new CultureInfo(value.Value);
+
+                    this._appPreferencesService.LanguageValue = value.Value;
 
                     OnPropertyChanged();
                 }
