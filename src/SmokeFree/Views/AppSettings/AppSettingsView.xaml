@@ -185,9 +185,20 @@
                                     FontSize="20"
                                     HeightRequest="40"
                                     WidthRequest="40"
-                                    Clicked="ShowSettings"
+                                    Clicked="ShowColorSettings"
                                    />
                                 <!-- /END/ START COLOR BUTTON -->
+
+                                <!-- Hidden Picker -->
+                                <Picker x:Name="ColorPicker" IsVisible="False"
+                                    Title="Language"
+                                    TitleColor="{StaticResource Gray-300}"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="30"
+                                    ItemsSource="{Binding Colours}"
+                                    ItemDisplayBinding="{Binding DisplayText}"
+                                    SelectedItem="{Binding SelectedColorItem}"
+                                />
 
                             </Grid>
                         </ViewCell>

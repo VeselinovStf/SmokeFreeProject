@@ -12,21 +12,21 @@ namespace SmokeFree.Views.AppSettings
         {
             InitializeComponent();
 
-            MessagingCenter.Subscribe<ColorSettingsView>(this, "ColorSettingsView", model => ChangeBarBackgroundColor());
+            //MessagingCenter.Subscribe<ColorSettingsView>(this, "ColorSettingsView", model => ChangeBarBackgroundColor());
         }
 
         private void ChangeBarBackgroundColor()
         {
-            var colorThemes = Globals.AppColorThemes;
+            //var colorThemes = Globals.AppColorThemes;
 
-            var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
+            //var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
 
-            BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
+            //BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
         }
 
-        private void ShowSettings(object sender, EventArgs e)
+        private void ShowColorSettings(object sender, EventArgs e)
         {
-            //ColorSettings.Show();
+            ColorPicker.Focus();
         }
 
         private void ShowLanguages(object sender, EventArgs e)

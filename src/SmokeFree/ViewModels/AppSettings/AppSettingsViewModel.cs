@@ -8,6 +8,7 @@ using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.AppSetting;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.Base;
+using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.OnBoarding;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.Helpers;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace SmokeFree.ViewModels.AppSettings
 {
@@ -35,10 +37,18 @@ namespace SmokeFree.ViewModels.AppSettings
         private ObservableCollection<LanguageItem> _languages;
 
         /// <summary>
+        /// Colours Collection
+        /// </summary>
+        private ObservableCollection<ColourItem> _colours;
+
+        /// <summary>
         /// Switch notifications on/ off
         /// </summary>
         private bool _notificationSwitch;
+
         private LanguageItem _selectedTLanguageItem;
+
+        private ColourItem _selectedColourItem;
 
         /// <summary>
         /// Database
@@ -106,7 +116,11 @@ namespace SmokeFree.ViewModels.AppSettings
             // App Availible Languges
             _languages = new ObservableCollection<LanguageItem>();
 
-            InitiateTestTimeLanguages();
+            // App Availible Colours Shemes
+            _colours = new ObservableCollection<ColourItem>();
+
+            InitiateAppLanguages();
+            InitializeAppColourShemes();
         }
 
         #endregion
@@ -163,7 +177,7 @@ namespace SmokeFree.ViewModels.AppSettings
         /// <summary>
         /// Initialize Test Time Durations Collection
         /// </summary>
-        private void InitiateTestTimeLanguages()
+        private void InitiateAppLanguages()
         {
             this.Languages.Clear();
 
@@ -184,6 +198,26 @@ namespace SmokeFree.ViewModels.AppSettings
             foreach (var language in languages)
             {
                 this.Languages.Add(language);
+            }
+        }
+
+        /// <summary>
+        /// Initate availible app colour shemes
+        /// </summary>
+        private void InitializeAppColourShemes()
+        {
+            this.Colours.Clear();
+
+            // Create Collection Of Collors
+            var globalThemeColors = Globals.AppColorThemes;
+
+            foreach (var colour in globalThemeColors)
+            {
+                this.Colours.Add(new ColourItem()
+                {
+                    Value = colour.Value,
+                    DisplayText = colour.Key
+                });
             }
         }
 
@@ -374,6 +408,9 @@ namespace SmokeFree.ViewModels.AppSettings
                         }
                         else
                         {
+                            base._appLogger.LogError(emailSendResult.Message);
+
+
                             // Can't send email
                             responseMessageTitle = AppResources.CantSendEmailTitle;
                             responseMessage = AppResources.CantSendIssueEmailMessage;
@@ -389,6 +426,8 @@ namespace SmokeFree.ViewModels.AppSettings
                 }
                 else
                 {
+                    base._appLogger.LogError(AppResources.IssueNoWebConnectionMessageTitle);
+
                     // User Is not connected to web - can't send issue
                     responseMessageTitle = AppResources.IssueNoWebConnectionMessageTitle;
                     responseMessage = AppResources.IssueNoWebConnectionMessage;
@@ -492,6 +531,22 @@ namespace SmokeFree.ViewModels.AppSettings
         }
 
         /// <summary>
+        /// Colours for Picker
+        /// </summary>
+        public ObservableCollection<ColourItem> Colours
+        {
+            get { return _colours; }
+            set
+            {
+                if (value != null)
+                {
+                    _colours = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
         /// Selected Test Time Duration Item
         /// </summary>
         public LanguageItem SelectedTLanguageItem
@@ -503,7 +558,6 @@ namespace SmokeFree.ViewModels.AppSettings
                 {
                     _selectedTLanguageItem = value;
 
-                    //TODO: A1 Change language
                     LocalizationResourceManager.Current.CurrentCulture = value == null ? CultureInfo.CurrentCulture : new CultureInfo(value.Value);
 
                     this._appPreferencesService.LanguageValue = value.Value;
@@ -513,7 +567,48 @@ namespace SmokeFree.ViewModels.AppSettings
             }
         }
 
+        /// <summary>
+        /// Selected Colour Item
+        /// </summary>
+        public ColourItem SelectedColorItem
+        {
+            get { return _selectedColourItem; }
+            set
+            {
+                if (value != null)
+                {
+                    _selectedColourItem = value;
+
+                    ApplySettings(this.Colours.IndexOf(value), value.DisplayText);
+
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
+        private void ApplySettings(int backgroundColorIndex, string colorKey)
+        {
+            INavigationService navigationService = null;
+            IAppLogger appLogger = null;
+
+            try
+            {             
+                SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor = backgroundColorIndex;
+
+                _appPreferencesService.ColorKey = colorKey;
+
+                MessagingCenter.Send(this, "ColorSettingsView");
+                 
+            }
+            catch (Exception ex)
+            {
+                appLogger.LogError(ex.Message);
+
+                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+            }
+
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace SmokeFree
             LocalizationResourceManager.Current.PropertyChanged += (sender, e)
                 => AppResources.Culture = LocalizationResourceManager.Current.CurrentCulture;
 
+
             LocalizationResourceManager.Current.Init(AppResources.ResourceManager);
 
             var appPreferences = AppContainer.Resolve<IAppPreferencesService>();

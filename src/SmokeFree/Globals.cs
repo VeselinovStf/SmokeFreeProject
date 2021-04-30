@@ -20,13 +20,13 @@ namespace SmokeFree
         /// <summary>
         /// App Hex Color Themes Set
         /// </summary>
-        public static List<string> AppColorThemes = new List<string>()
-        {
-            "#f54e5e",
-            "#2f72e4",
-            "#5d4cf7",
-            "#06846a",
-            "#d54008"
+        public static Dictionary<string,string> AppColorThemes = new Dictionary<string,string>()
+        { 
+           {"Attention","#f54e5e"},
+           {"Coulm","#2f72e4"},
+           {"Mellow","#5d4cf7"},
+           {"Goal","#06846a"},
+           {"Win","#d54008"}
         };
 
         /// <summary>

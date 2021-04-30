@@ -1,4 +1,5 @@
 ﻿using SmokeFree.Abstraction.Services.General;
+using System.Linq;
 using Xamarin.Essentials;
 
 namespace SmokeFree.Services.General
@@ -20,6 +21,21 @@ namespace SmokeFree.Services.General
             set
             {
                 Preferences.Set(nameof(LanguageValue), value);
+            }
+        }
+
+        /// <summary>
+        /// Holds Application Color Sheme
+        /// </summary>
+        public string ColorKey
+        {
+            get
+            {
+                return Preferences.Get(nameof(ColorKey), Globals.AppColorThemes.First().Key);
+            }
+            set
+            {
+                Preferences.Set(nameof(ColorKey), value);
             }
         }
     }

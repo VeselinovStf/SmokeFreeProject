@@ -64,6 +64,7 @@ namespace SmokeFree.AppLayout
 
         public static void ApplyColorSet1()
         {
+
             Application.Current.Resources["PrimaryColor"] = Color.FromHex("#f54e5e");
             Application.Current.Resources["PrimaryDarkColor"] = Color.FromHex("#d0424f");
             Application.Current.Resources["PrimaryDarkenColor"] = Color.FromHex("#ab3641");

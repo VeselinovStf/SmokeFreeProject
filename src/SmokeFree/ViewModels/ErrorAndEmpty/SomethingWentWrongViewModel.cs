@@ -155,6 +155,8 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
                         }
                         else
                         {
+                            base._appLogger.LogError(emailSendResult.Message);
+
                             // Can't send email
                             responseMessageTitle = AppResources.CantSendEmailTitle;
                             responseMessage = AppResources.CantSendIssueEmailMessage;
@@ -170,6 +172,7 @@ namespace SmokeFree.ViewModels.ErrorAndEmpty
                 }
                 else
                 {
+                    base._appLogger.LogError(AppResources.IssueNoWebConnectionMessageTitle);
                     // User Is not connected to web - can't send issue
                     responseMessageTitle = AppResources.IssueNoWebConnectionMessageTitle;
                     responseMessage = AppResources.IssueNoWebConnectionMessage;

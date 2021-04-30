@@ -13,5 +13,10 @@ namespace SmokeFree.Abstraction.Services.General
         /// Holds Application CultureInfo Language Value
         /// </summary>
         string LanguageValue { get; set; }
+
+        /// <summary>
+        /// Holds Application Color Sheme
+        /// </summary>
+        string ColorKey { get; set; }
     }
 }

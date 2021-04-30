@@ -14,7 +14,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Default Application Color Theme Skin
         /// </summary>
-        public int AppColorThemeIndex { get; set; }
+        //public int AppColorThemeIndex { get; set; }
 
         /// <summary>
         /// State for Notification Service

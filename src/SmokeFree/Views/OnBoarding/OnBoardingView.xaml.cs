@@ -22,58 +22,59 @@ namespace SmokeFree.Views.OnBoarding
 
             InitializeDefaultColour();
 
-            MessagingCenter.Subscribe<ColorSettingsView>(this, "ColorSettingsView", model => ChangeBarBackgroundColor());
+            //MessagingCenter.Subscribe<ColorSettingsView>(this, "ColorSettingsView", model => ChangeBarBackgroundColor());
         }
 
+        //TODO: CLEAN
         private void InitializeDefaultColour()
         {
-            INavigationService navigationService = null;
-            IAppLogger appLogger = null;
+            //INavigationService navigationService = null;
+            //IAppLogger appLogger = null;
 
-            try
-            {
-                var userId = Globals.UserId;
-                var realm = AppContainer.Resolve<Realm>();
-                navigationService = AppContainer.Resolve<INavigationService>();
-                appLogger = AppContainer.Resolve<IAppLogger>();
+            //try
+            //{
+            //    var userId = Globals.UserId;
+            //    var realm = AppContainer.Resolve<Realm>();
+            //    navigationService = AppContainer.Resolve<INavigationService>();
+            //    appLogger = AppContainer.Resolve<IAppLogger>();
 
-                var user = realm.Find<User>(userId);
+            //    var user = realm.Find<User>(userId);
 
-                if (user != null)
-                {
+            //    if (user != null)
+            //    {
 
-                    var currentColorIndex = user.AppColorThemeIndex;
+            //        var currentColorIndex = user.AppColorThemeIndex;
 
-                    var colorThemes = Globals.AppColorThemes;
+            //        var colorThemes = Globals.AppColorThemes;
 
-                    BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
-                }
-                else
-                {
-                    appLogger.LogWarning($"Can't find User! User id {userId}");
+            //        BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+            //    }
+            //    else
+            //    {
+            //        appLogger.LogWarning($"Can't find User! User id {userId}");
 
-                    var colorThemes = Globals.AppColorThemes;
+            //        var colorThemes = Globals.AppColorThemes;
 
-                    BackgroundColor = Color.FromHex(colorThemes[0]);
-                }
-            }
-            catch (Exception ex)
-            {
-                appLogger.LogError(ex.Message);
+            //        BackgroundColor = Color.FromHex(colorThemes[0]);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    appLogger.LogError(ex.Message);
 
-                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
-            }
+            //    navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+            //}
           
 
         }
 
         private void ChangeBarBackgroundColor()
         {
-            var colorThemes = Globals.AppColorThemes;
+            //var colorThemes = Globals.AppColorThemes;
 
-            var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
+            //var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
 
-            BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
+            //BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
         }
 
         /// <summary>
