@@ -11,7 +11,7 @@ namespace SmokeFree.Droid
        Theme = "@style/Theme.Splash",
        MainLauncher = true,
        NoHistory = true,
-       Icon = "@drawable/Icon")]
+       Icon = "@drawable/icon")]
     public class SplashScreenActivity : Activity
     {
         static readonly string TAG = "X:" + typeof(SplashScreenActivity).Name;

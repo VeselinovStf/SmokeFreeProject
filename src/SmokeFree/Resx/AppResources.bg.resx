@@ -363,4 +363,7 @@
   <data name="IssueNoDataToSendTitle" xml:space="preserve">
     <value>Няма информация</value>
   </data>
+  <data name="UnderTestViewModelStopSmokeConfirmTitle" xml:space="preserve">
+    <value>Приключи ли с цигарата?</value>
+  </data>
 </root>

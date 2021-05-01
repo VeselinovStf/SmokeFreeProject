@@ -772,6 +772,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you done with smoke?.
+        /// </summary>
+        internal static string UnderTestViewModelStopSmokeConfirmTitle {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelStopSmokeConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restarting the test is going to erase all collected data. Are you shore?.
         /// </summary>
         internal static string UnderTestViewModelStopTestMessage {

@@ -33,7 +33,7 @@ namespace SmokeFree.Droid
 
             NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
             {
-
+                 ShowBadge = true
             });
 
             NotificationCenter.NotifyNotificationTapped(Intent);

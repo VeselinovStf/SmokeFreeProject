@@ -22,8 +22,6 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <!-- Display Item -->
@@ -35,9 +33,9 @@
                                 Margin="20,30,20,0"
                                 Source="{Binding ImagePath}"/>
                 <!-- /END/ Display Item -->
-                <StackLayout Grid.Row="1">
-                    <!-- Header -->
-                    <Label 
+
+                <!-- Header -->
+                <Label 
                                 Grid.Row="1"
                                 TextColor="{StaticResource Gray-900}"
                                 VerticalOptions="Start"
@@ -48,7 +46,10 @@
                                 HorizontalTextAlignment="Center"
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Header}"/>
-                    <!-- /END/ Header -->
+                <!-- /END/ Header -->
+                
+                <StackLayout Grid.Row="2">
+                  
 
                     <!-- Description Text -->
                     <Label                                
@@ -63,7 +64,7 @@
 
                     <!-- Report Issue Button -->
                     <Button                                                      
-                            Grid.Row="3"
+                          
                             FontSize="20"                           
                             FontAttributes="Bold"
                             CornerRadius="30"
@@ -74,7 +75,7 @@
 
                     <!-- Try Again Button -->
                     <Button                                                      
-                            Grid.Row="4"
+                           
                             FontSize="20"                           
                             FontAttributes="Bold"
                             CornerRadius="30"

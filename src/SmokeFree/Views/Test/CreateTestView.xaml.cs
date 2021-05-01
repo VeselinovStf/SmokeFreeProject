@@ -74,7 +74,7 @@ namespace SmokeFree.Views.Test
             var dateTimeService = AppContainer.Resolve<IDateTimeWrapper>();
 
             this.GoalDateTime.Focus();
-            this.GoalDateTime.MinimumDate = dateTimeService.Now().AddDays(Globals.MinChallengeDays);
+            this.GoalDateTime.MinimumDate = dateTimeService.Now().AddDays(Globals.MinChallengeDays + 1);
             this.GoalDateTime.MaximumDate = dateTimeService.Now().AddYears(1);
 
 

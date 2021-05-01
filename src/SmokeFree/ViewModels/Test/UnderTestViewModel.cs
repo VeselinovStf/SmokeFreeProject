@@ -474,11 +474,16 @@ namespace SmokeFree.ViewModels.Test
                                 // Register Notification
                                 var delaySmokeNotification = new NotificationRequest
                                 {
+                                    
                                     NotificationId = Globals.DelayedSmokeNotificationId,
                                     Title = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
                                     Description = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage,
                                     ReturningData = "Dummy data", // Returning data when tapped on notification.
-                                    NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes) // Used for Scheduling local notification, if not specified notification will show immediately.
+                                    NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes), 
+                                    Android = new AndroidOptions() 
+                                    {
+                                         IconName = "icon"
+                                    } // Used for Scheduling local notification, if not specified notification will show immediately.
                                 };
 
                                 NotificationCenter.Current.Show(delaySmokeNotification);
@@ -525,7 +530,7 @@ namespace SmokeFree.ViewModels.Test
             // Check User Notification
             var userNotification = await base._dialogService
                 .ConfirmAsync(AppResources.UnderTestViewModelStartSmokeConfirmMessage,
-                    AppResources.UnderTestViewModelStartSmokeConfirmTitle,
+                    AppResources.UnderTestViewModelStopSmokeConfirmTitle,
                     AppResources.YesButtonText,
                     AppResources.NoButtonText);
 
@@ -806,10 +811,8 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private async void MarkSmokedAfterDelayLimitAsync()
         {
-            await base._dialogService.ShowDialog(
-                AppResources.UnderTestViewModelMarkAfterDelayDialogMessage,
-                AppResources.TestDataAccuired,
-                AppResources.ButtonOkText);
+            base._dialogService.ShowToast(
+                AppResources.UnderTestViewModelMarkAfterDelayDialogMessage);
 
             await SmokeOneCigareAsync(true);
         }

@@ -224,7 +224,11 @@ namespace SmokeFree.ViewModels.Test
                                     Title = AppResources.UnderTestViewModelCompleteTestMessage,
                                     Description = AppResources.UnderTestViewModelCompleteTestNotificationMessage,
                                     ReturningData = "Dummy data", // Returning data when tapped on notification.
-                                    NotifyTime = testEndDate.AddSeconds(3) // Used for Scheduling local notification, if not specified notification will show immediately.
+                                    NotifyTime = testEndDate.AddSeconds(3) ,
+                                    Android = new AndroidOptions()
+                                    {
+                                        IconName = "icon"
+                                    } // Used for Scheduling local notification, if not specified notification will show immediately.
                                 };
 
                                 NotificationCenter.Current.Show(testTimerNotification);

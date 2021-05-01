@@ -363,4 +363,7 @@
   <data name="IssueNoDataToSendTitle" xml:space="preserve">
     <value>No data to send</value>
   </data>
+  <data name="UnderTestViewModelStopSmokeConfirmTitle" xml:space="preserve">
+    <value>Are you done with smoke?</value>
+  </data>
 </root>
