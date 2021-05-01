@@ -13,7 +13,7 @@ namespace SmokeFree.Views.Test
     {
         public UnderTestView()
         {
-            InitializeComponent();         
+            InitializeComponent();
         }
 
         private void InitializeDefaultColour()

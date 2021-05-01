@@ -229,7 +229,7 @@ namespace SmokeFree.ViewModels.Test
 
                                 NotificationCenter.Current.Show(testTimerNotification);
                             }
-                            
+
                             // Navigate to Under Test
                             await base._navigationService.NavigateToAsync<UnderTestViewModel>();
                         }
@@ -248,7 +248,7 @@ namespace SmokeFree.ViewModels.Test
 
                 await base.InternalErrorMessageToUser();
             }
-            
+
         }
 
 

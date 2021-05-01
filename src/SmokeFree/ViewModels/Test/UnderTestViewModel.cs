@@ -8,7 +8,6 @@ using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
-using SmokeFree.Models.Managers.NotificationManager;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
@@ -29,7 +28,7 @@ namespace SmokeFree.ViewModels.Test
     {
         #region FIELDS
 
-       
+
         /// <summary>
         /// Stop Testing Timer Cancelation Token
         /// </summary>
@@ -124,7 +123,7 @@ namespace SmokeFree.ViewModels.Test
                 MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
             });
 
-            
+
         }
 
         #endregion
@@ -199,7 +198,7 @@ namespace SmokeFree.ViewModels.Test
 
                                 StartTimeSenceLastSmokeTimer();
                             }
-                               
+
                             //}
 
                         }
@@ -282,7 +281,7 @@ namespace SmokeFree.ViewModels.Test
 
                 if (userNotification)
                 {
-                   // Call Stop Testing
+                    // Call Stop Testing
                     await StopTesting();
 
                     // Navigate to Create Test
@@ -484,7 +483,7 @@ namespace SmokeFree.ViewModels.Test
 
                                 NotificationCenter.Current.Show(delaySmokeNotification);
                             }
-                            
+
                         }
                         else
                         {
@@ -554,7 +553,7 @@ namespace SmokeFree.ViewModels.Test
                         this.TimeSenceLastSmoke += TimeSpan.FromSeconds(1);
 
                     });
-                    
+
 
                     return true;
 
@@ -567,33 +566,33 @@ namespace SmokeFree.ViewModels.Test
         private void StartTestintTimer()
         {
             _deviceTimer
-                .Start( () =>
-                {
-                    // Invcoke TestLeftTime UI changes on main thread
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
-                    });
-                  
-                    if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
-                    {
-                        // TODO: C: Add loader to view
-                        base.IsBusy = true;
+                .Start(() =>
+               {
+                   // Invcoke TestLeftTime UI changes on main thread
+                   Device.BeginInvokeOnMainThread(() =>
+                  {
+                      this.TestLeftTime = this.TestLeftTime - TimeSpan.FromSeconds(1);
+                  });
 
-                        // Execute Function for stop testing
-                         MarkTestCompletedAsync();
-                         CreateTestResultAsync();
+                   if (this.TestLeftTime <= new TimeSpan(0, 0, 2))
+                   {
+                       // TODO: C: Add loader to view
+                       base.IsBusy = true;
 
-                        StopTestingTimer();
+                       // Execute Function for stop testing
+                       MarkTestCompletedAsync();
+                       CreateTestResultAsync();
 
-                        base.IsBusy = false;
+                       StopTestingTimer();
 
-                        return false;
-                    }
+                       base.IsBusy = false;
 
-                    return true;
+                       return false;
+                   }
 
-                }, this.stopTestingTimerCancellation);
+                   return true;
+
+               }, this.stopTestingTimerCancellation);
         }
 
         /// <summary>
@@ -602,30 +601,30 @@ namespace SmokeFree.ViewModels.Test
         private void StartSmokingTimer()
         {
             _deviceTimer
-                .Start( () =>
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        this.CurrentSmokeTime += TimeSpan.FromSeconds(1);
+                .Start(() =>
+               {
+                   Device.BeginInvokeOnMainThread(() =>
+                   {
+                       this.CurrentSmokeTime += TimeSpan.FromSeconds(1);
 
-                    });
+                   });
 
 
-                    if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
-                    {
-                        // TODO: C: Add loader to view
-                        base.IsBusy = true;
+                   if (this.CurrentSmokeTime.TotalMinutes > Globals.OneSmokeTreshHoldTimeMinutes)
+                   {
+                       // TODO: C: Add loader to view
+                       base.IsBusy = true;
 
-                         MarkSmokedAfterDelayLimitAsync();
+                       MarkSmokedAfterDelayLimitAsync();
 
-                        base.IsBusy = false;
+                       base.IsBusy = false;
 
-                        return false;
-                    }
+                       return false;
+                   }
 
-                    return true;
+                   return true;
 
-                }, this.stopSmokingTimerCancellation);
+               }, this.stopSmokingTimerCancellation);
         }
 
         /// <summary>
@@ -684,7 +683,7 @@ namespace SmokeFree.ViewModels.Test
                                     user.UserState = UserStates.IsTestComplete.ToString();
                                 });
 
-                                 NavigateToTestResults();
+                                NavigateToTestResults();
                             }
                             else
                             {
@@ -694,7 +693,7 @@ namespace SmokeFree.ViewModels.Test
                                 await base.InternalErrorMessageToUser();
                             }
                         }
-                       
+
                     }
                     else
                     {
@@ -877,7 +876,7 @@ namespace SmokeFree.ViewModels.Test
                                 {
                                     currentSmoke.EndSmokeTime = this._dateTime.Now();
                                 }
-                                
+
                                 currentSmoke.ModifiedOn = this._dateTime.Now();
                             });
 

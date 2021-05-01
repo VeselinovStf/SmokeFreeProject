@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmokeFree.Models.Views.AppSetting
+﻿namespace SmokeFree.Models.Views.AppSetting
 {
     public class LanguageItem
     {

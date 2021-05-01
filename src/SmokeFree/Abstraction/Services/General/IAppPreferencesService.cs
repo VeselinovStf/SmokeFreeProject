@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmokeFree.Abstraction.Services.General
+﻿namespace SmokeFree.Abstraction.Services.General
 {
     /// <summary>
     ///  Application preferences store abstraction.

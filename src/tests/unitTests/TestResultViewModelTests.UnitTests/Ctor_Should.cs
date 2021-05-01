@@ -31,7 +31,7 @@ namespace TestResultViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-         
+
             // Act
             var testResultViewModel = new TestResultViewModel(
                 realm,

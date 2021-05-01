@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using Xamarin.Forms;
 
 namespace SmokeFree.Converters
@@ -11,7 +9,7 @@ namespace SmokeFree.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var timeValue = (double)value;
-            var time = new TimeSpan(0,0,(int)timeValue);
+            var time = new TimeSpan(0, 0, (int)timeValue);
 
             var formatTime = new TimeSpan(time.Days, time.Hours, time.Minutes, time.Seconds);
 

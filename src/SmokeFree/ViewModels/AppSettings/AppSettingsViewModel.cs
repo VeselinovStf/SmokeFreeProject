@@ -27,7 +27,7 @@ namespace SmokeFree.ViewModels.AppSettings
     public class AppSettingsViewModel : ViewModelBase
     {
         #region FIELDS
-      
+
 
         /// <summary>
         /// Test Time Duration Collection
@@ -144,7 +144,7 @@ namespace SmokeFree.ViewModels.AppSettings
                     {
                         culture = appPreferencesLocalization;
                     }
-                    
+
                     var currentlySelectedLanguage = this.Languages.FirstOrDefault(e => e.Value == culture);
 
                     this.SelectedTLanguageItem = currentlySelectedLanguage;
@@ -249,7 +249,7 @@ namespace SmokeFree.ViewModels.AppSettings
 
                 await base._navigationService.InitializeAsync();
             }
-           
+
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace SmokeFree.ViewModels.AppSettings
             allowsMultipleExecutions: false);
 
         private async Task StartTutorial()
-        {          
+        {
             await base._navigationService.NavigateToAsync<OnBoardingViewModel>();
         }
 
@@ -290,7 +290,7 @@ namespace SmokeFree.ViewModels.AppSettings
                             AppResources.IssueNoWebConnectionMessageTitle,
                             AppResources.CantSendIssueEmailMessage,
                             AppResources.ButtonOkText);
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -326,7 +326,7 @@ namespace SmokeFree.ViewModels.AppSettings
                             AppResources.IssueNoWebConnectionMessageTitle,
                             AppResources.CantSendIssueEmailMessage,
                             AppResources.ButtonOkText);
-                }  
+                }
             }
             catch (Exception ex)
             {

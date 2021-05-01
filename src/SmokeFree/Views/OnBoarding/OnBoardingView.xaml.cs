@@ -1,12 +1,8 @@
-﻿
-using Realms;
-using SmokeFree.Abstraction.Services.General;
+﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
-using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.OnBoarding;
-using SmokeFree.Views.AppSettings;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

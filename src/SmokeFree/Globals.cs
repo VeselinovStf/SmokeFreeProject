@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SmokeFree
 {
@@ -20,8 +19,8 @@ namespace SmokeFree
         /// <summary>
         /// App Hex Color Themes Set
         /// </summary>
-        public static Dictionary<string,string> AppColorThemes = new Dictionary<string,string>()
-        { 
+        public static Dictionary<string, string> AppColorThemes = new Dictionary<string, string>()
+        {
            {"Attention","#f54e5e"},
            {"Coulm","#2f72e4"},
            {"Mellow","#5d4cf7"},

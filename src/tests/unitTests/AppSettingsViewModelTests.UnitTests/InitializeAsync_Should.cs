@@ -21,7 +21,7 @@ namespace AppSettingsViewModelTests.UnitTests
     public class InitializeAsync_Should
     {
         /// <summary>
-       /// Sets AppUser Property 
+        /// Sets AppUser Property 
         /// </summary>
         [Test]
         public async Task Sets_User_Property_Successfully_When_User_Exists()

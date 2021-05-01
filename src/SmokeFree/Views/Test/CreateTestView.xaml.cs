@@ -5,7 +5,6 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Bootstrap;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +17,7 @@ namespace SmokeFree.Views.Test
         {
             InitializeComponent();
 
-            
+
         }
 
         private void InitializeDefaultColour()

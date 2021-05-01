@@ -34,7 +34,7 @@ namespace TestResultViewModelTests.UnitTests
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
 
-           
+
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
@@ -82,7 +82,7 @@ namespace TestResultViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object);
-            
+
             // Act
             await testResultViewModel.InitializeAsync(new object());
 

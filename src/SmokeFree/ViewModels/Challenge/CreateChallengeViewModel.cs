@@ -12,8 +12,8 @@ namespace SmokeFree.ViewModels.Challenge
     {
         public CreateChallengeViewModel(
             INavigationService navigationService,
-            IDateTimeWrapper dateTimeWrapper, 
-            IAppLogger appLogger, 
+            IDateTimeWrapper dateTimeWrapper,
+            IAppLogger appLogger,
             IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
         }

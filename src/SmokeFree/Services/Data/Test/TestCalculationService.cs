@@ -32,7 +32,7 @@ namespace SmokeFree.Services.Data.Test
 
                 var newTestResults = new TestResult();
 
-               
+
                 var testEndDate = test.TestEndDate.LocalDateTime;
                 var testStartDate = test.TestStartDate.LocalDateTime;
 
@@ -116,7 +116,7 @@ namespace SmokeFree.Services.Data.Test
         public CurrentTestDataCalculationDTO GetCurrentTestDataCalculation(DateTime time, SmokeFree.Data.Models.Test test)
         {
             // Default Values
-            var currentSmokeId = string.Empty; 
+            var currentSmokeId = string.Empty;
             TimeSpan currentSmokeTime = new TimeSpan(0, 0, 0);
             TimeSpan timeSinceLastSmoke = new TimeSpan(0, 0, 0);
             TimeSpan testTimeLeft = new TimeSpan(0, 0, 0);
@@ -194,7 +194,7 @@ namespace SmokeFree.Services.Data.Test
             }
 
             // Return DTO Model 
-            return new CurrentTestDataCalculationDTO(totalSmoked, timeSinceLastSmoke, testTimeLeft, currentSmokeId, currentSmokeTime,isSmoking);
+            return new CurrentTestDataCalculationDTO(totalSmoked, timeSinceLastSmoke, testTimeLeft, currentSmokeId, currentSmokeTime, isSmoking);
         }
 
         /// <summary>

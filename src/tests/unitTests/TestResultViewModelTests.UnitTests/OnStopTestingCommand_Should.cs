@@ -13,7 +13,6 @@ using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace TestResultViewModelTests.UnitTests
@@ -150,7 +149,7 @@ namespace TestResultViewModelTests.UnitTests
             Assert.True(userAfterCommand.UserState.Equals(UserStates.CompletedOnBoarding.ToString()));
         }
 
-       
+
 
         /// <summary>
         /// Navigates to correct view model when command is executed correctly

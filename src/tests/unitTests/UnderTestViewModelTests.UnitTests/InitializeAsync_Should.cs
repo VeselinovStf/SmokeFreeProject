@@ -83,7 +83,7 @@ namespace UnderTestViewModelTests.UnitTests
                 timeSenceLastSmoke,
                 testLeftTime,
                 currentSmokeId,
-                currentSmokeTime,true);
+                currentSmokeTime, true);
 
             testCalculationServiceMock.Setup(e => e.GetCurrentTestDataCalculation(It.IsAny<DateTime>(), It.IsAny<Test>()))
                 .Returns(testCalculationResultDTO);
@@ -163,7 +163,7 @@ namespace UnderTestViewModelTests.UnitTests
                 timeSenceLastSmoke,
                 testLeftTime,
                 currentSmokeId,
-                currentSmokeTime,true);
+                currentSmokeTime, true);
 
             testCalculationServiceMock.Setup(e => e.GetCurrentTestDataCalculation(It.IsAny<DateTime>(), It.IsAny<Test>()))
                 .Returns(testCalculationResultDTO);
@@ -218,7 +218,7 @@ namespace UnderTestViewModelTests.UnitTests
                 timeSenceLastSmoke,
                 testLeftTime,
                 currentSmokeId,
-                currentSmokeTime,true);
+                currentSmokeTime, true);
 
             // Act
             await underTestViewModel.InitializeAsync(parameter);
@@ -280,7 +280,7 @@ namespace UnderTestViewModelTests.UnitTests
                 timeSenceLastSmoke,
                 testLeftTime,
                 currentSmokeId,
-                currentSmokeTime,true);
+                currentSmokeTime, true);
 
             testCalculationServiceMock.Setup(e => e.GetCurrentTestDataCalculation(It.IsAny<DateTime>(), It.IsAny<Test>()))
                 .Returns(testCalculationResultDTO);

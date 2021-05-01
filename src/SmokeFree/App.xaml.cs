@@ -26,7 +26,7 @@ namespace SmokeFree
             InitializeComponent();
 
             InitializeLocalization();
-            
+
             InitializeNavigation();
         }
 

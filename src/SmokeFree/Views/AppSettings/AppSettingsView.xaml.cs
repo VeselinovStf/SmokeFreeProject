@@ -2,7 +2,6 @@
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
-using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
 using System.Linq;
@@ -75,14 +74,14 @@ namespace SmokeFree.Views.AppSettings
                     catch (Exception ex)
                     {
                         var appLoger = AppContainer.Resolve<IAppLogger>();
-                        
+
 
                         appLoger.LogError(ex.Message);
 
                         var navigationService = AppContainer.Resolve<INavigationService>();
                         navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
                     }
-                }               
+                }
             };
         }
 
@@ -102,7 +101,7 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowLanguages(object sender, EventArgs e)
         {
-           this.picker.Focus();
+            this.picker.Focus();
         }
     }
 }

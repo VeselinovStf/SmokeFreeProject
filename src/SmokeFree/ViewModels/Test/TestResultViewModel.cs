@@ -200,7 +200,7 @@ namespace SmokeFree.ViewModels.Test
                                 userTestResults.DeletedOn = this._dateTime.Now();
                                 userTestResults.ModifiedOn = this._dateTime.Now();
                             }
- 
+
                             // Update User Status
                             user.UserState = UserStates.CompletedOnBoarding.ToString();
                             user.TestId = string.Empty;

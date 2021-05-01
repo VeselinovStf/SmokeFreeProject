@@ -70,6 +70,6 @@ namespace SmokeFree.Droid
             new LocalLogUtility().Initialize(assembly, assemblyName);
         }
 
-       
+
     }
 }
