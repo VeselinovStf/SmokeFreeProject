@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmokeFree.Views.Test.TestResultView"
              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              utility:ViewModelLocator.AutoWireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource PrimaryColor}"
@@ -78,7 +79,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- HEADER TEXT -->
-                    <Label Text="{Binding ViewTitle}"
+                    <Label Text="{xct:Translate TestResultViewModelTiitle}"
                            Grid.Row="0"
                            Grid.Column="0"
                            Grid.ColumnSpan="3"
@@ -92,28 +93,28 @@
                     <!-- TODO: ADD SMOKER TUPE -->
 
                     <!-- TEST RESULTS DISPLAY -->
-                    <Label Text="Test Time" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultTestTimeLabel}" Grid.Row="1" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.TotalTestTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="1" Grid.Column="2"/>
 
-                    <Label Text="Started Date" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultStartedDateLabel}" Grid.Row="2" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.TestStartDate,StringFormat='{dd:mm:yyyy}'}" Grid.Row="2" Grid.Column="2"/>
 
-                    <Label Text="End Date" Grid.Row="3" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultEndDateLabel}" Grid.Row="3" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.EndStartDate ,StringFormat='{dd:mm:yyyy}'}" Grid.Row="3" Grid.Column="2"/>
 
-                    <Label Text="Smoked Cigars" Grid.Row="4" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultSmokedCigarsLabel}" Grid.Row="4" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.TotalSmokedCigars}" Grid.Row="4" Grid.Column="2"/>
 
-                    <Label Text="Avarage For Day" Grid.Row="5" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultAvarageForDayLabel}" Grid.Row="5" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.AvarageSmokedCigarsPerDay,Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Row="5" Grid.Column="2"/>
 
-                    <Label Text="Avarage Clean Oxygen Time" Grid.Row="6" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultAvarageCleanOxygenTimeLabel}" Grid.Row="6" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.AvarageCleanOxygenTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="6" Grid.Column="2"/>
 
-                    <Label Text="Total Smoke Gaz Time" Grid.Row="7" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultTotalSmokedGazTime}" Grid.Row="7" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.TotalSmokeGasTimeTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="7" Grid.Column="2"/>
 
-                    <Label Text="Avarage Smoke Distance" Grid.Row="8" Grid.Column="0"/>
+                    <Label Text="{xct:Translate TestResultAvarageSmokeDistance}" Grid.Row="8" Grid.Column="0"/>
                     <Label Text="{Binding TestResult.AvarageSmokeDistanceSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="8" Grid.Column="2"/>
                      <!-- /END/ TEST RESULTS DISPLAY -->
 
@@ -123,7 +124,7 @@
             <!-- /END/ Test Results -->
 
             <!-- Create Challenge Button -->
-            <Button Text="Create Challenge" Grid.Row="2"
+            <Button Text="{xct:Translate TestResultCreateChallengeButton}" Grid.Row="2"
                     Command="{Binding OnCreateChallengeCommand}"
                     FontSize="20"
                     FontAttributes="Bold"                           

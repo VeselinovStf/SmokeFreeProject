@@ -390,9 +390,11 @@ namespace SmokeFree.ViewModels.AppSettings
                     else
                     {
                         // Can't create log zip
-                        base._appLogger.LogError(archivedLogsUtilityResponse.Message);
+                        base._appLogger.LogError($"Reason: {archivedLogsUtilityResponse.Message} : No data, or whrong folder structure!");
 
-                        await base.InternalErrorMessageToUser();
+                        // Success
+                        responseMessageTitle = AppResources.IssueNoDataToSendTitle;
+                        responseMessage = AppResources.IssueNoDataToSendMessage;
                     }
                 }
                 else

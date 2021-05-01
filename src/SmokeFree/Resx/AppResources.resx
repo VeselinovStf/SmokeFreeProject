@@ -330,4 +330,37 @@
   <data name="CantOpenAppWebSiteToastMessage" xml:space="preserve">
     <value>Can't open Application web site</value>
   </data>
+  <data name="TestResultAvarageCleanOxygenTimeLabel" xml:space="preserve">
+    <value>Avarage Clean Oxygen Time</value>
+  </data>
+  <data name="TestResultAvarageForDayLabel" xml:space="preserve">
+    <value>Avarage For Day</value>
+  </data>
+  <data name="TestResultAvarageSmokeDistance" xml:space="preserve">
+    <value>Avarage Smoke Distance</value>
+  </data>
+  <data name="TestResultCreateChallengeButton" xml:space="preserve">
+    <value>Create Challenge</value>
+  </data>
+  <data name="TestResultEndDateLabel" xml:space="preserve">
+    <value>Test End Date</value>
+  </data>
+  <data name="TestResultSmokedCigarsLabel" xml:space="preserve">
+    <value>Smoked Cigars</value>
+  </data>
+  <data name="TestResultStartedDateLabel" xml:space="preserve">
+    <value>Test Start Date</value>
+  </data>
+  <data name="TestResultTestTimeLabel" xml:space="preserve">
+    <value>Test Time</value>
+  </data>
+  <data name="TestResultTotalSmokedGazTime" xml:space="preserve">
+    <value>Total Smoke Gaz Time</value>
+  </data>
+  <data name="IssueNoDataToSendMessage" xml:space="preserve">
+    <value>There was no data to send</value>
+  </data>
+  <data name="IssueNoDataToSendTitle" xml:space="preserve">
+    <value>No data to send</value>
+  </data>
 </root>

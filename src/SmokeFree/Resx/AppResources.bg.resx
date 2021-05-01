@@ -330,4 +330,37 @@
   <data name="CantOpenAppWebSiteToastMessage" xml:space="preserve">
     <value>Не е възможно отваряне на уеб страницата</value>
   </data>
+  <data name="TestResultAvarageCleanOxygenTimeLabel" xml:space="preserve">
+    <value>Средно чист кислород за деня</value>
+  </data>
+  <data name="TestResultAvarageForDayLabel" xml:space="preserve">
+    <value>Средно за ден</value>
+  </data>
+  <data name="TestResultAvarageSmokeDistance" xml:space="preserve">
+    <value>Средно разтояние между цигарите</value>
+  </data>
+  <data name="TestResultCreateChallengeButton" xml:space="preserve">
+    <value>Създай Предизвикателство</value>
+  </data>
+  <data name="TestResultEndDateLabel" xml:space="preserve">
+    <value>Край на теста</value>
+  </data>
+  <data name="TestResultSmokedCigarsLabel" xml:space="preserve">
+    <value>Изпушени цигари</value>
+  </data>
+  <data name="TestResultStartedDateLabel" xml:space="preserve">
+    <value>Начало на теста</value>
+  </data>
+  <data name="TestResultTestTimeLabel" xml:space="preserve">
+    <value>Продължителност на теста</value>
+  </data>
+  <data name="TestResultTotalSmokedGazTime" xml:space="preserve">
+    <value>Време вдишан токсичен дим</value>
+  </data>
+  <data name="IssueNoDataToSendMessage" xml:space="preserve">
+    <value>Не бе открита информация за изпращане</value>
+  </data>
+  <data name="IssueNoDataToSendTitle" xml:space="preserve">
+    <value>Няма информация</value>
+  </data>
 </root>

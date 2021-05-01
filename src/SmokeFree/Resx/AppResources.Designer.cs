@@ -340,6 +340,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There was no data to send.
+        /// </summary>
+        internal static string IssueNoDataToSendMessage {
+            get {
+                return ResourceManager.GetString("IssueNoDataToSendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data to send.
+        /// </summary>
+        internal static string IssueNoDataToSendTitle {
+            get {
+                return ResourceManager.GetString("IssueNoDataToSendTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your device is not connected to internet network. Please connet to send issue!.
         /// </summary>
         internal static string IssueNoWebConnectionMessage {
@@ -552,6 +570,87 @@ namespace SmokeFree.Resx {
         internal static string TestDataAccuired {
             get {
                 return ResourceManager.GetString("TestDataAccuired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage Clean Oxygen Time.
+        /// </summary>
+        internal static string TestResultAvarageCleanOxygenTimeLabel {
+            get {
+                return ResourceManager.GetString("TestResultAvarageCleanOxygenTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage For Day.
+        /// </summary>
+        internal static string TestResultAvarageForDayLabel {
+            get {
+                return ResourceManager.GetString("TestResultAvarageForDayLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage Smoke Distance.
+        /// </summary>
+        internal static string TestResultAvarageSmokeDistance {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokeDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Challenge.
+        /// </summary>
+        internal static string TestResultCreateChallengeButton {
+            get {
+                return ResourceManager.GetString("TestResultCreateChallengeButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test End Date.
+        /// </summary>
+        internal static string TestResultEndDateLabel {
+            get {
+                return ResourceManager.GetString("TestResultEndDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoked Cigars.
+        /// </summary>
+        internal static string TestResultSmokedCigarsLabel {
+            get {
+                return ResourceManager.GetString("TestResultSmokedCigarsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Start Date.
+        /// </summary>
+        internal static string TestResultStartedDateLabel {
+            get {
+                return ResourceManager.GetString("TestResultStartedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Time.
+        /// </summary>
+        internal static string TestResultTestTimeLabel {
+            get {
+                return ResourceManager.GetString("TestResultTestTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Smoke Gaz Time.
+        /// </summary>
+        internal static string TestResultTotalSmokedGazTime {
+            get {
+                return ResourceManager.GetString("TestResultTotalSmokedGazTime", resourceCulture);
             }
         }
         
