@@ -93,7 +93,7 @@
                     <ContentPresenter />
                 </Grid>
             </ControlTemplate>
-            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+            <Style TargetType="ContentPage" >
                 <Setter Property="ControlTemplate">
                     <Setter.Value>
                         <ControlTemplate>

@@ -5,9 +5,11 @@
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
              utility:ViewModelLocator.AutoWireViewModel="True"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="False"           
              Title="{Binding ViewTitle}"   
+             BackgroundColor="{DynamicResource PrimaryColor}"
              >
+    
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>

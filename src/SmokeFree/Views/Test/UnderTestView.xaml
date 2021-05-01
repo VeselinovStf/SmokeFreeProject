@@ -4,7 +4,8 @@
              x:Class="SmokeFree.Views.Test.UnderTestView"
               xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
             utility:ViewModelLocator.AutoWireViewModel="True"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PrimaryColor}">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>

@@ -6,8 +6,7 @@
              xmlns:views="clr-namespace:SmokeFree.Views.AppSettings"
              utility:ViewModelLocator.AutoWireViewModel="True"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             BackgroundColor="{StaticResource Gray-400}"
-             ControlTemplate="{StaticResource PageWithGradient}"
+             BackgroundColor="{DynamicResource PrimaryColor}"
              Title="{Binding ViewTitle}"
              NavigationPage.HasNavigationBar="False"
            >
@@ -195,9 +194,8 @@
                                     TitleColor="{StaticResource Gray-300}"
                                     HorizontalTextAlignment="Center"
                                     FontSize="30"
-                                    ItemsSource="{Binding Colours}"
-                                    ItemDisplayBinding="{Binding DisplayText}"
-                                    SelectedItem="{Binding SelectedColorItem}"
+                                  
+                                   
                                 />
 
                             </Grid>

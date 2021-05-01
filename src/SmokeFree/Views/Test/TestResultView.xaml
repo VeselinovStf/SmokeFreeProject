@@ -5,6 +5,7 @@
              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
              utility:ViewModelLocator.AutoWireViewModel="True"
              NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PrimaryColor}"
              Title="{Binding ViewTitle}" 
              >
     <ContentPage.Content>

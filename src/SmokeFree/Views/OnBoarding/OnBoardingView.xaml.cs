@@ -21,60 +21,29 @@ namespace SmokeFree.Views.OnBoarding
             InitializeComponent();
 
             InitializeDefaultColour();
-
-            //MessagingCenter.Subscribe<ColorSettingsView>(this, "ColorSettingsView", model => ChangeBarBackgroundColor());
         }
 
-        //TODO: CLEAN
         private void InitializeDefaultColour()
         {
-            //INavigationService navigationService = null;
-            //IAppLogger appLogger = null;
+            try
+            {
+                var appPreferences = AppContainer.Resolve<IAppPreferencesService>();
 
-            //try
-            //{
-            //    var userId = Globals.UserId;
-            //    var realm = AppContainer.Resolve<Realm>();
-            //    navigationService = AppContainer.Resolve<INavigationService>();
-            //    appLogger = AppContainer.Resolve<IAppLogger>();
+                var currentColorIndex = appPreferences.ColorKey;
 
-            //    var user = realm.Find<User>(userId);
+                var colorThemes = Globals.AppColorThemes;
 
-            //    if (user != null)
-            //    {
+                BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+            }
+            catch (Exception ex)
+            {
+                var navigationService = AppContainer.Resolve<INavigationService>();
+                var appLogger = AppContainer.Resolve<IAppLogger>();
 
-            //        var currentColorIndex = user.AppColorThemeIndex;
+                appLogger.LogError(ex.Message);
 
-            //        var colorThemes = Globals.AppColorThemes;
-
-            //        BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
-            //    }
-            //    else
-            //    {
-            //        appLogger.LogWarning($"Can't find User! User id {userId}");
-
-            //        var colorThemes = Globals.AppColorThemes;
-
-            //        BackgroundColor = Color.FromHex(colorThemes[0]);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    appLogger.LogError(ex.Message);
-
-            //    navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
-            //}
-          
-
-        }
-
-        private void ChangeBarBackgroundColor()
-        {
-            //var colorThemes = Globals.AppColorThemes;
-
-            //var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
-
-            //BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
+                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+            }
         }
 
         /// <summary>
