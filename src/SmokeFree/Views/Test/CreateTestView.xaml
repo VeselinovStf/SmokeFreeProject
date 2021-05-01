@@ -20,7 +20,7 @@
             <!-- View Description -->
             <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
                    BackgroundColor="{StaticResource Gray-300}"
-                   Opacity="0.7">
+                   >
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -113,7 +113,6 @@
                     <Picker x:Name="picker"
                             Title="{xct:Translate CreateTestViewTestTimePicker}"
                             TitleColor="{StaticResource Gray-300}"
-                            BackgroundColor="{DynamicResource PrimaryColor}"
                             HorizontalTextAlignment="Center"
                             FontSize="25"
                             ItemsSource="{Binding TestTimeDurations}"

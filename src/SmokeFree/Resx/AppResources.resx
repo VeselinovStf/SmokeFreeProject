@@ -393,4 +393,10 @@
   <data name="UnderTestViewModelStopSmokeConfirmMessage" xml:space="preserve">
     <value>Click Ok if you are done with smoking</value>
   </data>
+  <data name="UnderTestViewDescriptionLabel" xml:space="preserve">
+    <value>Every time when you smoke click the Smoke Button, when you complete your smoke clicke Smoke Done button. It's very importent to do this. The Test data is going to be used to create your unique challeng, that is going to help you get rid of smoking habbit.</value>
+  </data>
+  <data name="UnderTestViewDescriptionLabelButton" xml:space="preserve">
+    <value>Begin</value>
+  </data>
 </root>

@@ -682,6 +682,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every time when you smoke click the Smoke Button, when you complete your smoke clicke Smoke Done button. It&apos;s very importent to do this. The Test data is going to be used to create your unique challeng, that is going to help you get rid of smoking habbit..
+        /// </summary>
+        internal static string UnderTestViewDescriptionLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewDescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Begin.
+        /// </summary>
+        internal static string UnderTestViewDescriptionLabelButton {
+            get {
+                return ResourceManager.GetString("UnderTestViewDescriptionLabelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Time.
         /// </summary>
         internal static string UnderTestViewLastTimeLabel {

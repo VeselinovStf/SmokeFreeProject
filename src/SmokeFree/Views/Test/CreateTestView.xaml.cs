@@ -31,6 +31,7 @@ namespace SmokeFree.Views.Test
                 var colorThemes = Globals.AppColorThemes;
 
                 BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+                picker.BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
             }
             catch (Exception ex)
             {

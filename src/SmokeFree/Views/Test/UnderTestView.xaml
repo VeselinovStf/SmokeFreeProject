@@ -15,7 +15,37 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackLayout>
+            <!-- View Description -->
+            <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
+                   BackgroundColor="{StaticResource Gray-300}"
+                   >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="25"
+                        FontAttributes="Bold"
+                        Text="{xct:Translate UnderTestViewDescriptionLabel}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Text="{xct:Translate UnderTestViewDescriptionLabelButton}" 
+                        CornerRadius="20"
+                        TextColor="{StaticResource Gray-900}"
+                        Opacity="5"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Clicked="OnCloseDescriptionButton_Clicked"/>
+                </Grid>
+
+            </Frame>
+            <!-- /END/ View Description -->
+
+            <StackLayout x:Name="ViewContent" IsVisible="false">
                 <!-- NAVIGATION -->
 
                 <Grid Grid.Row="0">

@@ -15,8 +15,6 @@ namespace SmokeFree.Views.Test
         public TestResultView()
         {
             InitializeComponent();
-
-            InitializeDefaultColour();
         }
 
         private void InitializeDefaultColour()
@@ -40,6 +38,11 @@ namespace SmokeFree.Views.Test
 
                 navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            InitializeDefaultColour();         
         }
     }
 }

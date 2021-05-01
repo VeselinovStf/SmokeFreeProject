@@ -52,5 +52,10 @@ namespace SmokeFree.Views.Test
             base.OnDisappearing();
         }
 
+        private void OnCloseDescriptionButton_Clicked(object sender, EventArgs e)
+        {
+            this.Description.IsVisible = false;
+            this.ViewContent.IsVisible = true;
+        }
     }
 }

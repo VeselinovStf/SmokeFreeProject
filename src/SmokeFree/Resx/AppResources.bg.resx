@@ -393,4 +393,10 @@
   <data name="UnderTestViewModelStopSmokeConfirmMessage" xml:space="preserve">
     <value>Избери Да, ако си изпушил цигарата си</value>
   </data>
+  <data name="UnderTestViewDescriptionLabel" xml:space="preserve">
+    <value>Всеки път когато започнеш да пушиш натисни бутона за старт, когато приключиш натисни бутона за Стоп. От изключителна важност е да отбелязваш правилно свойте пушения. Събраните данни от теста ще се използват за калкулиране на правилно предизвикателство, това ще бъде от огромна важност за успешното ти спиране на цигарите</value>
+  </data>
+  <data name="UnderTestViewDescriptionLabelButton" xml:space="preserve">
+    <value>Започни</value>
+  </data>
 </root>
