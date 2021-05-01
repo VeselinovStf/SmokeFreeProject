@@ -15,12 +15,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+
             </Grid.RowDefinitions>
 
-            <StackLayout>
+            <StackLayout  Grid.Row="0">
                 <!-- NAVIGATION -->
 
-                <Grid Grid.Row="0">
+                <Grid>
 
                     <!-- STOP TEST BUTTON -->
                     <Button                   
@@ -35,7 +36,16 @@
                         HorizontalOptions="Start"
                         Margin="10,10,10,10"/>
                     <!-- /END/ STOP TEST BUTTON -->
-
+                    
+                    <!-- HEADER TEXT -->
+                    <Label Text="{xct:Translate TestResultViewModelTiitle}"    
+                           HorizontalOptions="CenterAndExpand"                         
+                           FontSize="20"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="{StaticResource Gray-100}"
+                           FontFamily="{StaticResource Montserrat-Bold}"/>
+                    <!-- /END/ HEADER TEXT -->
+                    
                     <!-- App Settings Button -->
                     <Button                    
                         Text="&#xe72B;"
@@ -57,78 +67,45 @@
             <!-- /END/ NAVIGATION -->
 
             <!-- MAIN CONTENT -->
+            
             <!-- Test Results -->
-            <Frame CornerRadius="20" Grid.Row="1"
-                       Margin="20,0,20,10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <ListView  Grid.Row="1"
+                       ItemsSource="{Binding TestResults}" RowHeight="110">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
 
-                    <!-- HEADER TEXT -->
-                    <Label Text="{xct:Translate TestResultViewModelTiitle}"
-                           Grid.Row="0"
-                           Grid.Column="0"
-                           Grid.ColumnSpan="3"
-                           HorizontalOptions="CenterAndExpand"
-                          
-                           FontSize="20"
-                           TextColor="{StaticResource Gray-800}"
-                           FontFamily="{StaticResource Montserrat-Bold}"/>
-                    <!-- /END/ HEADER TEXT -->
+                            <Frame Margin="10,10,10,10" CornerRadius="10" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="&#xe72B;" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource FontIcons}"
+                                           FontSize="40" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding DisplayTitle}" TextColor="Black" FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="3" Text="{Binding Value}" TextColor="Black"
+                                           HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                </Grid>
+                            </Frame>
 
-                    <!-- TODO: ADD SMOKER TUPE -->
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-                    <!-- TEST RESULTS DISPLAY -->
-                    <Label Text="{xct:Translate TestResultTestTimeLabel}" Grid.Row="1" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TotalTestTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="1" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultStartedDateLabel}" Grid.Row="2" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TestStartDate,StringFormat='{dd:mm:yyyy}'}" Grid.Row="2" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultEndDateLabel}" Grid.Row="3" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.EndStartDate ,StringFormat='{dd:mm:yyyy}'}" Grid.Row="3" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultSmokedCigarsLabel}" Grid.Row="4" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TotalSmokedCigars}" Grid.Row="4" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultAvarageForDayLabel}" Grid.Row="5" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.AvarageSmokedCigarsPerDay,Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Row="5" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultAvarageCleanOxygenTimeLabel}" Grid.Row="6" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.AvarageCleanOxygenTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="6" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultTotalSmokedGazTime}" Grid.Row="7" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.TotalSmokeGasTimeTimeSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="7" Grid.Column="2"/>
-
-                    <Label Text="{xct:Translate TestResultAvarageSmokeDistance}" Grid.Row="8" Grid.Column="0"/>
-                    <Label Text="{Binding TestResult.AvarageSmokeDistanceSeconds,Converter={StaticResource DoubleTimeToStringDateTimeConverter}}" Grid.Row="8" Grid.Column="2"/>
-                     <!-- /END/ TEST RESULTS DISPLAY -->
-
-                </Grid>
-
-            </Frame>
+            </ListView>
             <!-- /END/ Test Results -->
 
             <!-- Create Challenge Button -->
-            <Button Text="{xct:Translate TestResultCreateChallengeButton}" Grid.Row="2"
+            <Button Text="{xct:Translate TestResultCreateChallengeButton}" 
+                    Grid.Row="2"
                     Command="{Binding OnCreateChallengeCommand}"
                     FontSize="20"
                     FontAttributes="Bold"                           
-                    Margin="20,0,20,20"                           
+                    Margin="20,20,20,20"                           
                     CornerRadius="30"/>
             <!-- /END/ Create Challenge Button -->
 

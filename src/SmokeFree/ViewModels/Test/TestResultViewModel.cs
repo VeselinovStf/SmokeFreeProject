@@ -3,11 +3,14 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
+using SmokeFree.Models.Views.Test;
 using SmokeFree.Resx;
+using SmokeFree.Utilities.Parsers;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.Challenge;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.CommunityToolkit.ObjectModel;
@@ -31,6 +34,12 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private readonly Realm _realm;
 
+        /// <summary>
+        /// Test Results Elements Collection
+        /// </summary>
+        private ObservableCollection<TestResultItem> _testResults;
+
+
         #endregion
 
         #region CTOR
@@ -47,6 +56,8 @@ namespace SmokeFree.ViewModels.Test
 
             // Database
             _realm = realm;
+
+            _testResults = new ObservableCollection<TestResultItem>();
         }
 
         #endregion
@@ -82,6 +93,60 @@ namespace SmokeFree.ViewModels.Test
                         {
                             this.TestResult = testResult;
 
+                            this.TestResults.Clear();
+
+                            TestResults = new ObservableCollection<TestResultItem>()
+                            {
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultTestTimeLabel,
+                                    Value = DoubleToString.DateTime(TestResult.TotalTestTimeSeconds)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultStartedDateLabel,
+                                    Value = DateTimeOfsetToString.DateTime(TestResult.TestStartDate)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultEndDateLabel,
+                                    Value = DateTimeOfsetToString.DateTime(TestResult.EndStartDate)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultSmokedCigarsLabel,
+                                    Value = TestResult.TotalSmokedCigars.ToString()
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultAvarageForDayLabel,
+                                    Value = DoubleToString.Procent(TestResult.AvarageSmokedCigarsPerDay)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultAvarageCleanOxygenTimeLabel,
+                                    Value = DoubleToString.DateTime(TestResult.AvarageCleanOxygenTimeSeconds)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultTotalSmokedGazTime,
+                                    Value = DoubleToString.DateTime(TestResult.TotalSmokeGasTimeTimeSeconds)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "&#xe72B;",
+                                    DisplayTitle = AppResources.TestResultAvarageSmokeDistance,
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeDistanceSeconds)
+                                },
+
+                            };
 
                         }
                         else
@@ -256,6 +321,20 @@ namespace SmokeFree.ViewModels.Test
                 OnPropertyChanged();
             }
         }
+     
+        /// <summary>
+        /// Test Results Elements Collection
+        /// </summary>
+        public ObservableCollection<TestResultItem> TestResults
+        {
+            get { return _testResults; }
+            set
+            { 
+                _testResults = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
     }
