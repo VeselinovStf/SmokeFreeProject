@@ -187,7 +187,7 @@
     <value>Започни своя тест</value>
   </data>
   <data name="CreateTestViewTestTimePicker" xml:space="preserve">
-    <value>Избере времеви диапазон за тестване</value>
+    <value>Избери времетраене на теста</value>
   </data>
   <data name="CreateTestViewViewDescriptionLabel" xml:space="preserve">
     <value>Избери своята цел! До коя дата искаш да спреш този навик?</value>
@@ -363,7 +363,34 @@
   <data name="IssueNoDataToSendTitle" xml:space="preserve">
     <value>Няма информация</value>
   </data>
+  <data name="UnderTestViewLastTimeLabel" xml:space="preserve">
+    <value>Последен път</value>
+  </data>
+  <data name="UnderTestViewMarkOneSmokedButton" xml:space="preserve">
+    <value>Отбележи като изпушена</value>
+  </data>
   <data name="UnderTestViewModelStopSmokeConfirmTitle" xml:space="preserve">
     <value>Приключи ли с цигарата?</value>
+  </data>
+  <data name="UnderTestViewSmokeSenceLabel" xml:space="preserve">
+    <value>Пуши от</value>
+  </data>
+  <data name="UnderTestViewSmokingLabel" xml:space="preserve">
+    <value>Изпушени</value>
+  </data>
+  <data name="UnderTestViewStartSmokingButton" xml:space="preserve">
+    <value>Започни да пушиш</value>
+  </data>
+  <data name="UnderTestViewTestLeftTimeLabel" xml:space="preserve">
+    <value>Оставащо време от теста</value>
+  </data>
+  <data name="AppSettingsViewColorPickerTitle" xml:space="preserve">
+    <value>Тема на приложението</value>
+  </data>
+  <data name="AppSettingsViewLanguagePickerTitle" xml:space="preserve">
+    <value>Език</value>
+  </data>
+  <data name="UnderTestViewModelStopSmokeConfirmMessage" xml:space="preserve">
+    <value>Избери Да, ако си изпушил цигарата си</value>
   </data>
 </root>

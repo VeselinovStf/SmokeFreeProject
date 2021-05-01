@@ -363,7 +363,34 @@
   <data name="IssueNoDataToSendTitle" xml:space="preserve">
     <value>No data to send</value>
   </data>
+  <data name="UnderTestViewLastTimeLabel" xml:space="preserve">
+    <value>Last Time</value>
+  </data>
+  <data name="UnderTestViewMarkOneSmokedButton" xml:space="preserve">
+    <value>Mark One Smoked</value>
+  </data>
   <data name="UnderTestViewModelStopSmokeConfirmTitle" xml:space="preserve">
     <value>Are you done with smoke?</value>
+  </data>
+  <data name="UnderTestViewSmokeSenceLabel" xml:space="preserve">
+    <value>Smoke Sence</value>
+  </data>
+  <data name="UnderTestViewSmokingLabel" xml:space="preserve">
+    <value>Smoked</value>
+  </data>
+  <data name="UnderTestViewStartSmokingButton" xml:space="preserve">
+    <value>Start Smoking</value>
+  </data>
+  <data name="UnderTestViewTestLeftTimeLabel" xml:space="preserve">
+    <value>Test Left Time</value>
+  </data>
+  <data name="AppSettingsViewColorPickerTitle" xml:space="preserve">
+    <value>App Color Sheme</value>
+  </data>
+  <data name="AppSettingsViewLanguagePickerTitle" xml:space="preserve">
+    <value>App Language</value>
+  </data>
+  <data name="UnderTestViewModelStopSmokeConfirmMessage" xml:space="preserve">
+    <value>Click Ok if you are done with smoking</value>
   </data>
 </root>

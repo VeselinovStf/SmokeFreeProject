@@ -190,7 +190,7 @@
 
                                 <!-- Hidden Picker -->
                                 <Picker x:Name="ColorPicker" IsVisible="False"
-                                    Title="Language"
+                                    Title="{xct:Translate AppSettingsViewColorPickerTitle}"
                                     TitleColor="{StaticResource Gray-300}"
                                     HorizontalTextAlignment="Center"
                                     FontSize="30"
@@ -309,7 +309,7 @@
 
                                 <!-- Hidden Picker -->
                                 <Picker x:Name="picker" IsVisible="False"
-                                    Title="Language"
+                                    Title="{xct:Translate AppSettingsViewLanguagePickerTitle}"
                                     TitleColor="{StaticResource Gray-300}"
                                     HorizontalTextAlignment="Center"
                                     FontSize="30"

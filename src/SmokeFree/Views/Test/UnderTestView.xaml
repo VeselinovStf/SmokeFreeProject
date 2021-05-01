@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmokeFree.Views.Test.UnderTestView"
               xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
             utility:ViewModelLocator.AutoWireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource PrimaryColor}">
@@ -63,7 +64,7 @@
                     <StackLayout>
 
                         <Label 
-                            Text="Smoked" 
+                            Text="{xct:Translate UnderTestViewSmokingLabel}" 
                             HorizontalOptions="Start"
                             FontSize="25"
                             TextColor="{StaticResource Gray-100}"
@@ -85,7 +86,7 @@
                         <Label 
                              IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="LastSmokeDateTimeDisplayLabel"
-                            Text="Last Time" 
+                            Text="{xct:Translate UnderTestViewLastTimeLabel}" 
                             FontSize="25"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
@@ -93,7 +94,7 @@
 
                         <Label 
                              IsVisible="{Binding IsSmoking}"
-                            Text="Smoke Sence" 
+                            Text="{xct:Translate UnderTestViewSmokeSenceLabel}" 
                             FontSize="25"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
@@ -135,7 +136,7 @@
                              Spacing="20">
 
                         <!-- UNDER TEST VIEW TITLE -->
-                        <Label Text="{Binding ViewTitle}"
+                        <Label Text="{xct:Translate UnderTestViewTiitle}"
                             VerticalOptions="CenterAndExpand" 
                             HorizontalOptions="CenterAndExpand"
                             TextColor="{StaticResource Gray-100}"
@@ -148,7 +149,7 @@
                         <Button 
                             IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="StartSmoking"                           
-                            Text="Start Smoking" 
+                            Text="{xct:Translate UnderTestViewStartSmokingButton}" 
                             Command="{Binding StartSmokingCommand}"
                             CommandParameter="{StaticResource TrueValue}"
                             FontSize="20"
@@ -161,7 +162,7 @@
                         <Button 
                             IsVisible="{Binding IsSmoking}"
                             x:Name="MarkOneSmoked"
-                            Text="Mark One Smoked" 
+                            Text="{xct:Translate UnderTestViewMarkOneSmokedButton}" 
                             Command="{Binding MarkOneSmokedCommand}"
                             CommandParameter="{StaticResource FalseValue}"
                             BackgroundColor="{StaticResource Gray-100}"
@@ -176,7 +177,7 @@
                     <StackLayout Grid.Row="2" VerticalOptions="EndAndExpand" Margin="0,60,0,0">
 
                         <Label 
-                            Text="Test Time Left" 
+                            Text="{xct:Translate UnderTestViewTestLeftTimeLabel}" 
                             HorizontalOptions="Center"
                             VerticalOptions="End"
                             FontSize="20"

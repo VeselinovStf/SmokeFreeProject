@@ -151,6 +151,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to App Color Sheme.
+        /// </summary>
+        internal static string AppSettingsViewColorPickerTitle {
+            get {
+                return ResourceManager.GetString("AppSettingsViewColorPickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Language.
+        /// </summary>
+        internal static string AppSettingsViewLanguagePickerTitle {
+            get {
+                return ResourceManager.GetString("AppSettingsViewLanguagePickerTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Application Settings.
         /// </summary>
         internal static string AppSettingsViewTitle {
@@ -664,6 +682,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Time.
+        /// </summary>
+        internal static string UnderTestViewLastTimeLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewLastTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark One Smoked.
+        /// </summary>
+        internal static string UnderTestViewMarkOneSmokedButton {
+            get {
+                return ResourceManager.GetString("UnderTestViewMarkOneSmokedButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue to Challenge!.
         /// </summary>
         internal static string UnderTestViewModelCompleteTestButton {
@@ -772,6 +808,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click Ok if you are done with smoking.
+        /// </summary>
+        internal static string UnderTestViewModelStopSmokeConfirmMessage {
+            get {
+                return ResourceManager.GetString("UnderTestViewModelStopSmokeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you done with smoke?.
         /// </summary>
         internal static string UnderTestViewModelStopSmokeConfirmTitle {
@@ -786,6 +831,42 @@ namespace SmokeFree.Resx {
         internal static string UnderTestViewModelStopTestMessage {
             get {
                 return ResourceManager.GetString("UnderTestViewModelStopTestMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoke Sence.
+        /// </summary>
+        internal static string UnderTestViewSmokeSenceLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewSmokeSenceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoked.
+        /// </summary>
+        internal static string UnderTestViewSmokingLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewSmokingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Smoking.
+        /// </summary>
+        internal static string UnderTestViewStartSmokingButton {
+            get {
+                return ResourceManager.GetString("UnderTestViewStartSmokingButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Left Time.
+        /// </summary>
+        internal static string UnderTestViewTestLeftTimeLabel {
+            get {
+                return ResourceManager.GetString("UnderTestViewTestLeftTimeLabel", resourceCulture);
             }
         }
         

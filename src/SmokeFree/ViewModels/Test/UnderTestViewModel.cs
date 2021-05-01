@@ -529,7 +529,7 @@ namespace SmokeFree.ViewModels.Test
         {
             // Check User Notification
             var userNotification = await base._dialogService
-                .ConfirmAsync(AppResources.UnderTestViewModelStartSmokeConfirmMessage,
+                .ConfirmAsync(AppResources.UnderTestViewModelStopSmokeConfirmMessage,
                     AppResources.UnderTestViewModelStopSmokeConfirmTitle,
                     AppResources.YesButtonText,
                     AppResources.NoButtonText);
