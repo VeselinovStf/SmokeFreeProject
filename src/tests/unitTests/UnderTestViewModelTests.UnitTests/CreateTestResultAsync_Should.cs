@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -21,83 +20,12 @@ namespace UnderTestViewModelTests.UnitTests
     /// </summary>
     public class CreateTestResultAsync_Should
     {
-        /// <summary>
-        /// Add Test Result To DB
-        /// </summary>
-        [Test]
-        public async Task Adds_TestResult_To_Db()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-            var testResultId = "TEST_RESULT";
-            var navigationServiceMock = new Mock<INavigationService>();
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
-
-            var testCalculationServiceMock = new Mock<ITestCalculationService>();
-            testCalculationServiceMock.Setup(e => e.CalculateTestResult(It.IsAny<Test>()))
-                .Returns(() => new SmokeFree.Models.Services.Data.Test.CalculateTestResultDTO(true, new TestResult() { Id = testResultId }));
-
-            var deviceTimerMock = new Mock<IDeviceTimer>();
-
-            var underTestViewModel = new UnderTestViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object,
-                notificationManagerMock.Object,
-                testCalculationServiceMock.Object,
-                deviceTimerMock.Object
-                );
-
-            var userId = Globals.UserId;
-            var testId = "TEST_ID";
-
-            var user = new User()
-            {
-                Id = userId,
-                TestId = testId
-            };
-
-            var userTest = new Test()
-            {
-                Id = testId,
-                UserId = userId
-            };
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-
-                user.Tests.Add(userTest);
-            });
-
-            // Act
-            underTestViewModel.CreateTestResultAsync();
-
-            var dbTestResult = realm.Find<TestResult>(testResultId);
-            //Assert
-            Assert.NotNull(dbTestResult);
-            Assert.IsTrue(dbTestResult.TestId.Equals(testId));
-            Assert.IsTrue(dbTestResult.CreatedOn.LocalDateTime.Equals(dateTime));
-            Assert.IsTrue(userTest.CompletedTestResult.Id.Equals(testResultId));
-            Assert.IsTrue(user.UserState.Equals(UserStates.IsTestComplete.ToString()));
-        }
 
         /// <summary>
         /// Notify User ( navigate to SomethingWentWrongViewModel ) when test results cant be calculated
         /// </summary>
         [Test]
-        public async Task Notify_User_When_TestResult_Cant_Be_Calculated()
+        public void Notify_User_When_TestResult_Cant_Be_Calculated()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -112,7 +40,6 @@ namespace UnderTestViewModelTests.UnitTests
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
 
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             testCalculationServiceMock.Setup(e => e.CalculateTestResult(It.IsAny<Test>()))
@@ -126,7 +53,6 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -164,7 +90,7 @@ namespace UnderTestViewModelTests.UnitTests
         /// Nothing save in db
         /// </summary>
         [Test]
-        public async Task Nothing_Is_Persist_In_DB_When_TestResult_Calculations_Cant_Be_Performed()
+        public void Nothing_Is_Persist_In_DB_When_TestResult_Calculations_Cant_Be_Performed()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -179,7 +105,6 @@ namespace UnderTestViewModelTests.UnitTests
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
 
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             testCalculationServiceMock.Setup(e => e.CalculateTestResult(It.IsAny<Test>()))
@@ -193,7 +118,6 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -232,7 +156,7 @@ namespace UnderTestViewModelTests.UnitTests
         /// App State - Notify User ( navigate to SomethingWentWrongViewModel ) when test is not found
         /// </summary>
         [Test]
-        public async Task Notify_User_When_Test_Is_Not_Found()
+        public void Notify_User_When_Test_Is_Not_Found()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -245,7 +169,6 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -255,7 +178,6 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -284,7 +206,7 @@ namespace UnderTestViewModelTests.UnitTests
         /// App State - Notify User ( navigate to SomethingWentWrongViewModel ) when user is not found
         /// </summary>
         [Test]
-        public async Task Notify_User_When_User_Is_Not_Found()
+        public void Notify_User_When_User_Is_Not_Found()
         {
             //Arrange
             var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
@@ -297,7 +219,6 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -307,7 +228,6 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );

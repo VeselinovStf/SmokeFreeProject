@@ -6,10 +6,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Plugin.LocalNotification;
-using SmokeFree.Abstraction.Managers;
-using SmokeFree.Droid.Managers;
 using SmokeFree.Utilities.Logging;
-using Xamarin.Forms;
 
 namespace SmokeFree.Droid
 {
@@ -33,7 +30,7 @@ namespace SmokeFree.Droid
 
             NotificationCenter.CreateNotificationChannel(new Plugin.LocalNotification.Platform.Droid.NotificationChannelRequest
             {
-                 ShowBadge = true
+                ShowBadge = true
             });
 
             NotificationCenter.NotifyNotificationTapped(Intent);
@@ -47,19 +44,8 @@ namespace SmokeFree.Droid
 
         protected override void OnNewIntent(Intent intent)
         {
-            CreateNotificationFromIntent(intent);
             NotificationCenter.NotifyNotificationTapped(intent);
             base.OnNewIntent(intent);
-        }
-
-        void CreateNotificationFromIntent(Intent intent)
-        {
-            if (intent?.Extras != null)
-            {
-                string title = intent.GetStringExtra(AndroidNotificationManager.TitleKey);
-                string message = intent.GetStringExtra(AndroidNotificationManager.MessageKey);
-                DependencyService.Get<INotificationManager>().ReceiveNotification(title, message);
-            }
         }
 
         private void InitializeLogging()

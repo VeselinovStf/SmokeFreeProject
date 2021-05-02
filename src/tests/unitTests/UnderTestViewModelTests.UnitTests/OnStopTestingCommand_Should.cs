@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -50,7 +49,7 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -60,7 +59,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -149,169 +148,7 @@ namespace UnderTestViewModelTests.UnitTests
             Assert.True(userAfterCommand.UserState.Equals(UserStates.CompletedOnBoarding.ToString()));
         }
 
-        /// <summary>
-        /// Stops Testing Timer When Executed
-        /// </summary>
-        [Test]
-        public void Stops_Testing_Timer_When_Execution_Process_Is_Correct()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration("Stops_Testing_Timer_When_Execution_Process_Is_Correct");
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-
-            var navigationServiceMock = new Mock<INavigationService>();
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-
-            dialogServiceMock.Setup(e => e.ConfirmAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
-
-            var notificationManagerMock = new Mock<INotificationManager>();
-            var testCalculationServiceMock = new Mock<ITestCalculationService>();
-
-            var deviceTimerMock = new Mock<IDeviceTimer>();
-            deviceTimerMock.Setup(e => e.Stop(It.IsAny<CancellationTokenSource>()));
-
-            var underTestViewModel = new UnderTestViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object,
-                notificationManagerMock.Object,
-                testCalculationServiceMock.Object,
-                deviceTimerMock.Object
-                );
-
-            var userId = Globals.UserId;
-            var testId = "1";
-
-            var user = new User()
-            {
-                Id = userId,
-                TestId = testId,
-                NotificationState = false,
-                UserState = UserStates.UserUnderTesting.ToString()
-            };
-
-            var userTestsOne = new Test()
-            {
-                Id = testId,
-                UserId = userId
-            };
-
-            var userChallenge = new Challenge()
-            {
-                Id = "CHALLENGE1",
-                UserId = userId
-            };
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-                user.Tests.Add(userTestsOne);
-                user.Challenges.Add(userChallenge);
-            });
-
-            // Act
-            underTestViewModel.OnStopTestingCommand.Execute(new object());
-
-            // Assert
-            deviceTimerMock.Verify(e => e.Stop(It.IsAny<CancellationTokenSource>()), Times.Exactly(1));
-
-        }
-
-        /// <summary>
-        /// Navigates to correct view model when command is executed correctly
-        /// </summary>
-        [Test]
-        public void Navigate_To_CreateTestViewModel_When_Execution_Process_Is_Correct()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration("Navigate_To_CreateTestViewModel_When_Execution_Process_Is_Correct");
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-
-            var navigationServiceMock = new Mock<INavigationService>();
-            navigationServiceMock.Setup(e => e.NavigateToAsync<CreateTestViewModel>());
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-
-            dialogServiceMock.Setup(e => e.ConfirmAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
-
-            var notificationManagerMock = new Mock<INotificationManager>();
-            var testCalculationServiceMock = new Mock<ITestCalculationService>();
-            var deviceTimerMock = new Mock<IDeviceTimer>();
-
-            var underTestViewModel = new UnderTestViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object,
-                notificationManagerMock.Object,
-                testCalculationServiceMock.Object,
-                deviceTimerMock.Object
-                );
-
-            var userId = Globals.UserId;
-            var testId = "1";
-
-            var user = new User()
-            {
-                Id = userId,
-                TestId = testId,
-                NotificationState = false,
-                UserState = UserStates.UserUnderTesting.ToString()
-            };
-
-            var userTestsOne = new Test()
-            {
-                Id = testId,
-                UserId = userId
-            };
-
-            var userChallenge = new Challenge()
-            {
-                Id = "CHALLENGE1",
-                UserId = userId
-            };
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-                user.Tests.Add(userTestsOne);
-                user.Challenges.Add(userChallenge);
-            });
-
-            // Act
-            underTestViewModel.OnStopTestingCommand.Execute(new object());
-
-            // Assert
-            navigationServiceMock.Verify(e => e.NavigateToAsync<CreateTestViewModel>(), Times.Exactly(1));
-
-        }
-
+      
         /// <summary>
         /// Logs when user is not found
         /// </summary>
@@ -341,7 +178,7 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -351,7 +188,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -405,7 +242,7 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -415,7 +252,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -472,7 +309,7 @@ namespace UnderTestViewModelTests.UnitTests
                 .Returns(Task.FromResult(true));
 
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -482,7 +319,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -537,7 +374,7 @@ namespace UnderTestViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -547,7 +384,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );

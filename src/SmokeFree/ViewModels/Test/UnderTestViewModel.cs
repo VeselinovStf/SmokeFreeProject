@@ -1,7 +1,6 @@
 ﻿
 using Plugin.LocalNotification;
 using Realms;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -99,7 +98,6 @@ namespace SmokeFree.ViewModels.Test
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
             IDialogService dialogService,
-            INotificationManager notificationManager,
             ITestCalculationService testCalculationService,
             IDeviceTimer deviceTimer) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
@@ -122,8 +120,6 @@ namespace SmokeFree.ViewModels.Test
 
                 MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
             });
-
-
         }
 
         #endregion
@@ -474,15 +470,15 @@ namespace SmokeFree.ViewModels.Test
                                 // Register Notification
                                 var delaySmokeNotification = new NotificationRequest
                                 {
-                                    
+
                                     NotificationId = Globals.DelayedSmokeNotificationId,
                                     Title = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationTitle,
                                     Description = AppResources.UnderTestViewModelOneSmokeTreshHoldNotificationMessage,
                                     ReturningData = "Dummy data", // Returning data when tapped on notification.
-                                    NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes), 
-                                    Android = new AndroidOptions() 
+                                    NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes),
+                                    Android = new AndroidOptions()
                                     {
-                                         IconName = "icon"
+                                        IconName = "icon"
                                     } // Used for Scheduling local notification, if not specified notification will show immediately.
                                 };
 

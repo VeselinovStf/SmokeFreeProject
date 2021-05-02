@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -36,7 +35,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -46,7 +45,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -70,52 +69,6 @@ namespace UnderTestViewModelTests.UnitTests
         }
 
 
-        /// <summary>
-        /// Stops Testing Timer
-        /// </summary>
-        [Test]
-        public void Stops_Testing_Time()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration("Stops_Testing_Time");
-            var realm = Realm.GetInstance(config);
-
-            var navigationServiceMock = new Mock<INavigationService>();
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
-            var testCalculationServiceMock = new Mock<ITestCalculationService>();
-            var deviceTimerMock = new Mock<IDeviceTimer>();
-            deviceTimerMock.Setup(e => e.Stop(It.IsAny<CancellationTokenSource>()));
-
-            var underTestViewModel = new UnderTestViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object,
-                notificationManagerMock.Object,
-                testCalculationServiceMock.Object,
-                deviceTimerMock.Object
-                );
-
-            var user = new User()
-            {
-                Id = Globals.UserId,
-                TestId = "1",
-                NotificationState = false
-            };
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-            });
-
-            underTestViewModel.OnSettingsCommand.Execute(new object());
-
-            //Assert
-            deviceTimerMock.Verify(e => e.Stop(It.IsAny<CancellationTokenSource>()), Times.Exactly(1));
-        }
+       
     }
 }

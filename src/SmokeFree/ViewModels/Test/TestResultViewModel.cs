@@ -234,36 +234,48 @@ namespace SmokeFree.ViewModels.Test
                         {
                             var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
 
-                            // Remove Test
-                            userTest.IsDeleted = true;
-                            userTest.DeletedOn = this._dateTime.Now();
-                            userTest.ModifiedOn = this._dateTime.Now();
-
-                            // Remove smoked cigares if persist
-                            if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                            if (userTest != null)
                             {
-                                foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                                // Remove Test
+                                userTest.IsDeleted = true;
+                                userTest.DeletedOn = this._dateTime.Now();
+                                userTest.ModifiedOn = this._dateTime.Now();
+
+                                // Remove smoked cigares if persist
+                                if (userTest.SmokedCigaresUnderTest.Count() > 0)
                                 {
-                                    smoke.IsDeleted = true;
-                                    smoke.DeletedOn = this._dateTime.Now();
-                                    smoke.ModifiedOn = this._dateTime.Now();
+                                    foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                                    {
+                                        smoke.IsDeleted = true;
+                                        smoke.DeletedOn = this._dateTime.Now();
+                                        smoke.ModifiedOn = this._dateTime.Now();
+                                    }
+                                }
+
+                                // Remove Test Result
+                                var userTestResults = userTest.CompletedTestResult;
+                                if (userTestResults != null)
+                                {
+                                    userTestResults.IsDeleted = true;
+                                    userTestResults.DeletedOn = this._dateTime.Now();
+                                    userTestResults.ModifiedOn = this._dateTime.Now();
+                                }
+                                else
+                                {
+                                    base._appLogger.LogCritical($"Can't find User Test Result: User Id {userId}, User Test Id {user.TestId}");
+
                                 }
                             }
-
+                           
                             var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
 
-                            // Remove Challenge
-                            testChallenge.IsDeleted = true;
-                            testChallenge.DeletedOn = this._dateTime.Now();
-                            testChallenge.ModifiedOn = this._dateTime.Now();
-
-                            // Remove Test Result
-                            var userTestResults = userTest.CompletedTestResult;
-                            if (userTestResults != null)
+                            if (testChallenge != null)
                             {
-                                userTestResults.IsDeleted = true;
-                                userTestResults.DeletedOn = this._dateTime.Now();
-                                userTestResults.ModifiedOn = this._dateTime.Now();
+                                // Remove Challenge
+                                testChallenge.IsDeleted = true;
+                                testChallenge.DeletedOn = this._dateTime.Now();
+                                testChallenge.ModifiedOn = this._dateTime.Now();
+
                             }
 
                             // Update User Status
@@ -321,7 +333,7 @@ namespace SmokeFree.ViewModels.Test
                 OnPropertyChanged();
             }
         }
-     
+
         /// <summary>
         /// Test Results Elements Collection
         /// </summary>
@@ -329,7 +341,7 @@ namespace SmokeFree.ViewModels.Test
         {
             get { return _testResults; }
             set
-            { 
+            {
                 _testResults = value;
                 OnPropertyChanged();
             }

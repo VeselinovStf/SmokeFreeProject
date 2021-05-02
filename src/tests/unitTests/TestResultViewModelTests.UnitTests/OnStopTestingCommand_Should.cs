@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -289,141 +288,6 @@ namespace TestResultViewModelTests.UnitTests
 
         }
 
-        /// <summary>
-        /// Logs when user test result is not found
-        /// </summary>
-        [Test]
-        public void Log_Error_If_User_Test_Result_Is_Not_Found_In_DB()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-
-            var navigationServiceMock = new Mock<INavigationService>();
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()));
-
-            var dialogServiceMock = new Mock<IDialogService>();
-
-            dialogServiceMock.Setup(e => e.ConfirmAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
-
-            var testResultViewModel = new TestResultViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object
-                );
-
-            var userId = Globals.UserId;
-            var testId = "1";
-
-            var user = new User()
-            {
-                Id = userId,
-                TestId = testId,
-                NotificationState = false,
-                UserState = UserStates.UserUnderTesting.ToString()
-            };
-
-            var userTestsOne = new Test()
-            {
-                Id = testId,
-                UserId = userId
-            };
-
-            var userChallenge = new Challenge()
-            {
-                Id = "CHALLENGE1",
-                UserId = userId
-            };
-
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-                user.Tests.Add(userTestsOne);
-                user.Challenges.Add(userChallenge);
-            });
-
-            // Act
-            testResultViewModel.OnStopTestingCommand.Execute(new object());
-
-            // Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()), Times.Exactly(1));
-
-        }
-
-        /// <summary>
-        /// Logs when user test is not found
-        /// </summary>
-        [Test]
-        public void Log_Critical_If_User_Test_Is_Not_Found_In_DB()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-
-            var navigationServiceMock = new Mock<INavigationService>();
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            appLoggerServiceMock.Setup(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()));
-
-            var dialogServiceMock = new Mock<IDialogService>();
-
-            dialogServiceMock.Setup(e => e.ConfirmAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
-
-            var testResultViewModel = new TestResultViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object
-                );
-
-            var userId = Globals.UserId;
-
-
-            var user = new User()
-            {
-                Id = userId,
-                NotificationState = false,
-                UserState = UserStates.UserUnderTesting.ToString()
-            };
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-            });
-
-            // Act
-            testResultViewModel.OnStopTestingCommand.Execute(new object());
-
-            // Assert
-            appLoggerServiceMock.Verify(e => e.LogCritical(It.IsAny<Exception>(), It.IsAny<string>()), Times.Exactly(1));
-
-        }
 
         /// <summary>
         /// Logs when user test is not found
@@ -438,7 +302,7 @@ namespace TestResultViewModelTests.UnitTests
             var dateTime = DateTime.Now;
 
             var navigationServiceMock = new Mock<INavigationService>();
-            navigationServiceMock.Setup(e => e.NavigateToAsync<SomethingWentWrongViewModel>());
+            navigationServiceMock.Setup(e => e.NavigateToAsync<CreateTestViewModel>());
 
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
@@ -479,82 +343,7 @@ namespace TestResultViewModelTests.UnitTests
             testResultViewModel.OnStopTestingCommand.Execute(new object());
 
             //Assert
-            navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
-
-        }
-
-        /// <summary>
-        /// Logs when user test result is not found
-        /// </summary>
-        [Test]
-        public void Notifies_User_If_User_Test_Result_Is_Not_Found_In_DB()
-        {
-            //Arrange
-            var config = new InMemoryConfiguration(Guid.NewGuid().ToString());
-            var realm = Realm.GetInstance(config);
-
-            var dateTime = DateTime.Now;
-
-            var navigationServiceMock = new Mock<INavigationService>();
-            navigationServiceMock.Setup(e => e.NavigateToAsync<SomethingWentWrongViewModel>());
-
-            var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
-            dateTimeWrapperMock.Setup(e => e.Now()).Returns(dateTime);
-
-            var appLoggerServiceMock = new Mock<IAppLogger>();
-            var dialogServiceMock = new Mock<IDialogService>();
-
-            dialogServiceMock.Setup(e => e.ConfirmAsync(
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>(),
-                    It.IsAny<string>()))
-                .Returns(Task.FromResult(true));
-
-            var testResultViewModel = new TestResultViewModel(
-                realm,
-                navigationServiceMock.Object,
-                dateTimeWrapperMock.Object,
-                appLoggerServiceMock.Object,
-                dialogServiceMock.Object
-                );
-
-            var userId = Globals.UserId;
-            var testId = "1";
-
-            var user = new User()
-            {
-                Id = userId,
-                TestId = testId,
-                NotificationState = false,
-                UserState = UserStates.UserUnderTesting.ToString()
-            };
-
-            var userTestsOne = new Test()
-            {
-                Id = testId,
-                UserId = userId
-            };
-
-            var userChallenge = new Challenge()
-            {
-                Id = "CHALLENGE1",
-                UserId = userId
-            };
-
-
-            realm.Write(() =>
-            {
-                realm.Add(user);
-                user.Tests.Add(userTestsOne);
-                user.Challenges.Add(userChallenge);
-            });
-
-            // Act
-            testResultViewModel.OnStopTestingCommand.Execute(new object());
-
-            //Assert
-            navigationServiceMock.Verify(e => e.NavigateToAsync<SomethingWentWrongViewModel>(), Times.Exactly(1));
+            navigationServiceMock.Verify(e => e.NavigateToAsync<CreateTestViewModel>(), Times.Exactly(1));
 
         }
 
@@ -586,7 +375,7 @@ namespace TestResultViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 

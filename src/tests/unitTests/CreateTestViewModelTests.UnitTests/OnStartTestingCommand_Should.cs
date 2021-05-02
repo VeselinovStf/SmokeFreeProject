@@ -204,7 +204,8 @@ namespace CreateTestViewModelTests.UnitTests
             var user = new User()
             {
                 Id = userId,
-                UserState = UserStates.CompletedOnBoarding.ToString()
+                UserState = UserStates.CompletedOnBoarding.ToString(),
+                NotificationState = false
             };
 
             createTestViewModel.SelectedTestTimeDurationItem = testDuration;
@@ -284,7 +285,8 @@ namespace CreateTestViewModelTests.UnitTests
             var user = new User()
             {
                 Id = userId,
-                UserState = UserStates.CompletedOnBoarding.ToString()
+                UserState = UserStates.CompletedOnBoarding.ToString(),
+                NotificationState = false
             };
 
             createTestViewModel.SelectedTestTimeDurationItem = testDuration;

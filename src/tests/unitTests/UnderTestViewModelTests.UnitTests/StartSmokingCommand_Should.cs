@@ -50,7 +50,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -60,7 +60,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -134,7 +134,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(false));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -144,7 +144,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -211,7 +211,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -221,7 +221,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -295,7 +295,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 //            deviceTimerMock.Setup(e =>
@@ -307,7 +307,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -369,7 +369,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -380,7 +380,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -451,7 +451,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -462,7 +462,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -548,7 +548,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -558,7 +558,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );
@@ -599,7 +599,7 @@
 //                It.IsAny<string>()))
 //                    .Returns(Task.FromResult(true));
 
-//            var notificationManagerMock = new Mock<INotificationManager>();
+//            
 //            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 //            var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -609,7 +609,7 @@
 //                dateTimeWrapperMock.Object,
 //                appLoggerServiceMock.Object,
 //                dialogServiceMock.Object,
-//                notificationManagerMock.Object,
+//                
 //                testCalculationServiceMock.Object,
 //                deviceTimerMock.Object
 //                );

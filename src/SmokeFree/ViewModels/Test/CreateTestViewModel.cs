@@ -224,7 +224,7 @@ namespace SmokeFree.ViewModels.Test
                                     Title = AppResources.UnderTestViewModelCompleteTestMessage,
                                     Description = AppResources.UnderTestViewModelCompleteTestNotificationMessage,
                                     ReturningData = "Dummy data", // Returning data when tapped on notification.
-                                    NotifyTime = testEndDate.AddSeconds(3) ,
+                                    NotifyTime = testEndDate.AddSeconds(3),
                                     Android = new AndroidOptions()
                                     {
                                         IconName = "icon"

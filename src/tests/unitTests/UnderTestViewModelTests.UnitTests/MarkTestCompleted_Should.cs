@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
-using SmokeFree.Abstraction.Managers;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
@@ -39,7 +38,7 @@ namespace UnderTestViewModelTests.UnitTests
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -49,7 +48,6 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -106,7 +104,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dialogServiceMock = new Mock<IDialogService>();
             dialogServiceMock.Setup(e => e.ShowDialog(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()));
 
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -116,7 +114,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -166,7 +164,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -176,7 +174,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -204,7 +202,7 @@ namespace UnderTestViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -214,7 +212,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );
@@ -258,7 +256,7 @@ namespace UnderTestViewModelTests.UnitTests
                 Setup(e => e.LogCritical(It.IsAny<string>(), It.IsAny<string>()));
 
             var dialogServiceMock = new Mock<IDialogService>();
-            var notificationManagerMock = new Mock<INotificationManager>();
+
             var testCalculationServiceMock = new Mock<ITestCalculationService>();
             var deviceTimerMock = new Mock<IDeviceTimer>();
 
@@ -268,7 +266,7 @@ namespace UnderTestViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                notificationManagerMock.Object,
+
                 testCalculationServiceMock.Object,
                 deviceTimerMock.Object
                 );

@@ -42,7 +42,7 @@ namespace SmokeFree.Views.Test
 
         protected override void OnAppearing()
         {
-            InitializeDefaultColour();         
+            InitializeDefaultColour();
         }
     }
 }
