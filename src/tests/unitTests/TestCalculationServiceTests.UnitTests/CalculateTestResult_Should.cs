@@ -180,7 +180,7 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
+            var totalTestTimeOffset = totalTestTime.TotalSeconds;
 
             var expectedTestResult = new TestResult()
             {
@@ -312,7 +312,7 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
+            var totalTestTimeOffset = totalTestTime.TotalSeconds;
 
             var expectedTestResult = new TestResult()
             {
@@ -444,7 +444,7 @@ namespace TestCalculationServiceTests.UnitTests
             var totalSmokeGasTimeSeconds = (totalSmokes * oneSmokeTimeInMinutes) * 60;
             var avarageSmokeDistanceSeconds = ((smokesDistanceInMinutes + oneSmokeTimeInMinutes) * 60) / testDays;
             var totalTestTime = testTimeElapsed.Subtract(dateTime);
-            var totalTestTimeOffset = (new DateTime() + totalTestTime).Second;
+            var totalTestTimeOffset = totalTestTime.TotalSeconds;
 
             var expectedTestResult = new TestResult()
             {
