@@ -34,6 +34,7 @@
                         FontSize="25"
                         FontAttributes="Bold"
                         Text="{xct:Translate CreateTestViewViewDescriptionLabel}"/>
+
                     <Button 
                         Grid.Row="1" 
                         Text="{xct:Translate CreateTestViewViewDescriptionLabelButton}" 
@@ -67,6 +68,18 @@
                     />
                     <!-- /END/ Goal Date Button -->
 
+
+                    <!-- TEST VIEW TITLE -->
+                    <Label Text="{xct:Translate CreateTestViewTiitle}"
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"
+                           HorizontalTextAlignment="Center"
+                            FontSize="20"/>
+                    <!-- /END/ TEST VIEW TITLE -->
+
+                    
                     <!-- App Settings Button -->
                     <Button
                     Text="&#xe72B;"
@@ -82,8 +95,6 @@
                 />
                     <!-- /END/ App Settings Button -->
                 </Grid>
-
-
                 <!-- /END/ NAVIGATION -->
 
                 <!-- MAIN CONTENT -->
@@ -98,16 +109,6 @@
                         IsVisible="false"
                         Date="{Binding GoalDateTime}"
                         />
-
-                    <!-- TEST VIEW TITLE -->
-                    <Label Text="{xct:Translate CreateTestViewTiitle}"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="{StaticResource Gray-100}"
-                            FontFamily="{StaticResource Montserrat-Bold}"
-                           HorizontalTextAlignment="Center"
-                            FontSize="20"/>
-                    <!-- /END/ TEST VIEW TITLE -->
 
                     <!-- TEST TIME PICKER -->
                     <Picker x:Name="picker"

@@ -64,6 +64,17 @@
                         Margin="10,10,10,10"/>
                     <!-- /END/ STOP TEST BUTTON -->
 
+                    <!-- UNDER TEST VIEW TITLE -->
+                    <Label Text="{xct:Translate UnderTestViewTiitle}"
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"/>
+                    <!-- /END/ TEST VIEW TITLE -->
+
+
                     <!-- App Settings Button -->
                     <Button            
                         x:Name="SettingsButton"
@@ -158,22 +169,13 @@
                 <Grid Grid.Row="2" VerticalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
+                      
                     </Grid.RowDefinitions>
                     <StackLayout 
                              VerticalOptions="CenterAndExpand"
                              Spacing="20">
 
-                        <!-- UNDER TEST VIEW TITLE -->
-                        <Label Text="{xct:Translate UnderTestViewTiitle}"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="{StaticResource Gray-100}"
-                            FontFamily="{StaticResource Montserrat-Bold}"
-                            HorizontalTextAlignment="Center"
-                            FontSize="20"/>
-                        <!-- /END/ TEST VIEW TITLE -->
 
                         <!-- Start Smoking BUTTON -->
                         <Button 
@@ -204,7 +206,7 @@
 
                     </StackLayout>
                     <!-- TEST TIME LEFT -->
-                    <StackLayout Grid.Row="2" VerticalOptions="EndAndExpand" Margin="0,60,0,0">
+                    <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Margin="0,60,0,0">
 
                         <Label 
                             Text="{xct:Translate UnderTestViewTestLeftTimeLabel}" 
