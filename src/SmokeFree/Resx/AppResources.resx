@@ -399,4 +399,22 @@
   <data name="UnderTestViewDescriptionLabelButton" xml:space="preserve">
     <value>Begin</value>
   </data>
+  <data name="UserSmokeStatusSetBad" xml:space="preserve">
+    <value>Addicted</value>
+  </data>
+  <data name="UserSmokeStatusSetConcern" xml:space="preserve">
+    <value>Stuck</value>
+  </data>
+  <data name="UserSmokeStatusSetQuiter" xml:space="preserve">
+    <value>Concern</value>
+  </data>
+  <data name="UserSmokeStatusSetSmoker" xml:space="preserve">
+    <value>Trobles</value>
+  </data>
+  <data name="UserSmokeStatusSetWorst" xml:space="preserve">
+    <value>Quit Now</value>
+  </data>
+  <data name="UserSmokeStatusTitle" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>

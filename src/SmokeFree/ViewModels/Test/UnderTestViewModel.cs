@@ -677,14 +677,29 @@ namespace SmokeFree.ViewModels.Test
                                 testResult.TestId = testId;
                                 testResult.CreatedOn = this._dateTime.Now();
 
-                                // Write To db
-                                this._realm.Write(() =>
-                                {
-                                    userTest.CompletedTestResult = testResult;
-                                    user.UserState = UserStates.IsTestComplete.ToString();
-                                });
+                                var userStatusCalculation = this._testCalculationService
+                                            .CalculateUserSmokeStatus(testResult);
 
-                                NavigateToTestResults();
+                                if (userStatusCalculation.Success)
+                                {
+                                    // Write To db
+                                    this._realm.Write(() =>
+                                    {
+                                        user.UserSmokeStatuses = userStatusCalculation.Status.ToString();
+                                        userTest.CompletedTestResult = testResult;
+                                        user.UserState = UserStates.IsTestComplete.ToString();
+                                    });
+
+                                    NavigateToTestResults();
+                                }
+                                else
+                                {
+                                    // User Test Result Not Found!
+                                    base._appLogger.LogCritical($"Can't Calculate User Smoke Status: User id: {userId}, Test Id {testId}");
+
+                                    await base.InternalErrorMessageToUser();
+                                }
+                               
                             }
                             else
                             {

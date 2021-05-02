@@ -55,5 +55,10 @@ namespace SmokeFree.Data.Models
         /// User State In Application
         /// </summary>
         public string UserState { get; set; } = UserStates.Initial.ToString();
+
+        /// <summary>
+        /// User Smoking Habbit Status
+        /// </summary>
+        public string UserSmokeStatuses { get; set; }
     }
 }

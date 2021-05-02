@@ -180,7 +180,6 @@ namespace TestCalculationServiceTests.UnitTests
             var testCalculationService = new TestCalculationService();
 
             var dateTime = DateTime.Now;
-            var currentlySmokedCount = 0;
             var timeSenceLastSmoke = new TimeSpan(0, 0, 0);
             var testLeftTime = new TimeSpan(0, 0, 0);
             var currentSmokeTime = dateTime.Subtract(dateTime.AddDays(-1));

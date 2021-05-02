@@ -1,4 +1,5 @@
 ﻿using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -6,6 +7,7 @@ using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.Test;
 using SmokeFree.Resx;
 using SmokeFree.Utilities.Parsers;
+using SmokeFree.Utilities.UserStateHelpers;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.Challenge;
@@ -33,6 +35,7 @@ namespace SmokeFree.ViewModels.Test
         /// Database
         /// </summary>
         private readonly Realm _realm;
+        private readonly ITestCalculationService _testCalculationService;
 
         /// <summary>
         /// Test Results Elements Collection
@@ -49,13 +52,16 @@ namespace SmokeFree.ViewModels.Test
             INavigationService navigationService,
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
-            IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IDialogService dialogService,
+            ITestCalculationService testCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Set View Title
             ViewTitle = AppResources.TestResultViewModelTiitle;
 
             // Database
             _realm = realm;
+
+            _testCalculationService = testCalculationService;
 
             _testResults = new ObservableCollection<TestResultItem>();
         }
@@ -88,6 +94,7 @@ namespace SmokeFree.ViewModels.Test
                     {
                         var testResult = userTest.CompletedTestResult;
 
+
                         // Validate Test Result
                         if (testResult != null)
                         {
@@ -99,49 +106,55 @@ namespace SmokeFree.ViewModels.Test
                             {
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = Globals.UserSmokeStatusesSet[StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses)].First().Item1,
+                                    DisplayTitle = AppResources.UserSmokeStatusTitle,
+                                    Value = Globals.UserSmokeStatusesSet[StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses)].First().Item2
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "\ue06a",
                                     DisplayTitle = AppResources.TestResultTestTimeLabel,
                                     Value = DoubleToString.DateTime(TestResult.TotalTestTimeSeconds)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue728",
                                     DisplayTitle = AppResources.TestResultStartedDateLabel,
                                     Value = DateTimeOfsetToString.DateTime(TestResult.TestStartDate)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue728",
                                     DisplayTitle = AppResources.TestResultEndDateLabel,
                                     Value = DateTimeOfsetToString.DateTime(TestResult.EndStartDate)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ueb78",
                                     DisplayTitle = AppResources.TestResultSmokedCigarsLabel,
                                     Value = TestResult.TotalSmokedCigars.ToString()
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue0c8",
                                     DisplayTitle = AppResources.TestResultAvarageForDayLabel,
                                     Value = DoubleToString.Procent(TestResult.AvarageSmokedCigarsPerDay)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue0f1",
                                     DisplayTitle = AppResources.TestResultAvarageCleanOxygenTimeLabel,
                                     Value = DoubleToString.DateTime(TestResult.AvarageCleanOxygenTimeSeconds)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue0ab",
                                     DisplayTitle = AppResources.TestResultTotalSmokedGazTime,
                                     Value = DoubleToString.DateTime(TestResult.TotalSmokeGasTimeTimeSeconds)
                                 },
                                 new TestResultItem()
                                 {
-                                    Icon = "&#xe72B;",
+                                    Icon = "\ue044",
                                     DisplayTitle = AppResources.TestResultAvarageSmokeDistance,
                                     Value = DoubleToString.DateTime(TestResult.AvarageSmokeDistanceSeconds)
                                 },

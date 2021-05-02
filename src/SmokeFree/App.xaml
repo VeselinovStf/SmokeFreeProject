@@ -43,6 +43,14 @@
                     <On Platform="UWP" Value="Assets/UIFontIcons.ttf#UIFontIcons" />
                 </OnPlatform.Platforms>
             </OnPlatform>
+
+            <OnPlatform x:Key="SFFontIcons" x:TypeArguments="x:String">
+                <OnPlatform.Platforms>
+                    <On Platform="Android" Value="uisficons.ttf#uisficons" />
+                    <On Platform="iOS" Value="UIFontIcons" />
+                    <On Platform="UWP" Value="Assets/uisficons.ttf#uisficons" />
+                </OnPlatform.Platforms>
+            </OnPlatform>
             <!-- /END/ ICONS -->
 
             <!-- FONTS -->

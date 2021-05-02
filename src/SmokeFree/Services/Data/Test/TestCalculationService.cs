@@ -231,5 +231,45 @@ namespace SmokeFree.Services.Data.Test
             // Default return value
             return new TimeSpan(0, 0, 0);
         }
+
+        public CalculateUserStatusDTO CalculateUserSmokeStatus(TestResult testResult)
+        {
+            try
+            {
+                var avarageUserSmokedCigares = (int)testResult.AvarageSmokedCigarsPerDay;
+
+                UserSmokeStatuses status;
+               
+                var userStatuses = Globals.UserSmokeStatusesSet;
+
+                if (avarageUserSmokedCigares >= 1 && avarageUserSmokedCigares <= 5)
+                {
+                    status = UserSmokeStatuses.Quiter;
+                }
+                else if (avarageUserSmokedCigares <= 10)
+                {
+                    status = UserSmokeStatuses.Concern;
+                }
+                else if (avarageUserSmokedCigares <= 15)
+                {
+                    status = UserSmokeStatuses.Smoker;
+                  
+                }
+                else if (avarageUserSmokedCigares <= 20)
+                {
+                    status = UserSmokeStatuses.Bad;                  
+                }
+                else
+                {
+                    status = UserSmokeStatuses.Worst;
+                }
+
+                return new CalculateUserStatusDTO(true,status);
+            }
+            catch (Exception ex)
+            {
+                return new CalculateUserStatusDTO(false, ex.Message);
+            }
+        }
     }
 }

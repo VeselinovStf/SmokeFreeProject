@@ -898,6 +898,60 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Addicted.
+        /// </summary>
+        internal static string UserSmokeStatusSetBad {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusSetBad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stuck.
+        /// </summary>
+        internal static string UserSmokeStatusSetConcern {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusSetConcern", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Concern.
+        /// </summary>
+        internal static string UserSmokeStatusSetQuiter {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusSetQuiter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trobles.
+        /// </summary>
+        internal static string UserSmokeStatusSetSmoker {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusSetSmoker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit Now.
+        /// </summary>
+        internal static string UserSmokeStatusSetWorst {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusSetWorst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string UserSmokeStatusTitle {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         internal static string YesButtonText {

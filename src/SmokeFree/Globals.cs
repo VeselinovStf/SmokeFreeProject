@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using SmokeFree.Data.Models;
+using SmokeFree.Resx;
+using System;
+using System.Collections.Generic;
 
 namespace SmokeFree
 {
@@ -26,6 +29,18 @@ namespace SmokeFree
            {"Mellow","#5d4cf7"},
            {"Goal","#06846a"},
            {"Win","#d54008"}
+        };
+
+        /// <summary>
+        /// User Statuses
+        /// </summary>
+        public static Dictionary<UserSmokeStatuses, List<(string,string)>> UserSmokeStatusesSet = new Dictionary<UserSmokeStatuses, List<(string Icon, string Message)>>()
+        {
+           {UserSmokeStatuses.Quiter,  new List<(string Icon, string Message)>{("\uec33", AppResources.UserSmokeStatusSetQuiter) } },
+           {UserSmokeStatuses.Concern,  new List<(string Icon, string Message)>{("\ue0fb", AppResources.UserSmokeStatusSetConcern  ) } },
+           {UserSmokeStatuses.Smoker,  new List<(string Icon, string Message)>{("\ue0e7", AppResources.UserSmokeStatusSetSmoker) } },
+           {UserSmokeStatuses.Bad,  new List<(string Icon, string Message)>{( "\ue0dd", AppResources.UserSmokeStatusSetBad ) } },
+           {UserSmokeStatuses.Worst,  new List<(string Icon, string Message)>{("\ue0ad", AppResources.UserSmokeStatusSetWorst) } },          
         };
 
         /// <summary>

@@ -6,6 +6,11 @@ namespace SmokeFree.Utilities.Parsers
     {
         public static string DateTime(double value)
         {
+            if (value <= 0)
+            {
+                return "";
+            }
+
             var time = new TimeSpan(0, 0, (int)value);
 
             var formatTime = new TimeSpan(time.Days, time.Hours, time.Minutes, time.Seconds);
@@ -15,6 +20,11 @@ namespace SmokeFree.Utilities.Parsers
 
         public static string Procent(double value)
         {
+            if (value <= 0)
+            {
+                return "";
+            }
+
             return string.Format("{0:N2}", value);
         }
     }

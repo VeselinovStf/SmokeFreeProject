@@ -53,7 +53,7 @@ namespace SmokeFree.Services.General
 
                 LocalizationResourceManager.Current.CurrentCulture = new CultureInfo(user.Localozation);
 
-                var userState = UserStateConverter.ToUserState(user.UserState);
+                var userState = StringToEnum.ToUserState<UserStates>(user.UserState);
 
                 // TODO: C: Clear navigation back stack
                 switch (userState)

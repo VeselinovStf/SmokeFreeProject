@@ -1,4 +1,5 @@
-﻿using SmokeFree.Models.Services.Data.Test;
+﻿using SmokeFree.Data.Models;
+using SmokeFree.Models.Services.Data.Test;
 using System;
 
 namespace SmokeFree.Abstraction.Services.Data.Test
@@ -30,5 +31,12 @@ namespace SmokeFree.Abstraction.Services.Data.Test
         /// <param name="now">Current time</param>
         /// <returns>TimeSpan time sence last smoke</returns>
         TimeSpan TimeSinceLastSmoke(SmokeFree.Data.Models.Test currentTest, DateTime now);
+
+        /// <summary>
+        /// Calculate User Status From Test Results
+        /// </summary>
+        /// <param name="testResult">User Test Results</param>
+        /// <returns>Response Model</returns>
+        CalculateUserStatusDTO CalculateUserSmokeStatus(TestResult testResult);
     }
 }

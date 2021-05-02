@@ -29,7 +29,7 @@
                         VerticalOptions="CenterAndExpand"
                         HorizontalTextAlignment="Center"
                         VerticalTextAlignment="Center"
-                        FontSize="25"
+                        FontSize="20"
                         FontAttributes="Bold"
                         Text="{xct:Translate UnderTestViewDescriptionLabel}"/>
                     <Button 
@@ -107,14 +107,14 @@
                         <Label 
                             Text="{xct:Translate UnderTestViewSmokingLabel}" 
                             HorizontalOptions="Start"
-                            FontSize="25"
+                            FontSize="20"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
                         <Label                       
                             Text="{Binding CurrentlySmokedCount}"                
                             HorizontalTextAlignment="Center"
-                            FontSize="25"
+                            FontSize="20"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
@@ -128,7 +128,7 @@
                              IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="LastSmokeDateTimeDisplayLabel"
                             Text="{xct:Translate UnderTestViewLastTimeLabel}" 
-                            FontSize="25"
+                            FontSize="20"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
@@ -136,7 +136,7 @@
                         <Label 
                              IsVisible="{Binding IsSmoking}"
                             Text="{xct:Translate UnderTestViewSmokeSenceLabel}" 
-                            FontSize="25"
+                            FontSize="20"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
@@ -146,7 +146,7 @@
                             x:Name="LastSmokeDateTimeDisplayDateTime"
                             Text="{Binding TimeSenceLastSmoke, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
                              HorizontalTextAlignment="Center"
-                            FontSize="25"
+                            FontSize="20"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
@@ -155,7 +155,7 @@
                             x:Name="LastSmokeDateTimeDisplayAtSmokeDateTime"
                             Text="{Binding CurrentSmokeTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
                              HorizontalTextAlignment="Center"
-                            FontSize="25"
+                            FontSize="20"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 

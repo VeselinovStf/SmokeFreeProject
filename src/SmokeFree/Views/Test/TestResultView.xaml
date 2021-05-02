@@ -83,8 +83,8 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="&#xe72B;" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource FontIcons}"
-                                           FontSize="40" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Column="0" Text="{Binding Icon}" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource SFFontIcons}"
+                                           FontSize="30" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
                                     <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding DisplayTitle}" TextColor="Black" FontAttributes="Bold"
                                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                                     <Label Grid.Column="3" Text="{Binding Value}" TextColor="Black"
