@@ -13,7 +13,7 @@ namespace SmokeFree
         /// <summary>
         /// Used For Testing 
         /// </summary>
-        public static bool MockRun = true;
+        public static bool MockRun = false;
 
         // Notification Ids
         public static int TestingTimeNotificationId = 666;
@@ -79,7 +79,7 @@ namespace SmokeFree
         /// <summary>
         /// Limits if User Forgets To push Smoke Done
         /// </summary>
-        public static int OneSmokeTreshHoldTimeMinutes = 9;
+        public static int OneSmokeTreshHoldTimeMinutes = 7;
 
         /// <summary>
         /// Minimum Limit for Challenge in Days
