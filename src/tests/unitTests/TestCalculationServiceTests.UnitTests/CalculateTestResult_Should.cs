@@ -474,5 +474,91 @@ namespace TestCalculationServiceTests.UnitTests
             Assert.IsTrue(expectedTestResult.AvarageSmokeDistanceSeconds == actual.TestResultCalculation.AvarageSmokeDistanceSeconds, "AvarageSmokeDistanceSeconds not valid");
             Assert.IsTrue(expectedTestResult.AvarageSmokeActiveTimeSeconds == actual.TestResultCalculation.AvarageSmokeActiveTimeSeconds, "AvarageSmokeActiveTimeSeconds not valid");
         }
+
+        /// <summary>
+        /// Calculate 2 Smokes for 30 sec Correctly.
+        /// Two smokes for 30 sec test
+        /// </summary>
+        [Test]
+        public void Calculate_30Sec_Two_Smokes_TestResult_Correctly()
+        {
+            // Arrange
+            var testCalculationService = new TestCalculationService();
+
+            var dateTime = DateTime.Now;
+            var testId = "Test_ID";
+            var testStartTime = dateTime;
+
+            var testTimeElapsed = dateTime;
+
+            // First Starts NOW
+            var smoke1start = dateTime;
+            var smoke1end = smoke1start.AddSeconds(6);
+            // First smoked for 6s
+            // 10sec free oxygen
+            // Second starts + 10 sec
+            var smoke2start = smoke1end.AddSeconds(10);
+            var smoke2end = smoke2start.AddSeconds(10);
+            // 4sec free oxygen
+            var endTestTIme = smoke2end.AddSeconds(4);
+
+            var smoke1 = new Smoke()
+            {
+                StartSmokeTime = smoke1start,
+                EndSmokeTime = smoke1end
+            };
+            var smoke2 = new Smoke()
+            {
+                StartSmokeTime = smoke2start,
+                EndSmokeTime = smoke2end
+            };
+           
+
+            var test = new Test()
+            {
+                Id = testId,
+                TestStartDate = testStartTime,
+                TestEndDate = endTestTIme
+            };
+
+            test.SmokedCigaresUnderTest.Add(smoke1);
+            test.SmokedCigaresUnderTest.Add(smoke2);
+
+            var totalSmokes = test.SmokedCigaresUnderTest.Count;
+            var avarageSmokesPerDay = totalSmokes / 1;
+            var avarageCleanTimeSeconds = 14 / 1;
+            var totalSmokeGasTimeSeconds = 16;
+            var avarageSmokeDistanceSeconds = 10 / 1;
+            var totalTestTime = endTestTIme.Subtract(testTimeElapsed);
+            var totalTestTimeOffset = totalTestTime.TotalSeconds;
+
+            var expectedTestResult = new TestResult()
+            {
+                TotalTestTimeSeconds = totalTestTimeOffset,
+                TestId = testId,
+                TestStartDate = test.TestStartDate,
+                EndStartDate = endTestTIme,
+                TotalSmokedCigars = totalSmokes,
+                AvarageSmokedCigarsPerDay = avarageSmokesPerDay,
+                AvarageCleanOxygenTimeSeconds = avarageCleanTimeSeconds,
+                TotalSmokeGasTimeTimeSeconds = totalSmokeGasTimeSeconds,
+                AvarageSmokeDistanceSeconds = avarageSmokeDistanceSeconds,
+                AvarageSmokeActiveTimeSeconds = avarageCleanTimeSeconds + totalSmokeGasTimeSeconds
+            };
+            // Act
+            var actual = testCalculationService.CalculateTestResult(test);
+
+            // Assert
+            Assert.IsTrue(expectedTestResult.TotalTestTimeSeconds == actual.TestResultCalculation.TotalTestTimeSeconds, "TotalTestTime not valid");
+            Assert.IsTrue(expectedTestResult.TestId == actual.TestResultCalculation.TestId, "TestId not valid");
+            Assert.IsTrue(expectedTestResult.TestStartDate.DateTime == actual.TestResultCalculation.TestStartDate, "TestStartDate not valid");
+            Assert.IsTrue(expectedTestResult.EndStartDate.DateTime == actual.TestResultCalculation.EndStartDate, "EndStartDate not valid");
+            Assert.IsTrue(expectedTestResult.TotalSmokedCigars == actual.TestResultCalculation.TotalSmokedCigars, "TotalSmokedCigars not valid");
+            Assert.IsTrue(expectedTestResult.AvarageSmokedCigarsPerDay == actual.TestResultCalculation.AvarageSmokedCigarsPerDay, "AvarageSmokedCigarsPerDay not valid");
+            Assert.IsTrue(expectedTestResult.AvarageCleanOxygenTimeSeconds == actual.TestResultCalculation.AvarageCleanOxygenTimeSeconds, "AvarageCleanOxygenTimeSeconds not valid");
+            Assert.IsTrue(expectedTestResult.TotalSmokeGasTimeTimeSeconds == actual.TestResultCalculation.TotalSmokeGasTimeTimeSeconds, "TotalSmokeGasTimeTimeSeconds not valid");
+            Assert.IsTrue(expectedTestResult.AvarageSmokeDistanceSeconds == actual.TestResultCalculation.AvarageSmokeDistanceSeconds, "AvarageSmokeDistanceSeconds not valid");
+            Assert.IsTrue(expectedTestResult.AvarageSmokeActiveTimeSeconds == actual.TestResultCalculation.AvarageSmokeActiveTimeSeconds, "AvarageSmokeActiveTimeSeconds not valid");
+        }
     }
 }
