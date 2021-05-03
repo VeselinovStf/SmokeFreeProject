@@ -380,6 +380,65 @@
                         </ViewCell>
                         <!-- /END/ SEND REPORT  -->
 
+                        <!-- SEND DB REPORT -->
+                        <ViewCell>
+                            <Grid
+                                BackgroundColor="{StaticResource Gray-100}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <!-- SEND DB REPORT  ICON -->
+                                <Label            
+                                     Margin="20,10,0,10"
+                                     Text="&#xe71E;"
+                                     FontFamily="{StaticResource FontIcons}"
+                                     BackgroundColor="Transparent"
+                                     HorizontalOptions="Start"
+                                     VerticalTextAlignment="Center"
+                                     TextColor="{StaticResource Gray-600}"
+                                     FontSize="20"
+                                     HeightRequest="40"
+                                     WidthRequest="40"
+                                    />
+                                <!-- /END/ SEND DB REPORT  ICON -->
+
+                                <!-- DB  APP TEXT -->
+                                <Label Text="{xct:Translate AppSetingApplicationSendDbLabel}"
+                                       Grid.Column="1"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="Start"
+                                       VerticalOptions="CenterAndExpand"
+                                       Margin="0,10,0,10"                                      
+                                       FontFamily="{StaticResource  Montserrat-Bold}"
+                                       TextColor="{StaticResource Gray-700}" />
+                                <!-- /END/ SEND DB   TEXT -->
+
+                                <!--  SEND DB REPORT  -->
+
+                                <Button
+                                    Margin="0,0,20,0"
+                                    Text="&#xe71A;"
+                                    Grid.Column="2"
+                                    FontFamily="{StaticResource FontIcons}"
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"
+                                    TextColor="{StaticResource Gray-700}"
+                                    FontSize="20"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    Command="{Binding SendDBCommand}"
+                                   />
+
+                                <!-- /END/  SEND REPORT  -->
+
+
+                            </Grid>
+                        </ViewCell>
+                        <!-- /END/ SEND DB REPORT  -->
+                        
                         <!-- Rank APP -->
                         <ViewCell>
                             <Grid

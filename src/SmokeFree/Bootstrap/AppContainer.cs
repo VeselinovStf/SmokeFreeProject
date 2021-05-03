@@ -27,6 +27,11 @@ namespace SmokeFree.Bootstrap
     {
         private static IContainer _container;
 
+        public static RealmConfiguration GetRealmConfiguration => new RealmConfiguration
+        {
+            SchemaVersion = 8
+        };
+
         /// <summary>
         /// Dependency Registrations
         /// </summary>
@@ -35,12 +40,9 @@ namespace SmokeFree.Bootstrap
             var _builder = new ContainerBuilder();
 
             // Database
-            var realmConfiguration = new RealmConfiguration
-            {
-                SchemaVersion = 8
-            };
 
-            _builder.Register(c => Realm.GetInstance(realmConfiguration)).InstancePerDependency();
+
+            _builder.Register(c => Realm.GetInstance(GetRealmConfiguration)).InstancePerDependency();
 
             //VIEW MODELS
             _builder.RegisterType<OnBoardingViewModel>();

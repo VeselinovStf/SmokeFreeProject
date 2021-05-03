@@ -4,6 +4,7 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Bootstrap;
 using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.AppSetting;
 using SmokeFree.Resx;
@@ -404,6 +405,92 @@ namespace SmokeFree.ViewModels.AppSettings
                     // User Is not connected to web - can't send issue
                     responseMessageTitle = AppResources.IssueNoWebConnectionMessageTitle;
                     responseMessage = AppResources.IssueNoWebConnectionMessage;
+                }
+
+                // Notify User
+                await this._dialogService
+                    .ShowDialog(
+                        responseMessage,
+                        responseMessageTitle,
+                        AppResources.ButtonOkText);
+            }
+            catch (System.Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// Send FeedBack Data to Dev team
+        /// </summary>
+        public IAsyncCommand SendDBCommand => new AsyncCommand(
+            SendDB,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task SendDB()
+        {
+            try
+            {
+                var responseMessageTitle = string.Empty;
+                var responseMessage = string.Empty;
+
+                // Check If User is able to send Email at all
+                if (this._connectionService.IsConnected)
+                {
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
+
+                    // Get Archived DB
+                    var archivedLogsUtilityResponse = this._localLogUtility
+                        .CreateDbZipFile(AppContainer.GetRealmConfiguration.DatabasePath);
+
+                    // Check if Logs are Archived
+                    if (archivedLogsUtilityResponse.Created)
+                    {
+                        // Send Them To Dev Team Email
+                        var emailSendResult = await this._emailSender
+                            .SendEmailAsync(
+                                Globals.IssueReportTitle,
+                                Globals.IssueReportBody,
+                                Globals.ReportIssueEmails,
+                                archivedLogsUtilityResponse.Message);
+
+                        if (emailSendResult.Success)
+                        {
+                            // Success
+                            responseMessageTitle = AppResources.EmailSuccesTitle;
+                            responseMessage = AppResources.DbEmailSuccessMessage;
+                        }
+                        else
+                        {
+                            base._appLogger.LogError(emailSendResult.Message);
+
+
+                            // Can't send email
+                            responseMessageTitle = AppResources.CantSendEmailTitle;
+                            responseMessage = AppResources.CantSendIssueEmailMessage;
+                        }
+                    }
+                    else
+                    {
+                        // Can't create log zip
+                        base._appLogger.LogError($"Reason: {archivedLogsUtilityResponse.Message} : No data, or whrong folder structure!");
+
+                        // Success
+                        responseMessageTitle = AppResources.DbNoDataToSendTitle;
+                        responseMessage = AppResources.DbNoDataToSendMessage;
+                    }
+                }
+                else
+                {
+                    base._appLogger.LogError(AppResources.DbNoWebConnectionMessageTitle);
+
+                    // User Is not connected to web - can't send issue
+                    responseMessageTitle = AppResources.DbNoWebConnectionMessageTitle;
+                    responseMessage = AppResources.DbNoWebConnectionMessage;
                 }
 
                 // Notify User

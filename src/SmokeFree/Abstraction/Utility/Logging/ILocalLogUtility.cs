@@ -1,4 +1,6 @@
-﻿using SmokeFree.Models.Utilities.Zip;
+﻿using Realms;
+using SmokeFree.Data.Models;
+using SmokeFree.Models.Utilities.Zip;
 using System.Reflection;
 
 namespace SmokeFree.Abstraction.Utility.Logging
@@ -20,5 +22,11 @@ namespace SmokeFree.Abstraction.Utility.Logging
         /// </summary>
         /// <returns>Response Model</returns>
         CreateLogZipFileResponse CreateLogZipFile();
+
+        /// <summary>
+        /// Creates Db ZIp
+        /// </summary>
+        /// <returns>Response Model</returns>
+        CreateDbZipFileResponse CreateDbZipFile(string dbPath);
     }
 }

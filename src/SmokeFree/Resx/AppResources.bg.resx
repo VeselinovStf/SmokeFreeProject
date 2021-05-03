@@ -420,6 +420,9 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Създай Предизвикателство</value>
   </data>
+  <data name="AppSetingApplicationSendDbLabel" xml:space="preserve">
+    <value>Изпрати Базата Данни</value>
+  </data>
   <data name="ChallengeViewModelTiitle" xml:space="preserve">
     <value>Предизвикателство</value>
   </data>
@@ -455,6 +458,21 @@
   </data>
   <data name="CreateChellengeViewModelStartChallengeConfirmTitle" xml:space="preserve">
     <value>Готов ли си</value>
+  </data>
+  <data name="DbEmailSuccessMessage" xml:space="preserve">
+    <value>Благодарим ви за изпратената информация. Информацията ще бъде използвана за подобряване на приложението.</value>
+  </data>
+  <data name="DbNoDataToSendMessage" xml:space="preserve">
+    <value>Не бе открита информация за изпращане</value>
+  </data>
+  <data name="DbNoDataToSendTitle" xml:space="preserve">
+    <value>Няма информация</value>
+  </data>
+  <data name="DbNoWebConnectionMessage" xml:space="preserve">
+    <value>Вашето устройство не е свързано към интернет мрежа. Свържете се, за да бъде изпратено вашето съобщение</value>
+  </data>
+  <data name="DbNoWebConnectionMessageTitle" xml:space="preserve">
+    <value>Не сте свързани към интернет</value>
   </data>
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>

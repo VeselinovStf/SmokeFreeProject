@@ -1,6 +1,9 @@
 ﻿using NLog;
 using NLog.Config;
+using Realms;
 using SmokeFree.Abstraction.Utility.Logging;
+using SmokeFree.Bootstrap;
+using SmokeFree.Data.Models;
 using SmokeFree.Models.Utilities.Zip;
 using SmokeFree.Utilities.Zip;
 using System;
@@ -69,6 +72,8 @@ namespace SmokeFree.Utilities.Logging
         {
             try
             {
+
+
                 string zipFilename = string.Empty;
 
                 // Check Global Logging Enabled
@@ -156,5 +161,95 @@ namespace SmokeFree.Utilities.Logging
 
         }
 
+        public CreateDbZipFileResponse CreateDbZipFile(string dbPath)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(dbPath))
+                {
+                    return new CreateDbZipFileResponse(false, "Invalid DB Path");
+                }
+
+                string zipFilename = string.Empty;
+
+                string folder;
+
+                // Device Specific - Get Log Folder Path
+                if (Device.RuntimePlatform == Device.iOS)
+                {
+                    folder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "..", "Library");
+                }
+                else if (Device.RuntimePlatform == Device.Android)
+                {
+                    folder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                }
+                else
+                {
+                    throw new Exception("Could not locate folder structure: Platform undefined.");
+                }
+
+                // Delete old zipfiles (housekeeping)
+                try
+                {
+                    foreach (string fileName in System.IO.Directory.GetFiles(folder, "*.db.zip"))
+                    {
+                        System.IO.File.Delete(fileName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error deleting old zip files: {ex.Message}");
+
+                    return new CreateDbZipFileResponse(false, ex.Message);
+                }
+
+                string logFolder = System.IO.Path.Combine(folder, "logs");
+
+                // If Logs Folder Exist
+                if (System.IO.Directory.Exists(logFolder))
+                {
+                    // Zip Name
+                    var zipName = $"{DateTime.Now.ToString("DB_yyyy-MM-dd-HH_mm_ss")}.db.zip";
+                    zipFilename = $"{folder}/{zipName}";
+
+                  
+                    int filesCount = System.IO.Directory.GetFiles(dbPath, "*.realm").Length;
+
+                    // If contains any logs
+                    if (filesCount > 0)
+                    {
+                        // Zip csv-s
+                        if (!FileZipUtility.QuickZip(dbPath, zipFilename))
+                        {
+                            return new CreateDbZipFileResponse(
+                                false,
+                                $"Can't zip db files! Log Folder: {logFolder}, Zip File Name: {zipFilename}");
+                        }
+                        else
+                        {
+                            var zipFile = System.IO.Directory.GetFiles(folder, zipName).FirstOrDefault();
+
+                            return new CreateDbZipFileResponse(true, zipFile);
+                        }
+                    }
+                    else
+                    {
+                        return new CreateDbZipFileResponse(false, $"Can't find .realm files to Zip! DB Folder: {logFolder}");
+                    }
+                }
+                else
+                {
+                    return new CreateDbZipFileResponse(false, $"Can't find db folder! Db Folder: {logFolder}");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                return new CreateDbZipFileResponse(false, ex.Message);
+            }
+        }
     }
 }

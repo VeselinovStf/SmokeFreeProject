@@ -124,6 +124,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send Database.
+        /// </summary>
+        internal static string AppSetingApplicationSendDbLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationSendDbLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visit Web Site.
         /// </summary>
         internal static string AppSetingApplicationWebSiteLabel {
@@ -435,6 +444,51 @@ namespace SmokeFree.Resx {
         internal static string CriticalApplicationFail {
             get {
                 return ResourceManager.GetString("CriticalApplicationFail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your issue email is send to our development team.Thank you for sending it. Information is going to help improving application.
+        /// </summary>
+        internal static string DbEmailSuccessMessage {
+            get {
+                return ResourceManager.GetString("DbEmailSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was no data to send.
+        /// </summary>
+        internal static string DbNoDataToSendMessage {
+            get {
+                return ResourceManager.GetString("DbNoDataToSendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No data to send.
+        /// </summary>
+        internal static string DbNoDataToSendTitle {
+            get {
+                return ResourceManager.GetString("DbNoDataToSendTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your device is not connected to internet network. Please connet to send issue!.
+        /// </summary>
+        internal static string DbNoWebConnectionMessage {
+            get {
+                return ResourceManager.GetString("DbNoWebConnectionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No internet connection.
+        /// </summary>
+        internal static string DbNoWebConnectionMessageTitle {
+            get {
+                return ResourceManager.GetString("DbNoWebConnectionMessageTitle", resourceCulture);
             }
         }
         

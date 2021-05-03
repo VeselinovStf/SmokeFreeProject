@@ -20,7 +20,6 @@ namespace SmokeFree.Views.Challenge
         protected override void OnAppearing()
         {
             InitializeDefaultColour();
-
         }
 
         private void InitializeDefaultColour()
