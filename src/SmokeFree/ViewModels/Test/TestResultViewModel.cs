@@ -327,6 +327,8 @@ namespace SmokeFree.ViewModels.Test
 
         private async Task ExecuteNavigateToCreateChallenge()
         {
+            //TODO: Settup InCreateChallenge
+
             await base._navigationService.NavigateToAsync<CreateChallengeViewModel>();
         }
 

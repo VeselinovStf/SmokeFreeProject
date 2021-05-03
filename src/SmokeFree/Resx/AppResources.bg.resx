@@ -417,4 +417,13 @@
   <data name="UserSmokeStatusTitle" xml:space="preserve">
     <value>Статус</value>
   </data>
+  <data name="CreateChallengeViewTitle" xml:space="preserve">
+    <value>Създай Предизвикателство</value>
+  </data>
+  <data name="CreateChallengeViewModelNewGoalDialogMessage" xml:space="preserve">
+    <value>Стартовия ти избор на крайна дата е по-малък от сегашната дата. Избери отново.</value>
+  </data>
+  <data name="CreateChallengeViewModelNewGoalDialogTitle" xml:space="preserve">
+    <value>Избери нова крайна дата на Предизвикателството</value>
+  </data>
 </root>

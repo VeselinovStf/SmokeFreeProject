@@ -417,4 +417,13 @@
   <data name="UserSmokeStatusTitle" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="CreateChallengeViewTitle" xml:space="preserve">
+    <value>Create Challenge</value>
+  </data>
+  <data name="CreateChallengeViewModelNewGoalDialogMessage" xml:space="preserve">
+    <value>Your initial selection for Challenge Goal time is less then the current date, please select again</value>
+  </data>
+  <data name="CreateChallengeViewModelNewGoalDialogTitle" xml:space="preserve">
+    <value>Select new Challenge Final Date</value>
+  </data>
 </root>

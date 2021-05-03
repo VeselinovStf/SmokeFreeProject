@@ -250,6 +250,33 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your initial selection for Challenge Goal time is less then the current date, please select again.
+        /// </summary>
+        internal static string CreateChallengeViewModelNewGoalDialogMessage {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewModelNewGoalDialogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select new Challenge Final Date.
+        /// </summary>
+        internal static string CreateChallengeViewModelNewGoalDialogTitle {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewModelNewGoalDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Challenge.
+        /// </summary>
+        internal static string CreateChallengeViewTitle {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Final goal date must be greater than current date with {0} days!.
         /// </summary>
         internal static string CreateTestInvalidGoalTimeMessage {
