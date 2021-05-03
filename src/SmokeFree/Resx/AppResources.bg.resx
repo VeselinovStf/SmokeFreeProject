@@ -420,6 +420,12 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Създай Предизвикателство</value>
   </data>
+  <data name="CreateChallengeViewDescriptionTitle" xml:space="preserve">
+    <value>Избери датата на която ще спреш цигарите и започни своето предизвикателство</value>
+  </data>
+  <data name="CreateChallengeViewGoalDateTitle" xml:space="preserve">
+    <value>Избери Крайна дата на Предизвикателството</value>
+  </data>
   <data name="CreateChallengeViewModelBackToTestingMessage" xml:space="preserve">
     <value>Връщането към тест ще изстрие всички събрани данни до момента</value>
   </data>
@@ -431,6 +437,9 @@
   </data>
   <data name="CreateChallengeViewModelNewGoalDialogTitle" xml:space="preserve">
     <value>Избери нова крайна дата на Предизвикателството</value>
+  </data>
+  <data name="CreateChallengeViewStartChallengeButtonText" xml:space="preserve">
+    <value>Започни Предизвикателството</value>
   </data>
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>

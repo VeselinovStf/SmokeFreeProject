@@ -420,6 +420,12 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Create Challenge</value>
   </data>
+  <data name="CreateChallengeViewDescriptionTitle" xml:space="preserve">
+    <value>Chose the date that you are going to quit smoking and start your challenge</value>
+  </data>
+  <data name="CreateChallengeViewGoalDateTitle" xml:space="preserve">
+    <value>Select Goal Completition Date</value>
+  </data>
   <data name="CreateChallengeViewModelBackToTestingMessage" xml:space="preserve">
     <value>Are you sure you want to go back to the test again?</value>
   </data>
@@ -431,6 +437,9 @@
   </data>
   <data name="CreateChallengeViewModelNewGoalDialogTitle" xml:space="preserve">
     <value>Select new Challenge Final Date</value>
+  </data>
+  <data name="CreateChallengeViewStartChallengeButtonText" xml:space="preserve">
+    <value>Start Your Challenge</value>
   </data>
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Back</value>

@@ -250,6 +250,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chose the date that you are going to quit smoking and start your challenge.
+        /// </summary>
+        internal static string CreateChallengeViewDescriptionTitle {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewDescriptionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Goal Completition Date.
+        /// </summary>
+        internal static string CreateChallengeViewGoalDateTitle {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewGoalDateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to go back to the test again?.
         /// </summary>
         internal static string CreateChallengeViewModelBackToTestingMessage {
@@ -282,6 +300,15 @@ namespace SmokeFree.Resx {
         internal static string CreateChallengeViewModelNewGoalDialogTitle {
             get {
                 return ResourceManager.GetString("CreateChallengeViewModelNewGoalDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Your Challenge.
+        /// </summary>
+        internal static string CreateChallengeViewStartChallengeButtonText {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewStartChallengeButtonText", resourceCulture);
             }
         }
         

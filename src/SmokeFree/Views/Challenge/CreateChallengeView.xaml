@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmokeFree.Views.Challenge.CreateChallengeView"
+              xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            utility:ViewModelLocator.AutoWireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PrimaryColor}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- View Description -->
+            <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
+                   BackgroundColor="{StaticResource Gray-300}"
+                   >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        Text="{xct:Translate CreateChallengeViewDescriptionTitle}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Text="{xct:Translate UnderTestViewDescriptionLabelButton}" 
+                        CornerRadius="20"
+                        TextColor="{StaticResource Gray-900}"
+                        Opacity="5"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Clicked="OnCloseDescriptionButton_Clicked"/>
+                </Grid>
+
+            </Frame>
+            <!-- /END/ View Description -->
+
+            <StackLayout x:Name="ViewContent" IsVisible="false">
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+                    <!-- Back BUTTON -->
+                    <Button                   
+                        Text="&#xe709;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnBackCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/Back BUTTON -->
+
+                    <!-- STOP TEST BUTTON -->
+                    <Button                   
+                        Text="&#xe724;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnStopChallengeCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Center"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ STOP TEST BUTTON -->
+
+                    <!-- App Settings Button -->
+                    <Button            
+                        x:Name="SettingsButton"
+                        Text="&#xe72B;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnSettingsCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="End"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ App Settings Button -->
+
+                </Grid>
+                <!-- /END/ NAVIGATION -->
+
+                <!-- MAIN CONTENT -->
+                <StackLayout Grid.Row="1"
+                         VerticalOptions="CenterAndExpand"
+                         Spacing="20"
+                         >
+                    <!-- Create Challenge VIEW TITLE -->
+                    <Label Text="{xct:Translate CreateChallengeViewTitle}"
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"/>
+                    <!-- /END/ Create Challenge  VIEW TITLE -->
+                    
+                    <Frame Margin="10,10,10,10" CornerRadius="10" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="{Binding UserSmokeStatus.Icon}" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource SFFontIcons}"
+                                           FontSize="30" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding UserSmokeStatus.Title}" TextColor="Black" FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="3" Text="{Binding UserSmokeStatus.Message}" TextColor="Black"
+                                           HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Goal Date Time TITLE-->
+                    <Label Text="{xct:Translate CreateChallengeViewGoalDateTitle}"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource Gray-100}"
+                       FontFamily="{StaticResource Montserrat-Bold}"
+                       HorizontalTextAlignment="Center"
+                       FontSize="20"
+                       />
+                    <!-- /END/ Goal Date Time TITLE-->
+
+                    <!-- Goal Date Time -->
+                    <DatePicker 
+                        x:Name="GoalDateTime" 
+                        Visual="Material"                       
+                        Date="{Binding GoalCompletitionTime}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        />
+                    <!-- /END/ Goal Date Time -->
+
+                    <!-- START TEST BUTTON -->
+                    <Button x:Name="StartChallengeButton"
+                            Text="{xct:Translate CreateChallengeViewStartChallengeButtonText}"                             
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"
+                            Command="{Binding OnStartChallengeCommand}"
+                            CornerRadius="30"/>
+                    <!-- /END/ START TEST BUTTON -->
+
+                </StackLayout>
+                <!-- /END/ MAIN CONTENT -->
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

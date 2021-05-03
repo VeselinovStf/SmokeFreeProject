@@ -145,6 +145,20 @@ namespace SmokeFree.ViewModels.Challenge
         #region COMMANDS
 
         /// <summary>
+        /// Starts Challenge
+        /// </summary>
+        public IAsyncCommand OnStartChallengeCommand => new AsyncCommand(
+            ExecuteStartChallenge,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteStartChallenge()
+        {
+            
+
+        }
+
+        /// <summary>
         /// Async Start Challenge Command and Logic
         /// </summary>
         public IAsyncCommand OnStopChallengeCommand => new AsyncCommand(
