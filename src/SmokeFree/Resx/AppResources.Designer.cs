@@ -241,6 +241,78 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wellcome to your challenge. Press Start Smoking when you are smoking. After first smoke pay close attention to Time to next timer! We know you kan doit so, when never go to smoke before Time to next is not zeroes! .
+        /// </summary>
+        internal static string ChallengeViewDescriptionTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewDescriptionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backing One day is going to delete all data for current and previous day. You are going to start again from previous day. Note that the goal time is not set back..
+        /// </summary>
+        internal static string ChallengeViewModelBackOneDayConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelBackOneDayConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back One Day.
+        /// </summary>
+        internal static string ChallengeViewModelBackOneDayConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelBackOneDayConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is your last challenge day! Are you happy with current results?.
+        /// </summary>
+        internal static string ChallengeViewModelJumpToCompleteConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelJumpToCompleteConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jump to completition.
+        /// </summary>
+        internal static string ChallengeViewModelJumpToCompleteConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelJumpToCompleteConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you surre that you are going to smoke? Is Time to next timer is all in zeroes? If not, give your self a rellaxing breave in, stay come and wait untill is zeroed!.
+        /// </summary>
+        internal static string ChallengeViewModellStartSmokeConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModellStartSmokeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count of smoked cigares is to close to your goal for the day. Please have a little courage, and stay strong. You Succeed so far with ease, you are close to success. Breath deap, drink some water. Success is to close to give up..
+        /// </summary>
+        internal static string ChallengeViewModellStartSmokeCountConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModellStartSmokeCountConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are close to completing the neaded time untill next smoke. Have a little fate, you are stong! Wait just a little bit..
+        /// </summary>
+        internal static string ChallengeViewModellStartSmokeTimeConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModellStartSmokeTimeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Smoke is markt as finished..
         /// </summary>
         internal static string ChallengeViewModelMarkAfterDelayDialogMessage {
@@ -250,11 +322,119 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you shore that you want to mark this day as completed?.
+        /// </summary>
+        internal static string ChallengeViewModelMarkDayCompletedConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelMarkDayCompletedConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark Day as completed.
+        /// </summary>
+        internal static string ChallengeViewModelMarkDayCompletedConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelMarkDayCompletedConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After delay, your smoke is marked as finished.
+        /// </summary>
+        internal static string ChallengeViewModelOneSmokeTreshHoldNotificationMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelOneSmokeTreshHoldNotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoke is marked as finished.
+        /// </summary>
+        internal static string ChallengeViewModelOneSmokeTreshHoldNotificationTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelOneSmokeTreshHoldNotificationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Good job! Continue with this good work! Are you shore that you want to skip one smoke?.
+        /// </summary>
+        internal static string ChallengeViewModelSkipOneSmokeConfirmMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelSkipOneSmokeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip one Smoke.
+        /// </summary>
+        internal static string ChallengeViewModelSkipOneSmokeConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelSkipOneSmokeConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Smoking!.
+        /// </summary>
+        internal static string ChallengeViewModelStartSmokeConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelStartSmokeConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you shore?.
+        /// </summary>
+        internal static string ChallengeViewModelStartSmokeCountConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelStartSmokeCountConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are close to success.
+        /// </summary>
+        internal static string ChallengeViewModelStartSmokeTimeConfirmTitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelStartSmokeTimeConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge.
         /// </summary>
         internal static string ChallengeViewModelTiitle {
             get {
                 return ResourceManager.GetString("ChallengeViewModelTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To Challenge Results.
+        /// </summary>
+        internal static string ChallengViewModelCompleteButton {
+            get {
+                return ResourceManager.GetString("ChallengViewModelCompleteButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Congratuations Challenge Completed. Let&apos;s see your success result.
+        /// </summary>
+        internal static string ChallengViewModelCompleteMessage {
+            get {
+                return ResourceManager.GetString("ChallengViewModelCompleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge Copleted.
+        /// </summary>
+        internal static string ChallengViewModelCompleteTitle {
+            get {
+                return ResourceManager.GetString("ChallengViewModelCompleteTitle", resourceCulture);
             }
         }
         

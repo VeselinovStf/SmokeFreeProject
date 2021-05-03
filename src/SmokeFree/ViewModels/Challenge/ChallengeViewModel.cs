@@ -1,4 +1,6 @@
-﻿using Realms;
+﻿using Plugin.LocalNotification;
+using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
@@ -49,6 +51,10 @@ namespace SmokeFree.ViewModels.Challenge
         private readonly Realm _realm;
 
         private readonly IDeviceTimer _deviceTimer;
+
+        private readonly IChallengeCalculationService _challengeCalculationService;
+
+        private readonly ITestCalculationService _testCalculationService;
 
         /// <summary>
         /// Curent Smoked Count
@@ -106,11 +112,17 @@ namespace SmokeFree.ViewModels.Challenge
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
             IDialogService dialogService,
-            IDeviceTimer deviceTimer) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IDeviceTimer deviceTimer,
+            IChallengeCalculationService challengeCalculationService,
+            ITestCalculationService testCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             _realm = realm;
 
             _deviceTimer = deviceTimer;
+
+            _challengeCalculationService = challengeCalculationService;
+
+            _testCalculationService = testCalculationService;
 
             // Initial Subscribe-UnSubscribe to OnAppearing of View Model
             MessagingCenter.Subscribe<ChallengeView>(this, MessagingCenterConstant.ChallengeViewAppearing, async (e) =>
@@ -156,23 +168,15 @@ namespace SmokeFree.ViewModels.Challenge
                 }
 
                 var challenge = _realm.All<Data.Models.Challenge>()
-                    .FirstOrDefault(e => !e.IsDeleted && e.UserId == userId);
+                    .FirstOrDefault(e => !e.IsDeleted && e.UserId == userId && !e.IsCompleted);
 
                 // Validate Challenge
                 if (challenge != null)
                 {
                     // Set User Smoke Status
                     var userSmokerStatus = StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses);
-                    var userSmokerStatusIcon = Globals.UserSmokeStatusesSet[userSmokerStatus].First().Item1;
-                    var userSmokerStatusMessage = Globals.UserSmokeStatusesSet[userSmokerStatus].First().Item2;
-
-                    this.UserSmokeStatus = new UserSmokeStatusItem()
-                    {
-                        Icon = userSmokerStatusIcon,
-                        Title = AppResources.UserSmokeStatusTitle,
-                        Message = userSmokerStatusMessage
-                    };
-
+                    SetUserSmokerStatus(userSmokerStatus);
+                   
                     // Not Started Challenge
                     if (challenge.CurrentDayOfChallenge == 0)
                     {
@@ -218,13 +222,13 @@ namespace SmokeFree.ViewModels.Challenge
                             .OrderBy(e => e.DayOfChallenge)
                             .FirstOrDefault(e => !e.StartSmokeTime.Equals(new DateTimeOffset()) && e.EndSmokeTime.Equals(new DateTimeOffset()) && !e.IsCompleted && !e.IsDeleted);
 
-                        // First Challenge Visit without smoked cigares
+                        // First Challenge Visit without smoked cigares - and is not started
                         if (currentDayChallenge == null)
                         {
                             this.IsSmoking = false;
 
                             var firstDayChallengeSmokes = challenge
-                                .ChallengeSmokes.FirstOrDefault(e => !e.IsDeleted && !e.IsCompleted && e.DayOfChallenge == 1);
+                                .ChallengeSmokes.FirstOrDefault(e => !e.IsDeleted && !e.IsCompleted && e.DayOfChallenge == challenge.CurrentDayOfChallenge);
 
                             if (firstDayChallengeSmokes != null)
                             {
@@ -284,16 +288,16 @@ namespace SmokeFree.ViewModels.Challenge
                                         .FirstOrDefault();
 
                                     var secondsTimeToNext = (int)_dateTime.Now().Subtract(lastSmoked.EndSmokeTime.LocalDateTime).TotalSeconds + currentDayChallenge.DistanceToNextInSeconds;
-                                    this.TimeToNextSmoke = new TimeSpan(0,0, secondsTimeToNext);
+                                    this.TimeToNextSmoke = new TimeSpan(0, 0, secondsTimeToNext);
 
                                     StartTimeToNextSmokeTimer();
-                                }                               
+                                }
                             }
                             else
                             {
                                 this.IsSmoking = false;
                             }
-                        }       
+                        }
                     }
 
                     this.TestLeftTime = challenge.GoalCompletitionTime.LocalDateTime.Subtract(this._dateTime.Now());
@@ -327,6 +331,7 @@ namespace SmokeFree.ViewModels.Challenge
             }
         }
 
+        
         private void DesapearingInitializeAsync()
         {
             StopSmokingTimer();
@@ -367,6 +372,199 @@ namespace SmokeFree.ViewModels.Challenge
         {
             // Check User Notification
             var userNotification = await base._dialogService
+                .ConfirmAsync(AppResources.ChallengeViewModelMarkDayCompletedConfirmMessage,
+                    AppResources.ChallengeViewModelMarkDayCompletedConfirmTitle,
+                    AppResources.YesButtonText,
+                    AppResources.NoButtonText);
+
+            if (userNotification)
+            {
+                await MarkDayCompleted();
+            }
+        }
+
+        /// <summary>
+        /// Start Smoking
+        /// </summary>
+        public IAsyncCommand<bool> StartSmokingCommand => new AsyncCommand<bool>(isSmoking =>
+           ExecuteStartSmoking(isSmoking),
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteStartSmoking(bool isSmoking)
+        {
+            try
+            {
+                if (this.TimeToNextSmoke > new TimeSpan(0, 0, 2))
+                {
+                    // Check User Notification
+                    var timeNotification = await base._dialogService
+                        .ConfirmAsync(AppResources.ChallengeViewModellStartSmokeTimeConfirmMessage,
+                        AppResources.ChallengeViewModelStartSmokeTimeConfirmTitle,
+                        AppResources.YesButtonText,
+                        AppResources.NoButtonText);
+
+                    if (!timeNotification)
+                    {
+                        return;
+                    }
+                }
+
+                if (this.CurrentlySmokedCount + 1 >= this.CurrentlDayMaxSmokeCount)
+                {
+                    // Check User Notification
+                    var countNotification = await base._dialogService
+                        .ConfirmAsync(AppResources.ChallengeViewModellStartSmokeCountConfirmMessage,
+                        AppResources.ChallengeViewModelStartSmokeCountConfirmTitle,
+                        AppResources.YesButtonText,
+                        AppResources.NoButtonText);
+
+                    if (!countNotification)
+                    {
+                        return;
+                    }
+                }
+
+                // Check User Notification
+                var userNotification = await base._dialogService
+                    .ConfirmAsync(AppResources.ChallengeViewModellStartSmokeConfirmMessage,
+                    AppResources.ChallengeViewModelStartSmokeConfirmTitle,
+                    AppResources.YesButtonText,
+                    AppResources.NoButtonText);
+
+                if (userNotification)
+                {
+                    // Validate if previous smoke is complete
+                    if (!string.IsNullOrWhiteSpace(this.CurrentSmokeId))
+                    {
+                        var lastSmokeState = _realm.Find<ChallengeSmoke>(this.CurrentSmokeId);
+                        if (lastSmokeState == null)
+                        {
+                            // Previous smoke is not stored in db
+                            base._appLogger.LogError($"Previous Challenge Smoke was not found in db! Internal state issud: Challenge Smoke Id {CurrentSmokeId}");
+                        }
+                        else
+                        {
+                            if (!lastSmokeState.IsCompleted)
+                            {
+                                // Left un completed smoke from previous runs
+                                base._appLogger.LogError($"Previous Challenge Smoke was not completed! Internal state issud: Challenge Smoke Id {CurrentSmokeId}");
+
+                                _realm.Write(() =>
+                                {
+                                    lastSmokeState.IsCompleted = true;
+                                    lastSmokeState.ModifiedOn = _dateTime.Now();
+
+                                    if (lastSmokeState.EndSmokeTime.Equals(new DateTimeOffset()))
+                                    {
+                                        lastSmokeState.EndSmokeTime = _dateTime.Now();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // If is empty - this is first smoke - set up challenge
+
+                        var currentDayChallenge = _realm.Find<DayChallengeSmoke>(this.CurrentDayChallengeId);
+
+                        if (currentDayChallenge != null)
+                        {
+                            _realm.Write(() =>
+                            {
+                                currentDayChallenge.StartSmokeTime = _dateTime.Now();
+                            });
+                        }
+                        else
+                        {
+                            // Day Challenge Not Found!
+                            base._appLogger.LogCritical($"Can't find DayChallengeSmoke: DayChallengeSmoke Id {this.CurrentDayChallengeId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }
+
+                    }
+
+                    // Get Current User for Notifications
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
+
+                    // Validate User
+                    if (user != null)
+                    {
+                        // Create new 
+                        var newChallengeSmoke = new Data.Models.ChallengeSmoke()
+                        {
+                            ChallengeId = this.CurrentDayChallengeId,
+                            StartSmokeTime = this._dateTime.Now(),
+                            CreatedOn = this._dateTime.Now(),
+                        };
+
+                        // Save to DB
+                        _realm.Write(() =>
+                        {
+                            _realm.Add(newChallengeSmoke);
+                        });
+
+                        // Assign Props
+                        this.CurrentSmokeId = newChallengeSmoke.Id;
+                        this.IsSmoking = true;
+
+                        // Start Smoking Timer
+                        StartSmokingTimer();
+
+                        StopTimeToNextSmokeTimer();
+
+                        if (user.NotificationState)
+                        {
+                            // Register Notification
+                            var delaySmokeNotification = new NotificationRequest
+                            {
+
+                                NotificationId = Globals.DelayedChallengeSmokeNotificationId,
+                                Title = AppResources.ChallengeViewModelOneSmokeTreshHoldNotificationTitle,
+                                Description = AppResources.ChallengeViewModelOneSmokeTreshHoldNotificationMessage,
+                                ReturningData = "Dummy data", // Returning data when tapped on notification.
+                                NotifyTime = DateTime.Now.AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes),
+                                Android = new AndroidOptions()
+                                {
+                                    IconName = "icon"
+                                } // Used for Scheduling local notification, if not specified notification will show immediately.
+                            };
+
+                            NotificationCenter.Current.Show(delaySmokeNotification);
+                        }
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// Mark One Smoked
+        /// </summary>
+        public IAsyncCommand<bool> MarkOneSmokedCommand => new AsyncCommand<bool>(isSmoking =>
+           MarkOneSmoked(isSmoking),
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task MarkOneSmoked(bool isSmoking)
+        {
+            // Check User Notification
+            var userNotification = await base._dialogService
                 .ConfirmAsync(AppResources.UnderTestViewModelStopSmokeConfirmMessage,
                     AppResources.UnderTestViewModelStopSmokeConfirmTitle,
                     AppResources.YesButtonText,
@@ -374,7 +572,30 @@ namespace SmokeFree.ViewModels.Challenge
 
             if (userNotification)
             {
-                await MarkDayCompleted();
+                await SmokeOneCigareAsync();
+            }
+        }
+
+        /// <summary>
+        /// Mark One Smoked
+        /// </summary>
+        public IAsyncCommand<bool> SkipOneSmokedCommand => new AsyncCommand<bool>(isSmoking =>
+           ExecuteSkipOneSmoke(),
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteSkipOneSmoke()
+        {
+            // Check User Notification
+            var userNotification = await base._dialogService
+                .ConfirmAsync(AppResources.ChallengeViewModelSkipOneSmokeConfirmMessage,
+                    AppResources.ChallengeViewModelSkipOneSmokeConfirmTitle,
+                    AppResources.YesButtonText,
+                    AppResources.NoButtonText);
+
+            if (userNotification)
+            {
+                SkipSmoke();
             }
         }
 
@@ -388,78 +609,88 @@ namespace SmokeFree.ViewModels.Challenge
 
         private async Task ExecuteStopChallengeCommand()
         {
-            // Check if user is shure
-            var userNotification = await base._dialogService
-                 .ConfirmAsync(
-                 AppResources.CreateChallengeViewModelBackToTestingMessage,
-                 AppResources.CreateChallengeViewModelBackToTestingTitle,
-                 AppResources.ButtonOkText,
-                 AppResources.ButtonCancelText);
-
-            if (userNotification)
+            try
             {
-                // Get Current User
-                var userId = Globals.UserId;
-                var user = _realm.Find<User>(userId);
+                // Check if user is shure
+                var userNotification = await base._dialogService
+                     .ConfirmAsync(
+                     AppResources.CreateChallengeViewModelBackToTestingMessage,
+                     AppResources.CreateChallengeViewModelBackToTestingTitle,
+                     AppResources.ButtonOkText,
+                     AppResources.ButtonCancelText);
 
-                // Validate User
-                if (user != null)
+                if (userNotification)
                 {
-                    var currentTestId = user.TestId;
+                    // Get Current User
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
 
-                    // Delete Current Test Information From DB
-                    var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
-                    var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
-                    // 
-
-                    _realm.Write(() =>
+                    // Validate User
+                    if (user != null)
                     {
-                        // Remove Test
-                        userTest.IsDeleted = true;
-                        userTest.DeletedOn = this._dateTime.Now();
-                        userTest.ModifiedOn = this._dateTime.Now();
+                        var currentTestId = user.TestId;
 
-                        userTest.CompletedTestResult.IsDeleted = true;
-                        userTest.CompletedTestResult.DeletedOn = this._dateTime.Now();
-                        userTest.CompletedTestResult.ModifiedOn = this._dateTime.Now();
+                        // Delete Current Test Information From DB
+                        var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
+                        var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
+                        // 
 
-                        // Remove smoked cigares if persist
-                        if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                        _realm.Write(() =>
                         {
-                            foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                            // Remove Test
+                            userTest.IsDeleted = true;
+                            userTest.DeletedOn = this._dateTime.Now();
+                            userTest.ModifiedOn = this._dateTime.Now();
+
+                            userTest.CompletedTestResult.IsDeleted = true;
+                            userTest.CompletedTestResult.DeletedOn = this._dateTime.Now();
+                            userTest.CompletedTestResult.ModifiedOn = this._dateTime.Now();
+
+                            // Remove smoked cigares if persist
+                            if (userTest.SmokedCigaresUnderTest.Count() > 0)
                             {
-                                smoke.IsDeleted = true;
-                                smoke.DeletedOn = this._dateTime.Now();
-                                smoke.ModifiedOn = this._dateTime.Now();
+                                foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                                {
+                                    smoke.IsDeleted = true;
+                                    smoke.DeletedOn = this._dateTime.Now();
+                                    smoke.ModifiedOn = this._dateTime.Now();
+                                }
                             }
-                        }
 
-                        // Remove Challenge
-                        testChallenge.IsDeleted = true;
-                        testChallenge.DeletedOn = this._dateTime.Now();
-                        testChallenge.ModifiedOn = this._dateTime.Now();
+                            // Remove Challenge
+                            testChallenge.IsDeleted = true;
+                            testChallenge.DeletedOn = this._dateTime.Now();
+                            testChallenge.ModifiedOn = this._dateTime.Now();
 
-                        foreach (var cs in testChallenge.ChallengeSmokes)
-                        {
-                            cs.IsDeleted = true;
-                            cs.DeletedOn = this._dateTime.Now();
-                            cs.ModifiedOn = this._dateTime.Now();
-                        }
+                            foreach (var cs in testChallenge.ChallengeSmokes)
+                            {
+                                cs.IsDeleted = true;
+                                cs.DeletedOn = this._dateTime.Now();
+                                cs.ModifiedOn = this._dateTime.Now();
+                            }
 
-                        // Update User Status
-                        user.UserState = UserStates.CompletedOnBoarding.ToString();
-                        user.TestId = string.Empty;
-                    });
+                            // Update User Status
+                            user.UserState = UserStates.CompletedOnBoarding.ToString();
+                            user.TestId = string.Empty;
+                        });
 
-                }
-                else
-                {
-                    // User Not Found!
-                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User: User Id {userId}");
 
-                    await base.InternalErrorMessageToUser();
+                        await base.InternalErrorMessageToUser();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+
         }
 
         /// <summary>
@@ -576,34 +807,11 @@ namespace SmokeFree.ViewModels.Challenge
 
                         return false;
                     }
-                 
+
 
                     return true;
 
                 }, this.stopTestingTimerCancellation);
-        }
-
-        /// <summary>
-        /// Mark One Smoked
-        /// </summary>
-        public IAsyncCommand<bool> MarkOneSmokedCommand => new AsyncCommand<bool>(isSmoking =>
-           MarkOneSmoked(isSmoking),
-            onException: base.GenericCommandExeptionHandler,
-            allowsMultipleExecutions: false);
-
-        private async Task MarkOneSmoked(bool isSmoking)
-        {
-            // Check User Notification
-            var userNotification = await base._dialogService
-                .ConfirmAsync(AppResources.UnderTestViewModelStopSmokeConfirmMessage,
-                    AppResources.UnderTestViewModelStopSmokeConfirmTitle,
-                    AppResources.YesButtonText,
-                    AppResources.NoButtonText);
-
-            if (userNotification)
-            {
-                await SmokeOneCigareAsync();
-            }
         }
 
         /// <summary>
@@ -623,7 +831,331 @@ namespace SmokeFree.ViewModels.Challenge
         /// <returns></returns>
         private async Task MarkDayCompleted()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userId = Globals.UserId;
+                var challenge = _realm.All<Data.Models.Challenge>()
+                    .FirstOrDefault(e => !e.IsDeleted && e.UserId == userId && !e.IsCompleted);
+
+                if (challenge != null)
+                {
+                    var currentChallengeDay = challenge
+                        .ChallengeSmokes.FirstOrDefault(e => e.Id == this.CurrentDayChallengeId && !e.IsDeleted && !e.IsCompleted);
+
+                    if (currentChallengeDay != null)
+                    {
+
+                        var newChallengeDay = _realm.All<DayChallengeSmoke>()
+                            .Where(e => !e.IsDeleted && !e.IsCompleted);
+
+                        var totalDays = newChallengeDay.Max(e => e.DayOfChallenge);
+                        var nextDay = currentChallengeDay.DayOfChallenge + 1;
+
+                        if (totalDays >= nextDay)
+                        {
+                            _realm.Write(() =>
+                            {
+                                currentChallengeDay.IsCompleted = true;
+                                currentChallengeDay.ModifiedOn = this._dateTime.Now();
+                                currentChallengeDay.EndSmokeTime = this._dateTime.Now();
+
+                                foreach (var currentSmoke in currentChallengeDay.DaySmokes)
+                                {
+                                    currentSmoke.IsCompleted = true;
+                                    currentSmoke.ModifiedOn = this._dateTime.Now();
+                                    currentSmoke.EndSmokeTime = this._dateTime.Now();
+                                    currentSmoke.IsDeleted = true;
+                                }
+
+                                challenge.CurrentDayOfChallenge += 1;
+
+                            });
+
+                            NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+                            StopSmokingTimer();
+                            StopTimeToNextSmokeTimer();
+
+                            await _navigationService.NavigateToAsync<ChallengeViewModel>();
+                            //TODO: Back Stack
+                        }
+                        else
+                        {
+                            // Check User Notification
+                            var userNotification = await base._dialogService
+                                .ConfirmAsync(AppResources.ChallengeViewModelJumpToCompleteConfirmMessage,
+                                    AppResources.ChallengeViewModelJumpToCompleteConfirmTitle,
+                                    AppResources.YesButtonText,
+                                    AppResources.NoButtonText);
+
+                            if (userNotification)
+                            {
+                                _realm.Write(() =>
+                                {
+                                    currentChallengeDay.IsCompleted = true;
+                                    currentChallengeDay.ModifiedOn = this._dateTime.Now();
+                                    currentChallengeDay.EndSmokeTime = this._dateTime.Now();
+
+                                    foreach (var currentSmoke in currentChallengeDay.DaySmokes)
+                                    {
+                                        currentSmoke.IsCompleted = true;
+                                        currentSmoke.ModifiedOn = this._dateTime.Now();
+                                        currentSmoke.EndSmokeTime = this._dateTime.Now();
+                                        currentSmoke.IsDeleted = true;
+                                    }
+                                });
+
+                                NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+                                StopSmokingTimer();
+                                StopTimeToNextSmokeTimer();
+
+                                CompleteChallenge();
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        // Day Challenge Not Found!
+                        base._appLogger.LogCritical($"Can't find DayChallengeSmoke: DayChallengeSmoke Id {this.CurrentDayChallengeId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // Day Challenge Not Found!
+                    base._appLogger.LogCritical($"Can't find User Challenge:User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// Mark One Cigar Smoked
+        /// </summary>
+        /// <param name="delayed"></param>
+        /// <returns></returns>
+        private async Task SmokeOneCigareAsync(bool delayed = false, bool isSkiped = false)
+        {
+            try
+            {
+                var currentChallengeDay = _realm
+                    .Find<DayChallengeSmoke>(this.CurrentDayChallengeId);
+
+                if (currentChallengeDay != null)
+                {
+                    var currentSmoke = currentChallengeDay
+                        .DaySmokes.FirstOrDefault(e => e.Id == this.CurrentSmokeId);
+
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
+
+                    var currentSmokeStatus = this._testCalculationService
+                        .CalculateUserSmokeStatusBySmokes(currentChallengeDay.DaySmoked + 1);
+
+                    if (currentSmoke != null)
+                    {
+                        _realm.Write(() =>
+                        {
+                            currentChallengeDay.DaySmoked += 1;
+                            currentSmoke.IsCompleted = true;
+                            currentSmoke.ModifiedOn = this._dateTime.Now();
+
+                            if (isSkiped)
+                            {
+                                currentSmoke.IsSkiped = true;
+                            }
+
+                            if (delayed)
+                            {
+                                currentSmoke.EndSmokeTime = currentSmoke
+                                    .StartSmokeTime
+                                    .LocalDateTime
+                                    .AddMinutes(Globals.OneSmokeTreshHoldTimeMinutes);
+                            }
+                            else
+                            {
+                                currentSmoke.EndSmokeTime = this._dateTime.Now();
+                            }
+
+                            user.UserSmokeStatuses = currentSmokeStatus.ToString();
+
+                        });
+
+                        var userSmokerStatus = StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses);
+                        SetUserSmokerStatus(userSmokerStatus);
+
+                        var secondsTimeToNext = _dateTime.Now().Subtract(_dateTime.Now().AddSeconds(currentChallengeDay.DistanceToNextInSeconds));
+                        this.TimeToNextSmoke = secondsTimeToNext;
+
+                        this.CurrentlySmokedCount = currentChallengeDay.DaySmokes.Count;
+
+                        NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+
+                        StartTimeToNextSmokeTimer();
+
+                        StopSmokingTimer();
+                    }
+                    else
+                    {
+                        // Day Challenge Not Found!
+                        base._appLogger.LogCritical($"Can't find DayChallengeSmoke smoke: Challenge Id: {this.CurrentDayChallengeId}, DayChallengeSmoke Id {this.CurrentDayChallengeId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+
+                }
+                else
+                {
+                    // Day Challenge Not Found!
+                    base._appLogger.LogCritical($"Can't find DayChallengeSmoke: DayChallengeSmoke Id {this.CurrentDayChallengeId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        /// <summary>
+        /// Set Complete Test
+        /// </summary>
+        private async void CompleteChallenge()
+        {
+            try
+            {
+                // Check if user is complete some of the challenges
+                // Complete all
+                var userId = Globals.UserId;
+                var challenge = _realm.All<Data.Models.Challenge>()
+                    .FirstOrDefault(e => !e.IsDeleted && e.UserId == userId && !e.IsCompleted);
+
+                if (challenge != null)
+                {
+                    var challengeResultCalculation = this._challengeCalculationService
+                        .CalculateChallengeResult(challenge);
+
+                    if (challengeResultCalculation.Success)
+                    {
+
+                        // Mark All Completed-IsDeleted in db
+                        _realm.Write(() =>
+                        {
+                            var user = _realm.Find<User>(userId);
+                            var currentTestId = user.TestId;
+
+                            // Delete Current Test Information From DB
+                            var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
+                            var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
+
+                            challenge.IsCompleted = true;
+                            challenge.ModifiedOn = _dateTime.Now();
+
+                            foreach (var chs in challenge.ChallengeSmokes)
+                            {
+                                chs.ModifiedOn = _dateTime.Now();
+                                chs.DeletedOn = _dateTime.Now();
+                                chs.IsDeleted = true; 
+                                chs.IsCompleted = true;
+
+                                foreach (var s in chs.DaySmokes)
+                                {
+                                    s.ModifiedOn = _dateTime.Now();
+                                    s.DeletedOn = _dateTime.Now();
+                                    s.IsDeleted = true;
+                                    s.IsCompleted = true;
+                                }
+                            }
+
+                            // Remove Test
+                            userTest.ModifiedOn = this._dateTime.Now();
+
+                            userTest.CompletedTestResult.IsDeleted = true;
+                            userTest.CompletedTestResult.DeletedOn = this._dateTime.Now();
+                            userTest.CompletedTestResult.ModifiedOn = this._dateTime.Now();
+
+                            // Remove smoked cigares if persist
+                            if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                            {
+                                foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                                {
+                                    smoke.IsDeleted = true;
+                                    smoke.DeletedOn = this._dateTime.Now();
+                                    smoke.ModifiedOn = this._dateTime.Now();
+                                }
+                            }
+
+                            // Update User Status
+                            user.UserState = UserStates.Complete.ToString();
+                            user.TestId = string.Empty;
+
+                            var challengeResult = challengeResultCalculation.ChallengeResult;
+                            challengeResult.ChallengeId = challenge.Id;
+                            challengeResult.CreatedOn = _dateTime.Now();
+
+                            _realm.Add(challengeResultCalculation.ChallengeResult);
+                        });
+
+                        await this._dialogService
+                            .ShowDialog(
+                                AppResources.ChallengViewModelCompleteMessage,
+                                AppResources.ChallengViewModelCompleteTitle,
+                                AppResources.ChallengViewModelCompleteButton);
+
+                        // Stop Testing Time Notification
+                        NotificationCenter.Current.Cancel(Globals.ChallengeNotificationId);
+
+                        // Stop Smoke Delayed Time Notification
+                        NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+
+                        StopSmokingTimer();
+                        StopTimeToNextSmokeTimer();
+                        StopTestingTimer();
+
+                        NavigateToCompletedChallenge();
+                    }
+                    else
+                    {
+                        // Day Challenge Not Found!
+                        base._appLogger.LogCritical($"Can't Calculate Challenge Result :User Id {userId}, Challenge Id {challenge.Id}, REASON: {challengeResultCalculation.Message}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+                else
+                {
+                    // Day Challenge Not Found!
+                    base._appLogger.LogCritical($"Can't find User Challenge:User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
+        }
+
+        public async void SkipSmoke()
+        {
+            await SmokeOneCigareAsync(false, true);
         }
 
         /// <summary>
@@ -632,25 +1164,103 @@ namespace SmokeFree.ViewModels.Challenge
         /// <returns></returns>
         private async Task BackOneChallengeDay()
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                // Check User Notification
+                var userNotification = await base._dialogService
+                    .ConfirmAsync(AppResources.ChallengeViewModelBackOneDayConfirmMessage,
+                        AppResources.ChallengeViewModelBackOneDayConfirmTitle,
+                        AppResources.YesButtonText,
+                        AppResources.NoButtonText);
 
-        /// <summary>
-        /// Mark One Cigar Smoked
-        /// </summary>
-        /// <param name="delayed"></param>
-        /// <returns></returns>
-        private async Task SmokeOneCigareAsync(bool delayed = false)
-        {
-            throw new NotImplementedException();
-        }
+                if (userNotification)
+                {
+                    var userId = Globals.UserId;
+                    var challenge = _realm.All<Data.Models.Challenge>()
+                        .FirstOrDefault(e => !e.IsDeleted && e.UserId == userId && !e.IsCompleted);
 
-        /// <summary>
-        /// Set Complete Test
-        /// </summary>
-        private async void CompleteChallenge()
-        {
-            throw new NotImplementedException();
+                    if (challenge != null)
+                    {
+                        var currentChallengeDay = challenge
+                            .ChallengeSmokes.FirstOrDefault(e => e.Id == this.CurrentDayChallengeId && !e.IsCompleted && !e.IsDeleted);
+
+                        if (currentChallengeDay != null)
+                        {
+                            var previousDayChallenge = challenge
+                                .ChallengeSmokes.FirstOrDefault(e => e.DayOfChallenge == currentChallengeDay.DayOfChallenge - 1);
+
+                            if (previousDayChallenge != null)
+                            {
+                                // Update Entities in DB
+                                _realm.Write(() =>
+                                {
+                                    currentChallengeDay.StartSmokeTime = new DateTimeOffset();
+                                    currentChallengeDay.DaySmoked = 0;
+                                    currentChallengeDay.ModifiedOn = _dateTime.Now();
+
+                                    foreach (var ds in currentChallengeDay.DaySmokes)
+                                    {
+                                        ds.IsDeleted = true;
+                                        ds.DeletedOn = _dateTime.Now();
+                                    }
+
+                                    previousDayChallenge.StartSmokeTime = new DateTimeOffset();
+                                    previousDayChallenge.DaySmoked = 0;
+                                    previousDayChallenge.ModifiedOn = _dateTime.Now();
+
+                                    foreach (var ds in previousDayChallenge.DaySmokes)
+                                    {
+                                        ds.IsDeleted = true;
+                                        ds.DeletedOn = _dateTime.Now();
+                                    }
+
+                                });
+
+                                this.CurrentDayChallengeId = string.Empty;
+                                this.CurrentSmokeId = string.Empty;
+
+                                // Stop Smoke Delayed Time Notification
+                                NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+
+                                StopSmokingTimer();
+                                StopTimeToNextSmokeTimer();
+                                StopTestingTimer();
+
+                                // Re-Initialize
+                                await AppearingInitializeAsync();
+                            }
+                            else
+                            {
+                                // Day Back Challenge Not Found!
+                                base._appLogger.LogCritical($"Can't find User Day Back Challenge - for day {currentChallengeDay.DayOfChallenge - 1} :User Id {userId}, Day Challenge Id: {CurrentDayChallengeId}");
+
+                                await base.InternalErrorMessageToUser();
+                            }
+                        }
+                        else
+                        {
+                            // Day Challenge Not Found!
+                            base._appLogger.LogCritical($"Can't find User Day Challenge:User Id {userId}, Day Challenge Id: {CurrentDayChallengeId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }
+                    }
+                    else
+                    {
+                        //  Challenge Not Found!
+                        base._appLogger.LogCritical($"Can't find User Challenge:User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                base._appLogger.LogCritical(ex);
+
+                await base.InternalErrorMessageToUser();
+            }
         }
 
         /// <summary>
@@ -688,6 +1298,20 @@ namespace SmokeFree.ViewModels.Challenge
 
             this.stopSmokingTimerCancellation = new CancellationTokenSource();
         }
+
+        private void SetUserSmokerStatus(UserSmokeStatuses userSmokerStatus)
+        {
+            var userSmokerStatusIcon = Globals.UserSmokeStatusesSet[userSmokerStatus].First().Item1;
+            var userSmokerStatusMessage = Globals.UserSmokeStatusesSet[userSmokerStatus].First().Item2;
+
+            this.UserSmokeStatus = new UserSmokeStatusItem()
+            {
+                Icon = userSmokerStatusIcon,
+                Title = AppResources.UserSmokeStatusTitle,
+                Message = userSmokerStatusMessage
+            };
+        }
+
 
         #endregion
 
@@ -738,8 +1362,8 @@ namespace SmokeFree.ViewModels.Challenge
         public string CurrentDayChallengeId
         {
             get { return _currentDayChallengeId; }
-            set 
-            { 
+            set
+            {
                 _currentDayChallengeId = value;
                 OnPropertyChanged();
             }

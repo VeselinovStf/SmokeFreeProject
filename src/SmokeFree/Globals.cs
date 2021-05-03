@@ -18,6 +18,7 @@ namespace SmokeFree
         // Notification Ids
         public static int TestingTimeNotificationId = 666;
         public static int DelayedSmokeNotificationId = 999;
+        public static int DelayedChallengeSmokeNotificationId = 555;
         public static int ChallengeNotificationId = 777;
 
         /// <summary>

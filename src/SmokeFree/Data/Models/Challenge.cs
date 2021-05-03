@@ -12,6 +12,7 @@ namespace SmokeFree.Data.Models
         [PrimaryKey]
         [MapTo("_id")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
+
         /// <summary>
         /// Start of the challenge
         /// </summary>
@@ -66,5 +67,10 @@ namespace SmokeFree.Data.Models
         /// Completed Chalenge Results Persistence Data
         /// </summary>    
         public ChallengeResult CompletedChallengeResult { get; set; }
+
+        /// <summary>
+        /// Completition Flag
+        /// </summary>
+        public bool IsCompleted { get; set; }
     }
 }

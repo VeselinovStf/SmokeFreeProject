@@ -238,37 +238,41 @@ namespace SmokeFree.Services.Data.Test
             {
                 var avarageUserSmokedCigares = (int)testResult.AvarageSmokedCigarsPerDay;
 
-                UserSmokeStatuses status;
+                UserSmokeStatuses status = CalculateUserSmokeStatusBySmokes(avarageUserSmokedCigares);
                
                 var userStatuses = Globals.UserSmokeStatusesSet;
-
-                if (avarageUserSmokedCigares >= 1 && avarageUserSmokedCigares <= 5)
-                {
-                    status = UserSmokeStatuses.Quiter;
-                }
-                else if (avarageUserSmokedCigares <= 10)
-                {
-                    status = UserSmokeStatuses.Concern;
-                }
-                else if (avarageUserSmokedCigares <= 15)
-                {
-                    status = UserSmokeStatuses.Smoker;
-                  
-                }
-                else if (avarageUserSmokedCigares <= 20)
-                {
-                    status = UserSmokeStatuses.Bad;                  
-                }
-                else
-                {
-                    status = UserSmokeStatuses.Worst;
-                }
 
                 return new CalculateUserStatusDTO(true,status);
             }
             catch (Exception ex)
             {
                 return new CalculateUserStatusDTO(false, ex.Message);
+            }
+        }
+
+        public UserSmokeStatuses CalculateUserSmokeStatusBySmokes(int smokedCigares)
+        {
+
+            if (smokedCigares >= 1 && smokedCigares <= 5)
+            {
+                return UserSmokeStatuses.Quiter;
+            }
+            else if (smokedCigares <= 10)
+            {
+                return UserSmokeStatuses.Concern;
+            }
+            else if (smokedCigares <= 15)
+            {
+                return UserSmokeStatuses.Smoker;
+
+            }
+            else if (smokedCigares <= 20)
+            {
+                return UserSmokeStatuses.Bad;
+            }
+            else
+            {
+                return UserSmokeStatuses.Worst;
             }
         }
     }

@@ -477,8 +477,68 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="ChallengeViewDescriptionTitle" xml:space="preserve">
+    <value>Wellcome to your challenge. Press Start Smoking when you are smoking. After first smoke pay close attention to Time to next timer! We know you kan doit so, when never go to smoke before Time to next is not zeroes! </value>
+  </data>
+  <data name="ChallengeViewModelBackOneDayConfirmMessage" xml:space="preserve">
+    <value>Backing One day is going to delete all data for current and previous day. You are going to start again from previous day. Note that the goal time is not set back.</value>
+  </data>
+  <data name="ChallengeViewModelBackOneDayConfirmTitle" xml:space="preserve">
+    <value>Back One Day</value>
+  </data>
+  <data name="ChallengeViewModelJumpToCompleteConfirmMessage" xml:space="preserve">
+    <value>This is your last challenge day! Are you happy with current results?</value>
+  </data>
+  <data name="ChallengeViewModelJumpToCompleteConfirmTitle" xml:space="preserve">
+    <value>Jump to completition</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeConfirmMessage" xml:space="preserve">
+    <value>Are you surre that you are going to smoke? Is Time to next timer is all in zeroes? If not, give your self a rellaxing breave in, stay come and wait untill is zeroed!</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeCountConfirmMessage" xml:space="preserve">
+    <value>Count of smoked cigares is to close to your goal for the day. Please have a little courage, and stay strong. You Succeed so far with ease, you are close to success. Breath deap, drink some water. Success is to close to give up.</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeTimeConfirmMessage" xml:space="preserve">
+    <value>You are close to completing the neaded time untill next smoke. Have a little fate, you are stong! Wait just a little bit.</value>
+  </data>
   <data name="ChallengeViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
     <value>Smoke is markt as finished.</value>
+  </data>
+  <data name="ChallengeViewModelMarkDayCompletedConfirmMessage" xml:space="preserve">
+    <value>Are you shore that you want to mark this day as completed?</value>
+  </data>
+  <data name="ChallengeViewModelMarkDayCompletedConfirmTitle" xml:space="preserve">
+    <value>Mark Day as completed</value>
+  </data>
+  <data name="ChallengeViewModelOneSmokeTreshHoldNotificationMessage" xml:space="preserve">
+    <value>After delay, your smoke is marked as finished</value>
+  </data>
+  <data name="ChallengeViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
+    <value>Smoke is marked as finished</value>
+  </data>
+  <data name="ChallengeViewModelSkipOneSmokeConfirmMessage" xml:space="preserve">
+    <value>Good job! Continue with this good work! Are you shore that you want to skip one smoke?</value>
+  </data>
+  <data name="ChallengeViewModelSkipOneSmokeConfirmTitle" xml:space="preserve">
+    <value>Skip one Smoke</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeConfirmTitle" xml:space="preserve">
+    <value>Start Smoking!</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeCountConfirmTitle" xml:space="preserve">
+    <value>Are you shore?</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeTimeConfirmTitle" xml:space="preserve">
+    <value>You are close to success</value>
+  </data>
+  <data name="ChallengViewModelCompleteButton" xml:space="preserve">
+    <value>To Challenge Results</value>
+  </data>
+  <data name="ChallengViewModelCompleteMessage" xml:space="preserve">
+    <value>Congratuations Challenge Completed. Let's see your success result</value>
+  </data>
+  <data name="ChallengViewModelCompleteTitle" xml:space="preserve">
+    <value>Challenge Copleted</value>
   </data>
   <data name="CompleteChallengeNotificationMessage" xml:space="preserve">
     <value>Your Challenge time is over!</value>

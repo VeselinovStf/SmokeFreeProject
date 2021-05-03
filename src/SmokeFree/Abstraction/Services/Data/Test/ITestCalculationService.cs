@@ -38,5 +38,12 @@ namespace SmokeFree.Abstraction.Services.Data.Test
         /// <param name="testResult">User Test Results</param>
         /// <returns>Response Model</returns>
         CalculateUserStatusDTO CalculateUserSmokeStatus(TestResult testResult);
+
+        /// <summary>
+        /// Calculate UserSmokeStatus by input cigares count
+        /// </summary>
+        /// <param name="smokedCigares">Count Of Smoked Cigares</param>
+        /// <returns></returns>
+        UserSmokeStatuses CalculateUserSmokeStatusBySmokes(int smokedCigares);
     }
 }

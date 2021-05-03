@@ -1,7 +1,5 @@
-﻿using SmokeFree.Models.Services.Data.Challenge;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SmokeFree.Data.Models;
+using SmokeFree.Models.Services.Data.Challenge;
 
 namespace SmokeFree.Abstraction.Services.Data.Test
 {
@@ -23,5 +21,12 @@ namespace SmokeFree.Abstraction.Services.Data.Test
             double avarageSmokedADay,
             double avarageSmokeActiveTime,
             string challengeId);
+
+        /// <summary>
+        /// Calculate Challenge Result by Challenge
+        /// </summary>
+        /// <param name="challenge">Challenge entity for calculations</param>
+        /// <returns>Response Model</returns>
+        CalculateChallengeResultResponse CalculateChallengeResult(Challenge challenge);
     }
 }

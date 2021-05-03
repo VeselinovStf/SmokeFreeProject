@@ -477,8 +477,68 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="ChallengeViewDescriptionTitle" xml:space="preserve">
+    <value>Твоят успех е близо. Всеки път когато започнеш да пушиш натисни Започни да пушиш. Обърни голямо внимание на тиймера - Време до следваща. Покажи, че имаш желание за успех и никога не пуши преди таймера да е нулиран</value>
+  </data>
+  <data name="ChallengeViewModelBackOneDayConfirmMessage" xml:space="preserve">
+    <value>Връщането с един ден ще изстрие информацията за сегашния и предния ден. Датата за спиране на цигари няма да се промени.</value>
+  </data>
+  <data name="ChallengeViewModelBackOneDayConfirmTitle" xml:space="preserve">
+    <value>Върни се ден на зад</value>
+  </data>
+  <data name="ChallengeViewModelJumpToCompleteConfirmMessage" xml:space="preserve">
+    <value>Готов ли си да приключиш предизвикателството?</value>
+  </data>
+  <data name="ChallengeViewModelJumpToCompleteConfirmTitle" xml:space="preserve">
+    <value>Приключване на предизвикателството</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeConfirmMessage" xml:space="preserve">
+    <value>Сигурен ли си? Таймера за следваща достигнал ли е до нула. Ако не е, поеми си дълбоко въздух, и си дай малко време преди да заплиш, изчакай да се нулира!</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeCountConfirmMessage" xml:space="preserve">
+    <value>Броя на изпушени цигари е прекалено близо до гонената от теб цел. Успя до тук! Остава още малко! Не е нужно да го правиш в този момент. Поеми си дълбоко въздух, налей си чаша вода. Успеха е прекалено близо, за да се откажеш.</value>
+  </data>
+  <data name="ChallengeViewModellStartSmokeTimeConfirmMessage" xml:space="preserve">
+    <value>Близо си до постигането на целта! Изчакай още малко, ти си силен, имай вяра, ти ще успееш. Изчакай таймера за следваща да се нулира!</value>
+  </data>
   <data name="ChallengeViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
     <value>Цигарата е отбелязана за испушена.</value>
+  </data>
+  <data name="ChallengeViewModelMarkDayCompletedConfirmMessage" xml:space="preserve">
+    <value>Сигурен ли си че искаш да посочиш този ден като приключен</value>
+  </data>
+  <data name="ChallengeViewModelMarkDayCompletedConfirmTitle" xml:space="preserve">
+    <value>Маркирай деня за приключен</value>
+  </data>
+  <data name="ChallengeViewModelOneSmokeTreshHoldNotificationMessage" xml:space="preserve">
+    <value>След изтичане на лимита, цигарата ти е маркирана като изпушена</value>
+  </data>
+  <data name="ChallengeViewModelOneSmokeTreshHoldNotificationTitle" xml:space="preserve">
+    <value>Цигарата е маркирана като изпушена</value>
+  </data>
+  <data name="ChallengeViewModelSkipOneSmokeConfirmMessage" xml:space="preserve">
+    <value>Добра работа. Продължавай в същия дух! Сигурен ли си че искаш да пропуснеш едно пушене?</value>
+  </data>
+  <data name="ChallengeViewModelSkipOneSmokeConfirmTitle" xml:space="preserve">
+    <value>Пропусни една цигара</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeConfirmTitle" xml:space="preserve">
+    <value>Започни да пушиш</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeCountConfirmTitle" xml:space="preserve">
+    <value>Сигурен ли си?</value>
+  </data>
+  <data name="ChallengeViewModelStartSmokeTimeConfirmTitle" xml:space="preserve">
+    <value>Близо си до успеха!</value>
+  </data>
+  <data name="ChallengViewModelCompleteButton" xml:space="preserve">
+    <value>Към Резултатите</value>
+  </data>
+  <data name="ChallengViewModelCompleteMessage" xml:space="preserve">
+    <value>Поздравления, Предизвикателството е завършено. Нека да видим твоето представяне.</value>
+  </data>
+  <data name="ChallengViewModelCompleteTitle" xml:space="preserve">
+    <value>Предизвикателството е Завършено</value>
   </data>
   <data name="CompleteChallengeNotificationMessage" xml:space="preserve">
     <value>Времето на твоето предизвикателство Приключи</value>

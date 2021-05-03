@@ -42,5 +42,15 @@ namespace SmokeFree.Data.Models
         /// Deletiton Time
         /// </summary>
         public DateTimeOffset DeletedOn { get; set; }
+
+        /// <summary>
+        /// Is Smoke Completed Flag
+        /// </summary>
+        public bool IsCompleted { get; set; }
+
+        /// <summary>
+        /// Skip Smoke Flag - Note that this marks Start-End as invalid
+        /// </summary>
+        public bool IsSkiped { get; set; }
     }
 }
