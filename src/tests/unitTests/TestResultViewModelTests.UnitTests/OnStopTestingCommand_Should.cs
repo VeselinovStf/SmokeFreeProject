@@ -48,13 +48,16 @@ namespace TestResultViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+
 
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object
                 );
 
             var userId = Globals.UserId;
@@ -178,12 +181,15 @@ namespace TestResultViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object
                 );
 
             var userId = Globals.UserId;
@@ -260,12 +266,15 @@ namespace TestResultViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object
                 );
 
             var user = new User()
@@ -317,12 +326,15 @@ namespace TestResultViewModelTests.UnitTests
                     It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
+
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object
                 );
 
             var userId = Globals.UserId;
@@ -384,7 +396,8 @@ namespace TestResultViewModelTests.UnitTests
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object
                 );
 
 

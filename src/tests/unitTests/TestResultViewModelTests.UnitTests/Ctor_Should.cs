@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -31,6 +32,7 @@ namespace TestResultViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 
             // Act
             var testResultViewModel = new TestResultViewModel(
@@ -38,7 +40,8 @@ namespace TestResultViewModelTests.UnitTests
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object);
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object);
 
             //Assert
             Assert.NotNull(testResultViewModel);
@@ -58,6 +61,7 @@ namespace TestResultViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 
             LocalizationResourceManager.Current.CurrentCulture = new CultureInfo("uk");
             var resourceManager = ResourceManagerMock.GetResourceManager();
@@ -70,7 +74,8 @@ namespace TestResultViewModelTests.UnitTests
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object);
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object);
 
             var underTestViewTitle = testResultViewModel.ViewTitle;
 

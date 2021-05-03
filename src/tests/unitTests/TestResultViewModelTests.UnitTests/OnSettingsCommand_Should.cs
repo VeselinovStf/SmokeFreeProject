@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -31,13 +32,15 @@ namespace TestResultViewModelTests.UnitTests
             var dateTimeWrapperMock = new Mock<IDateTimeWrapper>();
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
+            var testCalculationServiceMock = new Mock<ITestCalculationService>();
 
             var testResultViewModel = new TestResultViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object);
+                dialogServiceMock.Object,
+                testCalculationServiceMock.Object);
 
             // Act
             testResultViewModel.OnSettingsCommand.Execute(new object());
