@@ -327,9 +327,26 @@ namespace SmokeFree.ViewModels.Test
 
         private async Task ExecuteNavigateToCreateChallenge()
         {
-            //TODO: Settup InCreateChallenge
+            var userId = Globals.UserId;
+            var user = _realm.Find<User>(userId);
 
-            await base._navigationService.NavigateToAsync<CreateChallengeViewModel>();
+            if (user != null)
+            {
+                _realm.Write(() =>
+                {
+                    user.UserState = UserStates.InCreateChallenge.ToString();
+                    user.ModifiedOn = this._dateTime.Now();
+                });
+
+                await base._navigationService.NavigateToAsync<CreateChallengeViewModel>();
+            }
+            else
+            {
+                // User Not Found!
+                base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                await base.InternalErrorMessageToUser();
+            }
         }
 
         #endregion
