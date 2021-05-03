@@ -477,8 +477,14 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="ChallengeViewCurrentSmokingLabel" xml:space="preserve">
+    <value>Изпупени</value>
+  </data>
   <data name="ChallengeViewDescriptionTitle" xml:space="preserve">
     <value>Твоят успех е близо. Всеки път когато започнеш да пушиш натисни Започни да пушиш. Обърни голямо внимание на тиймера - Време до следваща. Покажи, че имаш желание за успех и никога не пуши преди таймера да е нулиран</value>
+  </data>
+  <data name="ChallengeViewGoalSmokingLabel" xml:space="preserve">
+    <value>Цел</value>
   </data>
   <data name="ChallengeViewModelBackOneDayConfirmMessage" xml:space="preserve">
     <value>Връщането с един ден ще изстрие информацията за сегашния и предния ден. Датата за спиране на цигари няма да се промени.</value>
@@ -530,6 +536,9 @@
   </data>
   <data name="ChallengeViewModelStartSmokeTimeConfirmTitle" xml:space="preserve">
     <value>Близо си до успеха!</value>
+  </data>
+  <data name="ChallengeViewSkipSmokeButton" xml:space="preserve">
+    <value>Пропусни Пушене</value>
   </data>
   <data name="ChallengViewModelCompleteButton" xml:space="preserve">
     <value>Към Резултатите</value>

@@ -241,11 +241,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Smoked.
+        /// </summary>
+        internal static string ChallengeViewCurrentSmokingLabel {
+            get {
+                return ResourceManager.GetString("ChallengeViewCurrentSmokingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wellcome to your challenge. Press Start Smoking when you are smoking. After first smoke pay close attention to Time to next timer! We know you kan doit so, when never go to smoke before Time to next is not zeroes! .
         /// </summary>
         internal static string ChallengeViewDescriptionTitle {
             get {
                 return ResourceManager.GetString("ChallengeViewDescriptionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal.
+        /// </summary>
+        internal static string ChallengeViewGoalSmokingLabel {
+            get {
+                return ResourceManager.GetString("ChallengeViewGoalSmokingLabel", resourceCulture);
             }
         }
         
@@ -408,6 +426,15 @@ namespace SmokeFree.Resx {
         internal static string ChallengeViewModelTiitle {
             get {
                 return ResourceManager.GetString("ChallengeViewModelTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip Smoke.
+        /// </summary>
+        internal static string ChallengeViewSkipSmokeButton {
+            get {
+                return ResourceManager.GetString("ChallengeViewSkipSmokeButton", resourceCulture);
             }
         }
         

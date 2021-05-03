@@ -111,6 +111,7 @@
                             FontSize="20"/>
                     <!-- /END/ Create Challenge  VIEW TITLE -->
                     
+                    <!-- User Smoke Status -->
                     <Frame Margin="10,10,10,10" CornerRadius="10" >
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -127,6 +128,7 @@
                                            HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
                         </Grid>
                     </Frame>
+                    <!-- /END/ User Smoke Status -->
 
                     <!-- Goal Date Time TITLE-->
                     <Label Text="{xct:Translate CreateChallengeViewGoalDateTitle}"

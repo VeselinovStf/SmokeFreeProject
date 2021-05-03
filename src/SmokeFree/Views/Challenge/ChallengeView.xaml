@@ -58,8 +58,8 @@
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Gray-100}"
                         FontSize="20"
-                        HeightRequest="40"
-                        WidthRequest="40"
+                        HeightRequest="50"
+                        WidthRequest="50"
                         HorizontalOptions="Start"
                         Margin="10,10,10,10"/>
                     <!-- /END/ STOP TEST BUTTON -->
@@ -83,8 +83,8 @@
                         BackgroundColor="Transparent"
                         TextColor="{StaticResource Gray-100}"
                         FontSize="20"
-                        HeightRequest="40"
-                        WidthRequest="40"
+                        HeightRequest="50"
+                        WidthRequest="50"
                         HorizontalOptions="End"
                         Margin="10,10,10,10"/>
                     <!-- /END/ App Settings Button -->
@@ -93,7 +93,256 @@
                 <!-- /END/ NAVIGATION -->
 
                 <!-- MAIN CONTENT -->
-               
+                <!-- STATUS DISPLAY -->
+                <Grid Grid.Row="1" Margin="20,0,20,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- SMOKES COUNT DISPLAY -->
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- Current smoked Label -->
+                        <Label 
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{xct:Translate ChallengeViewCurrentSmokingLabel}" 
+                            HorizontalOptions="Start"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <!--Separator -->
+                        <Label 
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text=" / " 
+                            HorizontalOptions="Start"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <!-- Goal smoked Label -->
+                        <Label 
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="{xct:Translate ChallengeViewGoalSmokingLabel}" 
+                            HorizontalOptions="Start"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <!-- Current smoked Value -->
+                        <Label        
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="{Binding CurrentlySmokedCount}"                
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                       
+
+                        <!-- Goal smoked Value -->
+                        <Label         
+                             Grid.Row="1"
+                            Grid.Column="2"
+                            Text="{Binding CurrentlDayMaxSmokeCount}"                
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                    </Grid>
+                    <!-- /END/ SMOKES COUNT DISPLAY -->
+
+                    <!-- LAST SMOKE DATE TIME DISPLAY -->
+                    <StackLayout Grid.Column="1" VerticalOptions="Center" HorizontalOptions="EndAndExpand" >
+
+                        <Label 
+                             IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="LastSmokeDateTimeDisplayLabel"
+                            Text="{xct:Translate UnderTestViewLastTimeLabel}" 
+                            FontSize="20"
+                            HorizontalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                             IsVisible="{Binding IsSmoking}"
+                            Text="{xct:Translate UnderTestViewSmokeSenceLabel}" 
+                            FontSize="20"
+                            HorizontalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="LastSmokeDateTimeDisplayDateTime"
+                            Text="{Binding TimeToNextSmoke, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
+                             HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label 
+                            IsVisible="{Binding IsSmoking}"
+                            x:Name="LastSmokeDateTimeDisplayAtSmokeDateTime"
+                            Text="{Binding CurrentSmokeTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}" 
+                             HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <!-- Skip Smoke BUTTON -->
+                        <Button 
+                            IsVisible="{Binding TimeToNextSmoke, Converter={StaticResource TimerToBoleanVisabilityConverter}}"
+                            x:Name="SkipSMoke"
+                            Text="{xct:Translate ChallengeViewSkipSmokeButton}" 
+                            Command="{Binding SkipOneSmokedCommand}"
+                            BackgroundColor="{StaticResource Gray-100}"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"                           
+                            CornerRadius="30"/>
+                        <!-- /END/ Skip Smoke BUTTON -->
+
+                    </StackLayout>
+                    <!-- /END/ LAST SMOKE DATE TIME DISPLAY -->
+
+                </Grid>
+                <!-- /END/ STATUS DISPLAY -->
+
+                <!-- MAIN CONTROLS CONTENT -->
+                <Grid Grid.Row="3" VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout 
+                             VerticalOptions="CenterAndExpand"
+                             Spacing="20">
+                        
+                        <!-- User Smoke Status -->
+                        <Frame Margin="10,10,10,10" CornerRadius="10" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding UserSmokeStatus.Icon}" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource SFFontIcons}"
+                                           FontSize="30" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding UserSmokeStatus.Title}" TextColor="Black" FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="3" Text="{Binding UserSmokeStatus.Message}" TextColor="Black"
+                                           HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            </Grid>
+                        </Frame>
+                        <!-- /END/ User Smoke Status -->
+
+                        <!-- Start Smoking BUTTON -->
+                        <Button 
+                            IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
+                            x:Name="StartSmoking"                           
+                            Text="{xct:Translate UnderTestViewStartSmokingButton}" 
+                            Command="{Binding StartSmokingCommand}"
+                            CommandParameter="{StaticResource TrueValue}"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"                           
+                            CornerRadius="30"/>
+                        <!-- /END/ Start Smoking BUTTON -->
+
+                        <!-- Mark One Smoked BUTTON -->
+                        <Button 
+                            IsVisible="{Binding IsSmoking}"
+                            x:Name="MarkOneSmoked"
+                            Text="{xct:Translate UnderTestViewMarkOneSmokedButton}" 
+                            Command="{Binding MarkOneSmokedCommand}"
+                            CommandParameter="{StaticResource FalseValue}"
+                            BackgroundColor="{StaticResource Gray-100}"
+                            FontSize="20"
+                            FontAttributes="Bold"                           
+                            Margin="20,0,20,20"                           
+                            CornerRadius="30"/>
+                        <!-- /END/ Mark One Smoked BUTTON -->
+
+                    </StackLayout>
+                    
+                    <!-- TEST TIME LEFT -->
+                    <StackLayout Grid.Row="1" VerticalOptions="EndAndExpand" Margin="0,60,0,0">
+
+                        <Label 
+                            Text="{xct:Translate UnderTestViewTestLeftTimeLabel}" 
+                            HorizontalOptions="Center"
+                            VerticalOptions="End"
+                            FontSize="20"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                        <Label       
+                            x:Name="Timer"
+                            Text="{Binding TestLeftTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}"                
+                            HorizontalTextAlignment="Center"
+                            FontSize="20"
+                            VerticalOptions="End"
+                            TextColor="{StaticResource Gray-100}"
+                            FontFamily="{StaticResource Montserrat-Bold}"/>
+
+                    </StackLayout>
+                    <!-- /END/ TEST TIME LEFT -->
+
+                    
+                    
+                </Grid>
+
+                <Grid Grid.Row="3" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Back One Day BUTTON -->
+                    <Button                   
+                            Text="&#xe707;"
+                            FontFamily="{StaticResource FontIcons}"
+                            Command="{Binding OnBackOneChallengeDayCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Gray-100}"
+                            FontSize="25"                
+                            Grid.Column="0"
+                            HorizontalOptions="Start"                  
+                          />
+                    <!-- /END/ Back One Day BUTTON -->
+
+                    <!-- Mark Day Complete BUTTON -->
+                    <Button                   
+                            Text="&#xe74C;"
+                            FontFamily="{StaticResource FontIcons}"
+                            Command="{Binding OnMarkDayCompletedCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{StaticResource Gray-100}"
+                            FontSize="40"                  
+                            Grid.Column="2"
+                            HorizontalOptions="End"                   
+                          />
+                    <!-- /END/ Mark Day Complete BUTTON -->
+
+                </Grid>
                 <!-- /END/ MAIN CONTENT -->
 
             </StackLayout>

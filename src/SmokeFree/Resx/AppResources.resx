@@ -477,8 +477,14 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="ChallengeViewCurrentSmokingLabel" xml:space="preserve">
+    <value>Smoked</value>
+  </data>
   <data name="ChallengeViewDescriptionTitle" xml:space="preserve">
     <value>Wellcome to your challenge. Press Start Smoking when you are smoking. After first smoke pay close attention to Time to next timer! We know you kan doit so, when never go to smoke before Time to next is not zeroes! </value>
+  </data>
+  <data name="ChallengeViewGoalSmokingLabel" xml:space="preserve">
+    <value>Goal</value>
   </data>
   <data name="ChallengeViewModelBackOneDayConfirmMessage" xml:space="preserve">
     <value>Backing One day is going to delete all data for current and previous day. You are going to start again from previous day. Note that the goal time is not set back.</value>
@@ -530,6 +536,9 @@
   </data>
   <data name="ChallengeViewModelStartSmokeTimeConfirmTitle" xml:space="preserve">
     <value>You are close to success</value>
+  </data>
+  <data name="ChallengeViewSkipSmokeButton" xml:space="preserve">
+    <value>Skip Smoke</value>
   </data>
   <data name="ChallengViewModelCompleteButton" xml:space="preserve">
     <value>To Challenge Results</value>
