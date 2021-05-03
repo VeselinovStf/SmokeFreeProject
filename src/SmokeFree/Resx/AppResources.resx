@@ -420,6 +420,12 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Create Challenge</value>
   </data>
+  <data name="CreateChallengeViewModelBackToTestingMessage" xml:space="preserve">
+    <value>Are you sure you want to go back to the test again?</value>
+  </data>
+  <data name="CreateChallengeViewModelBackToTestingTitle" xml:space="preserve">
+    <value>Back To New Test</value>
+  </data>
   <data name="CreateChallengeViewModelNewGoalDialogMessage" xml:space="preserve">
     <value>Your initial selection for Challenge Goal time is less then the current date, please select again</value>
   </data>

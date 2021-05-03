@@ -157,10 +157,10 @@ namespace SmokeFree.ViewModels.Challenge
             // Check if user is shure
             var userNotification = await base._dialogService
                  .ConfirmAsync(
-                $"Are you sure you want to go back to the test again?",
-                 "Restart Testing",
-                 "Ok",
-                 "Cancel");
+                 AppResources.CreateChallengeViewModelBackToTestingMessage,
+                 AppResources.CreateChallengeViewModelBackToTestingTitle,
+                 AppResources.ButtonOkText,
+                 AppResources.ButtonCancelText);
 
             if (userNotification)
             {

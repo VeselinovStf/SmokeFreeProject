@@ -420,6 +420,12 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Създай Предизвикателство</value>
   </data>
+  <data name="CreateChallengeViewModelBackToTestingMessage" xml:space="preserve">
+    <value>Връщането към тест ще изстрие всички събрани данни до момента</value>
+  </data>
+  <data name="CreateChallengeViewModelBackToTestingTitle" xml:space="preserve">
+    <value>Направи Тест Отново</value>
+  </data>
   <data name="CreateChallengeViewModelNewGoalDialogMessage" xml:space="preserve">
     <value>Стартовия ти избор на крайна дата е по-малък от сегашната дата. Избери отново.</value>
   </data>

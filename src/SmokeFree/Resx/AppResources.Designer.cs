@@ -250,6 +250,24 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to go back to the test again?.
+        /// </summary>
+        internal static string CreateChallengeViewModelBackToTestingMessage {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewModelBackToTestingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back To New Test.
+        /// </summary>
+        internal static string CreateChallengeViewModelBackToTestingTitle {
+            get {
+                return ResourceManager.GetString("CreateChallengeViewModelBackToTestingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your initial selection for Challenge Goal time is less then the current date, please select again.
         /// </summary>
         internal static string CreateChallengeViewModelNewGoalDialogMessage {
