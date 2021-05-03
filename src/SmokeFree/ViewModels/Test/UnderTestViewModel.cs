@@ -6,6 +6,7 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Constants.Messages;
 using SmokeFree.Data.Models;
 using SmokeFree.Resx;
 using SmokeFree.ViewModels.AppSettings;
@@ -114,11 +115,11 @@ namespace SmokeFree.ViewModels.Test
             _deviceTimer = deviceTimer;
 
             // Initial Subscribe-UnSubscribe to OnAppearing of View Model
-            MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewAppearing", async (e) =>
+            MessagingCenter.Subscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewAppearing, async (e) =>
             {
                 await AppearingInitializeAsync();
 
-                MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
+                MessagingCenter.Unsubscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewAppearing);
             });
         }
 
@@ -205,11 +206,11 @@ namespace SmokeFree.ViewModels.Test
                         StartTestintTimer();
 
                         // Initial Subscribe-UnSubscribe to OnDesapearing of View Model
-                        MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewDisappearing", (e) =>
+                        MessagingCenter.Subscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewDisappearing, (e) =>
                         {
                             DesapearingInitializeAsync();
 
-                            MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewDisappearing");
+                            MessagingCenter.Unsubscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewDisappearing);
                         });
                     }
                     else
@@ -243,11 +244,11 @@ namespace SmokeFree.ViewModels.Test
             StopTimeSenceLastSmokeTimer();
 
             // Post Subscribe-UnSubscribe to OnAppearing of View Model
-            MessagingCenter.Subscribe<UnderTestView>(this, "UnderTestViewAppearing", async (e) =>
+            MessagingCenter.Subscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewAppearing, async (e) =>
             {
                 await AppearingInitializeAsync();
 
-                MessagingCenter.Unsubscribe<UnderTestView>(this, "UnderTestViewAppearing");
+                MessagingCenter.Unsubscribe<UnderTestView>(this, MessagingCenterConstant.UnderTestViewAppearing);
             });
 
         }

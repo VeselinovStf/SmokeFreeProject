@@ -61,5 +61,10 @@ namespace SmokeFree.Data.Models
         /// User Id
         /// </summary>
         public int UserId { get; set; }
+
+        /// <summary>
+        /// Completed Chalenge Results Persistence Data
+        /// </summary>    
+        public ChallengeResult CompletedChallengeResult { get; set; }
     }
 }

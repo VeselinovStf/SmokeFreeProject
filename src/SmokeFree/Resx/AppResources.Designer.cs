@@ -241,11 +241,38 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Smoke is markt as finished..
+        /// </summary>
+        internal static string ChallengeViewModelMarkAfterDelayDialogMessage {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelMarkAfterDelayDialogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge.
         /// </summary>
         internal static string ChallengeViewModelTiitle {
             get {
                 return ResourceManager.GetString("ChallengeViewModelTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Challenge time is over!.
+        /// </summary>
+        internal static string CompleteChallengeNotificationMessage {
+            get {
+                return ResourceManager.GetString("CompleteChallengeNotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge Goal Time Come!.
+        /// </summary>
+        internal static string CompleteChallengeNotificationTitle {
+            get {
+                return ResourceManager.GetString("CompleteChallengeNotificationTitle", resourceCulture);
             }
         }
         

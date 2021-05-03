@@ -71,7 +71,7 @@ namespace SmokeFree.Services.General
                     case UserStates.InChallenge:
                         return NavigateToAsync<ChallengeViewModel>();
                     case UserStates.Complete:
-                        //TODO: B: Add Complete
+                        return NavigateToAsync<CompletedChallengeViewModel>();
                         break;
                     default:
                         break;

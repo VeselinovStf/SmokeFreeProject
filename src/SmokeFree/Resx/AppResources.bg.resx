@@ -477,4 +477,13 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>
   </data>
+  <data name="ChallengeViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
+    <value>Цигарата е отбелязана за испушена.</value>
+  </data>
+  <data name="CompleteChallengeNotificationMessage" xml:space="preserve">
+    <value>Времето на твоето предизвикателство Приключи</value>
+  </data>
+  <data name="CompleteChallengeNotificationTitle" xml:space="preserve">
+    <value>Предизвикателството Приключи</value>
+  </data>
 </root>

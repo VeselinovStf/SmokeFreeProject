@@ -1,6 +1,7 @@
 ﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
+using SmokeFree.Constants.Messages;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
 
@@ -20,6 +21,14 @@ namespace SmokeFree.Views.Challenge
         protected override void OnAppearing()
         {
             InitializeDefaultColour();
+            MessagingCenter.Send<ChallengeView>(this, MessagingCenterConstant.ChallengeViewAppearing);
+            base.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            MessagingCenter.Send<ChallengeView>(this, MessagingCenterConstant.ChallengeViewDisappearing);
+            base.OnDisappearing();
         }
 
         private void InitializeDefaultColour()

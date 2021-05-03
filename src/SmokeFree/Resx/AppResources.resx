@@ -477,4 +477,13 @@
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="ChallengeViewModelMarkAfterDelayDialogMessage" xml:space="preserve">
+    <value>Smoke is markt as finished.</value>
+  </data>
+  <data name="CompleteChallengeNotificationMessage" xml:space="preserve">
+    <value>Your Challenge time is over!</value>
+  </data>
+  <data name="CompleteChallengeNotificationTitle" xml:space="preserve">
+    <value>Challenge Goal Time Come!</value>
+  </data>
 </root>

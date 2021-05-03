@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmokeFree.Views.Challenge.CompletedChallengeView"
+                 xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            utility:ViewModelLocator.AutoWireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PrimaryColor}"
+             >
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+        
+
+            <StackLayout x:Name="ViewContent" IsVisible="false">
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+               
+                    <!-- HEADER TEXT -->
+                    <Label Text="{xct:Translate ChallengeViewModelTiitle}"    
+                           HorizontalOptions="CenterAndExpand"                         
+                           FontSize="20"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="{StaticResource Gray-100}"
+                           FontFamily="{StaticResource Montserrat-Bold}"/>
+                    <!-- /END/ HEADER TEXT -->
+
+
+                    <!-- App Settings Button -->
+                    <Button            
+                        x:Name="SettingsButton"
+                        Text="&#xe72B;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnSettingsCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="End"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ App Settings Button -->
+
+                </Grid>
+                <!-- /END/ NAVIGATION -->
+
+                <!-- MAIN CONTENT -->
+
+                <!-- /END/ MAIN CONTENT -->
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,4 +1,5 @@
-﻿using Realms;
+﻿using Plugin.LocalNotification;
+using Realms;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
@@ -241,6 +242,7 @@ namespace SmokeFree.ViewModels.Challenge
                             challenge.ChallengeStart = this._dateTime.Now();
                             challenge.GoalCompletitionTime = goalTime;
                             challenge.ModifiedOn = this._dateTime.Now();
+                            challenge.TotalChallengeDays = goalTimeInDays;
 
                             foreach (var dcs in challengeCalculations.DayChallengeSmokes)
                             {
@@ -252,6 +254,26 @@ namespace SmokeFree.ViewModels.Challenge
 
 
                         });
+
+                        // Notification
+                        if (user.NotificationState)
+                        {
+                            // Register Notification
+                            var testTimerNotification = new NotificationRequest
+                            {
+                                NotificationId = Globals.ChallengeNotificationId,
+                                Title = AppResources.CompleteChallengeNotificationTitle,
+                                Description = AppResources.CompleteChallengeNotificationMessage,
+                                ReturningData = "Dummy data", // Returning data when tapped on notification.
+                                NotifyTime = goalTime.AddSeconds(3),
+                                Android = new AndroidOptions()
+                                {
+                                    IconName = "icon"
+                                } // Used for Scheduling local notification, if not specified notification will show immediately.
+                            };
+
+                            NotificationCenter.Current.Show(testTimerNotification);
+                        }
 
                         await this._navigationService.NavigateToAsync<ChallengeViewModel>();
                     }

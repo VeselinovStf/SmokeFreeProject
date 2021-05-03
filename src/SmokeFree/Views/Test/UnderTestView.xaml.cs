@@ -1,6 +1,7 @@
 ﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
+using SmokeFree.Constants.Messages;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
 using Xamarin.Forms;
@@ -42,13 +43,13 @@ namespace SmokeFree.Views.Test
         protected override void OnAppearing()
         {
             InitializeDefaultColour();
-            MessagingCenter.Send<UnderTestView>(this, "UnderTestViewAppearing");
+            MessagingCenter.Send<UnderTestView>(this, MessagingCenterConstant.UnderTestViewAppearing);
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            MessagingCenter.Send<UnderTestView>(this, "UnderTestViewDisappearing");
+            MessagingCenter.Send<UnderTestView>(this, MessagingCenterConstant.UnderTestViewDisappearing);
             base.OnDisappearing();
         }
 
