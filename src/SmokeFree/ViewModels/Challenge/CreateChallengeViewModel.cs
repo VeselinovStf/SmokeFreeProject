@@ -1,4 +1,5 @@
 ﻿using Realms;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
@@ -28,6 +29,8 @@ namespace SmokeFree.ViewModels.Challenge
         /// </summary>
         private readonly Realm _realm;
 
+        private readonly IChallengeCalculationService _challengeCalculationService;
+
         /// <summary>
         /// Smoke Free Goal Completition DateTime
         /// </summary>
@@ -52,10 +55,13 @@ namespace SmokeFree.ViewModels.Challenge
             INavigationService navigationService,
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
-            IDialogService dialogService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IDialogService dialogService,
+            IChallengeCalculationService challengeCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Database
             _realm = realm;
+
+            _challengeCalculationService = challengeCalculationService;
 
             // View Title
             ViewTitle = AppResources.CreateChallengeViewTitle;
@@ -154,7 +160,110 @@ namespace SmokeFree.ViewModels.Challenge
 
         private async Task ExecuteStartChallenge()
         {
-            
+            // Get GoalCompletitionTime
+            var goalTime = this.GoalCompletitionTime;
+
+            // Check if GoalCompletitionTime is > of constraints!!!
+            if (goalTime < this._dateTime.Now().AddDays(Globals.MinChallengeDays))
+            {
+                await base._dialogService.ShowDialog(
+                    AppResources.CreateChellengeViewModelGoalTimeNotificationMessage,
+                    AppResources.CreateChellengeViewModelGoalTimeNotificationTitle,
+                    AppResources.ButtonOkText);
+            }
+            else
+            {
+                // Notify user if is shour
+                var checkIfUserIsShour = await base._dialogService
+                    .ConfirmAsync(
+                    AppResources.CreateChellengeViewModelStartChallengeConfirmMessage,
+                    AppResources.CreateChellengeViewModelStartChallengeConfirmTitle,
+                    AppResources.YesButtonText, 
+                    AppResources.NoButtonText);
+
+                if (checkIfUserIsShour)
+                {
+                    var userId = Globals.UserId;
+                    var user = _realm.Find<User>(userId);
+
+                    if (user == null)
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+
+                    var userTest = user.Tests
+                        .FirstOrDefault(e => !e.IsDeleted && e.IsCompleted);
+
+                    if (userTest == null)
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test: User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+
+                    var testResult = userTest.CompletedTestResult;
+
+                    if (testResult == null)
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Test Results: User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+
+                    var goalTimeInDays = (int)Math.Abs((goalTime - _dateTime.Now()).Days);
+                    var avarageSmokeADay = testResult.AvarageSmokedCigarsPerDay;
+                    var avarageSmokeActiveTime = testResult.AvarageSmokeActiveTimeSeconds;
+
+                    var challenge = user.Challenges
+                        .FirstOrDefault(e => !e.IsDeleted);
+
+                    if (challenge == null)
+                    {
+                        // User Not Found!
+                        base._appLogger.LogCritical($"Can't find User Challenge: User Id {userId}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+
+                    var challengeCalculations = this._challengeCalculationService
+                        .CalculatedChallengeSmokes(goalTimeInDays, avarageSmokeADay, avarageSmokeActiveTime, challenge.Id);
+
+                    if (challengeCalculations.Success)
+                    {
+                        _realm.Write(() =>
+                        {
+                            // Update Challenge
+                            challenge.ChallengeStart = this._dateTime.Now();
+                            challenge.GoalCompletitionTime = goalTime;
+                            challenge.ModifiedOn = this._dateTime.Now();
+
+                            foreach (var dcs in challengeCalculations.DayChallengeSmokes)
+                            {
+                                dcs.CreatedOn = this._dateTime.Now();
+                                challenge.ChallengeSmokes.Add(dcs);
+                            }
+
+                            user.UserState = UserStates.InChallenge.ToString();
+
+
+                        });
+
+                        await this._navigationService.NavigateToAsync<ChallengeViewModel>();
+                    }
+                    else
+                    {
+                        // User Not Found!
+                        base._appLogger.LogError($"Can't Calculate New Challenge Data: User Id {userId}, Challenge Id: {challenge.Id}");
+
+                        await base.InternalErrorMessageToUser();
+                    }
+                }
+            }
 
         }
 
@@ -198,6 +307,10 @@ namespace SmokeFree.ViewModels.Challenge
                         userTest.IsDeleted = true;
                         userTest.DeletedOn = this._dateTime.Now();
                         userTest.ModifiedOn = this._dateTime.Now();
+
+                        userTest.CompletedTestResult.IsDeleted = true;
+                        userTest.CompletedTestResult.DeletedOn = this._dateTime.Now();
+                        userTest.CompletedTestResult.ModifiedOn = this._dateTime.Now();
 
                         // Remove smoked cigares if persist
                         if (userTest.SmokedCigaresUnderTest.Count() > 0)

@@ -232,6 +232,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Challenge.
+        /// </summary>
+        internal static string ChallengeViewModelTiitle {
+            get {
+                return ResourceManager.GetString("ChallengeViewModelTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You Smoke Test is going to continue for {0}. Are you sure about that?.
         /// </summary>
         internal static string ConfirmStartTestingDialogMessage {
@@ -318,6 +327,42 @@ namespace SmokeFree.Resx {
         internal static string CreateChallengeViewTitle {
             get {
                 return ResourceManager.GetString("CreateChallengeViewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Time for challeng is 3 days, select more then that!.
+        /// </summary>
+        internal static string CreateChellengeViewModelGoalTimeNotificationMessage {
+            get {
+                return ResourceManager.GetString("CreateChellengeViewModelGoalTimeNotificationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Give your self time!.
+        /// </summary>
+        internal static string CreateChellengeViewModelGoalTimeNotificationTitle {
+            get {
+                return ResourceManager.GetString("CreateChellengeViewModelGoalTimeNotificationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure that this is your final goal completition date?.
+        /// </summary>
+        internal static string CreateChellengeViewModelStartChallengeConfirmMessage {
+            get {
+                return ResourceManager.GetString("CreateChellengeViewModelStartChallengeConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you ready?.
+        /// </summary>
+        internal static string CreateChellengeViewModelStartChallengeConfirmTitle {
+            get {
+                return ResourceManager.GetString("CreateChellengeViewModelStartChallengeConfirmTitle", resourceCulture);
             }
         }
         

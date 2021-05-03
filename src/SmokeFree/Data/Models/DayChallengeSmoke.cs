@@ -16,7 +16,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Distance from current to next smoke
         /// </summary>
-        public DateTimeOffset DistanceToNext { get; set; }
+        public int DistanceToNextInSeconds { get; set; }
 
         /// <summary>
         /// Smoke Start Time
@@ -46,7 +46,7 @@ namespace SmokeFree.Data.Models
         /// <summary>
         /// Foreign Key To Challenge
         /// </summary>
-        public int ChallengeId { get; set; }
+        public string ChallengeId { get; set; }
 
         /// <summary>
         /// Last Modifiet date

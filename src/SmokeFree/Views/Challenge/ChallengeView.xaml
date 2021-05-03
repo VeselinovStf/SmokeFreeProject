@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmokeFree.Views.Challenge.ChallengeView"
+                xmlns:utility="clr-namespace:SmokeFree.Bootstrap;assembly=SmokeFree"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            utility:ViewModelLocator.AutoWireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource PrimaryColor}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- View Description -->
+            <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
+                   BackgroundColor="{StaticResource Gray-300}"
+                   >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        Text="{xct:Translate CreateChallengeViewDescriptionTitle}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Text="{xct:Translate UnderTestViewDescriptionLabelButton}" 
+                        CornerRadius="20"
+                        TextColor="{StaticResource Gray-900}"
+                        Opacity="5"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Clicked="OnCloseDescriptionButton_Clicked"/>
+                </Grid>
+
+            </Frame>
+            <!-- /END/ View Description -->
+
+            <StackLayout x:Name="ViewContent" IsVisible="false">
+                <!-- NAVIGATION -->
+
+                <Grid Grid.Row="0">
+
+                    <!-- STOP TEST BUTTON -->
+                    <Button                   
+                        Text="&#xe724;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnStopChallengeCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Start"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ STOP TEST BUTTON -->
+
+                    <!-- HEADER TEXT -->
+                    <Label Text="{xct:Translate ChallengeViewModelTiitle}"    
+                           HorizontalOptions="CenterAndExpand"                         
+                           FontSize="20"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="{StaticResource Gray-100}"
+                           FontFamily="{StaticResource Montserrat-Bold}"/>
+                    <!-- /END/ HEADER TEXT -->
+
+
+                    <!-- App Settings Button -->
+                    <Button            
+                        x:Name="SettingsButton"
+                        Text="&#xe72B;"
+                        FontFamily="{StaticResource FontIcons}"
+                        Command="{Binding OnSettingsCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="{StaticResource Gray-100}"
+                        FontSize="20"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="End"
+                        Margin="10,10,10,10"/>
+                    <!-- /END/ App Settings Button -->
+
+                </Grid>
+                <!-- /END/ NAVIGATION -->
+
+                <!-- MAIN CONTENT -->
+               
+                <!-- /END/ MAIN CONTENT -->
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

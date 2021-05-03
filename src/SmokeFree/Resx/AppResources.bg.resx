@@ -420,6 +420,9 @@
   <data name="CreateChallengeViewTitle" xml:space="preserve">
     <value>Създай Предизвикателство</value>
   </data>
+  <data name="ChallengeViewModelTiitle" xml:space="preserve">
+    <value>Предизвикателство</value>
+  </data>
   <data name="CreateChallengeViewDescriptionTitle" xml:space="preserve">
     <value>Избери датата на която ще спреш цигарите и започни своето предизвикателство</value>
   </data>
@@ -440,6 +443,18 @@
   </data>
   <data name="CreateChallengeViewStartChallengeButtonText" xml:space="preserve">
     <value>Започни Предизвикателството</value>
+  </data>
+  <data name="CreateChellengeViewModelGoalTimeNotificationMessage" xml:space="preserve">
+    <value>Минималното време на Предизвикатество е три дни, избрал си по ранна дата от тези дни.</value>
+  </data>
+  <data name="CreateChellengeViewModelGoalTimeNotificationTitle" xml:space="preserve">
+    <value>Нужно е повече време!</value>
+  </data>
+  <data name="CreateChellengeViewModelStartChallengeConfirmMessage" xml:space="preserve">
+    <value>Сигурен ли си, че това е дата до която ще си спрял цигарите?</value>
+  </data>
+  <data name="CreateChellengeViewModelStartChallengeConfirmTitle" xml:space="preserve">
+    <value>Готов ли си</value>
   </data>
   <data name="TestResultBackButton" xml:space="preserve">
     <value>Назад</value>

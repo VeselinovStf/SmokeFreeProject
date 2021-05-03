@@ -5,6 +5,7 @@ using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
+using SmokeFree.Services.Data.Challenge;
 using SmokeFree.Services.Data.Test;
 using SmokeFree.Services.General;
 using SmokeFree.Utilities.DeviceUtilities;
@@ -36,7 +37,7 @@ namespace SmokeFree.Bootstrap
             // Database
             var realmConfiguration = new RealmConfiguration
             {
-                SchemaVersion = 7
+                SchemaVersion = 8
             };
 
             _builder.Register(c => Realm.GetInstance(realmConfiguration)).InstancePerDependency();
@@ -60,6 +61,7 @@ namespace SmokeFree.Bootstrap
 
             // SERVICES - DATA
             _builder.RegisterType<TestCalculationService>().As<ITestCalculationService>();
+            _builder.RegisterType<ChallengeCalculationService>().As<IChallengeCalculationService>();
 
 
             // UTILITIES

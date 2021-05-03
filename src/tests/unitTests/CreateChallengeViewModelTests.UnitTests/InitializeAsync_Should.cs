@@ -2,6 +2,7 @@ using Moq;
 using NUnit.Framework;
 using Realms;
 using SmokeFree;
+using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
@@ -37,14 +38,16 @@ namespace CreateChallengeViewModelTests.UnitTests
 
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
-        
+            var challengeCalculationServiceMock = new Mock<IChallengeCalculationService>();
+
 
             var createChallengeViewModel = new CreateChallengeViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                challengeCalculationServiceMock.Object
                 );
 
             object parameter = new object();
@@ -119,12 +122,16 @@ namespace CreateChallengeViewModelTests.UnitTests
                 It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 
+            var challengeCalculationServiceMock = new Mock<IChallengeCalculationService>();
+
+
             var createChallengeViewModel = new CreateChallengeViewModel(
                 realm,
                 navigationServiceMock.Object,
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
-                dialogServiceMock.Object
+                dialogServiceMock.Object,
+                challengeCalculationServiceMock.Object
                 );
 
             object parameter = new object();
