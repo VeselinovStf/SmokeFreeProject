@@ -646,6 +646,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        internal static string TestResultBackButton {
+            get {
+                return ResourceManager.GetString("TestResultBackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Challenge.
         /// </summary>
         internal static string TestResultCreateChallengeButton {

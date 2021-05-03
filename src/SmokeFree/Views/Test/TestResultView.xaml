@@ -100,9 +100,22 @@
             <!-- /END/ Test Results -->
 
             <!-- Create Challenge Button -->
-            <Button Text="{xct:Translate TestResultCreateChallengeButton}" 
+            <Button IsVisible="{Binding InCreateChallenge, Converter={StaticResource BooleanReverseConverter}}"
+                    Text="{xct:Translate TestResultCreateChallengeButton}" 
                     Grid.Row="2"
                     Command="{Binding OnCreateChallengeCommand}"
+                    FontSize="20"
+                    FontAttributes="Bold"                           
+                    Margin="20,20,20,20"                           
+                    CornerRadius="30"/>
+            <!-- /END/ Create Challenge Button -->
+
+            <!-- Create Challenge Button -->
+            <Button 
+                    IsVisible="{Binding InCreateChallenge}"
+                    Text="{xct:Translate TestResultBackButton}" 
+                    Grid.Row="2"
+                    Command="{Binding BackToCreateChallengeCommand}"
                     FontSize="20"
                     FontAttributes="Bold"                           
                     Margin="20,20,20,20"                           

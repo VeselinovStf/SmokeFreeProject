@@ -31,10 +31,13 @@ namespace SmokeFree.ViewModels.Test
         /// </summary>
         private TestResult _testResult;
 
+        private bool _inCreateChallenge;
+
         /// <summary>
         /// Database
         /// </summary>
         private readonly Realm _realm;
+
         private readonly ITestCalculationService _testCalculationService;
 
         /// <summary>
@@ -161,6 +164,12 @@ namespace SmokeFree.ViewModels.Test
 
                             };
 
+                            var userState = StringToEnum.ToUserState<UserStates>(user.UserState);
+                            if (userState == UserStates.InCreateChallenge)
+                            {
+                                this.InCreateChallenge = true;
+                            }
+
                         }
                         else
                         {
@@ -210,6 +219,19 @@ namespace SmokeFree.ViewModels.Test
         private async Task ExecuteNavigateToSetting()
         {
             await base._navigationService.NavigateToAsync<AppSettingsViewModel>();
+        }
+
+        /// <summary>
+        /// Navigate back
+        /// </summary>
+        public IAsyncCommand BackToCreateChallengeCommand => new AsyncCommand(
+            BackToCreateChallenge,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task BackToCreateChallenge()
+        {
+            await base._navigationService.BackToPreviousAsync();
         }
 
         /// <summary>
@@ -362,6 +384,19 @@ namespace SmokeFree.ViewModels.Test
             set
             {
                 _testResult = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Hide Create Challenge Button if is in Create
+        /// </summary>
+        public bool InCreateChallenge
+        {
+            get { return _inCreateChallenge; }
+            set
+            {
+                _inCreateChallenge = value;
                 OnPropertyChanged();
             }
         }

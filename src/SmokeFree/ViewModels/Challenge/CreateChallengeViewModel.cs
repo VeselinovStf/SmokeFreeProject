@@ -145,6 +145,79 @@ namespace SmokeFree.ViewModels.Challenge
         #region COMMANDS
 
         /// <summary>
+        /// Async Start Challenge Command and Logic
+        /// </summary>
+        public IAsyncCommand OnStopChallengeCommand => new AsyncCommand(
+            ExecuteStopChallengeCommand,
+            onException: base.GenericCommandExeptionHandler,
+            allowsMultipleExecutions: false);
+
+        private async Task ExecuteStopChallengeCommand()
+        {
+            // Check if user is shure
+            var userNotification = await base._dialogService
+                 .ConfirmAsync(
+                $"Are you sure you want to go back to the test again?",
+                 "Restart Testing",
+                 "Ok",
+                 "Cancel");
+
+            if (userNotification)
+            {
+                // Get Current User
+                var userId = Globals.UserId;
+                var user = _realm.Find<User>(userId);
+
+                // Validate User
+                if (user != null)
+                {
+                    var currentTestId = user.TestId;
+
+                    // Delete Current Test Information From DB
+                    var userTest = user.Tests.FirstOrDefault(t => t.UserId == userId && !t.IsDeleted);
+                    var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
+                    // 
+
+                    _realm.Write(() =>
+                    {
+                        // Remove Test
+                        userTest.IsDeleted = true;
+                        userTest.DeletedOn = this._dateTime.Now();
+                        userTest.ModifiedOn = this._dateTime.Now();
+
+                        // Remove smoked cigares if persist
+                        if (userTest.SmokedCigaresUnderTest.Count() > 0)
+                        {
+                            foreach (var smoke in userTest.SmokedCigaresUnderTest)
+                            {
+                                smoke.IsDeleted = true;
+                                smoke.DeletedOn = this._dateTime.Now();
+                                smoke.ModifiedOn = this._dateTime.Now();
+                            }
+                        }
+
+                        // Remove Challenge
+                        testChallenge.IsDeleted = true;
+                        testChallenge.DeletedOn = this._dateTime.Now();
+                        testChallenge.ModifiedOn = this._dateTime.Now();
+
+                        // Update User Status
+                        user.UserState = UserStates.CompletedOnBoarding.ToString();
+                        user.TestId = string.Empty;
+                    });            
+
+                }
+                else
+                {
+                    // User Not Found!
+                    base._appLogger.LogCritical($"Can't find User: User Id {userId}");
+
+                    await base.InternalErrorMessageToUser();
+                }
+            }
+        }
+
+        /// <summary>
         /// Navigate to settings View
         /// </summary>
         public IAsyncCommand OnSettingsCommand => new AsyncCommand(

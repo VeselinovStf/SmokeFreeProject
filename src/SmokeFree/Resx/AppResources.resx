@@ -426,4 +426,7 @@
   <data name="CreateChallengeViewModelNewGoalDialogTitle" xml:space="preserve">
     <value>Select new Challenge Final Date</value>
   </data>
+  <data name="TestResultBackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
 </root>
