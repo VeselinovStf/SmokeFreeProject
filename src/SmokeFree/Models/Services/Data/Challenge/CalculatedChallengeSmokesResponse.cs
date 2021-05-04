@@ -10,9 +10,10 @@ namespace SmokeFree.Models.Services.Data.Challenge
             Success = success;
         }
 
-        public CalculatedChallengeSmokesResponse(bool success, List<DayChallengeSmoke> dayChallengeSmokes) : this(success)
+        public CalculatedChallengeSmokesResponse(bool success, List<DayChallengeSmoke> dayChallengeSmokes, int goalTimeInDays) : this(success)
         {
             DayChallengeSmokes = dayChallengeSmokes;
+            GoalTimeInDays = goalTimeInDays;
         }
 
         public CalculatedChallengeSmokesResponse(bool success, string message) : this(success)
@@ -21,7 +22,7 @@ namespace SmokeFree.Models.Services.Data.Challenge
         }
 
         public List<DayChallengeSmoke> DayChallengeSmokes { get; set; }
-
+        public int GoalTimeInDays { get; }
         public bool Success { get; }
         public string Message { get; }
     }

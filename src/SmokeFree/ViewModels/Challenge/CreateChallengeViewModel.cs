@@ -32,6 +32,8 @@ namespace SmokeFree.ViewModels.Challenge
 
         private readonly IChallengeCalculationService _challengeCalculationService;
 
+        private readonly INotificationCenterService _notificationCenterService;
+
         /// <summary>
         /// Smoke Free Goal Completition DateTime
         /// </summary>
@@ -57,12 +59,15 @@ namespace SmokeFree.ViewModels.Challenge
             IDateTimeWrapper dateTimeWrapper,
             IAppLogger appLogger,
             IDialogService dialogService,
-            IChallengeCalculationService challengeCalculationService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
+            IChallengeCalculationService challengeCalculationService,
+            INotificationCenterService notificationCenterService) : base(navigationService, dateTimeWrapper, appLogger, dialogService)
         {
             // Database
             _realm = realm;
 
             _challengeCalculationService = challengeCalculationService;
+
+            _notificationCenterService = notificationCenterService;
 
             // View Title
             ViewTitle = AppResources.CreateChallengeViewTitle;
@@ -187,7 +192,102 @@ namespace SmokeFree.ViewModels.Challenge
                     var userId = Globals.UserId;
                     var user = _realm.Find<User>(userId);
 
-                    if (user == null)
+                    if (user != null)
+                    {
+                        var userTest = user.Tests
+                        .FirstOrDefault(e => !e.IsDeleted && e.IsCompleted);
+
+                        if (userTest != null)
+                        {
+                            var testResult = userTest.CompletedTestResult;
+
+                            if (testResult != null)
+                            {
+                                var challenge = user.Challenges
+                                    .FirstOrDefault(e => !e.IsDeleted && !e.IsCompleted);
+
+                                if (challenge != null)
+                                {
+                                    var challengeCalculations = this._challengeCalculationService
+                                        .CalculatedChallengeSmokes(
+                                            goalTime, 
+                                            testResult.AvarageSmokedCigarsPerDay,
+                                            testResult.AvarageSmokeActiveTimeSeconds, 
+                                            challenge.Id,
+                                            _dateTime.Now());
+
+                                    if (challengeCalculations.Success)
+                                    {
+                                        _realm.Write(() =>
+                                        {
+                                            // Update Challenge
+                                            challenge.ChallengeStart = this._dateTime.Now();
+                                            challenge.GoalCompletitionTime = goalTime;
+                                            challenge.ModifiedOn = this._dateTime.Now();
+                                            challenge.TotalChallengeDays = challengeCalculations.GoalTimeInDays;
+
+                                            foreach (var dcs in challengeCalculations.DayChallengeSmokes)
+                                            {
+                                                dcs.CreatedOn = this._dateTime.Now();
+                                                challenge.ChallengeSmokes.Add(dcs);
+                                            }
+
+                                            user.UserState = UserStates.InChallenge.ToString();
+                                        });
+
+                                        // Notification
+                                        if (user.NotificationState)
+                                        {
+                                            // Register Notification
+                                            this._notificationCenterService.ShowNewNotification(
+                                                Globals.ChallengeNotificationId,
+                                                AppResources.CompleteChallengeNotificationTitle,
+                                                AppResources.CompleteChallengeNotificationMessage,
+                                                goalTime.AddSeconds(3)
+                                                );
+                                        }
+
+                                        await this._navigationService.NavigateToAsync<ChallengeViewModel>();
+                                    }
+                                    else
+                                    {
+                                        // User Not Found!
+                                        base._appLogger.LogError($"Can't Calculate New Challenge Data: User Id {userId}, Challenge Id: {challenge.Id}");
+
+                                        await base.InternalErrorMessageToUser();
+                                    }
+                                }
+                                else
+                                {
+                                    // User Not Found!
+                                    base._appLogger.LogCritical($"Can't find User Challenge: User Id {userId}");
+
+                                    await base.InternalErrorMessageToUser();
+                                }
+
+                                
+                            }
+                            else
+                            {
+                                // User Not Found!
+                                base._appLogger.LogCritical($"Can't find User Test Results: User Id {userId}");
+
+                                await base.InternalErrorMessageToUser();
+                            }
+
+                            
+                        }
+                        else
+                        {
+                            // User Not Found!
+                            base._appLogger.LogCritical($"Can't find User Test: User Id {userId}");
+
+                            await base.InternalErrorMessageToUser();
+                        }
+
+                        
+                    }
+                    else
                     {
                         // User Not Found!
                         base._appLogger.LogCritical($"Can't find User: User Id {userId}");
@@ -195,95 +295,7 @@ namespace SmokeFree.ViewModels.Challenge
                         await base.InternalErrorMessageToUser();
                     }
 
-                    var userTest = user.Tests
-                        .FirstOrDefault(e => !e.IsDeleted && e.IsCompleted);
-
-                    if (userTest == null)
-                    {
-                        // User Not Found!
-                        base._appLogger.LogCritical($"Can't find User Test: User Id {userId}");
-
-                        await base.InternalErrorMessageToUser();
-                    }
-
-                    var testResult = userTest.CompletedTestResult;
-
-                    if (testResult == null)
-                    {
-                        // User Not Found!
-                        base._appLogger.LogCritical($"Can't find User Test Results: User Id {userId}");
-
-                        await base.InternalErrorMessageToUser();
-                    }
-
-                    var goalTimeInDays = (int)Math.Abs((goalTime - _dateTime.Now()).Days);
-                    var avarageSmokeADay = testResult.AvarageSmokedCigarsPerDay;
-                    var avarageSmokeActiveTime = testResult.AvarageSmokeActiveTimeSeconds;
-
-                    var challenge = user.Challenges
-                        .FirstOrDefault(e => !e.IsDeleted);
-
-                    if (challenge == null)
-                    {
-                        // User Not Found!
-                        base._appLogger.LogCritical($"Can't find User Challenge: User Id {userId}");
-
-                        await base.InternalErrorMessageToUser();
-                    }
-
-                    var challengeCalculations = this._challengeCalculationService
-                        .CalculatedChallengeSmokes(goalTimeInDays, avarageSmokeADay, avarageSmokeActiveTime, challenge.Id);
-
-                    if (challengeCalculations.Success)
-                    {
-                        _realm.Write(() =>
-                        {
-                            // Update Challenge
-                            challenge.ChallengeStart = this._dateTime.Now();
-                            challenge.GoalCompletitionTime = goalTime;
-                            challenge.ModifiedOn = this._dateTime.Now();
-                            challenge.TotalChallengeDays = goalTimeInDays;
-
-                            foreach (var dcs in challengeCalculations.DayChallengeSmokes)
-                            {
-                                dcs.CreatedOn = this._dateTime.Now();
-                                challenge.ChallengeSmokes.Add(dcs);
-                            }
-
-                            user.UserState = UserStates.InChallenge.ToString();
-
-
-                        });
-
-                        // Notification
-                        if (user.NotificationState)
-                        {
-                            // Register Notification
-                            var testTimerNotification = new NotificationRequest
-                            {
-                                NotificationId = Globals.ChallengeNotificationId,
-                                Title = AppResources.CompleteChallengeNotificationTitle,
-                                Description = AppResources.CompleteChallengeNotificationMessage,
-                                ReturningData = "Dummy data", // Returning data when tapped on notification.
-                                NotifyTime = goalTime.AddSeconds(3),
-                                Android = new AndroidOptions()
-                                {
-                                    IconName = "icon"
-                                } // Used for Scheduling local notification, if not specified notification will show immediately.
-                            };
-
-                            NotificationCenter.Current.Show(testTimerNotification);
-                        }
-
-                        await this._navigationService.NavigateToAsync<ChallengeViewModel>();
-                    }
-                    else
-                    {
-                        // User Not Found!
-                        base._appLogger.LogError($"Can't Calculate New Challenge Data: User Id {userId}, Challenge Id: {challenge.Id}");
-
-                        await base.InternalErrorMessageToUser();
-                    }
+                    
                 }
             }
 

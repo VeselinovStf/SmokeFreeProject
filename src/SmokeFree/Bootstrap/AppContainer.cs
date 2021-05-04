@@ -61,6 +61,7 @@ namespace SmokeFree.Bootstrap
             _builder.RegisterType<DialogService>().As<IDialogService>();
             _builder.RegisterType<NetworkConnectionService>().As<INetworkConnectionService>();
             _builder.RegisterType<AppPreferencesService>().As<IAppPreferencesService>();
+            _builder.RegisterType<NotificationCenterService>().As<INotificationCenterService>().SingleInstance();
 
             // SERVICES - DATA
             _builder.RegisterType<TestCalculationService>().As<ITestCalculationService>();

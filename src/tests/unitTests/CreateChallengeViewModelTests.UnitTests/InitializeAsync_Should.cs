@@ -4,7 +4,6 @@ using Realms;
 using SmokeFree;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
-using SmokeFree.Abstraction.Utility.DeviceUtilities;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
@@ -13,7 +12,6 @@ using SmokeFree.Resx;
 using SmokeFree.Utilities.UserStateHelpers;
 using SmokeFree.ViewModels.Challenge;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +37,7 @@ namespace CreateChallengeViewModelTests.UnitTests
             var appLoggerServiceMock = new Mock<IAppLogger>();
             var dialogServiceMock = new Mock<IDialogService>();
             var challengeCalculationServiceMock = new Mock<IChallengeCalculationService>();
+            var notificationCenterMock = new Mock<INotificationCenterService>();
 
 
             var createChallengeViewModel = new CreateChallengeViewModel(
@@ -47,7 +46,8 @@ namespace CreateChallengeViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                challengeCalculationServiceMock.Object
+                challengeCalculationServiceMock.Object,
+                notificationCenterMock.Object
                 );
 
             object parameter = new object();
@@ -123,6 +123,7 @@ namespace CreateChallengeViewModelTests.UnitTests
                 .Returns(Task.FromResult(true));
 
             var challengeCalculationServiceMock = new Mock<IChallengeCalculationService>();
+            var notificationCenterMock = new Mock<INotificationCenterService>();
 
 
             var createChallengeViewModel = new CreateChallengeViewModel(
@@ -131,7 +132,8 @@ namespace CreateChallengeViewModelTests.UnitTests
                 dateTimeWrapperMock.Object,
                 appLoggerServiceMock.Object,
                 dialogServiceMock.Object,
-                challengeCalculationServiceMock.Object
+                challengeCalculationServiceMock.Object,
+                notificationCenterMock.Object
                 );
 
             object parameter = new object();

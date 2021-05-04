@@ -81,19 +81,20 @@ namespace SmokeFree.Services.Data.Challenge
         /// <summary>
         /// Calculate all challenge smokes for each day
         /// </summary>
-        /// <param name="totalGoalDays">Total days for goal completition</param>
-        /// <param name="avarageSmokedADay">Avarage Smokes For day</param>
-        /// <param name="avarageSmokeActiveTime">Avarage active smoke time - (first smoke time - last smoke time avarage)</param>
-        /// <param name="challengeId">Challenge Id</param>
         /// <returns>Response Model</returns>
         public CalculatedChallengeSmokesResponse CalculatedChallengeSmokes(
-            int totalGoalDays,
-            double avarageSmokedADay,
-            double avarageSmokeActiveTime,
-            string challengeId)
+            DateTime goalTime,
+            double avarageSmokedCigarsPerDay,
+            double avarageSmokeActiveTimeSeconds,
+            string challengeId,
+            DateTime timeNow)
         {
             try
             {
+                var totalGoalDays = (int)Math.Abs((goalTime - timeNow).Days);
+                var avarageSmokedADay = avarageSmokedCigarsPerDay;
+                var avarageSmokeActiveTime = avarageSmokeActiveTimeSeconds;
+
                 // Amount of smokes to remove for each day 
                 // in order to complete goal time
                 var avarageRemoveSmokeADay = avarageSmokedADay / totalGoalDays;
@@ -127,7 +128,7 @@ namespace SmokeFree.Services.Data.Challenge
                         false,$"Can't Generate Challenge Daily Smoke Data! Challenge Id: {challengeId}!");
                 }
 
-                return new CalculatedChallengeSmokesResponse(true, result);
+                return new CalculatedChallengeSmokesResponse(true, result, totalGoalDays);
 
             }
             catch (Exception ex)
