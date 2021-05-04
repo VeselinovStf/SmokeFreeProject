@@ -169,6 +169,7 @@ namespace SmokeFree.ViewModels.Challenge
             // Get GoalCompletitionTime
             var goalTime = this.GoalCompletitionTime;
 
+          
             // Check if GoalCompletitionTime is > of constraints!!!
             if (goalTime < this._dateTime.Now().AddDays(Globals.MinChallengeDays))
             {
@@ -186,6 +187,12 @@ namespace SmokeFree.ViewModels.Challenge
                     AppResources.CreateChellengeViewModelStartChallengeConfirmTitle,
                     AppResources.YesButtonText, 
                     AppResources.NoButtonText);
+
+                if (Globals.MockRun)
+                {
+                    goalTime = _dateTime.Now().AddSeconds(30);
+                }
+
 
                 if (checkIfUserIsShour)
                 {

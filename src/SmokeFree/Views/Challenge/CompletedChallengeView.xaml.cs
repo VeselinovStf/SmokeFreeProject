@@ -1,4 +1,8 @@
-﻿using System;
+﻿using SmokeFree.Abstraction.Services.General;
+using SmokeFree.Abstraction.Utility.Logging;
+using SmokeFree.Bootstrap;
+using SmokeFree.ViewModels.ErrorAndEmpty;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +19,40 @@ namespace SmokeFree.Views.Challenge
         public CompletedChallengeView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            InitializeDefaultColour();
+        }
+
+        private void InitializeDefaultColour()
+        {
+            try
+            {
+                var appPreferences = AppContainer.Resolve<IAppPreferencesService>();
+
+                var currentColorIndex = appPreferences.ColorKey;
+
+                var colorThemes = Globals.AppColorThemes;
+
+                BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+            }
+            catch (Exception ex)
+            {
+                var navigationService = AppContainer.Resolve<INavigationService>();
+                var appLogger = AppContainer.Resolve<IAppLogger>();
+
+                appLogger.LogError(ex.Message);
+
+                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+            }
+        }
+
+        private void OnCloseDescriptionButton_Clicked(object sender, EventArgs e)
+        {
+            this.Description.IsVisible = false;
+            this.ViewContent.IsVisible = true;
         }
     }
 }

@@ -180,18 +180,8 @@ namespace SmokeFree.ViewModels.Challenge
                     // Not Started Challenge
                     if (challenge.CurrentDayOfChallenge == 0)
                     {
-                        // App State Validation
-                        if (challenge.ChallengeSmokes.Count == 0)
-                        {
-                            this.IsSmoking = false;
-                        }
-                        else
-                        {
-                            // User Challenge Not Found!
-                            base._appLogger.LogCritical($"On Challenge Day 0, Found Challenge Smokes! Invalid App State: User Id :{userId}, Challenge Id {challenge.Id}");
-
-                            await base.InternalErrorMessageToUser();
-                        }
+                       
+                        this.IsSmoking = false;
 
                         // First Challenge Day
                         _realm.Write(() =>
@@ -493,6 +483,8 @@ namespace SmokeFree.ViewModels.Challenge
                     // Validate User
                     if (user != null)
                     {
+                        var currentDayChallenge = _realm.Find<DayChallengeSmoke>(this.CurrentDayChallengeId);
+
                         // Create new 
                         var newChallengeSmoke = new Data.Models.ChallengeSmoke()
                         {
@@ -504,7 +496,7 @@ namespace SmokeFree.ViewModels.Challenge
                         // Save to DB
                         _realm.Write(() =>
                         {
-                            _realm.Add(newChallengeSmoke);
+                            currentDayChallenge.DaySmokes.Add(newChallengeSmoke);
                         });
 
                         // Assign Props
@@ -846,7 +838,8 @@ namespace SmokeFree.ViewModels.Challenge
                     {
 
                         var newChallengeDay = _realm.All<DayChallengeSmoke>()
-                            .Where(e => !e.IsDeleted && !e.IsCompleted);
+                            .Where(e => !e.IsDeleted && !e.IsCompleted)
+                            .ToList();
 
                         var totalDays = newChallengeDay.Max(e => e.DayOfChallenge);
                         var nextDay = currentChallengeDay.DayOfChallenge + 1;
@@ -957,15 +950,16 @@ namespace SmokeFree.ViewModels.Challenge
                 {
                     var currentSmoke = currentChallengeDay
                         .DaySmokes.FirstOrDefault(e => e.Id == this.CurrentSmokeId);
-
-                    var userId = Globals.UserId;
-                    var user = _realm.Find<User>(userId);
-
-                    var currentSmokeStatus = this._testCalculationService
-                        .CalculateUserSmokeStatusBySmokes(currentChallengeDay.DaySmoked + 1);
-
+                   
                     if (currentSmoke != null)
                     {
+                        var userId = Globals.UserId;
+                        var user = _realm.Find<User>(userId);
+
+                        var currentSmokeStatus = this._testCalculationService
+                            .CalculateUserSmokeStatusBySmokes(currentChallengeDay.DaySmoked + 1);
+
+
                         _realm.Write(() =>
                         {
                             currentChallengeDay.DaySmoked += 1;
@@ -1002,6 +996,8 @@ namespace SmokeFree.ViewModels.Challenge
                         this.CurrentlySmokedCount = currentChallengeDay.DaySmokes.Count;
 
                         NotificationCenter.Current.Cancel(Globals.DelayedChallengeSmokeNotificationId);
+
+                        this.IsSmoking = false;
 
                         StartTimeToNextSmokeTimer();
 
@@ -1234,7 +1230,11 @@ namespace SmokeFree.ViewModels.Challenge
                                 // Day Back Challenge Not Found!
                                 base._appLogger.LogCritical($"Can't find User Day Back Challenge - for day {currentChallengeDay.DayOfChallenge - 1} :User Id {userId}, Day Challenge Id: {CurrentDayChallengeId}");
 
-                                await base.InternalErrorMessageToUser();
+                                //TODO: Localization
+                                await base._dialogService
+                                    .ShowDialog("Can't Go Back one day, you are on your first",
+                                        "Can't Go Back",
+                                        AppResources.ButtonOkText);
                             }
                         }
                         else

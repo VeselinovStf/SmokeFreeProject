@@ -439,6 +439,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time To Next.
+        /// </summary>
+        internal static string ChallengeViewTimeToNextLabel {
+            get {
+                return ResourceManager.GetString("ChallengeViewTimeToNextLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To Challenge Results.
         /// </summary>
         internal static string ChallengViewModelCompleteButton {
@@ -480,6 +489,15 @@ namespace SmokeFree.Resx {
         internal static string CompleteChallengeNotificationTitle {
             get {
                 return ResourceManager.GetString("CompleteChallengeNotificationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Results.
+        /// </summary>
+        internal static string CompletedChallengeViewModelTiitle {
+            get {
+                return ResourceManager.GetString("CompletedChallengeViewModelTiitle", resourceCulture);
             }
         }
         

@@ -95,6 +95,13 @@ namespace SmokeFree.Services.Data.Challenge
                 // for each day timeMaxMinutes / smokes count for day = distance to next
 
                 var totalGoalDays = (int)Math.Abs((goalTime - timeNow).Days);
+
+                // For Testing Check
+                if (totalGoalDays == 0)
+                {
+                    totalGoalDays = 1;
+                }
+
                 var avarageRemoveSmokeADay = avarageSmokedADay / totalGoalDays;
                 var timeMaxMinutes = avarageSmokedADay * (avarageSmokeDistance / 60);
 

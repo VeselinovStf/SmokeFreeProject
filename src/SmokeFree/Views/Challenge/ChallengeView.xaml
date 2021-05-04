@@ -174,7 +174,7 @@
                         <Label 
                              IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="LastSmokeDateTimeDisplayLabel"
-                            Text="{xct:Translate UnderTestViewLastTimeLabel}" 
+                            Text="{xct:Translate ChallengeViewTimeToNextLabel}" 
                             FontSize="20"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"

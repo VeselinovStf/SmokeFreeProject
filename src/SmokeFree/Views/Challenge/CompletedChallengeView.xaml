@@ -16,7 +16,35 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-        
+            <!-- View Description -->
+            <Frame x:Name="Description" Grid.RowSpan="2" Margin="10,10,10,10" CornerRadius="50"                 
+                   BackgroundColor="{StaticResource Gray-300}"
+                   >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        Text="{xct:Translate CreateChallengeViewDescriptionTitle}"/>
+                    <Button 
+                        Grid.Row="1" 
+                        Text="{xct:Translate UnderTestViewDescriptionLabelButton}" 
+                        CornerRadius="20"
+                        TextColor="{StaticResource Gray-900}"
+                        Opacity="5"
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        Clicked="OnCloseDescriptionButton_Clicked"/>
+                </Grid>
+
+            </Frame>
+            <!-- /END/ View Description -->
 
             <StackLayout x:Name="ViewContent" IsVisible="false">
                 <!-- NAVIGATION -->
@@ -25,7 +53,7 @@
 
                
                     <!-- HEADER TEXT -->
-                    <Label Text="{xct:Translate ChallengeViewModelTiitle}"    
+                    <Label Text="{xct:Translate CompletedChallengeViewModelTiitle}"    
                            HorizontalOptions="CenterAndExpand"                         
                            FontSize="20"
                            VerticalOptions="CenterAndExpand"

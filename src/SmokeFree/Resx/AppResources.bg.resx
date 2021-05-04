@@ -555,4 +555,10 @@
   <data name="CompleteChallengeNotificationTitle" xml:space="preserve">
     <value>Предизвикателството Приключи</value>
   </data>
+  <data name="ChallengeViewTimeToNextLabel" xml:space="preserve">
+    <value>Време до следваща</value>
+  </data>
+  <data name="CompletedChallengeViewModelTiitle" xml:space="preserve">
+    <value>Резултати</value>
+  </data>
 </root>
