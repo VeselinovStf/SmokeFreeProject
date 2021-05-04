@@ -94,16 +94,16 @@ namespace SmokeFree.Services.Data.Test
                 return new TimeSpan();
             }
 
-            var orderedSmokes = smokes.OrderByDescending(e => e.StartSmokeTime).ToList();
+            var orderedSmokes = smokes.OrderBy(e => e.StartSmokeTime).ToList();
+
             for (int i = 0; i < orderedSmokes.Count - 1; i++)
             {
-                var subs = orderedSmokes[i].StartSmokeTime.Subtract(orderedSmokes[i + 1].StartSmokeTime);
+
+                var subs = orderedSmokes[i + 1].StartSmokeTime.LocalDateTime.Subtract(orderedSmokes[i].EndSmokeTime.LocalDateTime);
 
                 timeSpan.Add(subs);
             }
 
-
-            //return timeSpan.Average();
             return new TimeSpan((long)timeSpan.Select(ts => ts.Ticks).Average());
         }
 

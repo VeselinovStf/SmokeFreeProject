@@ -85,17 +85,18 @@ namespace SmokeFree.Services.Data.Challenge
         public CalculatedChallengeSmokesResponse CalculatedChallengeSmokes(
             DateTime goalTime,
             double avarageSmokedADay,
-            double avarageSmokeActiveTime,
+            double avarageSmokeDistance,
             string challengeId,
             DateTime timeNow)
         {
             try
             {
-                var totalGoalDays = (int)Math.Abs((goalTime - timeNow).Days);
+                // avarageSmokedADay * avarageSmokeDistance = timeMaxMinutes
+                // for each day timeMaxMinutes / smokes count for day = distance to next
 
-                // Amount of smokes to remove for each day 
-                // in order to complete goal time
+                var totalGoalDays = (int)Math.Abs((goalTime - timeNow).Days);
                 var avarageRemoveSmokeADay = avarageSmokedADay / totalGoalDays;
+                var timeMaxMinutes = avarageSmokedADay * (avarageSmokeDistance / 60);
 
                 // Smoked for day
                 var dailySmoked = avarageSmokedADay;
@@ -105,7 +106,8 @@ namespace SmokeFree.Services.Data.Challenge
                 // For each day
                 for (int i = 0; i < totalGoalDays; i++)
                 {
-                    var currentDaySmokeDistanceMinutes = Math.Abs((avarageSmokeActiveTime / dailySmoked) * 60);
+                    var currentDaySmokeDistanceMinutes = timeMaxMinutes / (totalGoalDays - i);
+                    currentDaySmokeDistanceMinutes = (currentDaySmokeDistanceMinutes - (avarageSmokeDistance / 60)) + (avarageSmokeDistance / 60);
 
                     var newChallengeSmoke = new DayChallengeSmoke()
                     {
@@ -123,7 +125,7 @@ namespace SmokeFree.Services.Data.Challenge
                 if (result.Count == 0)
                 {
                     return new CalculatedChallengeSmokesResponse(
-                        false,$"Can't Generate Challenge Daily Smoke Data! Challenge Id: {challengeId}!");
+                        false, $"Can't Generate Challenge Daily Smoke Data! Challenge Id: {challengeId}!");
                 }
 
                 return new CalculatedChallengeSmokesResponse(true, result, totalGoalDays);

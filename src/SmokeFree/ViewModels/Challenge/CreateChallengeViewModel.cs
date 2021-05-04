@@ -211,8 +211,8 @@ namespace SmokeFree.ViewModels.Challenge
                                     var challengeCalculations = this._challengeCalculationService
                                         .CalculatedChallengeSmokes(
                                             goalTime, 
-                                            testResult.AvarageSmokedCigarsPerDay,
-                                            testResult.AvarageSmokeActiveTimeSeconds, 
+                                            testResult.TotalSmokedCigars,
+                                            testResult.AvarageSmokeDistanceSeconds, 
                                             challenge.Id,
                                             _dateTime.Now());
 
