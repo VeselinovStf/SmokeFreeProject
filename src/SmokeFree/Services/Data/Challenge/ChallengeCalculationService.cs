@@ -84,16 +84,14 @@ namespace SmokeFree.Services.Data.Challenge
         /// <returns>Response Model</returns>
         public CalculatedChallengeSmokesResponse CalculatedChallengeSmokes(
             DateTime goalTime,
-            double avarageSmokedCigarsPerDay,
-            double avarageSmokeActiveTimeSeconds,
+            double avarageSmokedADay,
+            double avarageSmokeActiveTime,
             string challengeId,
             DateTime timeNow)
         {
             try
             {
                 var totalGoalDays = (int)Math.Abs((goalTime - timeNow).Days);
-                var avarageSmokedADay = avarageSmokedCigarsPerDay;
-                var avarageSmokeActiveTime = avarageSmokeActiveTimeSeconds;
 
                 // Amount of smokes to remove for each day 
                 // in order to complete goal time
