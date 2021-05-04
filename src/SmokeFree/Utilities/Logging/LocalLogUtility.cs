@@ -161,7 +161,7 @@ namespace SmokeFree.Utilities.Logging
 
         }
 
-        public CreateDbZipFileResponse CreateDbZipFile(string dbPath)
+        public CreateDbZipFileResponse CreateDbZipFile(string dbPath, string[] content)
         {
             try
             {
@@ -218,8 +218,34 @@ namespace SmokeFree.Utilities.Logging
                     // If contains any logs
                     if (filesCount > 0)
                     {
+                        var coppyDbFolder = "CoppyDbFolder";
+                        var coppyFolderPath = Path.Combine(folder, coppyDbFolder);
+
+                        if (!Directory.Exists(coppyFolderPath))
+                        {
+                            Directory.CreateDirectory(Path.Combine(folder, coppyDbFolder));
+                        }
+                        else
+                        {
+                            foreach (string fileName in System.IO.Directory.GetFiles(coppyFolderPath, "*.txt"))
+                            {
+                                System.IO.File.Delete(fileName);
+                            }
+                        }
+
+                        var txtFileName = "temp_db.txt";
+                        var newTxtDbPath = Path.Combine(coppyFolderPath, txtFileName);
+                        using (var fileStream = new StreamWriter(newTxtDbPath))
+                        {
+                            foreach (var c in content)
+                            {
+                                fileStream.WriteLine(c);
+                            }
+                            
+                        }
+
                         // Zip csv-s
-                        if (!FileZipUtility.QuickZip(dbPath, zipFilename))
+                        if (!FileZipUtility.QuickZip(coppyFolderPath, zipFilename))
                         {
                             return new CreateDbZipFileResponse(
                                 false,

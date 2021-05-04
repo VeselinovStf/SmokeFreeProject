@@ -27,6 +27,6 @@ namespace SmokeFree.Abstraction.Utility.Logging
         /// Creates Db ZIp
         /// </summary>
         /// <returns>Response Model</returns>
-        CreateDbZipFileResponse CreateDbZipFile(string dbPath);
+        CreateDbZipFileResponse CreateDbZipFile(string dbPath, string[] content);
     }
 }

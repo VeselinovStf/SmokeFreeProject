@@ -8,6 +8,7 @@ using SmokeFree.Bootstrap;
 using SmokeFree.Data.Models;
 using SmokeFree.Models.Views.AppSetting;
 using SmokeFree.Resx;
+using SmokeFree.Utilities.Logging;
 using SmokeFree.ViewModels.Base;
 using SmokeFree.ViewModels.OnBoarding;
 using System;
@@ -445,7 +446,9 @@ namespace SmokeFree.ViewModels.AppSettings
 
                     // Get Archived DB
                     var archivedLogsUtilityResponse = this._localLogUtility
-                        .CreateDbZipFile(AppContainer.GetRealmConfiguration.DatabasePath);
+                        .CreateDbZipFile(
+                            AppContainer.GetRealmConfiguration.DatabasePath.Replace("default.realm" , ""),
+                            DbDump.DumpInMemory(this._realm));
 
                     // Check if Logs are Archived
                     if (archivedLogsUtilityResponse.Created)
