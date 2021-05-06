@@ -18,8 +18,8 @@ namespace SmokeFree.Abstraction.Services.General
         /// <param name="icon">Notification icon</param>
         void ShowNewNotification(
             int notificationId,
-            string title, 
-            string message, 
+            string title,
+            string message,
             DateTime timeToShow,
             string returningData = "Dummy data",
             string icon = "icon");

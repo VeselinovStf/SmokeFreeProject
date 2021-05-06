@@ -38,7 +38,7 @@ namespace SmokeFree.ViewModels.Challenge
             Realm realm,
             INavigationService navigationService,
             IDateTimeWrapper dateTimeWrapper,
-            IAppLogger appLogger, 
+            IAppLogger appLogger,
             IDialogService dialogService,
             INetworkConnectionService connectionService,
             ILocalLogUtility localLogUtility,
@@ -321,8 +321,8 @@ namespace SmokeFree.ViewModels.Challenge
         public ChallengeResult ChallengeResult
         {
             get { return _challengeResult; }
-            set 
-            { 
+            set
+            {
                 _challengeResult = value;
                 OnPropertyChanged();
             }

@@ -1,6 +1,4 @@
-﻿using Realms;
-using SmokeFree.Data.Models;
-using SmokeFree.Models.Utilities.Zip;
+﻿using SmokeFree.Models.Utilities.Zip;
 using System.Reflection;
 
 namespace SmokeFree.Abstraction.Utility.Logging

@@ -176,11 +176,11 @@ namespace SmokeFree.ViewModels.Challenge
                     // Set User Smoke Status
                     var userSmokerStatus = StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses);
                     SetUserSmokerStatus(userSmokerStatus);
-                   
+
                     // Not Started Challenge
                     if (challenge.CurrentDayOfChallenge == 0)
                     {
-                       
+
                         this.IsSmoking = false;
 
                         // First Challenge Day
@@ -321,7 +321,7 @@ namespace SmokeFree.ViewModels.Challenge
             }
         }
 
-        
+
         private void DesapearingInitializeAsync()
         {
             StopSmokingTimer();
@@ -950,7 +950,7 @@ namespace SmokeFree.ViewModels.Challenge
                 {
                     var currentSmoke = currentChallengeDay
                         .DaySmokes.FirstOrDefault(e => e.Id == this.CurrentSmokeId);
-                   
+
                     if (currentSmoke != null)
                     {
                         var userId = Globals.UserId;
@@ -1066,7 +1066,7 @@ namespace SmokeFree.ViewModels.Challenge
                             {
                                 chs.ModifiedOn = _dateTime.Now();
                                 chs.DeletedOn = _dateTime.Now();
-                                chs.IsDeleted = true; 
+                                chs.IsDeleted = true;
                                 chs.IsCompleted = true;
 
                                 foreach (var s in chs.DaySmokes)
@@ -1254,7 +1254,7 @@ namespace SmokeFree.ViewModels.Challenge
                         await base.InternalErrorMessageToUser();
                     }
                 }
-               
+
             }
             catch (Exception ex)
             {

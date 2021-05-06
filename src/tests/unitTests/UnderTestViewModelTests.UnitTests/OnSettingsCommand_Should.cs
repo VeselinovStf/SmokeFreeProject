@@ -10,7 +10,6 @@ using SmokeFree.Abstraction.Utility.Wrappers;
 using SmokeFree.Data.Models;
 using SmokeFree.ViewModels.AppSettings;
 using SmokeFree.ViewModels.Test;
-using System.Threading;
 
 namespace UnderTestViewModelTests.UnitTests
 {
@@ -69,6 +68,6 @@ namespace UnderTestViewModelTests.UnitTests
         }
 
 
-       
+
     }
 }

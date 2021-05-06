@@ -319,7 +319,7 @@ namespace SmokeFree.ViewModels.Test
 
                                 }
                             }
-                           
+
                             var testChallenge = user.Challenges.FirstOrDefault(c => c.UserId == userId && !c.IsDeleted);
 
                             if (testChallenge != null)

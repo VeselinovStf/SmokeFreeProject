@@ -1,12 +1,8 @@
-﻿
-using AiForms.Renderers;
-using SmokeFree.Abstraction.Services.General;
+﻿using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

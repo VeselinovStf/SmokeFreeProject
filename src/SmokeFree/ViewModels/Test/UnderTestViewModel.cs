@@ -700,7 +700,7 @@ namespace SmokeFree.ViewModels.Test
 
                                     await base.InternalErrorMessageToUser();
                                 }
-                               
+
                             }
                             else
                             {

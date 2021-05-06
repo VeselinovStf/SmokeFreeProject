@@ -44,7 +44,7 @@ namespace SmokeFree.Services.Data.Challenge
                 if (actualyToBeSmoked < expectedToBeSmoked)
                 {
                     successRate = (actualyToBeSmoked / expectedToBeSmoked) * 100;
-                   
+
                 }
                 else
                 {

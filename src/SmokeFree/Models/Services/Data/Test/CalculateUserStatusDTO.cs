@@ -19,7 +19,7 @@ namespace SmokeFree.Models.Services.Data.Test
 
         public CalculateUserStatusDTO(bool success, UserSmokeStatuses status) : this(success)
         {
-         
+
             Status = status;
         }
 

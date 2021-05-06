@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmokeFree.Constants.Messages
+﻿namespace SmokeFree.Constants.Messages
 {
     public static class MessagingCenterConstant
     {

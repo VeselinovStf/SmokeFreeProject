@@ -1,5 +1,4 @@
-﻿using SmokeFree.Data.Models;
-using System;
+﻿using System;
 
 namespace SmokeFree.Utilities.UserStateHelpers
 {

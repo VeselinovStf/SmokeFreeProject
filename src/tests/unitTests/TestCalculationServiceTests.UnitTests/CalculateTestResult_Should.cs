@@ -512,7 +512,7 @@ namespace TestCalculationServiceTests.UnitTests
                 StartSmokeTime = smoke2start,
                 EndSmokeTime = smoke2end
             };
-           
+
 
             var test = new Test()
             {

@@ -268,10 +268,10 @@ namespace SmokeFree.Services.Data.Test
                 var avarageUserSmokedCigares = (int)testResult.AvarageSmokedCigarsPerDay;
 
                 UserSmokeStatuses status = CalculateUserSmokeStatusBySmokes(avarageUserSmokedCigares);
-               
+
                 var userStatuses = Globals.UserSmokeStatusesSet;
 
-                return new CalculateUserStatusDTO(true,status);
+                return new CalculateUserStatusDTO(true, status);
             }
             catch (Exception ex)
             {

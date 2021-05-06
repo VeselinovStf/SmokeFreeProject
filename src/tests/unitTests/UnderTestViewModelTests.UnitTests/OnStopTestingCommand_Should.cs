@@ -12,7 +12,6 @@ using SmokeFree.ViewModels.ErrorAndEmpty;
 using SmokeFree.ViewModels.Test;
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace UnderTestViewModelTests.UnitTests
@@ -148,7 +147,7 @@ namespace UnderTestViewModelTests.UnitTests
             Assert.True(userAfterCommand.UserState.Equals(UserStates.CompletedOnBoarding.ToString()));
         }
 
-      
+
         /// <summary>
         /// Logs when user is not found
         /// </summary>

@@ -1,5 +1,4 @@
-﻿using Plugin.LocalNotification;
-using Realms;
+﻿using Realms;
 using SmokeFree.Abstraction.Services.Data.Test;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
@@ -105,7 +104,7 @@ namespace SmokeFree.ViewModels.Challenge
                             await base._dialogService.ShowDialog(
                                 AppResources.CreateChallengeViewModelNewGoalDialogMessage,
                                 AppResources.CreateChallengeViewModelNewGoalDialogTitle,
-                                AppResources.ButtonOkText);   
+                                AppResources.ButtonOkText);
                         }
                         else
                         {
@@ -132,7 +131,7 @@ namespace SmokeFree.ViewModels.Challenge
                         base._appLogger.LogCritical($"Can't find User Challenge:User Id {userId}");
 
                         await base.InternalErrorMessageToUser();
-                    }                   
+                    }
                 }
                 else
                 {
@@ -169,7 +168,7 @@ namespace SmokeFree.ViewModels.Challenge
             // Get GoalCompletitionTime
             var goalTime = this.GoalCompletitionTime;
 
-          
+
             // Check if GoalCompletitionTime is > of constraints!!!
             if (goalTime < this._dateTime.Now().AddDays(Globals.MinChallengeDays))
             {
@@ -185,7 +184,7 @@ namespace SmokeFree.ViewModels.Challenge
                     .ConfirmAsync(
                     AppResources.CreateChellengeViewModelStartChallengeConfirmMessage,
                     AppResources.CreateChellengeViewModelStartChallengeConfirmTitle,
-                    AppResources.YesButtonText, 
+                    AppResources.YesButtonText,
                     AppResources.NoButtonText);
 
                 if (Globals.MockRun)
@@ -217,9 +216,9 @@ namespace SmokeFree.ViewModels.Challenge
                                 {
                                     var challengeCalculations = this._challengeCalculationService
                                         .CalculatedChallengeSmokes(
-                                            goalTime, 
+                                            goalTime,
                                             testResult.TotalSmokedCigars,
-                                            testResult.AvarageSmokeDistanceSeconds, 
+                                            testResult.AvarageSmokeDistanceSeconds,
                                             challenge.Id,
                                             _dateTime.Now());
 
@@ -272,7 +271,7 @@ namespace SmokeFree.ViewModels.Challenge
                                     await base.InternalErrorMessageToUser();
                                 }
 
-                                
+
                             }
                             else
                             {
@@ -282,7 +281,7 @@ namespace SmokeFree.ViewModels.Challenge
                                 await base.InternalErrorMessageToUser();
                             }
 
-                            
+
                         }
                         else
                         {
@@ -292,7 +291,7 @@ namespace SmokeFree.ViewModels.Challenge
                             await base.InternalErrorMessageToUser();
                         }
 
-                        
+
                     }
                     else
                     {
@@ -302,7 +301,7 @@ namespace SmokeFree.ViewModels.Challenge
                         await base.InternalErrorMessageToUser();
                     }
 
-                    
+
                 }
             }
 
@@ -372,7 +371,7 @@ namespace SmokeFree.ViewModels.Challenge
                         // Update User Status
                         user.UserState = UserStates.CompletedOnBoarding.ToString();
                         user.TestId = string.Empty;
-                    });            
+                    });
 
                 }
                 else
@@ -444,8 +443,8 @@ namespace SmokeFree.ViewModels.Challenge
         public string CurrentChallengeId
         {
             get { return _currentChallengeId; }
-            set 
-            { 
+            set
+            {
                 _currentChallengeId = value;
                 OnPropertyChanged();
             }
@@ -457,7 +456,7 @@ namespace SmokeFree.ViewModels.Challenge
         public UserSmokeStatusItem UserSmokeStatus
         {
             get { return _userSmokeStatus; }
-            set 
+            set
             {
                 _userSmokeStatus = value;
                 OnPropertyChanged();

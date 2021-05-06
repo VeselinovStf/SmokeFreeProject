@@ -447,7 +447,7 @@ namespace SmokeFree.ViewModels.AppSettings
                     // Get Archived DB
                     var archivedLogsUtilityResponse = this._localLogUtility
                         .CreateDbZipFile(
-                            AppContainer.GetRealmConfiguration.DatabasePath.Replace("default.realm" , ""),
+                            AppContainer.GetRealmConfiguration.DatabasePath.Replace("default.realm", ""),
                             DbDump.DumpInMemory(this._realm));
 
                     // Check if Logs are Archived

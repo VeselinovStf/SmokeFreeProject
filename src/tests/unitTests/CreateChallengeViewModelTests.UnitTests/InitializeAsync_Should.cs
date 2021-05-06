@@ -64,7 +64,7 @@ namespace CreateChallengeViewModelTests.UnitTests
 
             var user = new User()
             {
-                Id = Globals.UserId,  
+                Id = Globals.UserId,
                 UserSmokeStatuses = UserSmokeStatuses.Bad.ToString()
             };
 
@@ -118,7 +118,7 @@ namespace CreateChallengeViewModelTests.UnitTests
             var dialogServiceMock = new Mock<IDialogService>();
             dialogServiceMock.Setup(e => e.ShowDialog(
                 It.IsAny<string>(),
-                It.IsAny<string>(), 
+                It.IsAny<string>(),
                 It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
 

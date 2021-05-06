@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:magicGradients="clr-namespace:MagicGradients;assembly=MagicGradients"
              xmlns:converters="clr-namespace:SmokeFree.Converters"
-             xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"
+            
              x:Class="SmokeFree.App">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- APP SETTINGS -->
-            <Color x:Key="AccentColor">#FFBF00</Color>
+            <!-- APP SETTINGS  xmlns:sv="clr-namespace:AiForms.Renderers;assembly=SettingsView"-->
+            <!--<Color x:Key="AccentColor">#FFBF00</Color>
             <Color x:Key="DisabledColor">#E6DAB9</Color>
             <Color x:Key="TitleTextColor">#CC9900</Color>
             <Color x:Key="PaleBackColorPrimary">#F2EFE6</Color>
@@ -37,7 +37,7 @@
                 <Setter Property="HeaderTextColor" Value="{StaticResource PaleBackColorPrimary}" />
                 <Setter Property="FooterFontSize" Value="{StaticResource BaseFontSize-}" />
                 <Setter Property="FooterTextColor" Value="{StaticResource PaleTextColor}" />
-            </Style>
+            </Style>-->
             <!-- /END/ APP SETTINGS -->
 
             <!-- Colors -->

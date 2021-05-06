@@ -61,12 +61,12 @@ namespace SmokeFree.Utilities.Logging
             return dataRows.ToArray();
         }
 
-        private static IEnumerable<string>  GetFromEntity<T>(List<T> entity)
+        private static IEnumerable<string> GetFromEntity<T>(List<T> entity)
         {
             List<string> res = new List<string>();
 
             StringBuilder builder = new StringBuilder();
-            
+
             var headerT = entity.FirstOrDefault();
             Type headerType = headerT.GetType();
             PropertyInfo[] headerProps = headerType.GetProperties();
@@ -93,9 +93,9 @@ namespace SmokeFree.Utilities.Logging
                     foreach (var prop in props)
                     {
                         if (prop.GetIndexParameters().Length == 0)
-                        {                           
+                        {
                             builder.Append(prop.GetValue(obj).ToString() + ",");
-                        }                          
+                        }
                     }
 
                     res.Add(builder.ToString().TrimEnd(','));
@@ -106,9 +106,9 @@ namespace SmokeFree.Utilities.Logging
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex);
-                }              
+                }
             }
-            
+
             return res;
         }
     }

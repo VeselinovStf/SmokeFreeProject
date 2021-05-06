@@ -1,9 +1,6 @@
 ﻿using NLog;
 using NLog.Config;
-using Realms;
 using SmokeFree.Abstraction.Utility.Logging;
-using SmokeFree.Bootstrap;
-using SmokeFree.Data.Models;
 using SmokeFree.Models.Utilities.Zip;
 using SmokeFree.Utilities.Zip;
 using System;
@@ -212,7 +209,7 @@ namespace SmokeFree.Utilities.Logging
                     var zipName = $"{DateTime.Now.ToString("DB_yyyy-MM-dd-HH_mm_ss")}.db.zip";
                     zipFilename = $"{folder}/{zipName}";
 
-                  
+
                     int filesCount = System.IO.Directory.GetFiles(dbPath, "*.realm").Length;
 
                     // If contains any logs
@@ -241,7 +238,7 @@ namespace SmokeFree.Utilities.Logging
                             {
                                 fileStream.WriteLine(c);
                             }
-                            
+
                         }
 
                         // Zip csv-s

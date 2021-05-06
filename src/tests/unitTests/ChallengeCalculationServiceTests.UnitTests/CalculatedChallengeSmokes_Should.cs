@@ -24,10 +24,10 @@ namespace ChallengeCalculationServiceTests.UnitTests
 
             // Act
             var calculationResult = calculationService.CalculatedChallengeSmokes(
-                goalTime, 
-                avarageSmokedADay, 
-                avarageSmokeActiveTime, 
-                challengeId, 
+                goalTime,
+                avarageSmokedADay,
+                avarageSmokeActiveTime,
+                challengeId,
                 timeNow);
 
             // Assert
