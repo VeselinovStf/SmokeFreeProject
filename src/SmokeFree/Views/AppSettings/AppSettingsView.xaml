@@ -33,15 +33,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- APP ICON  -->
-                <Button
-                    Text="&#xe72C;"
-                    FontFamily="{StaticResource FontIcons}"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="Start"
-                    TextColor="{StaticResource Gray-700}"
-                    FontSize="40"
-
-                />
+                <Image Source="icon.png"
+                       
+                       />
                 <!-- /END/  APP ICON -->
 
                 <!-- Page Title -->
@@ -50,7 +44,7 @@
                        HorizontalOptions="Start"
                        VerticalOptions="CenterAndExpand"
                        TextColor="{StaticResource Gray-700}"
-                       FontSize="20"
+                       
                        />
                 <!-- /END/ Page Title -->
 
@@ -98,7 +92,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                     
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -155,7 +149,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                     
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -220,7 +214,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                     
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -274,7 +268,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -340,7 +334,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -399,7 +393,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -458,7 +452,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                     
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -517,7 +511,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
@@ -580,7 +574,7 @@
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
                                      TextColor="{StaticResource Gray-600}"
-                                     FontSize="20"
+                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />

@@ -124,10 +124,10 @@
     <value>ReSchedule.png</value>
   </data>
   <data name="OnBoardingItemText1" xml:space="preserve">
-    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+    <value>Thank you for installing Smoke Free. Welcome to your first step to get rid of smoking habit</value>
   </data>
   <data name="OnBoardingItemTitle1" xml:space="preserve">
-    <value>Guide One</value>
+    <value>Welcome</value>
   </data>
   <data name="OnBoardingItemButton2" xml:space="preserve">
     <value>Next</value>
@@ -136,22 +136,22 @@
     <value>TimeZone.png</value>
   </data>
   <data name="OnBoardingItemText2" xml:space="preserve">
-    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+    <value>You Have to do two steps</value>
   </data>
   <data name="OnBoardingItemTitle2" xml:space="preserve">
-    <value>Guide Two</value>
+    <value>The Process</value>
   </data>
   <data name="OnBoardingItemButton3" xml:space="preserve">
-    <value>Done</value>
+    <value>Next</value>
   </data>
   <data name="OnBoardingItemImage3" xml:space="preserve">
     <value>ViewMode.png</value>
   </data>
   <data name="OnBoardingItemText3" xml:space="preserve">
-    <value>Text Two for current on boarding menu, it may be long, but, may be short.</value>
+    <value>First step is to take information for your addiction to smoking</value>
   </data>
   <data name="OnBoardingItemTitle3" xml:space="preserve">
-    <value>Guide Three</value>
+    <value>The Test</value>
   </data>
   <data name="OnBoardingViewTitle" xml:space="preserve">
     <value>Tutorial</value>
@@ -190,7 +190,7 @@
     <value>Select Test Time Duration</value>
   </data>
   <data name="CreateTestViewViewDescriptionLabel" xml:space="preserve">
-    <value>Let's First Set Your Stop Smoking Goal Completition Date!</value>
+    <value>Let's First Set Your Stop Smoking Goal Completition Date and the amount of days for test. For best results select more days for testing.</value>
   </data>
   <data name="CreateTestViewViewDescriptionLabelButton" xml:space="preserve">
     <value>Continue</value>
@@ -560,5 +560,26 @@
   </data>
   <data name="CompletedChallengeViewModelTiitle" xml:space="preserve">
     <value>Results</value>
+  </data>
+  <data name="OnBoardingItemButton4" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="OnBoardingItemImage4" xml:space="preserve">
+    <value>ViewMode.png</value>
+  </data>
+  <data name="OnBoardingItemText4" xml:space="preserve">
+    <value>Second step is to take the challenge. This is the main step in witch you are going to conquer this habit</value>
+  </data>
+  <data name="OnBoardingItemTitle4" xml:space="preserve">
+    <value>The Challenge</value>
+  </data>
+  <data name="TestResultAvarageSmokeActiveTimeSeconds" xml:space="preserve">
+    <value>Avarage Active time</value>
+  </data>
+  <data name="TestResultAvarageSmokingTimeSeconds" xml:space="preserve">
+    <value>Avarage Smoking Time</value>
+  </data>
+  <data name="TestResultTotalCleanOxygenSeconds" xml:space="preserve">
+    <value>Avarage Not Smoking Time</value>
   </data>
 </root>

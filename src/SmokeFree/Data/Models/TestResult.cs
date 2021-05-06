@@ -85,5 +85,9 @@ namespace SmokeFree.Data.Models
         /// Id Of Test
         /// </summary>
         public string TestId { get; set; }
+
+        public double AvarageSmokingTimeSeconds { get; set; }
+
+        public double TotalCleanOxygenSeconds { get; set; }
     }
 }

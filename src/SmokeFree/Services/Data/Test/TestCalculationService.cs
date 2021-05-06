@@ -7,6 +7,20 @@ using System.Linq;
 
 namespace SmokeFree.Services.Data.Test
 {
+    public class DayCalculation
+    {
+        public int DaySmokedCount { get; set; }
+
+        public TimeSpan DayAvarageSmokingTimeSpan { get; set; }
+        public TimeSpan DayAvarageNotSmokingTimeSpan { get; set; }
+        public TimeSpan DayAvarageSmokeDistance { get; set; }
+
+        public TimeSpan TotalSmokeTime { get; set; }
+
+        public double SmokeActiveTimeSeconds { get; set; }
+        public TimeSpan DayCleanOxygen { get; internal set; }
+    }
+
     /// <summary>
     /// Service concern in Test Model Calculations
     /// </summary>
@@ -23,6 +37,7 @@ namespace SmokeFree.Services.Data.Test
             {
                 // Get Test Smokes
                 var testSmokes = test.SmokedCigaresUnderTest;
+                var dayResults = new List<DayCalculation>();
 
                 // Validate App State
                 if (testSmokes.Count == 0)
@@ -31,51 +46,65 @@ namespace SmokeFree.Services.Data.Test
                 }
 
                 var newTestResults = new TestResult();
-
-
                 var testEndDate = test.TestEndDate.LocalDateTime;
                 var testStartDate = test.TestStartDate.LocalDateTime;
 
                 newTestResults.TotalTestTimeSeconds = testEndDate.Subtract(testStartDate).TotalSeconds;
-
                 newTestResults.TestId = test.Id;
                 newTestResults.TestStartDate = test.TestStartDate.LocalDateTime;
                 newTestResults.EndStartDate = test.TestEndDate.LocalDateTime;
                 newTestResults.TotalSmokedCigars = testSmokes.Count();
 
-                // Per day calculation
-                var avaragePerDay = testSmokes
+                var dayBasedSmokes = testSmokes
                     .GroupBy(
-                        smoke => smoke.StartSmokeTime.LocalDateTime.Day,
-                        (day, smokes) => new
-                        {
-                            SmokedForDay = smokes.Count(),
-                            DaySmokeTimeMinutes =
-                                smokes.Select(
-                                    e => e.EndSmokeTime.LocalDateTime.Subtract(e.StartSmokeTime.LocalDateTime)
-                                    ).ToList().Sum(e => e.TotalMinutes),
-                            DayNotSmokingTime = smokes.Max(e => e.EndSmokeTime.LocalDateTime)
-                                .Subtract(smokes.Min(e => e.StartSmokeTime.LocalDateTime)).Subtract(
-                                new TimeSpan(smokes.Select(
-                                    e => e.EndSmokeTime.Subtract(e.StartSmokeTime.LocalDateTime)
-                                    ).Sum(e => e.Ticks))
-                                ),
-                            AvarageSmokeDistance = CalculateAvarageSmokeDistance(smokes.ToList())
-                        }
-                    )
-                    .ToList();
+                        smoke => smoke.StartSmokeTime.LocalDateTime.Day)
+                    .OrderBy(e => e.Key)
+                    .ThenBy(e => e.OrderBy(v => v.StartSmokeTime));
 
-                var avarageSmokedCigarsPerDay = avaragePerDay.Select(e => e.SmokedForDay).Average();
-                var avarageSmokeOxygen = TimeSpan.FromMinutes((long)Math.Ceiling(avaragePerDay.Select(e => e.DaySmokeTimeMinutes).Average()));
-                var avarageCleanOxygen = new TimeSpan((long)avaragePerDay.Select(e => e.DayNotSmokingTime.Ticks).Average());
-                var avarageSmokeDistance = new TimeSpan((long)avaragePerDay.Select(e => e.AvarageSmokeDistance.Ticks).Average());
+                foreach (var daySmoke in dayBasedSmokes)
+                {
+                    var daySmokedCount = daySmoke.Count();
 
-                // TODO: B SmokerType is not added
-                newTestResults.AvarageSmokedCigarsPerDay = avarageSmokedCigarsPerDay;
-                newTestResults.AvarageCleanOxygenTimeSeconds = avarageCleanOxygen.TotalSeconds;
-                newTestResults.TotalSmokeGasTimeTimeSeconds = avarageSmokeOxygen.TotalSeconds;
-                newTestResults.AvarageSmokeDistanceSeconds = avarageSmokeDistance.TotalSeconds;
-                newTestResults.AvarageSmokeActiveTimeSeconds = (avarageSmokeOxygen + avarageCleanOxygen).TotalSeconds;
+                    var dayFirstLastSmokeTimeMinutes = daySmoke.Last().EndSmokeTime.LocalDateTime
+                            .Subtract(daySmoke.First().StartSmokeTime.LocalDateTime).TotalSeconds;
+
+                    var daySmokingTimeSpanAVG = CalculateSmokeTimeAVG(daySmoke.ToList());
+
+                    var dayNotSmokingTimeSpanAVG = CalculateNotSmokeTimeAVG(daySmoke.ToList());
+
+                    var daySmokeDistanceAVG = CalculateSmokeDistanceAVG(daySmoke.ToList());
+
+                    var dayTotalSmokeTime = CalculateTotalSmokeTime(daySmoke.ToList());
+
+                    var dayCleanOxygen = CalculateTotalCleanOxygenTime(daySmoke.ToList());
+
+                    dayResults.Add(new DayCalculation()
+                    {
+                        DayAvarageSmokeDistance = daySmokeDistanceAVG,
+                        DayAvarageNotSmokingTimeSpan = dayNotSmokingTimeSpanAVG,
+                        DaySmokedCount = daySmokedCount,
+                        DayAvarageSmokingTimeSpan = daySmokingTimeSpanAVG,
+                        SmokeActiveTimeSeconds = dayFirstLastSmokeTimeMinutes,
+                        TotalSmokeTime = dayTotalSmokeTime,
+                        DayCleanOxygen = dayCleanOxygen
+                    });
+                }
+
+                var avarageSmokedCigarsPerDay = dayResults.Select(e => e.DaySmokedCount);
+                var avarageSmokeOxygen = dayResults.Select(e => e.DayAvarageSmokingTimeSpan.TotalSeconds);
+                var avarageCleanOxygen = dayResults.Select(e => e.DayAvarageNotSmokingTimeSpan.TotalSeconds);
+                var avarageSmokeDistance = dayResults.Select(e => e.DayAvarageSmokeDistance.TotalSeconds);
+                var avarageSmokeActiveTimeSeconds = dayResults.Select(e => e.SmokeActiveTimeSeconds);
+                var totalSmokeTime = dayResults.Select(e => e.TotalSmokeTime.TotalSeconds).Sum();
+                var totalCleanOxygen = dayResults.Select(e => e.DayCleanOxygen.TotalSeconds).Sum();
+
+                newTestResults.AvarageSmokedCigarsPerDay = avarageSmokedCigarsPerDay.Average();
+                newTestResults.AvarageCleanOxygenTimeSeconds = avarageCleanOxygen.Average();
+                newTestResults.TotalSmokeGasTimeTimeSeconds = totalSmokeTime;
+                newTestResults.AvarageSmokeDistanceSeconds = avarageSmokeDistance.Average();
+                newTestResults.AvarageSmokeActiveTimeSeconds = avarageSmokeActiveTimeSeconds.Average();
+                newTestResults.AvarageSmokingTimeSeconds = avarageSmokeOxygen.Average();
+                newTestResults.TotalCleanOxygenSeconds = totalCleanOxygen;
 
                 return new CalculateTestResultDTO(true, newTestResults);
             }
@@ -274,6 +303,80 @@ namespace SmokeFree.Services.Data.Test
             {
                 return UserSmokeStatuses.Worst;
             }
+        }
+
+        private TimeSpan CalculateTotalCleanOxygenTime(List<Smoke> smokes)
+        {
+            var timeSpan = new TimeSpan(0, 0, 0);
+
+            var orderedSmokes = smokes.OrderBy(e => e.StartSmokeTime).ToList();
+
+            for (int i = 0; i < orderedSmokes.Count - 1; i++)
+            {
+                timeSpan += orderedSmokes[i + 1].StartSmokeTime.LocalDateTime.Subtract(orderedSmokes[i].EndSmokeTime.LocalDateTime);
+            }
+
+            return timeSpan;
+        }
+
+        private TimeSpan CalculateTotalSmokeTime(List<Smoke> smokes)
+        {
+            var timeSpan = new TimeSpan(0, 0, 0);
+
+            foreach (var s in smokes)
+            {
+                timeSpan += s.EndSmokeTime.LocalDateTime.Subtract(s.StartSmokeTime.LocalDateTime);
+            }
+
+            return timeSpan;
+        }
+
+        private TimeSpan CalculateSmokeDistanceAVG(List<Smoke> smokes)
+        {
+            var timeSpan = new List<TimeSpan>();
+
+            var orderedSmokes = smokes.OrderBy(e => e.StartSmokeTime.LocalDateTime)
+                .Select(e => e.StartSmokeTime.LocalDateTime)
+                .Reverse()
+                .ToList();
+
+            for (int i = 0; i < orderedSmokes.Count - 1; i++)
+            {
+                var subs = orderedSmokes[i].Subtract(orderedSmokes[i + 1]);
+
+                timeSpan.Add(subs);
+            }
+
+            return new TimeSpan((long)timeSpan.Select(ts => ts.Ticks).Average());
+        }
+
+        private TimeSpan CalculateNotSmokeTimeAVG(List<Smoke> smokes)
+        {
+            var timeSpan = new List<TimeSpan>();
+
+            var orderedSmokes = smokes.OrderBy(e => e.StartSmokeTime).ToList();
+
+            for (int i = 0; i < orderedSmokes.Count - 1; i++)
+            {
+
+                var sup = orderedSmokes[i + 1].StartSmokeTime.LocalDateTime.Subtract(orderedSmokes[i].EndSmokeTime.LocalDateTime);
+                timeSpan.Add(sup);
+            }
+
+            return new TimeSpan((long)timeSpan.Select(ts => ts.Ticks).Average());
+        }
+
+        private TimeSpan CalculateSmokeTimeAVG(List<Smoke> smokes)
+        {
+            var timeSpan = new List<TimeSpan>();
+
+            foreach (var s in smokes)
+            {
+                var res = s.EndSmokeTime.LocalDateTime.Subtract(s.StartSmokeTime.LocalDateTime);
+                timeSpan.Add(res);
+            }
+
+            return new TimeSpan((long)timeSpan.Select(ts => ts.Ticks).Average());
         }
     }
 }

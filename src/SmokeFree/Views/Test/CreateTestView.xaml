@@ -113,7 +113,7 @@
                     <!-- TEST TIME PICKER -->
                     <Picker x:Name="picker"
                             Title="{xct:Translate CreateTestViewTestTimePicker}"
-                            TitleColor="{StaticResource Gray-300}"
+                            TitleColor="{StaticResource Gray-800}"
                             HorizontalTextAlignment="Center"
                             FontSize="25"
                             ItemsSource="{Binding TestTimeDurations}"

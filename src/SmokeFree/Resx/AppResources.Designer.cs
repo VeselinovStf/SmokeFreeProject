@@ -673,7 +673,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Let&apos;s First Set Your Stop Smoking Goal Completition Date!.
+        ///   Looks up a localized string similar to Let&apos;s First Set Your Stop Smoking Goal Completition Date and the amount of days for test. For best results select more days for testing..
         /// </summary>
         internal static string CreateTestViewViewDescriptionLabel {
             get {
@@ -844,11 +844,20 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Done.
+        ///   Looks up a localized string similar to Next.
         /// </summary>
         internal static string OnBoardingItemButton3 {
             get {
                 return ResourceManager.GetString("OnBoardingItemButton3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        internal static string OnBoardingItemButton4 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemButton4", resourceCulture);
             }
         }
         
@@ -880,7 +889,16 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
+        ///   Looks up a localized string similar to ViewMode.png.
+        /// </summary>
+        internal static string OnBoardingItemImage4 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemImage4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for installing Smoke Free. Welcome to your first step to get rid of smoking habit.
         /// </summary>
         internal static string OnBoardingItemText1 {
             get {
@@ -889,7 +907,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
+        ///   Looks up a localized string similar to You Have to do two steps.
         /// </summary>
         internal static string OnBoardingItemText2 {
             get {
@@ -898,7 +916,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text Two for current on boarding menu, it may be long, but, may be short..
+        ///   Looks up a localized string similar to First step is to take information for your addiction to smoking.
         /// </summary>
         internal static string OnBoardingItemText3 {
             get {
@@ -907,7 +925,16 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guide One.
+        ///   Looks up a localized string similar to Second step is to take the challenge. This is the main step in witch you are going to conquer this habit.
+        /// </summary>
+        internal static string OnBoardingItemText4 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome.
         /// </summary>
         internal static string OnBoardingItemTitle1 {
             get {
@@ -916,7 +943,7 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guide Two.
+        ///   Looks up a localized string similar to The Process.
         /// </summary>
         internal static string OnBoardingItemTitle2 {
             get {
@@ -925,11 +952,20 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Guide Three.
+        ///   Looks up a localized string similar to The Test.
         /// </summary>
         internal static string OnBoardingItemTitle3 {
             get {
                 return ResourceManager.GetString("OnBoardingItemTitle3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Challenge.
+        /// </summary>
+        internal static string OnBoardingItemTitle4 {
+            get {
+                return ResourceManager.GetString("OnBoardingItemTitle4", resourceCulture);
             }
         }
         
@@ -1033,11 +1069,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avarage Active time.
+        /// </summary>
+        internal static string TestResultAvarageSmokeActiveTimeSeconds {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokeActiveTimeSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avarage Smoke Distance.
         /// </summary>
         internal static string TestResultAvarageSmokeDistance {
             get {
                 return ResourceManager.GetString("TestResultAvarageSmokeDistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage Smoking Time.
+        /// </summary>
+        internal static string TestResultAvarageSmokingTimeSeconds {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokingTimeSeconds", resourceCulture);
             }
         }
         
@@ -1092,6 +1146,15 @@ namespace SmokeFree.Resx {
         internal static string TestResultTestTimeLabel {
             get {
                 return ResourceManager.GetString("TestResultTestTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage Not Smoking Time.
+        /// </summary>
+        internal static string TestResultTotalCleanOxygenSeconds {
+            get {
+                return ResourceManager.GetString("TestResultTotalCleanOxygenSeconds", resourceCulture);
             }
         }
         

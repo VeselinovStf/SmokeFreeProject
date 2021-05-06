@@ -161,6 +161,24 @@ namespace SmokeFree.ViewModels.Test
                                     DisplayTitle = AppResources.TestResultAvarageSmokeDistance,
                                     Value = DoubleToString.DateTime(TestResult.AvarageSmokeDistanceSeconds)
                                 },
+                                new TestResultItem()
+                                {
+                                    Icon = "\ue044",
+                                    DisplayTitle = AppResources.TestResultAvarageSmokeActiveTimeSeconds,
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeActiveTimeSeconds)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "\ue044",
+                                    DisplayTitle = AppResources.TestResultAvarageSmokingTimeSeconds,
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokingTimeSeconds)
+                                },
+                                new TestResultItem()
+                                {
+                                    Icon = "\ue044",
+                                    DisplayTitle = AppResources.TestResultTotalCleanOxygenSeconds,
+                                    Value = DoubleToString.DateTime(TestResult.TotalCleanOxygenSeconds)
+                                },
 
                             };
 

@@ -156,6 +156,13 @@ namespace SmokeFree.ViewModels.OnBoarding
                     Title = AppResources.OnBoardingItemTitle3,
                     Text = AppResources.OnBoardingItemText3,
                     ItemButtonText = AppResources.OnBoardingItemButton3
+                },
+                new OnBordingItem()
+                {
+                    Image = AppResources.OnBoardingItemImage4,
+                    Title = AppResources.OnBoardingItemTitle4,
+                    Text = AppResources.OnBoardingItemText4,
+                    ItemButtonText = AppResources.OnBoardingItemButton4
                 }
 
             };

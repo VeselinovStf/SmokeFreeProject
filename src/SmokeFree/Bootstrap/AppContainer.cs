@@ -29,7 +29,7 @@ namespace SmokeFree.Bootstrap
 
         public static RealmConfiguration GetRealmConfiguration => new RealmConfiguration
         {
-            SchemaVersion = 10
+            SchemaVersion = 11
         };
 
         /// <summary>

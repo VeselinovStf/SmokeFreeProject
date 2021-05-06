@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OnBoardingItemButton3" xml:space="preserve">
-    <value>Готово</value>
+    <value>Продължи</value>
   </data>
   <data name="OnBoardingItemImage3" xml:space="preserve">
     <value>ViewMode.png</value>
   </data>
   <data name="OnBoardingItemText3" xml:space="preserve">
-    <value>Едно много дълго обяснение, какво се случва тук!</value>
+    <value>Първата стъпка е да минеш през тест, чрез който ще разберем до колко е силен навика ти</value>
   </data>
   <data name="OnBoardingItemTitle3" xml:space="preserve">
-    <value>Насока Три</value>
+    <value>Теста</value>
   </data>
   <data name="OnBoardingItemButton2" xml:space="preserve">
     <value>Продължи</value>
@@ -136,10 +136,10 @@
     <value>TimeZone.png</value>
   </data>
   <data name="OnBoardingItemText2" xml:space="preserve">
-    <value>Едно много дълго обяснение, какво се случва тук!</value>
+    <value>Трябва да изпълниш две стъпки</value>
   </data>
   <data name="OnBoardingItemTitle2" xml:space="preserve">
-    <value>Насока Две</value>
+    <value>Процеса</value>
   </data>
   <data name="OnBoardingItemButton1" xml:space="preserve">
     <value>Продължи</value>
@@ -148,10 +148,10 @@
     <value>ReSchedule.png</value>
   </data>
   <data name="OnBoardingItemText1" xml:space="preserve">
-    <value>Едно много дълго обяснение, какво се случва тук!</value>
+    <value>Благодарим ти за инсталирането на нашето приложение. Това е първа успешна стъпка към спирането на цигарите</value>
   </data>
   <data name="OnBoardingItemTitle1" xml:space="preserve">
-    <value>Насока Едно</value>
+    <value>Здравей!</value>
   </data>
   <data name="OnBoardingViewTitle" xml:space="preserve">
     <value>Ръководство</value>
@@ -190,7 +190,7 @@
     <value>Избери времетраене на теста</value>
   </data>
   <data name="CreateTestViewViewDescriptionLabel" xml:space="preserve">
-    <value>Избери своята цел! До коя дата искаш да спреш този навик?</value>
+    <value>Нека първо избереш конкретна дата в коята да приключиш с този нави и колко време ще продължи теста. За най-добри резултати избери повече време за тестване.</value>
   </data>
   <data name="CreateTestViewViewDescriptionLabelButton" xml:space="preserve">
     <value>Продължи</value>
@@ -560,5 +560,26 @@
   </data>
   <data name="CompletedChallengeViewModelTiitle" xml:space="preserve">
     <value>Резултати</value>
+  </data>
+  <data name="OnBoardingItemButton4" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="OnBoardingItemImage4" xml:space="preserve">
+    <value>ViewMode.png</value>
+  </data>
+  <data name="OnBoardingItemText4" xml:space="preserve">
+    <value>Втората стъпка е да преминеш изпитанието. Това е главната стъпка, която ще ти помогне да победиш този навик.</value>
+  </data>
+  <data name="OnBoardingItemTitle4" xml:space="preserve">
+    <value>Изпитанието</value>
+  </data>
+  <data name="TestResultAvarageSmokeActiveTimeSeconds" xml:space="preserve">
+    <value>Средно Активно Време</value>
+  </data>
+  <data name="TestResultAvarageSmokingTimeSeconds" xml:space="preserve">
+    <value>Средно време прекарано в пушене</value>
+  </data>
+  <data name="TestResultTotalCleanOxygenSeconds" xml:space="preserve">
+    <value>Средно време без пушене</value>
   </data>
 </root>
