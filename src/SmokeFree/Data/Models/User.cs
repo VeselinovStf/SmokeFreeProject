@@ -27,6 +27,11 @@ namespace SmokeFree.Data.Models
         public string TestId { get; set; }
 
         /// <summary>
+        /// Completed Challenge Result
+        /// </summary>
+        public string ChallengeResultId { get; set; }
+
+        /// <summary>
         /// User Tests
         /// </summary>
         public IList<Test> Tests { get; }

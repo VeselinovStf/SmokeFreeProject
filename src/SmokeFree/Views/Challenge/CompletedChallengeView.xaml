@@ -81,7 +81,91 @@
                 <!-- /END/ NAVIGATION -->
 
                 <!-- MAIN CONTENT -->
+                <Frame CornerRadius="20" Margin="5,0,5,0">
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                        <Label Text="Congratulations"
+                               FontSize="25"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                               />
+                        <Label Text="You Completed The Challenge"
+                               FontSize="20"
+                               HorizontalTextAlignment="Center"                              
+                               />
+                        <Label Text="Your Score"
+                               FontSize="20"
+                               HorizontalTextAlignment="Center"                              
+                               />
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+              
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
+                            <Label Text="Challenge Start"  Grid.Column="0" Grid.Row="0" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start" HorizontalOptions="Start"/>
+                            <Label Text="{Binding ChallengeResult.ChallengeStart, Converter={StaticResource TimeSpanToStaticTimeConverter}}"  Grid.Column="2" Grid.Row="0" FontSize="15"  VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" />
+
+                            <Label Text="Challenge Completition" FontSize="15"  Grid.Column="0" Grid.Row="1" VerticalOptions="Start" VerticalTextAlignment="Start" HorizontalOptions="Start"/>
+                            <Label Text="{Binding ChallengeResult.GoalCompletitionTime, Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Column="2" Grid.Row="1"  FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                            
+                            <Label Text="Challenge Total Challenge Days" Grid.Column="0" Grid.Row="2" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding ChallengeResult.TotalChallengeDays}" Grid.Column="2" Grid.Row="2" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                            <Label Text="Total Smoked Cigars Under Challenge" Grid.Column="0" Grid.Row="3" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding ChallengeResult.TotalSmokedCigarsUnderChallenge, Converter={StaticResource TimeSpanToStaticTimeConverter}}" Grid.Column="2" Grid.Row="3" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                            <Label Text="Avarage Smoked Under Challenge" Grid.Column="0" Grid.Row="4" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding ChallengeResult.AvarageSmokedUnderChallenge, Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Column="2" Grid.Row="4" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                            <Label Text="Success Rate" Grid.Column="0" Grid.Row="5" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding SuccessRate.SuccessRate, Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Column="2" Grid.Row="5" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                            <Label Text="Skiped" Grid.Column="0" Grid.Row="6" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding SuccessRate.Skiped}" Grid.Column="2" Grid.Row="6" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                            <Label Text="Rating" Grid.Column="0" Grid.Row="7" FontSize="15" VerticalOptions="Start" VerticalTextAlignment="Start"/>
+                            <Label Text="{Binding SuccessRate.Rating, Converter={StaticResource DoubleToProcentStringConverter}}" Grid.Column="2" Grid.Row="7" FontSize="15" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+
+                        
+                        </Grid>
+                        <!-- START TEST BUTTON -->
+                       
+                        <!-- /END/ START TEST BUTTON -->
+                    </StackLayout>
+                </Frame>
+                <Button 
+                               
+                                Text="Send Data To Dev"                              
+                                FontSize="20"
+                                FontAttributes="Bold"                           
+                                Margin="20,20,20,20"
+                                Command="{Binding SendDBCommand}"
+                                CornerRadius="30"/>
+                <!-- /END/ START TEST BUTTON -->
+
+                <!-- START TEST BUTTON -->
+                <Button 
+                                Text="Re Take The Test"  
+                                Margin="20,20,20,20"
+                                FontSize="20"
+                                FontAttributes="Bold"                                                           
+                                Command="{Binding OnRestartToTestCommand}"
+                                CornerRadius="30"/>
                 <!-- /END/ MAIN CONTENT -->
 
             </StackLayout>

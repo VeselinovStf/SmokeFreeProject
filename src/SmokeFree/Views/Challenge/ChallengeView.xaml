@@ -119,7 +119,7 @@
                             Grid.Column="0"
                             Text="{xct:Translate ChallengeViewCurrentSmokingLabel}" 
                             HorizontalOptions="Start"
-                            FontSize="20"
+                            FontSize="15"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
@@ -129,7 +129,7 @@
                             Grid.Column="1"
                             Text=" / " 
                             HorizontalOptions="Start"
-                            FontSize="20"
+                            FontSize="15"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
@@ -139,7 +139,7 @@
                             Grid.Column="2"
                             Text="{xct:Translate ChallengeViewGoalSmokingLabel}" 
                             HorizontalOptions="Start"
-                            FontSize="20"
+                            FontSize="15"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
 
@@ -175,7 +175,7 @@
                              IsVisible="{Binding IsSmoking, Converter={StaticResource BooleanReverseConverter}}"
                             x:Name="LastSmokeDateTimeDisplayLabel"
                             Text="{xct:Translate ChallengeViewTimeToNextLabel}" 
-                            FontSize="20"
+                            FontSize="15"
                             HorizontalOptions="End"
                             TextColor="{StaticResource Gray-100}"
                             FontFamily="{StaticResource Montserrat-Bold}"/>
@@ -226,7 +226,7 @@
                 <!-- /END/ STATUS DISPLAY -->
 
                 <!-- MAIN CONTROLS CONTENT -->
-                <Grid Grid.Row="3" VerticalOptions="CenterAndExpand">
+                <Grid Grid.Row="3" VerticalOptions="EndAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>

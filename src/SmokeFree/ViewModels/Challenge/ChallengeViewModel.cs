@@ -1099,6 +1099,7 @@ namespace SmokeFree.ViewModels.Challenge
                             // Update User Status
                             user.UserState = UserStates.Complete.ToString();
                             user.TestId = string.Empty;
+                            user.ChallengeResultId = challengeResultCalculation.ChallengeResult.Id;
 
                             var challengeResult = challengeResultCalculation.ChallengeResult;
                             challengeResult.ChallengeId = challenge.Id;
