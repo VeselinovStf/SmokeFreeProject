@@ -23,6 +23,97 @@ namespace SmokeFree.Views.AppSettings
             InitializeColorPicker();
         }
 
+        //private void InitializeDefaultColour()
+        //{
+        //    try
+        //    {
+        //        var appPreferences = AppContainer.Resolve<IAppPreferencesService>();
+
+        //        var currentColorIndex = appPreferences.ColorKey;
+
+        //        var colorThemes = Globals.AppColorThemes;
+
+        //        BackgroundColor = Color.FromHex(colorThemes[currentColorIndex]);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var navigationService = AppContainer.Resolve<INavigationService>();
+        //        var appLogger = AppContainer.Resolve<IAppLogger>();
+
+        //        appLogger.LogError(ex.Message);
+
+        //        navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+        //    }
+        //}
+
+        //private void InitializeColorPicker()
+        //{
+        //    var colors = Globals.AppColorThemes;
+
+        //    var colorKeys = new ObservableCollection<string>();
+        //    foreach (var c in colors)
+        //    {
+        //        colorKeys.Add(c.Key);
+        //    }
+
+        //    ColorPicker.ItemsSource = colorKeys;
+
+        //    ColorPicker.PropertyChanged += (sender, args) =>
+        //    {
+        //        var selectedIndeElement = (string)ColorPicker.SelectedItem;
+
+        //        if (!string.IsNullOrWhiteSpace(selectedIndeElement))
+        //        {
+        //            var selectedIndex = colors.Keys.ToList().IndexOf(selectedIndeElement);
+
+        //            try
+        //            {
+        //                SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor = selectedIndex;
+
+        //                var appPreferencesService = AppContainer.Resolve<IAppPreferencesService>();
+
+        //                appPreferencesService.ColorKey = selectedIndeElement;
+
+        //                var colorHex = colors[colors.Keys.ToList()[selectedIndex]];
+
+        //                BackgroundColor = Color.FromHex(colorHex);
+
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                var appLoger = AppContainer.Resolve<IAppLogger>();
+
+
+        //                appLoger.LogError(ex.Message);
+
+        //                var navigationService = AppContainer.Resolve<INavigationService>();
+        //                navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
+        //            }
+        //        }
+
+
+        //    };
+        //}
+
+        //private void ChangeBarBackgroundColor()
+        //{
+        //    //var colorThemes = Globals.AppColorThemes;
+
+        //    //var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
+
+        //    //BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
+        //}
+
+        //private void ShowColorSettings(object sender, EventArgs e)
+        //{
+        //    // ColorPicker.Focus();
+        //}
+
+        //private void ShowLanguages(object sender, EventArgs e)
+        //{
+        //    // this.picker.Focus();
+        //}
+
         private void InitializeDefaultColour()
         {
             try
@@ -50,29 +141,24 @@ namespace SmokeFree.Views.AppSettings
         {
             var colors = Globals.AppColorThemes;
 
-            var colorKeys = new ObservableCollection<string>();
             foreach (var c in colors)
             {
-                colorKeys.Add(c.Key);
+                ColorPicker.Items.Add(c.Key);
             }
 
-            ColorPicker.ItemsSource = colorKeys;
-
-            ColorPicker.PropertyChanged += (sender, args) =>
+            ColorPicker.SelectedIndexChanged += (sender, args) =>
             {
-                var selectedIndeElement = (string)ColorPicker.SelectedItem;
+                var selectedIndex = ColorPicker.SelectedIndex;
 
-                if (!string.IsNullOrWhiteSpace(selectedIndeElement))
+                if (selectedIndex != -1)
                 {
-                    var selectedIndex = colors.Keys.ToList().IndexOf(selectedIndeElement);
-
                     try
                     {
                         SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor = selectedIndex;
 
                         var appPreferencesService = AppContainer.Resolve<IAppPreferencesService>();
 
-                        appPreferencesService.ColorKey = selectedIndeElement;
+                        appPreferencesService.ColorKey = ColorPicker.Items[selectedIndex];
 
                         var colorHex = colors[colors.Keys.ToList()[selectedIndex]];
 
@@ -90,8 +176,6 @@ namespace SmokeFree.Views.AppSettings
                         navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
                     }
                 }
-                
-
             };
         }
 
@@ -106,12 +190,12 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowColorSettings(object sender, EventArgs e)
         {
-            // ColorPicker.Focus();
+            ColorPicker.Focus();
         }
 
         private void ShowLanguages(object sender, EventArgs e)
         {
-            // this.picker.Focus();
+            this.picker.Focus();
         }
     }
 }
