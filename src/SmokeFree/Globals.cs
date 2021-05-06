@@ -13,7 +13,7 @@ namespace SmokeFree
         /// <summary>
         /// Used For Testing 
         /// </summary>
-        public static bool MockRun = false;
+        public static bool MockRun = true;
 
         // Notification Ids
         public static int TestingTimeNotificationId = 666;

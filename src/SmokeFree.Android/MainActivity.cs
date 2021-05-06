@@ -19,7 +19,7 @@ namespace SmokeFree.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
+            AiForms.Renderers.Droid.SettingsViewInit.Init();
             // User Dialogs Init
             UserDialogs.Init(this);
 

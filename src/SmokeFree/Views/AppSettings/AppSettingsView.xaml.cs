@@ -1,9 +1,12 @@
 ﻿
+using AiForms.Renderers;
 using SmokeFree.Abstraction.Services.General;
 using SmokeFree.Abstraction.Utility.Logging;
 using SmokeFree.Bootstrap;
 using SmokeFree.ViewModels.ErrorAndEmpty;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -47,24 +50,29 @@ namespace SmokeFree.Views.AppSettings
         {
             var colors = Globals.AppColorThemes;
 
+            var colorKeys = new ObservableCollection<string>();
             foreach (var c in colors)
             {
-                ColorPicker.Items.Add(c.Key);
+                colorKeys.Add(c.Key);
             }
 
-            ColorPicker.SelectedIndexChanged += (sender, args) =>
-            {
-                var selectedIndex = ColorPicker.SelectedIndex;
+            ColorPicker.ItemsSource = colorKeys;
 
-                if (selectedIndex != -1)
+            ColorPicker.PropertyChanged += (sender, args) =>
+            {
+                var selectedIndeElement = (string)ColorPicker.SelectedItem;
+
+                if (!string.IsNullOrWhiteSpace(selectedIndeElement))
                 {
+                    var selectedIndex = colors.Keys.ToList().IndexOf(selectedIndeElement);
+
                     try
                     {
                         SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor = selectedIndex;
 
                         var appPreferencesService = AppContainer.Resolve<IAppPreferencesService>();
 
-                        appPreferencesService.ColorKey = ColorPicker.Items[selectedIndex];
+                        appPreferencesService.ColorKey = selectedIndeElement;
 
                         var colorHex = colors[colors.Keys.ToList()[selectedIndex]];
 
@@ -82,6 +90,8 @@ namespace SmokeFree.Views.AppSettings
                         navigationService.NavigateToAsync<SomethingWentWrongViewModel>();
                     }
                 }
+                
+
             };
         }
 
@@ -96,12 +106,12 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowColorSettings(object sender, EventArgs e)
         {
-            ColorPicker.Focus();
+            // ColorPicker.Focus();
         }
 
         private void ShowLanguages(object sender, EventArgs e)
         {
-            this.picker.Focus();
+            // this.picker.Focus();
         }
     }
 }
