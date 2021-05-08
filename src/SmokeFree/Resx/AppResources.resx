@@ -582,4 +582,13 @@
   <data name="TestResultTotalCleanOxygenSeconds" xml:space="preserve">
     <value>Avarage Not Smoking Time</value>
   </data>
+  <data name="AppSetingTutorialDescription" xml:space="preserve">
+    <value>Start Application Tutorial Again</value>
+  </data>
+  <data name="AppSetingApplicationColorDescription" xml:space="preserve">
+    <value>Change Application Color Sheme</value>
+  </data>
+  <data name="AppSetingApplicationNotificationDescription" xml:space="preserve">
+    <value>Turn on or off application mobile notifications</value>
+  </data>
 </root>

@@ -34,7 +34,7 @@
                         Text="{xct:Translate CreateTestViewViewDescriptionLabel}"/>
 
                     <Button 
-                        Style="{StaticResource MainButton}"
+                        Style="{StaticResource DescriptionButton}"
                         Grid.Row="1" 
                         Text="{xct:Translate CreateTestViewViewDescriptionLabelButton}" 
                         Clicked="OnCloseDescriptionButton_Clicked"/>

@@ -61,6 +61,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Application Color Sheme.
+        /// </summary>
+        internal static string AppSetingApplicationColorDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationColorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color Theme.
         /// </summary>
         internal static string AppSetingApplicationColorLabel {
@@ -84,6 +93,15 @@ namespace SmokeFree.Resx {
         internal static string AppSetingApplicationFeedbackLabel {
             get {
                 return ResourceManager.GetString("AppSetingApplicationFeedbackLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Turn on or off application mobile notifications.
+        /// </summary>
+        internal static string AppSetingApplicationNotificationDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationNotificationDescription", resourceCulture);
             }
         }
         
@@ -138,6 +156,15 @@ namespace SmokeFree.Resx {
         internal static string AppSetingApplicationWebSiteLabel {
             get {
                 return ResourceManager.GetString("AppSetingApplicationWebSiteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Application Tutorial Again.
+        /// </summary>
+        internal static string AppSetingTutorialDescription {
+            get {
+                return ResourceManager.GetString("AppSetingTutorialDescription", resourceCulture);
             }
         }
         

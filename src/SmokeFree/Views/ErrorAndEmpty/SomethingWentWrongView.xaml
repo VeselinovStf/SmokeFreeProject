@@ -47,9 +47,9 @@
                                 VerticalTextAlignment="Center"
                                 Text="{Binding Header}"/>
                 <!-- /END/ Header -->
-                
+
                 <StackLayout Grid.Row="2">
-                  
+
 
                     <!-- Description Text -->
                     <Label                                
@@ -84,11 +84,8 @@
                             Text="{Binding TryAgainCommandText}"/>
                     <!-- /END/ Try Again Button -->
                 </StackLayout>
-                
+
             </Grid>
-
-            
-
         </Grid>
     </ContentPage.Content>
     <!-- /END/ View Content -->

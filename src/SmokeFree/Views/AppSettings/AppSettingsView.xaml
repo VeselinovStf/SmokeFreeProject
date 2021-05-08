@@ -10,31 +10,38 @@
              Title="{Binding ViewTitle}"
              NavigationPage.HasNavigationBar="False"
            >
+    <ContentPage.Resources>
+        <ResourceDictionary Source="StyleAppSetting.xaml" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <!-- Content -->
-        <Grid>
-            <Grid.RowDefinitions>
+        <StackLayout>
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
 
             </Grid.RowDefinitions>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateBackCommand}" />
+            </Grid.GestureRecognizers>-->
 
             <!-- HEADER -->
             <Grid 
                 Margin="0,40,0,0"
-                HeightRequest="70"
+                HeightRequest="95"
                 BackgroundColor="{StaticResource Gray-100}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
 
                 </Grid.ColumnDefinitions>
-
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateBackCommand}" />
+                </Grid.GestureRecognizers>
                 <!-- APP ICON  -->
-                <Image Source="icon.png"
-                       Margin="10,10,0,10"
+                <Image Style="{StaticResource AppIconStyle}"
                        
                        />
                 <!-- /END/  APP ICON -->
@@ -42,52 +49,212 @@
                 <!-- Page Title -->
                 <Label Text="{xct:Translate AppSettingsViewTitle}"
                        Grid.Column="1"
-                       FontSize="20"
-                       FontFamily="{StaticResource  Montserrat-Bold}"
-                       Margin="10,10,10,10"
-                       HorizontalOptions="StartAndExpand"
-                       VerticalOptions="CenterAndExpand"
-                       TextColor="{StaticResource Gray-700}"
-                       
+                      Style="{StaticResource LabelsStyle}"                      
                        />
                 <!-- /END/ Page Title -->
 
                 <!-- BACK BUTTON  -->
-                <Button
-                    Margin="0,0,20,0"
-                    Text="&#xe71A;"
+                <Label
+                    Style="{StaticResource EnterButtonIconStyle}"
                     Grid.Column="2"
-                    FontFamily="{StaticResource FontIcons}"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    TextColor="{StaticResource Gray-700}"
-                    FontSize="20"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    Command="{Binding NavigateBackCommand}"/>
+                   />
                 <!-- /END/  BACK BUTTON -->
 
             </Grid>
             <!-- /END/ HEADER -->
 
-            <!-- MAIN CONTENT TABLE -->
+            <StackLayout>
+                <!-- Section Tutorial -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <!-- Section -->
+                    
+                    <!-- Section Title-->
+                    <Label 
+                        Text="{xct:Translate AppSetingTutorialSection}"
+                        Style="{StaticResource SectionTitleLabelStyle}"
+                        />
+                    <!-- /END/ Section Title-->
+
+                    <!-- /END/ Section -->
+
+                    <!-- Cell -->
+                    <Frame Grid.Row="1">
+                        <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding StartTutorialCommand}" />
+                            </Grid.GestureRecognizers>
+                            <!-- TUTORIAL ICON -->
+                          
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe751;"/>
+                            
+                            <!-- /END/ TUTORIAL ICON -->
+
+                            <!-- TUTORIAL TEXT -->
+                            <StackLayout  Grid.Column="1">
+                                <Label Text="{xct:Translate AppSetingTutorialTitle}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                <Label Text="{xct:Translate AppSetingTutorialDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                            </StackLayout>
+                               
+
+                            <!-- /END/ TUTORIAL TEXT -->
+
+                            <!-- START TUTORIAL BUTTON -->
+                         
+                                <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+                              
+                            <!-- /END/ START TUTORIAL BUTTON -->
+                           
+
+                            </Grid>
+                    </Frame>
+                    <!-- /End/ Cell -->
+                </Grid>
+                <!-- /END/ Section Tutorial -->
+
+                <!-- Section Application -->
+                <StackLayout Spacing="0.7">
+                   
+                    <!-- Section -->
+
+                    <!-- Section Title-->
+                    <Label 
+                        Text="{xct:Translate AppSetingApplicationSection}"
+                        Style="{StaticResource SectionTitleLabelStyle}"
+                        />
+                    <!-- /END/ Section Title-->
+
+                    <!-- /END/ Section -->
+
+                    <!-- Cell Color-->
+                    <Frame >
+                        <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowColorSettings" />
+                            </Grid.GestureRecognizers>
+                            
+                            <!-- Color ICON -->
+                            <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe731;"/>
+
+                            <!-- /END/ Color ICON -->
+
+                            <!-- Color TEXT -->
+                            <StackLayout  Grid.Column="1">
+                                <Label Text="{xct:Translate AppSetingApplicationColorLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                <Label Text="{xct:Translate AppSetingApplicationColorDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                            </StackLayout>
+                            <!-- /END/ Color TEXT -->
+
+                            <!-- Hidden Picker -->
+                            <Picker x:Name="ColorPicker" IsVisible="False"
+                                    Title="{xct:Translate AppSettingsViewColorPickerTitle}"
+                                    TitleColor="{StaticResource Gray-300}"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="30"/>
+
+                        </Grid>
+                    </Frame>
+                    <!-- /End/ Cell COLOR-->
+
+                    <!-- Notifications Color-->
+                    <Frame >
+                        <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ShowColorSettings" />
+                            </Grid.GestureRecognizers>
+
+                            <!-- Notifications ICON -->
+                            <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe743;"/>
+
+                            <!-- /END/ Notifications ICON -->
+
+                            <!-- Notifications TEXT -->
+                            <StackLayout  Grid.Column="1">
+                                <Label Text="{xct:Translate AppSetingApplicationNotificationLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                <Label Text="{xct:Translate AppSetingApplicationNotificationDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                            </StackLayout>
+                            <!-- /END/ Notifications TEXT -->
+
+                            <!-- START STOP NOTIFICATIONS -->
+                            
+                                <Switch      
+                                    Margin="0,0,20,0"
+                                    Visual="Material"
+                                    Grid.Column="2"                                 
+                                    BackgroundColor="Transparent"
+                                    HorizontalOptions="End"                           
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    IsToggled="{Binding NotificationSwitch}"
+                                   />
+                                
+                            <!-- /END/ START STOP NOTIFICATIONS -->
+                        </Grid>
+                    </Frame>
+                    <!-- /End/ Notifications COLOR-->
+                </StackLayout>
+                <!-- /END/ Section Application -->
+                
+            </StackLayout>
+            <!-- MAIN CONTENT TABLE --><!--
             <TableView 
                 Intent="Settings"
-                Grid.Row="1"
+               
                >
           
-                    <!-- TUTORIAL SECTION -->
+                    --><!-- TUTORIAL SECTION --><!--
                     <TableSection Title="{xct:Translate AppSetingTutorialSection}" TextColor="{StaticResource Gray-100}">
-                        <ViewCell>
+                        <ViewCell Height="100">
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
                               >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- TUTORIAL ICON -->
+                                --><!-- TUTORIAL ICON --><!--
                                 <Label         
                                      Margin="20,10,0,10"
                                      Text="&#xe751;"
@@ -95,25 +262,25 @@
                                      BackgroundColor="Transparent"
                                      HorizontalOptions="Start"
                                      VerticalTextAlignment="Center"
-                                     TextColor="{StaticResource Gray-600}"
-                                     
+                                     TextColor="{StaticResource Gray-600}"                                    
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ TUTORIAL ICON -->
+                                --><!-- /END/ TUTORIAL ICON -->
 
-                                <!-- TUTORIAL TEXT -->
+                                <!-- TUTORIAL TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingTutorialTitle}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
                                        HorizontalOptions="Start"
                                        VerticalOptions="CenterAndExpand"
-                                       Margin="0,10,0,10"                                      
+                                       Margin="0,10,0,10"    
+                                       FontSize="25"
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ TUTORIAL TEXT -->
+                                --><!-- /END/ TUTORIAL TEXT -->
 
-                                <!-- START TUTORIAL BUTTON -->
+                                <!-- START TUTORIAL BUTTON --><!--
                                 <Button
                                     Margin="0,0,20,0"
                                     Text="&#xe71A;"
@@ -126,14 +293,14 @@
                                     HeightRequest="40"
                                     WidthRequest="40"
                                     Command="{Binding StartTutorialCommand}"/>
-                                <!-- /END/ START TUTORIAL BUTTON -->
+                                --><!-- /END/ START TUTORIAL BUTTON --><!--
 
                             </Grid>
                         </ViewCell>
                     </TableSection>
-                    <!-- /END/ TUTORIAL SECTION -->
+                    --><!-- /END/ TUTORIAL SECTION -->
 
-                    <!-- APPLICATION SECTION -->
+                    <!-- APPLICATION SECTION --><!--
                     <TableSection Title="{xct:Translate AppSetingApplicationSection}" TextColor="{StaticResource Gray-100}">
                         <ViewCell>
                             <Grid
@@ -144,7 +311,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- COLOR ICON -->
+                                --><!-- COLOR ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe731;"
@@ -157,9 +324,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ COLOR ICON -->
+                                --><!-- /END/ COLOR ICON -->
 
-                                <!-- COLOR TEXT -->
+                                <!-- COLOR TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationColorLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -168,9 +335,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ COLOR TEXT -->
+                                --><!-- /END/ COLOR TEXT -->
 
-                                <!-- START COLOR BUTTON -->
+                                <!-- START COLOR BUTTON --><!--
                                 <Button
                                     Margin="0,0,20,0"
                                     Text="&#xe71A;"
@@ -184,9 +351,9 @@
                                     WidthRequest="40"
                                     Clicked="ShowColorSettings"
                                    />
-                                <!-- /END/ START COLOR BUTTON -->
+                                --><!-- /END/ START COLOR BUTTON -->
 
-                                <!-- Hidden Picker -->
+                                <!-- Hidden Picker --><!--
                                 <Picker x:Name="ColorPicker" IsVisible="False"
                                     Title="{xct:Translate AppSettingsViewColorPickerTitle}"
                                     TitleColor="{StaticResource Gray-300}"
@@ -199,7 +366,7 @@
                             </Grid>
                         </ViewCell>
 
-                        <!-- NOTIFICATIONS -->
+                        --><!-- NOTIFICATIONS --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -209,7 +376,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- NOTIFICATIONS ICON -->
+                                --><!-- NOTIFICATIONS ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe743;"
@@ -222,9 +389,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ NOTIFICATIONS ICON -->
+                                --><!-- /END/ NOTIFICATIONS ICON -->
 
-                                <!-- NOTIFICATIONS TEXT -->
+                                <!-- NOTIFICATIONS TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationNotificationLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -233,9 +400,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ NOTIFICATIONS TEXT -->
+                                --><!-- /END/ NOTIFICATIONS TEXT -->
 
-                                <!-- START STOP NOTIFICATIONS -->
+                                <!-- START STOP NOTIFICATIONS --><!--
                                 <Switch      
                                     Margin="0,0,20,0"
                                     Grid.Column="2"                                 
@@ -245,15 +412,15 @@
                                     WidthRequest="40"
                                     IsToggled="{Binding NotificationSwitch}"
                                    />
-                                <!-- /END/ START STOP NOTIFICATIONS -->
+                                --><!-- /END/ START STOP NOTIFICATIONS --><!--
 
 
                             </Grid>
                         </ViewCell>
-                        <!-- NOTIFICATIONS -->
+                        --><!-- NOTIFICATIONS -->
 
 
-                        <!-- LANGUAGE APP -->
+                        <!-- LANGUAGE APP --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -263,7 +430,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- LANGUAGE ICON -->
+                                --><!-- LANGUAGE ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe73B;"
@@ -276,9 +443,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ LANGUAGE ICON -->
+                                --><!-- /END/ LANGUAGE ICON -->
 
-                                <!-- LANGUAGE TEXT -->
+                                <!-- LANGUAGE TEXT --><!--
                                 <Label Text="{Binding SelectedTLanguageItem.DisplayText}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -287,9 +454,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ LANGUAGE TEXT -->
+                                --><!-- /END/ LANGUAGE TEXT -->
 
-                                <!-- START LANGUAGE BUTTON -->
+                                <!-- START LANGUAGE BUTTON --><!--
                                 <Button
                                     Margin="0,0,20,0"
                                     Text="&#xe71A;"
@@ -303,9 +470,9 @@
                                     WidthRequest="40"
                                     Clicked="ShowLanguages"
                                    />
-                                <!-- /END/ START LANGUAGE BUTTON -->
+                                --><!-- /END/ START LANGUAGE BUTTON -->
 
-                                <!-- Hidden Picker -->
+                                <!-- Hidden Picker --><!--
                                 <Picker x:Name="picker" IsVisible="False"
                                     Title="{xct:Translate AppSettingsViewLanguagePickerTitle}"
                                     TitleColor="{StaticResource Gray-300}"
@@ -317,9 +484,9 @@
                                 />
                             </Grid>
                         </ViewCell>
-                        <!-- LANGUAGE -->
+                        --><!-- LANGUAGE -->
 
-                        <!-- SEND REPORT -->
+                        <!-- SEND REPORT --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -329,7 +496,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- SEND REPORT  ICON -->
+                                --><!-- SEND REPORT  ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe71F;"
@@ -342,9 +509,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ SEND REPORT  ICON -->
+                                --><!-- /END/ SEND REPORT  ICON -->
 
-                                <!-- RESTART APP TEXT -->
+                                <!-- RESTART APP TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationFeedbackLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -353,9 +520,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ SEND REPORT  TEXT -->
+                                --><!-- /END/ SEND REPORT  TEXT -->
 
-                                <!--  SEND REPORT  -->
+                                <!--  SEND REPORT  --><!--
 
                                 <Button
                                     Margin="0,0,20,0"
@@ -371,14 +538,14 @@
                                     Command="{Binding SendFeedBackDataCommand}"
                                    />
 
-                                <!-- /END/  SEND REPORT  -->
+                                --><!-- /END/  SEND REPORT  --><!--
 
 
                             </Grid>
                         </ViewCell>
-                        <!-- /END/ SEND REPORT  -->
+                        --><!-- /END/ SEND REPORT  -->
 
-                        <!-- SEND DB REPORT -->
+                        <!-- SEND DB REPORT --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -388,7 +555,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- SEND DB REPORT  ICON -->
+                                --><!-- SEND DB REPORT  ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe71E;"
@@ -401,9 +568,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ SEND DB REPORT  ICON -->
+                                --><!-- /END/ SEND DB REPORT  ICON -->
 
-                                <!-- DB  APP TEXT -->
+                                <!-- DB  APP TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationSendDbLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -412,9 +579,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ SEND DB   TEXT -->
+                                --><!-- /END/ SEND DB   TEXT -->
 
-                                <!--  SEND DB REPORT  -->
+                                <!--  SEND DB REPORT  --><!--
 
                                 <Button
                                     Margin="0,0,20,0"
@@ -430,14 +597,14 @@
                                     Command="{Binding SendDBCommand}"
                                    />
 
-                                <!-- /END/  SEND REPORT  -->
+                                --><!-- /END/  SEND REPORT  --><!--
 
 
                             </Grid>
                         </ViewCell>
-                        <!-- /END/ SEND DB REPORT  -->
+                        --><!-- /END/ SEND DB REPORT  -->
 
-                        <!-- Rank APP -->
+                        <!-- Rank APP --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -447,7 +614,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- Rank APP  ICON -->
+                                --><!-- Rank APP  ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe70C;"
@@ -460,9 +627,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ Rank APP  ICON -->
+                                --><!-- /END/ Rank APP  ICON -->
 
-                                <!-- Rank APP TEXT -->
+                                <!-- Rank APP TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationRankLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -471,9 +638,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ Rank APP TEXT -->
+                                --><!-- /END/ Rank APP TEXT -->
 
-                                <!--  Rank APP  -->
+                                <!--  Rank APP  --><!--
 
                                 <Button
                                     Margin="0,0,20,0"
@@ -489,14 +656,14 @@
                                     Command="{Binding RankAppCommand}"
                                    />
 
-                                <!-- /END/ Rank APP  -->
+                                --><!-- /END/ Rank APP  --><!--
 
 
                             </Grid>
                         </ViewCell>
-                        <!-- /END/ SEND REPORT  -->
+                        --><!-- /END/ SEND REPORT  -->
 
-                        <!-- RESTART APP -->
+                        <!-- RESTART APP --><!--
                         <ViewCell>
                             <Grid
                                 BackgroundColor="{StaticResource Gray-100}"
@@ -506,7 +673,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- RESTART APP ICON -->
+                                --><!-- RESTART APP ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe747;"
@@ -519,9 +686,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ RESTART APP ICON -->
+                                --><!-- /END/ RESTART APP ICON -->
 
-                                <!-- RESTART APP TEXT -->
+                                <!-- RESTART APP TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationRestartLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -530,9 +697,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ RESTART APP TEXT -->
+                                --><!-- /END/ RESTART APP TEXT -->
 
-                                <!--  RESTART APP -->
+                                <!--  RESTART APP --><!--
 
                                 <Button
                                     Margin="0,0,20,0"
@@ -548,17 +715,17 @@
                                     Command="{Binding RestartAppCommand}"
                                    />
 
-                                <!-- /END/  RESTART APP -->
+                                --><!-- /END/  RESTART APP --><!--
 
 
                             </Grid>
                         </ViewCell>
-                        <!-- RESTART -->
+                        --><!-- RESTART --><!--
 
                     </TableSection>
-                    <!-- /END/ APPLICATION SECTION -->
+                    --><!-- /END/ APPLICATION SECTION -->
 
-                    <!-- CONTACT SECTION -->
+                    <!-- CONTACT SECTION --><!--
                     <TableSection Title="{xct:Translate AppSetingApplicationContactSection}" TextColor="{StaticResource Gray-100}">
                         <ViewCell>
                             <Grid
@@ -569,7 +736,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <!-- COLOR ICON -->
+                                --><!-- COLOR ICON --><!--
                                 <Label            
                                      Margin="20,10,0,10"
                                      Text="&#xe73E;"
@@ -582,9 +749,9 @@
                                      HeightRequest="40"
                                      WidthRequest="40"
                                     />
-                                <!-- /END/ COLOR ICON -->
+                                --><!-- /END/ COLOR ICON -->
 
-                                <!-- COLOR TEXT -->
+                                <!-- COLOR TEXT --><!--
                                 <Label Text="{xct:Translate AppSetingApplicationWebSiteLabel}"
                                        Grid.Column="1"
                                        VerticalTextAlignment="Center"
@@ -593,9 +760,9 @@
                                        Margin="0,10,0,10"                                      
                                        FontFamily="{StaticResource  Montserrat-Bold}"
                                        TextColor="{StaticResource Gray-700}" />
-                                <!-- /END/ COLOR TEXT -->
+                                --><!-- /END/ COLOR TEXT -->
 
-                                <!-- START COLOR BUTTON -->
+                                <!-- START COLOR BUTTON --><!--
                                 <Button
                                     Margin="0,0,20,0"
                                     Text="&#xe71A;"
@@ -609,21 +776,21 @@
                                     WidthRequest="40"
                                     Command="{Binding VisitWebsiteCommand}"
                                    />
-                                <!-- /END/ START COLOR BUTTON -->
+                                --><!-- /END/ START COLOR BUTTON --><!--
 
                             </Grid>
                         </ViewCell>
                     </TableSection>
-                    <!-- /END/ CONTACT SECTION -->
+                    --><!-- /END/ CONTACT SECTION --><!--
 
    
             </TableView>
-            <!-- /END/ MAIN CONTENT TABLE -->
+            --><!-- /END/ MAIN CONTENT TABLE -->
 
             <!--<views:ColorSettingsView 
                  Grid.Row="2"
                 x:Name="ColorSettings" />-->
-        </Grid>
+        </StackLayout>
         <!-- /END/ Content -->
     </ContentPage.Content>
 </ContentPage>

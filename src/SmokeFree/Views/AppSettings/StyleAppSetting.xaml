@@ -7,8 +7,8 @@
     <!-- App ICON STYLE -->
     <Style x:Key="AppIconStyle" TargetType="Image">
         <Setter Property="Source" Value="icon.png" />
-        <Setter Property="Margin" Value="40,20,20,20" />
-        <Setter Property="Scale" Value="3" />
+        <Setter Property="Margin" Value="30,10,0,10" />
+        <Setter Property="Scale" Value="1.5" />
     </Style>
     <!-- /END/ App ICON STYLE -->
 
@@ -35,10 +35,9 @@
     <Style x:Key="LabelsStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Gray-700}" />
         <Setter Property="FontFamily" Value="{StaticResource  Montserrat-SemiBold}" />
-        <Setter Property="Margin" Value="0,10,0,10" />
+        <Setter Property="Margin" Value="20,15,15,10" />
         <Setter Property="FontSize" Value="20" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
     </Style>
     <!-- /END/ Main Label STYLE -->
@@ -48,21 +47,98 @@
 <!-- BUTTONS STYLES -->
     
     <!-- ICONS STYLE -->
-    <Style x:Key="EnterButtonIconStyle" TargetType="Button">
+    <Style x:Key="EnterButtonIconStyle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="{StaticResource  FontIcons}" />
-        <Setter Property="Margin" Value="0,0,0,20" />
         <Setter Property="Text" Value="&#xe71A;" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="30" />
         <Setter Property="HeightRequest" Value="40" />
         <Setter Property="WidthRequest" Value="40" />
         <Setter Property="HorizontalOptions" Value="End" />
-        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+    <!-- ICONS STYLE -->
+    <Style x:Key="EnterButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource  FontIcons}" />
+        <Setter Property="Text" Value="&#xe71A;" />
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Center" />
+       
     </Style>
     <!-- /END/ ICONS STYLE -->
 
 
-<!-- /END/ BUTTONS STYLES -->
+    <!-- /END/ BUTTONS STYLES -->
 
+<!-- SECTIONS -->
+
+    <!-- ICONS STYLE -->
+    <Style x:Key="SectionTitleLabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-SemiBold}" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="Margin" Value="30,5,0,5" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+<!-- SECTIONS -->
+
+<!-- CELL -->
+
+    <!-- CELL GRID STYLE -->
+    <Style x:Key="CellGridStyle" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource Gray-100}" />
+    </Style>
+    <!-- /END/  CELL GRID STYLE -->
+
+    <!-- ICONS STYLE -->
+    <Style x:Key="CellIconStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource  FontIcons}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="10,0,10,0" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+    <!-- Main Label STYLE -->
+    <Style x:Key="CellTitleStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-Bold}" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" /> 
+    </Style>
+    <!-- /END/ Main Label STYLE -->
+
+    <!-- Main Label STYLE -->
+    <Style x:Key="CellDescriptionStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-Regular}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <!-- /END/ Main Label STYLE -->
+
+    <!-- /END/ CELL -->
 </ResourceDictionary>

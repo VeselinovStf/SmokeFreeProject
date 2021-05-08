@@ -174,8 +174,19 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
             <!-- /END/ Text STYLE -->
-            
-<!-- /END/ PAGE DESCRIPTIONS STYLE -->
+
+            <!-- DescriptionButton BUTTON -->
+            <Style x:Key="DescriptionButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+            <!-- /END/ DescriptionButton BUTTON -->
+
+            <!-- /END/ PAGE DESCRIPTIONS STYLE -->
             
 <!-- PAGE NAVIGATION -->
             
@@ -192,7 +203,7 @@
             </Style>
             <!-- /END/ Title STYLE -->
 
-            <!-- CLOSE ICON STYLE -->
+            <!-- Goal Date ICON STYLE -->
             <Style x:Key="GoalDateIconButton" TargetType="Button">
                 <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
                 <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
@@ -204,8 +215,50 @@
                 <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="Text" Value="&#xe746;" />
             </Style>
-            <!-- /END/ CLOSE ICON STYLE -->
+            <!-- /END/ Goal Date ICON STYLE -->
 
+            <!-- STOP TESTING ICON STYLE -->
+            <Style x:Key="StopTestingIconStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe724;" />
+            </Style>
+            <!-- /END/ STOP TESTING STYLE -->
+
+            <!-- STOP TESTING ICON STYLE -->
+            <Style x:Key="StopTestingMidleIconStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe724;" />
+            </Style>
+            <!-- /END/ STOP TESTING STYLE -->
+
+            <!-- Back from challenge create ICON STYLE -->
+            <Style x:Key="BackFromPageIconStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe709;" />
+            </Style>
+            <!-- /END/ Back from challenge create  STYLE -->
+            
             <!-- CLOSE ICON STYLE -->
             <Style x:Key="SettingsButtonIconStyle" TargetType="Button">
                 <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />

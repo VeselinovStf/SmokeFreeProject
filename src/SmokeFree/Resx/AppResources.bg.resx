@@ -582,4 +582,13 @@
   <data name="TestResultTotalCleanOxygenSeconds" xml:space="preserve">
     <value>Средно време без пушене</value>
   </data>
+  <data name="AppSetingTutorialDescription" xml:space="preserve">
+    <value>Стартирай началното ръководство</value>
+  </data>
+  <data name="AppSetingApplicationColorDescription" xml:space="preserve">
+    <value>Промени Цветовата палитра на приложението</value>
+  </data>
+  <data name="AppSetingApplicationNotificationDescription" xml:space="preserve">
+    <value>Включи/ Изключи нотификацийте на приложението</value>
+  </data>
 </root>

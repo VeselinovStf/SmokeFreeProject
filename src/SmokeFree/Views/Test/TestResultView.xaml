@@ -25,39 +25,21 @@
 
                     <!-- STOP TEST BUTTON -->
                     <Button                   
-                        Text="&#xe724;"
-                        FontFamily="{StaticResource FontIcons}"
+                        Style="{StaticResource StopTestingIconStyle}"
                         Command="{Binding OnStopTestingCommand}"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource Gray-100}"
-                        FontSize="20"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        HorizontalOptions="Start"
-                        Margin="10,10,10,10"/>
+                      />
                     <!-- /END/ STOP TEST BUTTON -->
                     
                     <!-- HEADER TEXT -->
                     <Label Text="{xct:Translate TestResultViewModelTiitle}"    
-                           HorizontalOptions="CenterAndExpand"                         
-                           FontSize="20"
-                           VerticalOptions="CenterAndExpand"
-                           TextColor="{StaticResource Gray-100}"
-                           FontFamily="{StaticResource Montserrat-Bold}"/>
+                           Style="{StaticResource PageTitleStyle}"/>
                     <!-- /END/ HEADER TEXT -->
                     
                     <!-- App Settings Button -->
                     <Button                    
-                        Text="&#xe72B;"
                         FontFamily="{StaticResource FontIcons}"
                         Command="{Binding OnSettingsCommand}"
-                        BackgroundColor="Transparent"
-                        TextColor="{StaticResource Gray-100}"
-                        FontSize="20"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        HorizontalOptions="End"
-                        Margin="10,10,10,10"/>
+                        Style="{StaticResource SettingsButtonIconStyle}"/>
                     <!-- /END/ App Settings Button -->
 
                 </Grid>
@@ -104,10 +86,7 @@
                     Text="{xct:Translate TestResultCreateChallengeButton}" 
                     Grid.Row="2"
                     Command="{Binding OnCreateChallengeCommand}"
-                    FontSize="20"
-                    FontAttributes="Bold"                           
-                    Margin="20,20,20,20"                           
-                    CornerRadius="30"/>
+                    Style="{StaticResource GrayButton}"/>
             <!-- /END/ Create Challenge Button -->
 
             <!-- Create Challenge Button -->
@@ -116,10 +95,7 @@
                     Text="{xct:Translate TestResultBackButton}" 
                     Grid.Row="2"
                     Command="{Binding BackToCreateChallengeCommand}"
-                    FontSize="20"
-                    FontAttributes="Bold"                           
-                    Margin="20,20,20,20"                           
-                    CornerRadius="30"/>
+                    Style="{StaticResource GrayButton}"/>
             <!-- /END/ Create Challenge Button -->
 
             <!-- /END/ MAIN CONTENT -->

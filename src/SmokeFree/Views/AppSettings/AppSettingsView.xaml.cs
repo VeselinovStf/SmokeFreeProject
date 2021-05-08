@@ -177,11 +177,11 @@ namespace SmokeFree.Views.AppSettings
 
         private void ChangeBarBackgroundColor()
         {
-            //var colorThemes = Globals.AppColorThemes;
+            var colorThemes = Globals.AppColorThemes;
 
-            //var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
+            var colorIndex = SmokeFree.AppLayout.AppSettings.Instance.SelectedPrimaryColor;
 
-            //BackgroundColor = Color.FromHex(colorThemes[colorIndex]);
+            BackgroundColor = Color.FromHex(colorThemes[colorThemes.Keys.ToList()[colorIndex]]);
         }
 
         private void ShowColorSettings(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowLanguages(object sender, EventArgs e)
         {
-            this.picker.Focus();
+            //this.picker.Focus();
         }
     }
 }
