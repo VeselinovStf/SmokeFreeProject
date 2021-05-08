@@ -48,40 +48,27 @@
 
                             <!-- Header -->
                             <Label 
+                                Style="{StaticResource TitleStyle}"
                                 Grid.Row="1"
-                                TextColor="{StaticResource Gray-100}"
-                                VerticalOptions="Start"
-                                FontSize="26"
-                                Margin="30"
-                                FontAttributes="Bold"
-                                HorizontalOptions="Center"
-                                HorizontalTextAlignment="Center"
-                                VerticalTextAlignment="Center"
+                                TextColor="{StaticResource Gray-100}"                              
                                 Text="{Binding Title}"/>
                             <!-- /END/ Header -->
 
                             <!-- Description Text -->
                             <Label
+                                Style="{StaticResource MessageStyle}"
                                 Grid.Row="2"
-                                TextColor="{StaticResource Gray-100}"
-                                Margin="20,0,20,25"
-                                FontSize="20"
-                                HorizontalOptions="Center"
-                                HorizontalTextAlignment="Center"
-                                VerticalTextAlignment="Center"
+                                TextColor="{StaticResource Gray-100}"                                
                                 Text="{Binding Text}"/>
                             <!-- /END/ Description Text -->
 
                         </Grid>
 
                         <!-- Next/End Button -->
-                        <Button                                                      
-                            Grid.Row="1"
-                            FontSize="20"
-                            Clicked="OnChangeCarouselItem_Clicked"
-                            FontAttributes="Bold"
-                            CornerRadius="30"
-                            Margin="20,0,20,20"
+                        <Button        
+                            Style="{StaticResource GrayButton}"
+                            Grid.Row="1"                           
+                            Clicked="OnChangeCarouselItem_Clicked"                           
                             Command="{Binding Path=OnBordingItemButtonClickedCommand,Source={RelativeSource AncestorType={x:Type viewModels:OnBoardingViewModel} }}"
                             Text="{Binding ItemButtonText}"/>
                         <!-- /END/ Next/End Button -->

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmokeFree.Views.AppSettings.StyleAppSetting">
+ <!-- ICON STYLES -->
+
+    <!-- App ICON STYLE -->
+    <Style x:Key="AppIconStyle" TargetType="Image">
+        <Setter Property="Source" Value="icon.png" />
+        <Setter Property="Margin" Value="40,20,20,20" />
+        <Setter Property="Scale" Value="3" />
+    </Style>
+    <!-- /END/ App ICON STYLE -->
+
+    <!-- ICONS STYLE -->
+    <Style x:Key="AppSettingsIconsStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource  FontIcons}" />
+        <Setter Property="Margin" Value="20,10,0,10" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+<!-- /END/ ICON STYLES -->
+
+<!-- Label STYLES -->
+    
+    <!-- Main Label STYLE -->
+    <Style x:Key="LabelsStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-700}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-SemiBold}" />
+        <Setter Property="Margin" Value="0,10,0,10" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+    <!-- /END/ Main Label STYLE -->
+
+<!-- /END/ Label STYLES -->
+
+<!-- BUTTONS STYLES -->
+    
+    <!-- ICONS STYLE -->
+    <Style x:Key="EnterButtonIconStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource  FontIcons}" />
+        <Setter Property="Margin" Value="0,0,0,20" />
+        <Setter Property="Text" Value="&#xe71A;" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+
+<!-- /END/ BUTTONS STYLES -->
+
+</ResourceDictionary>

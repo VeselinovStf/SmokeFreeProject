@@ -34,6 +34,7 @@
 
                 <!-- APP ICON  -->
                 <Image Source="icon.png"
+                       Margin="10,10,0,10"
                        
                        />
                 <!-- /END/  APP ICON -->
@@ -41,7 +42,10 @@
                 <!-- Page Title -->
                 <Label Text="{xct:Translate AppSettingsViewTitle}"
                        Grid.Column="1"
-                       HorizontalOptions="Start"
+                       FontSize="20"
+                       FontFamily="{StaticResource  Montserrat-Bold}"
+                       Margin="10,10,10,10"
+                       HorizontalOptions="StartAndExpand"
                        VerticalOptions="CenterAndExpand"
                        TextColor="{StaticResource Gray-700}"
                        
@@ -71,7 +75,7 @@
                 Intent="Settings"
                 Grid.Row="1"
                >
-                <TableRoot>
+          
                     <!-- TUTORIAL SECTION -->
                     <TableSection Title="{xct:Translate AppSetingTutorialSection}" TextColor="{StaticResource Gray-100}">
                         <ViewCell>
@@ -612,7 +616,7 @@
                     </TableSection>
                     <!-- /END/ CONTACT SECTION -->
 
-                </TableRoot>
+   
             </TableView>
             <!-- /END/ MAIN CONTENT TABLE -->
 

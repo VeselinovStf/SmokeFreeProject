@@ -155,8 +155,132 @@
             </Style>
             <!-- /END/ THEME GRADIENT -->
 
-            <!-- ICON STYLES -->
+ <!-- PAGE DESCRIPTIONS STYLE -->
+            <Style x:Key="PageDescription" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-200}" />
+                <Setter Property="CornerRadius" Value="50" />
+                <Setter Property="Margin" Value="10,10,10,10" />
+            </Style>
 
+            <!-- Text STYLE -->
+            <Style x:Key="DescriptionText" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <!-- /END/ Text STYLE -->
+            
+<!-- /END/ PAGE DESCRIPTIONS STYLE -->
+            
+<!-- PAGE NAVIGATION -->
+            
+            <!-- Title STYLE -->
+            <Style x:Key="PageTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+            </Style>
+            <!-- /END/ Title STYLE -->
+
+            <!-- CLOSE ICON STYLE -->
+            <Style x:Key="GoalDateIconButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe746;" />
+            </Style>
+            <!-- /END/ CLOSE ICON STYLE -->
+
+            <!-- CLOSE ICON STYLE -->
+            <Style x:Key="SettingsButtonIconStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Text" Value="&#xe72B;" />
+            </Style>
+            <!-- /END/ CLOSE ICON STYLE -->
+
+
+<!-- /END/ PAGE NAVIGATION -->
+
+<!-- ON BOARDIN -->
+            <!-- Title STYLE -->
+            <Style x:Key="TitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="26" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="30" />
+            </Style>
+            <!-- /END/ Title STYLE -->
+
+            <!-- Message STYLE -->
+            <Style x:Key="MessageStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource Gray-100}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Regular}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="20,0,20,25" />
+            </Style>
+            <!-- /END/ Message STYLE -->
+<!-- /END/ ON BOARDIN -->
+            
+<!-- Buttons Style -->
+            
+            <!-- MAIN BUTTON -->
+            <Style x:Key="MainButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-SemiBold}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="20" />
+            </Style>
+            <!-- /END/ MAIN BUTTON -->
+            
+            <!-- White BUTTON -->
+            <Style x:Key="GrayButton" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat-Bold}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-100}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="30" />
+                <Setter Property="Margin" Value="20,0,20,20"/>
+            </Style>
+            <!-- /END/ White BUTTON -->
+
+ <!-- /END/ Buttons Style -->
+
+<!-- ICON STYLES -->
+            
             <!-- CLOSE ICON STYLE -->
             <Style x:Key="CloseIconStyle" TargetType="Button">
                 <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
@@ -165,10 +289,10 @@
                 <Setter Property="Text" Value="&#xe724;" />
             </Style>
             <!-- /END/ CLOSE ICON STYLE -->
+            
+<!-- /END/ ICON STYLES -->
 
-            <!-- /END/ ICON STYLES -->
-
-            <!-- CONVERTERS -->
+<!-- CONVERTERS -->
             <converters:TimeSpanToStaticTimeConverter x:Key="TimeSpanToStaticTimeConverter"/>
             <converters:BooleanReverseConverter x:Key="BooleanReverseConverter"/>
             <converters:DoubleToProcentStringConverter x:Key="DoubleToProcentStringConverter"/>
@@ -178,7 +302,7 @@
             <x:Boolean x:Key="FalseValue">False</x:Boolean>
             <x:Boolean x:Key="TrueValue">True</x:Boolean>
 
-            <!-- /END/ CONVERTERS -->
+<!-- /END/ CONVERTERS -->
 
         </ResourceDictionary>
     </Application.Resources>
