@@ -68,24 +68,15 @@
 
                 </Grid>
                 <!-- /END/ NAVIGATION -->
-
-                <!-- MAIN CONTENT -->
-                <StackLayout Grid.Row="1"
-                         VerticalOptions="CenterAndExpand"
-                         Spacing="20"
-                         >
+                <StackLayout Grid.Row="1" Margin="20">
                     <!-- Create Challenge VIEW TITLE -->
                     <Label Text="{xct:Translate CreateChallengeViewTitle}"
-                            VerticalOptions="CenterAndExpand" 
-                            HorizontalOptions="CenterAndExpand"
-                            TextColor="{StaticResource Gray-100}"
-                            FontFamily="{StaticResource Montserrat-Bold}"
-                            HorizontalTextAlignment="Center"
-                            FontSize="20"/>
+                            Style="{StaticResource PageTitleStyle}"/>
                     <!-- /END/ Create Challenge  VIEW TITLE -->
-                    
+
                     <!-- User Smoke Status -->
-                    <Frame Margin="10,10,10,10" CornerRadius="10" >
+                    <Frame Margin="10,40,10,0" 
+                           CornerRadius="10" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -93,15 +84,39 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Text="{Binding UserSmokeStatus.Icon}" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource SFFontIcons}"
-                                           FontSize="30" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
-                            <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding UserSmokeStatus.Title}" TextColor="Black" FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                            <Label Grid.Column="3" Text="{Binding UserSmokeStatus.Message}" TextColor="Black"
-                                           HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                            <Label 
+                                Grid.Column="0" 
+                                Text="{Binding UserSmokeStatus.Icon}"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                FontFamily="{StaticResource SFFontIcons}"
+                                FontSize="30" 
+                                HorizontalTextAlignment="Start" 
+                                VerticalTextAlignment="Center"/>
+
+                            <Label Grid.Column="1"
+                                   Grid.ColumnSpan="2" 
+                                   Text="{Binding UserSmokeStatus.Title}" 
+                                   TextColor="Black" FontAttributes="Bold"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
+
+                            <Label Grid.Column="3"
+                                   Text="{Binding UserSmokeStatus.Message}"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="End"
+                                   VerticalTextAlignment="Center"/>
+
                         </Grid>
                     </Frame>
                     <!-- /END/ User Smoke Status -->
+                </StackLayout>
+
+                <!-- MAIN CONTENT -->
+                <StackLayout Grid.Row="2"
+                         VerticalOptions="CenterAndExpand"
+                         Spacing="20"
+                         >
 
                     <!-- Goal Date Time TITLE-->
                     <Label Text="{xct:Translate CreateChallengeViewGoalDateTitle}"

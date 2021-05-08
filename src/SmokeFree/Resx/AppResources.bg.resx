@@ -609,4 +609,52 @@
   <data name="AppSetingApplicationWebSiteDescription" xml:space="preserve">
     <value>Посети уеб сайта на приложението</value>
   </data>
+  <data name="TestResultAvarageCleanOxygenTimeDescription" xml:space="preserve">
+    <value>Средно количество чист кислород по време на теста</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultAvarageForDayDescription" xml:space="preserve">
+    <value>Средно изпушени на ден</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultAvarageSmokeActiveTimeSecondsDescription" xml:space="preserve">
+    <value>Среден перио между първа-последна цигара, за ден</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultAvarageSmokeDistanceDescription" xml:space="preserve">
+    <value>Средно разтояние между всяка цигара</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultAvarageSmokingTimeSecondsDescription" xml:space="preserve">
+    <value>Средно време прекарано в пушене</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultEndDateDescription" xml:space="preserve">
+    <value>Теста бе завършен на</value>
+    <comment>Test Results</comment>
+  </data>
+  <data name="TestResultSmokedCigarsDescription" xml:space="preserve">
+    <value>Блой изпушени цигари по време на теста</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultStartedDateDescription" xml:space="preserve">
+    <value>Теста бе стартиран на</value>
+    <comment>Test Results</comment>
+  </data>
+  <data name="TestResultTestTimeDescription" xml:space="preserve">
+    <value>Пълното време на теста</value>
+    <comment>Test Results</comment>
+  </data>
+  <data name="TestResultTotalCleanOxygenSecondsDescription" xml:space="preserve">
+    <value>Средно дишан чист кислород</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="TestResultTotalSmokedGazTimeDescription" xml:space="preserve">
+    <value>Време на поемане на токсичен дим</value>
+    <comment>Test Result</comment>
+  </data>
+  <data name="UserSmokeStatusDescription" xml:space="preserve">
+    <value>До каква степен си пристрастен</value>
+    <comment>Test Results</comment>
+  </data>
 </root>

@@ -1132,11 +1132,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avarage clean oxygen breath in test period.
+        /// </summary>
+        internal static string TestResultAvarageCleanOxygenTimeDescription {
+            get {
+                return ResourceManager.GetString("TestResultAvarageCleanOxygenTimeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avarage Clean Oxygen Time.
         /// </summary>
         internal static string TestResultAvarageCleanOxygenTimeLabel {
             get {
                 return ResourceManager.GetString("TestResultAvarageCleanOxygenTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage smokes for one day.
+        /// </summary>
+        internal static string TestResultAvarageForDayDescription {
+            get {
+                return ResourceManager.GetString("TestResultAvarageForDayDescription", resourceCulture);
             }
         }
         
@@ -1159,6 +1177,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avarage Active time between first-last smoke for day.
+        /// </summary>
+        internal static string TestResultAvarageSmokeActiveTimeSecondsDescription {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokeActiveTimeSecondsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avarage Smoke Distance.
         /// </summary>
         internal static string TestResultAvarageSmokeDistance {
@@ -1168,11 +1195,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avarage distence betwen each smoke.
+        /// </summary>
+        internal static string TestResultAvarageSmokeDistanceDescription {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokeDistanceDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avarage Smoking Time.
         /// </summary>
         internal static string TestResultAvarageSmokingTimeSeconds {
             get {
                 return ResourceManager.GetString("TestResultAvarageSmokingTimeSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avarage time spend in smoking.
+        /// </summary>
+        internal static string TestResultAvarageSmokingTimeSecondsDescription {
+            get {
+                return ResourceManager.GetString("TestResultAvarageSmokingTimeSecondsDescription", resourceCulture);
             }
         }
         
@@ -1195,11 +1240,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test was completed at.
+        /// </summary>
+        internal static string TestResultEndDateDescription {
+            get {
+                return ResourceManager.GetString("TestResultEndDateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test End Date.
         /// </summary>
         internal static string TestResultEndDateLabel {
             get {
                 return ResourceManager.GetString("TestResultEndDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total smoked cigares under your test period.
+        /// </summary>
+        internal static string TestResultSmokedCigarsDescription {
+            get {
+                return ResourceManager.GetString("TestResultSmokedCigarsDescription", resourceCulture);
             }
         }
         
@@ -1213,11 +1276,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test was started at.
+        /// </summary>
+        internal static string TestResultStartedDateDescription {
+            get {
+                return ResourceManager.GetString("TestResultStartedDateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test Start Date.
         /// </summary>
         internal static string TestResultStartedDateLabel {
             get {
                 return ResourceManager.GetString("TestResultStartedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Time of test.
+        /// </summary>
+        internal static string TestResultTestTimeDescription {
+            get {
+                return ResourceManager.GetString("TestResultTestTimeDescription", resourceCulture);
             }
         }
         
@@ -1240,11 +1321,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avarage cleand oxygen between smokes a day.
+        /// </summary>
+        internal static string TestResultTotalCleanOxygenSecondsDescription {
+            get {
+                return ResourceManager.GetString("TestResultTotalCleanOxygenSecondsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total Smoke Gaz Time.
         /// </summary>
         internal static string TestResultTotalSmokedGazTime {
             get {
                 return ResourceManager.GetString("TestResultTotalSmokedGazTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total time breathing toxig smoke gaz.
+        /// </summary>
+        internal static string TestResultTotalSmokedGazTimeDescription {
+            get {
+                return ResourceManager.GetString("TestResultTotalSmokedGazTimeDescription", resourceCulture);
             }
         }
         
@@ -1470,6 +1569,15 @@ namespace SmokeFree.Resx {
         internal static string UnderTestViewTiitle {
             get {
                 return ResourceManager.GetString("UnderTestViewTiitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What is the state of your addiction.
+        /// </summary>
+        internal static string UserSmokeStatusDescription {
+            get {
+                return ResourceManager.GetString("UserSmokeStatusDescription", resourceCulture);
             }
         }
         

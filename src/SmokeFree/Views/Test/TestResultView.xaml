@@ -9,6 +9,9 @@
              BackgroundColor="{DynamicResource PrimaryColor}"
              Title="{Binding ViewTitle}" 
              >
+    <ContentPage.Resources>
+        <ResourceDictionary Source="StyleTest.xaml"/>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -52,12 +55,60 @@
             
             <!-- Test Results -->
             <ListView  Grid.Row="1"
-                       ItemsSource="{Binding TestResults}" RowHeight="110">
+                       ItemsSource="{Binding TestResults}"
+                       SelectionMode="None"
+                       RowHeight="220">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <Frame 
+                                Margin="10,10,10,10" 
+                                   CornerRadius="10" >
 
-                            <Frame Margin="10,10,10,10" CornerRadius="10" >
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label 
+                                            Grid.Column="0"
+                                            Grid.RowSpan="2"
+                                           Text="{Binding Icon}" 
+                                           Style="{StaticResource CellIconStartCell}" />
+
+                                    <Label 
+                                           Grid.Column="1"
+                                           Text="{Binding DisplayTitle}" 
+                                           Style="{StaticResource CellTitleStyle}"/>
+
+                                    <Label 
+                                        Grid.Column="1"
+                                        Grid.ColumnSpan="1"
+                                        Grid.Row="1"
+                                           Text="{Binding Description}" 
+                                           Style="{StaticResource CellDescriptionStyle}"/>
+
+                                    <Label 
+                                         Grid.RowSpan="2"
+                                          Grid.Column="2"
+                                        Margin="5"
+                                           Text="{Binding Value}" 
+                                           FontSize="18"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="End" 
+                                           VerticalTextAlignment="Center"/>
+                                </Grid>
+                                
+                            </Frame>
+                            <!--<Frame 
+                                Margin="10,10,10,10" 
+                                   CornerRadius="10" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -65,14 +116,39 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Icon}" TextColor="Black" FontAttributes="Bold" FontFamily="{StaticResource SFFontIcons}"
-                                           FontSize="30" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding DisplayTitle}" TextColor="Black" FontAttributes="Bold"
-                                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Column="3" Text="{Binding Value}" TextColor="Black"
-                                           HorizontalTextAlignment="End" VerticalTextAlignment="Center"/>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Label Grid.Column="0" 
+                                           Grid.RowSpan="2"
+                                           Text="{Binding Icon}" 
+                                           Style="{StaticResource CellIconStartCell}"
+                                           
+                                         />
+                                    
+
+                                    <Label Grid.Column="1" 
+                                           Grid.ColumnSpan="2" 
+                                           Text="{Binding DisplayTitle}" 
+                                           Style="{StaticResource CellTitleStyle}"/>
+
+                                    <Label Grid.Column="1" 
+                                           Grid.ColumnSpan="2" 
+                                           Grid.Row="1"
+                                           Text="{Binding Description}" 
+                                           Style="{StaticResource CellDescriptionStyle}"/>
+
+                                    <Label Grid.Column="3" 
+                                           Grid.RowSpan="2"
+                                           Text="{Binding Value}" 
+                                           FontSize="18"
+                                           TextColor="Black"
+                                           HorizontalTextAlignment="End" 
+                                           VerticalTextAlignment="Center"/>
                                 </Grid>
-                            </Frame>
+                            </Frame>-->
 
                         </ViewCell>
                     </DataTemplate>
@@ -85,12 +161,14 @@
             <Button IsVisible="{Binding InCreateChallenge, Converter={StaticResource BooleanReverseConverter}}"
                     Text="{xct:Translate TestResultCreateChallengeButton}" 
                     Grid.Row="2"
+                    Margin="20"
                     Command="{Binding OnCreateChallengeCommand}"
                     Style="{StaticResource GrayButton}"/>
             <!-- /END/ Create Challenge Button -->
 
             <!-- Create Challenge Button -->
             <Button 
+                    Margin="50"
                     IsVisible="{Binding InCreateChallenge}"
                     Text="{xct:Translate TestResultBackButton}" 
                     Grid.Row="2"

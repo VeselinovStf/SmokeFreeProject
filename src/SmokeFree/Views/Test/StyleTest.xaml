@@ -15,4 +15,45 @@
         <Setter Property="Margin" Value="30" />
     </Style>
     <!-- /END/ TestTimePicker STYLE -->
+
+    <!-- TEST RESULT VIEW -->
+
+
+    <!-- ICONS STYLE -->
+    <Style x:Key="CellIconStartCell" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-Black}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="FontFamily" Value="{StaticResource  SFFontIcons}" />
+        <Setter Property="FontSize" Value="35" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+    <!-- /END/ ICONS STYLE -->
+
+    <!-- Main Label STYLE -->
+    <Style x:Key="CellTitleStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-Bold}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <!-- /END/ Main Label STYLE -->
+
+    <!-- Main Label STYLE -->
+    <Style x:Key="CellDescriptionStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
+        <Setter Property="FontFamily" Value="{StaticResource  Montserrat-Regular}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <!-- /END/ Main Label STYLE -->
+    <!-- /END/ TEST RESULT VIEW -->
 </ResourceDictionary>

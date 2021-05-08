@@ -111,73 +111,85 @@ namespace SmokeFree.ViewModels.Test
                                 {
                                     Icon = Globals.UserSmokeStatusesSet[StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses)].First().Item1,
                                     DisplayTitle = AppResources.UserSmokeStatusTitle,
-                                    Value = Globals.UserSmokeStatusesSet[StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses)].First().Item2
+                                    Value = Globals.UserSmokeStatusesSet[StringToEnum.ToUserState<UserSmokeStatuses>(user.UserSmokeStatuses)].First().Item2,
+                                    Description = AppResources.UserSmokeStatusDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue06a",
                                     DisplayTitle = AppResources.TestResultTestTimeLabel,
-                                    Value = DoubleToString.DateTime(TestResult.TotalTestTimeSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.TotalTestTimeSeconds),
+                                    Description = AppResources.TestResultTestTimeDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue728",
                                     DisplayTitle = AppResources.TestResultStartedDateLabel,
-                                    Value = DateTimeOfsetToString.DateTime(TestResult.TestStartDate)
+                                    Value = DateTimeOfsetToString.DateTime(TestResult.TestStartDate),
+                                    Description = AppResources.TestResultStartedDateDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue728",
                                     DisplayTitle = AppResources.TestResultEndDateLabel,
-                                    Value = DateTimeOfsetToString.DateTime(TestResult.EndStartDate)
+                                    Value = DateTimeOfsetToString.DateTime(TestResult.EndStartDate),
+                                    Description = AppResources.TestResultEndDateDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ueb78",
                                     DisplayTitle = AppResources.TestResultSmokedCigarsLabel,
-                                    Value = TestResult.TotalSmokedCigars.ToString()
+                                    Value = TestResult.TotalSmokedCigars.ToString(),
+                                    Description = AppResources.TestResultSmokedCigarsDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue0c8",
                                     DisplayTitle = AppResources.TestResultAvarageForDayLabel,
-                                    Value = DoubleToString.Procent(TestResult.AvarageSmokedCigarsPerDay)
+                                    Value = DoubleToString.Procent(TestResult.AvarageSmokedCigarsPerDay),
+                                    Description = AppResources.TestResultAvarageForDayDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue0f1",
                                     DisplayTitle = AppResources.TestResultAvarageCleanOxygenTimeLabel,
-                                    Value = DoubleToString.DateTime(TestResult.AvarageCleanOxygenTimeSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.AvarageCleanOxygenTimeSeconds),
+                                    Description = AppResources.TestResultAvarageCleanOxygenTimeDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue0ab",
                                     DisplayTitle = AppResources.TestResultTotalSmokedGazTime,
-                                    Value = DoubleToString.DateTime(TestResult.TotalSmokeGasTimeTimeSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.TotalSmokeGasTimeTimeSeconds),
+                                    Description = AppResources.TestResultTotalSmokedGazTimeDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue044",
                                     DisplayTitle = AppResources.TestResultAvarageSmokeDistance,
-                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeDistanceSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeDistanceSeconds),
+                                    Description = AppResources.TestResultAvarageSmokeDistanceDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue044",
                                     DisplayTitle = AppResources.TestResultAvarageSmokeActiveTimeSeconds,
-                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeActiveTimeSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokeActiveTimeSeconds),
+                                    Description = AppResources.TestResultAvarageSmokeActiveTimeSecondsDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue044",
                                     DisplayTitle = AppResources.TestResultAvarageSmokingTimeSeconds,
-                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokingTimeSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.AvarageSmokingTimeSeconds),
+                                    Description = AppResources.TestResultAvarageSmokingTimeSecondsDescription
                                 },
                                 new TestResultItem()
                                 {
                                     Icon = "\ue044",
                                     DisplayTitle = AppResources.TestResultTotalCleanOxygenSeconds,
-                                    Value = DoubleToString.DateTime(TestResult.TotalCleanOxygenSeconds)
+                                    Value = DoubleToString.DateTime(TestResult.TotalCleanOxygenSeconds),
+                                    Description = AppResources.TestResultTotalCleanOxygenSecondsDescription
                                 },
 
                             };
