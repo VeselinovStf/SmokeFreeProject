@@ -298,7 +298,7 @@
     <value>Contacts</value>
   </data>
   <data name="AppSetingApplicationFeedbackLabel" xml:space="preserve">
-    <value>Send Report to Dev Team</value>
+    <value>Send Report</value>
   </data>
   <data name="AppSetingApplicationNotificationLabel" xml:space="preserve">
     <value>Notifications</value>
@@ -585,10 +585,28 @@
   <data name="AppSetingTutorialDescription" xml:space="preserve">
     <value>Start Application Tutorial Again</value>
   </data>
+  <data name="AppSetingAboutSection" xml:space="preserve">
+    <value>About</value>
+  </data>
   <data name="AppSetingApplicationColorDescription" xml:space="preserve">
     <value>Change Application Color Sheme</value>
   </data>
+  <data name="AppSetingApplicationFeedbackDescription" xml:space="preserve">
+    <value>Send Application Logging reports to development team</value>
+  </data>
+  <data name="AppSetingApplicationLanguageLabel" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
   <data name="AppSetingApplicationNotificationDescription" xml:space="preserve">
     <value>Turn on or off application mobile notifications</value>
+  </data>
+  <data name="AppSetingApplicationRankDescription" xml:space="preserve">
+    <value>Give 5 stars rating</value>
+  </data>
+  <data name="AppSetingApplicationSendDbDescription" xml:space="preserve">
+    <value>Send Application Database to Dev Team. This is going to help develip more successfull quit smoking method</value>
+  </data>
+  <data name="AppSetingApplicationWebSiteDescription" xml:space="preserve">
+    <value>Visit Application Web Site</value>
   </data>
 </root>

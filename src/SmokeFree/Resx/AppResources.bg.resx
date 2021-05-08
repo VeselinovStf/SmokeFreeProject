@@ -298,7 +298,7 @@
     <value>Връзки</value>
   </data>
   <data name="AppSetingApplicationFeedbackLabel" xml:space="preserve">
-    <value>Изпрати състояние</value>
+    <value>Изпрати Доклад</value>
   </data>
   <data name="AppSetingApplicationNotificationLabel" xml:space="preserve">
     <value>Известия</value>
@@ -585,10 +585,28 @@
   <data name="AppSetingTutorialDescription" xml:space="preserve">
     <value>Стартирай началното ръководство</value>
   </data>
+  <data name="AppSetingAboutSection" xml:space="preserve">
+    <value>За нас</value>
+  </data>
   <data name="AppSetingApplicationColorDescription" xml:space="preserve">
     <value>Промени Цветовата палитра на приложението</value>
   </data>
+  <data name="AppSetingApplicationFeedbackDescription" xml:space="preserve">
+    <value>Изпрати логовете от приложението на разработчиците</value>
+  </data>
+  <data name="AppSetingApplicationLanguageLabel" xml:space="preserve">
+    <value>Избери Език</value>
+  </data>
   <data name="AppSetingApplicationNotificationDescription" xml:space="preserve">
     <value>Включи/ Изключи нотификацийте на приложението</value>
+  </data>
+  <data name="AppSetingApplicationRankDescription" xml:space="preserve">
+    <value>Оцени приложението с 5 звезди</value>
+  </data>
+  <data name="AppSetingApplicationSendDbDescription" xml:space="preserve">
+    <value>Изпрати базата данни. Това ще помогне за разработването на по-добър метод за спиране на цигари</value>
+  </data>
+  <data name="AppSetingApplicationWebSiteDescription" xml:space="preserve">
+    <value>Посети уеб сайта на приложението</value>
   </data>
 </root>

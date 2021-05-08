@@ -15,17 +15,8 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <!-- Content -->
+
         <StackLayout>
-            <!--<Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-
-            </Grid.RowDefinitions>
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding NavigateBackCommand}" />
-            </Grid.GestureRecognizers>-->
-
             <!-- HEADER -->
             <Grid 
                 Margin="0,40,0,0"
@@ -33,7 +24,7 @@
                 BackgroundColor="{StaticResource Gray-100}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
 
                 </Grid.ColumnDefinitions>
@@ -49,7 +40,7 @@
                 <!-- Page Title -->
                 <Label Text="{xct:Translate AppSettingsViewTitle}"
                        Grid.Column="1"
-                      Style="{StaticResource LabelsStyle}"                      
+                       Style="{StaticResource LabelsStyle}"                      
                        />
                 <!-- /END/ Page Title -->
 
@@ -63,161 +54,164 @@
             </Grid>
             <!-- /END/ HEADER -->
 
-            <StackLayout>
-                <!-- Section Tutorial -->
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <!-- Section -->
-                    
-                    <!-- Section Title-->
-                    <Label 
+            <ScrollView>
+                <StackLayout>
+                    <StackLayout>
+                        <!-- Section Tutorial -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Section -->
+
+                            <!-- Section Title-->
+                            <Label 
                         Text="{xct:Translate AppSetingTutorialSection}"
                         Style="{StaticResource SectionTitleLabelStyle}"
                         />
-                    <!-- /END/ Section Title-->
+                            <!-- /END/ Section Title-->
 
-                    <!-- /END/ Section -->
+                            <!-- /END/ Section -->
 
-                    <!-- Cell -->
-                    <Frame Grid.Row="1">
-                        <Grid
+                            <!-- Cell -->
+                            <Frame Grid.Row="1">
+                                <Grid
                              Style="{StaticResource CellGridStyle}"
                               >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding StartTutorialCommand}" />
-                            </Grid.GestureRecognizers>
-                            <!-- TUTORIAL ICON -->
-                          
-                                <Label         
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding StartTutorialCommand}" />
+                                    </Grid.GestureRecognizers>
+                                    <!-- TUTORIAL ICON -->
+
+                                    <Label         
                                      Style="{StaticResource CellIconStyle}"
                                      Text="&#xe751;"/>
-                            
-                            <!-- /END/ TUTORIAL ICON -->
 
-                            <!-- TUTORIAL TEXT -->
-                            <StackLayout  Grid.Column="1">
-                                <Label Text="{xct:Translate AppSetingTutorialTitle}"                                      
+                                    <!-- /END/ TUTORIAL ICON -->
+
+                                    <!-- TUTORIAL TEXT -->
+                                    <StackLayout  Grid.Column="1">
+                                        <Label Text="{xct:Translate AppSetingTutorialTitle}"                                      
                                        Style="{StaticResource CellTitleStyle}" />
 
-                                <Label Text="{xct:Translate AppSetingTutorialDescription}"                                       
+                                        <Label Text="{xct:Translate AppSetingTutorialDescription}"                                       
                                        Style="{StaticResource CellDescriptionStyle}" />
-                            </StackLayout>
-                               
+                                    </StackLayout>
 
-                            <!-- /END/ TUTORIAL TEXT -->
 
-                            <!-- START TUTORIAL BUTTON -->
-                         
-                                <Label
+                                    <!-- /END/ TUTORIAL TEXT -->
+
+                                    <!-- START TUTORIAL BUTTON -->
+
+                                    <Label
                                     Grid.Column="2"
                                     Style="{StaticResource EnterButtonIconStyle}"/>
-                              
-                            <!-- /END/ START TUTORIAL BUTTON -->
-                           
 
-                            </Grid>
-                    </Frame>
-                    <!-- /End/ Cell -->
-                </Grid>
-                <!-- /END/ Section Tutorial -->
+                                    <!-- /END/ START TUTORIAL BUTTON -->
 
-                <!-- Section Application -->
-                <StackLayout Spacing="0.7">
-                   
-                    <!-- Section -->
 
-                    <!-- Section Title-->
-                    <Label 
+                                </Grid>
+                            </Frame>
+                            <!-- /End/ Cell -->
+                        </Grid>
+                    </StackLayout>
+                    <!-- /END/ Section Tutorial -->
+
+                    <!-- Section Application -->
+                    <StackLayout Spacing="1">
+
+                        <!-- Section -->
+
+                        <!-- Section Title-->
+                        <Label 
                         Text="{xct:Translate AppSetingApplicationSection}"
                         Style="{StaticResource SectionTitleLabelStyle}"
                         />
-                    <!-- /END/ Section Title-->
+                        <!-- /END/ Section Title-->
 
-                    <!-- /END/ Section -->
+                        <!-- /END/ Section -->
 
-                    <!-- Cell Color-->
-                    <Frame >
-                        <Grid
+                        <!-- Cell Color-->
+                        <Frame >
+                            <Grid
                              Style="{StaticResource CellGridStyle}"
                               >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ShowColorSettings" />
-                            </Grid.GestureRecognizers>
-                            
-                            <!-- Color ICON -->
-                            <Label         
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowColorSettings" />
+                                </Grid.GestureRecognizers>
+
+                                <!-- Color ICON -->
+                                <Label         
                                      Style="{StaticResource CellIconStyle}"
                                      Text="&#xe731;"/>
 
-                            <!-- /END/ Color ICON -->
+                                <!-- /END/ Color ICON -->
 
-                            <!-- Color TEXT -->
-                            <StackLayout  Grid.Column="1">
-                                <Label Text="{xct:Translate AppSetingApplicationColorLabel}"                                      
+                                <!-- Color TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationColorLabel}"                                      
                                        Style="{StaticResource CellTitleStyle}" />
 
-                                <Label Text="{xct:Translate AppSetingApplicationColorDescription}"                                       
+                                    <Label Text="{xct:Translate AppSetingApplicationColorDescription}"                                       
                                        Style="{StaticResource CellDescriptionStyle}" />
-                            </StackLayout>
-                            <!-- /END/ Color TEXT -->
+                                </StackLayout>
+                                <!-- /END/ Color TEXT -->
 
-                            <!-- Hidden Picker -->
-                            <Picker x:Name="ColorPicker" IsVisible="False"
+                                <!-- Hidden Picker -->
+                                <Picker x:Name="ColorPicker" IsVisible="False"
                                     Title="{xct:Translate AppSettingsViewColorPickerTitle}"
                                     TitleColor="{StaticResource Gray-300}"
                                     HorizontalTextAlignment="Center"
                                     FontSize="30"/>
 
-                        </Grid>
-                    </Frame>
-                    <!-- /End/ Cell COLOR-->
+                            </Grid>
+                        </Frame>
+                        <!-- /End/ Cell COLOR-->
 
-                    <!-- Notifications Color-->
-                    <Frame >
-                        <Grid
+                        <!-- Notifications-->
+                        <Frame >
+                            <Grid
                              Style="{StaticResource CellGridStyle}"
                               >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ShowColorSettings" />
-                            </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowColorSettings" />
+                                </Grid.GestureRecognizers>
 
-                            <!-- Notifications ICON -->
-                            <Label         
+                                <!-- Notifications ICON -->
+                                <Label         
                                      Style="{StaticResource CellIconStyle}"
                                      Text="&#xe743;"/>
 
-                            <!-- /END/ Notifications ICON -->
+                                <!-- /END/ Notifications ICON -->
 
-                            <!-- Notifications TEXT -->
-                            <StackLayout  Grid.Column="1">
-                                <Label Text="{xct:Translate AppSetingApplicationNotificationLabel}"                                      
+                                <!-- Notifications TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationNotificationLabel}"                                      
                                        Style="{StaticResource CellTitleStyle}" />
 
-                                <Label Text="{xct:Translate AppSetingApplicationNotificationDescription}"                                       
+                                    <Label Text="{xct:Translate AppSetingApplicationNotificationDescription}"                                       
                                        Style="{StaticResource CellDescriptionStyle}" />
-                            </StackLayout>
-                            <!-- /END/ Notifications TEXT -->
+                                </StackLayout>
+                                <!-- /END/ Notifications TEXT -->
 
-                            <!-- START STOP NOTIFICATIONS -->
-                            
+                                <!-- START STOP NOTIFICATIONS -->
+
                                 <Switch      
                                     Margin="0,0,20,0"
                                     Visual="Material"
@@ -228,15 +222,311 @@
                                     WidthRequest="40"
                                     IsToggled="{Binding NotificationSwitch}"
                                    />
-                                
-                            <!-- /END/ START STOP NOTIFICATIONS -->
+
+                                <!-- /END/ START STOP NOTIFICATIONS -->
+                            </Grid>
+                        </Frame>
+                        <!-- /End/ Notifications-->
+
+                        <!-- Language -->
+                        <Frame >
+                            <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowLanguages" />
+                                </Grid.GestureRecognizers>
+
+                                <!-- Language ICON -->
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe73B;"/>
+
+                                <!-- /END/ Language ICON -->
+
+                                <!-- Language TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationLanguageLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                    <Label Text="{Binding SelectedTLanguageItem.DisplayText}"                                     
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                </StackLayout>
+                                <!-- /END/ Language TEXT -->
+
+                                <!-- Hidden Picker -->
+                                <Picker x:Name="picker" IsVisible="False"
+                                    Title="{xct:Translate AppSettingsViewLanguagePickerTitle}"
+                                    TitleColor="{StaticResource Gray-300}"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="30"
+                                    ItemsSource="{Binding Languages}"
+                                    ItemDisplayBinding="{Binding DisplayText}"
+                                    SelectedItem="{Binding SelectedTLanguageItem}"
+                                />
+
+                            </Grid>
+                        </Frame>
+                        <!-- /End/ Language-->
+
+                        <!-- Report Cell -->
+                        <Frame>
+                            <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SendFeedBackDataCommand}" />
+                                </Grid.GestureRecognizers>
+                                <!-- Report ICON -->
+
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe71F;"/>
+
+                                <!-- /END/ Report ICON -->
+
+                                <!-- Report TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationFeedbackLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                    <Label Text="{xct:Translate AppSetingApplicationFeedbackDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                </StackLayout>
+
+
+                                <!-- /END/ Report TEXT -->
+
+                                <!-- START Report BUTTON -->
+
+                                <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+
+                                <!-- /END/ START Report BUTTON -->
+
+
+                            </Grid>
+                        </Frame>
+                        <!-- /End/ Report Cell -->
+
+                        <!--DB Report Cell -->
+                        <Frame>
+                            <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SendDBCommand}" />
+                                </Grid.GestureRecognizers>
+                                <!--DB Report ICON -->
+
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe71E;"/>
+
+                                <!-- /END/DB Report ICON -->
+
+                                <!--DB Report TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationSendDbLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                    <Label Text="{xct:Translate AppSetingApplicationSendDbDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                </StackLayout>
+
+
+                                <!-- /END/DB Report TEXT -->
+
+                                <!-- START DB Report BUTTON -->
+
+                                <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+
+                                <!-- /END/ START DBReport BUTTON -->
+
+
+                            </Grid>
+                        </Frame>
+                        <!-- /End/DB Report Cell -->
+
+                        <!-- Rank Cell -->
+                        <Frame>
+                            <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RankAppCommand}" />
+                                </Grid.GestureRecognizers>
+                                <!--Rank ICON -->
+
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe70C;"/>
+
+                                <!-- /END/Rank ICON -->
+
+                                <!--Rank TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationRankLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                    <Label Text="{xct:Translate AppSetingApplicationRankDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                </StackLayout>
+
+
+                                <!-- /END/Rank TEXT -->
+
+                                <!-- START Rank BUTTON -->
+
+                                <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+
+                                <!-- /END/ Rank BUTTON -->
+
+
+                            </Grid>
+                        </Frame>
+                        <!-- /End/Rank Cell -->
+
+                        <!-- Restart Cell -->
+                        <Frame>
+                            <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RestartAppCommand}" />
+                                </Grid.GestureRecognizers>
+                                <!--Restart ICON -->
+
+                                <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe747;"/>
+
+                                <!-- /END/Restart ICON -->
+
+                                <!--Restart TEXT -->
+                                <StackLayout  Grid.Column="1">
+                                    <Label Text="{xct:Translate AppSetingApplicationRestartLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                    <Label Text="{xct:Translate AppSetingApplicationRankDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                </StackLayout>
+
+
+                                <!-- /END/Restart TEXT -->
+
+                                <!-- START Restart BUTTON -->
+
+                                <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+
+                                <!-- /END/ Restart BUTTON -->
+                            </Grid>
+                        </Frame>
+                        <!-- /End/Rank Cell -->
+
+                    </StackLayout>
+                    <!-- /END/ Section Application -->
+
+                    <StackLayout>
+                        <!-- Section Contact -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <!-- Section -->
+
+                            <!-- Section Title-->
+                            <Label 
+                        Text="{xct:Translate AppSetingAboutSection}"
+                        Style="{StaticResource SectionTitleLabelStyle}"
+                        />
+                            <!-- /END/ Section Title-->
+
+                            <!-- /END/ Section -->
+
+                            <!-- Contact Cell -->
+                            <Frame Grid.Row="1">
+                                <Grid
+                             Style="{StaticResource CellGridStyle}"
+                              >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding VisitWebsiteCommand}" />
+                                    </Grid.GestureRecognizers>
+                                    <!-- Contact ICON -->
+
+                                    <Label         
+                                     Style="{StaticResource CellIconStyle}"
+                                     Text="&#xe73E;"/>
+
+                                    <!-- /END/ Contact ICON -->
+
+                                    <!-- Contact TEXT -->
+                                    <StackLayout  Grid.Column="1">
+                                        <Label Text="{xct:Translate AppSetingApplicationWebSiteLabel}"                                      
+                                       Style="{StaticResource CellTitleStyle}" />
+
+                                        <Label Text="{xct:Translate AppSetingApplicationWebSiteDescription}"                                       
+                                       Style="{StaticResource CellDescriptionStyle}" />
+                                    </StackLayout>
+
+
+                                    <!-- /END/ Contact TEXT -->
+
+                                    <!-- START Contact BUTTON -->
+
+                                    <Label
+                                    Grid.Column="2"
+                                    Style="{StaticResource EnterButtonIconStyle}"/>
+
+                                    <!-- /END/ START Contact BUTTON -->
+                                </Grid>
+                            </Frame>
+                            <!-- /End/ Cell -->
                         </Grid>
-                    </Frame>
-                    <!-- /End/ Notifications COLOR-->
+                    </StackLayout>
+                    <!-- /END/ Section Contact -->
+                    
                 </StackLayout>
-                <!-- /END/ Section Application -->
-                
-            </StackLayout>
+            </ScrollView>
+
             <!-- MAIN CONTENT TABLE --><!--
             <TableView 
                 Intent="Settings"

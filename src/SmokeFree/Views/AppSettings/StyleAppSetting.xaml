@@ -8,7 +8,7 @@
     <Style x:Key="AppIconStyle" TargetType="Image">
         <Setter Property="Source" Value="icon.png" />
         <Setter Property="Margin" Value="30,10,0,10" />
-        <Setter Property="Scale" Value="1.5" />
+        <Setter Property="Scale" Value="2" />
     </Style>
     <!-- /END/ App ICON STYLE -->
 
@@ -33,7 +33,7 @@
     
     <!-- Main Label STYLE -->
     <Style x:Key="LabelsStyle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource Gray-700}" />
+        <Setter Property="TextColor" Value="{StaticResource Gray-900}" />
         <Setter Property="FontFamily" Value="{StaticResource  Montserrat-SemiBold}" />
         <Setter Property="Margin" Value="20,15,15,10" />
         <Setter Property="FontSize" Value="20" />
@@ -123,7 +123,7 @@
         <Setter Property="FontSize" Value="25" />
         <Setter Property="HorizontalOptions" Value="Start" />
         <Setter Property="VerticalOptions" Value="CenterAndExpand" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalTextAlignment" Value="Center" /> 
     </Style>
     <!-- /END/ Main Label STYLE -->

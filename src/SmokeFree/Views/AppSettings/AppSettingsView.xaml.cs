@@ -191,7 +191,7 @@ namespace SmokeFree.Views.AppSettings
 
         private void ShowLanguages(object sender, EventArgs e)
         {
-            //this.picker.Focus();
+            this.picker.Focus();
         }
     }
 }

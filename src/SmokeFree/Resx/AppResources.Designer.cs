@@ -61,6 +61,15 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string AppSetingAboutSection {
+            get {
+                return ResourceManager.GetString("AppSetingAboutSection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Application Color Sheme.
         /// </summary>
         internal static string AppSetingApplicationColorDescription {
@@ -88,11 +97,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send Report to Dev Team.
+        ///   Looks up a localized string similar to Send Application Logging reports to development team.
+        /// </summary>
+        internal static string AppSetingApplicationFeedbackDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationFeedbackDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Report.
         /// </summary>
         internal static string AppSetingApplicationFeedbackLabel {
             get {
                 return ResourceManager.GetString("AppSetingApplicationFeedbackLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Language.
+        /// </summary>
+        internal static string AppSetingApplicationLanguageLabel {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationLanguageLabel", resourceCulture);
             }
         }
         
@@ -111,6 +138,15 @@ namespace SmokeFree.Resx {
         internal static string AppSetingApplicationNotificationLabel {
             get {
                 return ResourceManager.GetString("AppSetingApplicationNotificationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Give 5 stars rating.
+        /// </summary>
+        internal static string AppSetingApplicationRankDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationRankDescription", resourceCulture);
             }
         }
         
@@ -142,11 +178,29 @@ namespace SmokeFree.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send Application Database to Dev Team. This is going to help develip more successfull quit smoking method.
+        /// </summary>
+        internal static string AppSetingApplicationSendDbDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationSendDbDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send Database.
         /// </summary>
         internal static string AppSetingApplicationSendDbLabel {
             get {
                 return ResourceManager.GetString("AppSetingApplicationSendDbLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visit Application Web Site.
+        /// </summary>
+        internal static string AppSetingApplicationWebSiteDescription {
+            get {
+                return ResourceManager.GetString("AppSetingApplicationWebSiteDescription", resourceCulture);
             }
         }
         
